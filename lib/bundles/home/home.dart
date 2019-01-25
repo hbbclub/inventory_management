@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/bundles/home/welcome.dart';
-import 'package:inventory_management/bundles/material/material_info.dart';
-import 'package:inventory_management/bundles/setting/setting.dart';
+import 'package:inventory_management/bundles/inventory/inventory_page.dart';
+import 'package:inventory_management/bundles/material/material_info_page.dart';
+import 'package:inventory_management/bundles/memo/memo_page.dart';
+import 'package:inventory_management/bundles/printing/printing_page.dart';
+import 'package:inventory_management/bundles/setting/setting_page.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,10 +14,10 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   List<Widget> _widgets = [
-    MaterialInfo(),
-    Welcome(),
-    Welcome(),
-    Welcome(),
+    MaterialInfoPage(),
+    PrintingPage(),
+    MemoPage(),
+    InventoryPage(),
     Setting(),
   ];
 

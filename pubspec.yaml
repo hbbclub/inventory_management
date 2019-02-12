@@ -10,12 +10,14 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.0.0-dev.68.0 <3.0.0'
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
+  mlkit: ^0.8.0
+  image_picker: ^0.4.12
   font_awesome_flutter: ^8.2.0
   cupertino_icons: ^0.1.2
 

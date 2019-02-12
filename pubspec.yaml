@@ -18,8 +18,19 @@ dependencies:
 
   mlkit: ^0.8.0
   image_picker: ^0.4.12
+  barcode_scan: ^0.0.8
   font_awesome_flutter: ^8.2.0
   cupertino_icons: ^0.1.2
+  path_provider: ^0.4.1
+  # flutter packages pub run build_runner build
+  # flutter packages pub run build_runner watch
+  json_annotation: ^2.0.0
+  rxdart: ^0.20.0
+  shared_preferences: ^0.4.0
+
+  device_info: ^0.2.1
+
+  http: ^0.12.0
 
 dev_dependencies:
   flutter_test:
@@ -35,9 +46,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

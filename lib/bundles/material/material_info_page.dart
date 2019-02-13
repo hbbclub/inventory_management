@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/material/Material_Info_tile.dart';
 import 'package:inventory_management/bundles/material/search_material.dart';
+import 'package:inventory_management/bundles/route/route.route.dart';
 
 class MaterialInfoPage extends StatefulWidget {
   @override
@@ -76,7 +78,15 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
           child: Icon(
             Icons.more_horiz,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Widget page = MyRouter().findPage(
+              RouterPageOption(
+                url: 'router://AdvancedInfoPage',
+                params: {},
+              ),
+            );
+            Utils.pushScreen(context, page);
+          },
         ));
   }
 }

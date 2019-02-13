@@ -124,7 +124,7 @@ class Utils {
   static showSnackBar(BuildContext context,
       {@required String text, int duration}) {
     final snackBar = SnackBar(
-      content: new Text(text ?? 'hahaha'),
+      content: new Text(text ?? ' '),
       duration: Duration(seconds: duration ?? 1),
     );
     Scaffold.of(context).showSnackBar(snackBar);

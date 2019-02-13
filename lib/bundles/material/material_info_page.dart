@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/material/Material_Info_tile.dart';
 import 'package:inventory_management/bundles/material/search_material.dart';
 
 class MaterialInfoPage extends StatefulWidget {
@@ -77,23 +78,5 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
           ),
           onPressed: () {},
         ));
-  }
-}
-
-class MaterialInfoTile extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Text('123123'),
-          ),
-          Expanded(
-            child: Text('123123'),
-          )
-        ],
-      ),
-    );
   }
 }

@@ -157,6 +157,7 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
       },
     );
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: new TabBarView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller,

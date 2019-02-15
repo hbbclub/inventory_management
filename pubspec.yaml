@@ -22,6 +22,7 @@ dependencies:
   font_awesome_flutter: ^8.2.0
   cupertino_icons: ^0.1.2
   path_provider: ^0.4.1
+  multi_image_picker: ^3.0.13
   #  flutter packages pub run build_runner clean
   # flutter packages pub run build_runner build --delete-conflicting-outputs
   # flutter packages pub run build_runner watch

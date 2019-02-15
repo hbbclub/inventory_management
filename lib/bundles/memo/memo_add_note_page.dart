@@ -90,33 +90,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
             RaisedButton(
                 child: Icon(Icons.image),
                 onPressed: () {
-                  scaffoldKey.currentState
-                      .showBottomSheet((BuildContext context) {
-                    return Container(
-                      height: 200,
-                      width: 300,
-                      child: ListView(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text('相机'),
-                            onTap: () async {},
-                          ),
-                          ListTile(
-                              title: Text('相册'),
-                              onTap: () {
-                                loadAssets();
-                                Navigator.of(context).pop();
-                              }),
-                          ListTile(
-                            title: Text('取消'),
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  });
+                  loadAssets();
                 }),
           ],
         ),
@@ -135,6 +109,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
     try {
       resultList = await MultiImagePicker.pickImages(
         maxImages: 300,
+        enableCamera: true,
       );
     } on PlatformException catch (e) {
       error = e.message;

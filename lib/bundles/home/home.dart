@@ -79,7 +79,7 @@ class Home extends StatefulWidget {
 }
 
 class _TabScreenState extends State<Home> with TickerProviderStateMixin {
-  TabController controller;
+  PageController controller;
   int _currentIndex = 0;
   BottomNavigationBarType _type = BottomNavigationBarType.fixed;
   List<NavigationIconView> _navigationViews;
@@ -87,7 +87,7 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = new TabController(length: 5, vsync: this);
+    controller = new PageController(initialPage: _currentIndex);
     _navigationViews = <NavigationIconView>[
       NavigationIconView(
         icon: const Icon(Icons.gradient),
@@ -148,7 +148,7 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
       currentIndex: _currentIndex,
       type: _type,
       onTap: (int index) {
-        controller.index = index;
+        controller.animateToPage(index, duration:_navigationViews[_currentIndex].controller.duration , curve: Curves.easeIn,);
         setState(() {
           _navigationViews[_currentIndex].controller.reverse();
           _currentIndex = index;
@@ -158,7 +158,7 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
     );
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      body: new TabBarView(
+      body: new PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller,
         children: [

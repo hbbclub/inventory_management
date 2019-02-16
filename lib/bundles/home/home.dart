@@ -148,7 +148,7 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
       currentIndex: _currentIndex,
       type: _type,
       onTap: (int index) {
-        controller.animateToPage(index, duration:_navigationViews[_currentIndex].controller.duration , curve: Curves.easeIn,);
+        controller.jumpToPage(index);
         setState(() {
           _navigationViews[_currentIndex].controller.reverse();
           _currentIndex = index;

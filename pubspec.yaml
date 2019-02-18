@@ -30,7 +30,6 @@ dependencies:
   annotation_route: any
   rxdart: ^0.20.0
   shared_preferences: ^0.4.0
-  build_runner: ^1.1.2
   device_info: ^0.2.1
   http: ^0.12.0
   dio: ^2.0.5
@@ -39,6 +38,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  build_runner: ^1.1.2
+  json_serializable: ^2.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 

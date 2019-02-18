@@ -1,6 +1,6 @@
 import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_management/bundles/material/Material_Info_tile.dart';
+import 'package:inventory_management/bundles/material/material_Info_tile.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
 @ARoute(url: 'router://AdvancedInfoPage')

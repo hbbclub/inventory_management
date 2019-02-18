@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
-import 'package:inventory_management/bundles/material/Material_Info_tile.dart';
+import 'package:inventory_management/bundles/material/material_Info_tile.dart';
 import 'package:inventory_management/bundles/material/search_material.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 

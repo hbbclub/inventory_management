@@ -16,7 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  mlkit: ^0.8.0
+  mlkit: ^0.9.0
   image_picker: ^0.4.12
   barcode_scan: ^0.0.8
   font_awesome_flutter: ^8.2.0

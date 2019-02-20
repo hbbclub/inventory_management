@@ -10,19 +10,36 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.0.0-dev.68.0 <3.0.0'
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
+  mlkit: ^0.9.0
+  image_picker: ^0.4.12
+  barcode_scan: ^0.0.8
   font_awesome_flutter: ^8.2.0
   cupertino_icons: ^0.1.2
+  path_provider: ^0.4.1
+  multi_image_picker: ^3.0.13
+  #  flutter packages pub run build_runner clean
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
+  # flutter packages pub run build_runner watch
+  json_annotation: ^2.0.0
+  annotation_route: any
+  rxdart: ^0.20.0
+  shared_preferences: ^0.4.0
+  device_info: ^0.2.1
+  http: ^0.12.0
+  dio: ^2.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  build_runner: ^1.1.2
+  json_serializable: ^2.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
@@ -33,9 +50,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:annotation_route/route.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:inventory_management/bundles/common/multi_image_picker/asset_view.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
@@ -18,7 +22,9 @@ class MemoAddNotePage extends StatefulWidget {
 class _MemoAddNotePageState extends State<MemoAddNotePage> {
   static final GlobalKey<ScaffoldState> scaffoldKey =
       GlobalKey<ScaffoldState>();
+  TextRecognizer textDetector = FirebaseVision.instance.textRecognizer();
   List<Asset> images = List<Asset>();
+  List<VisionText> _currentTextLabels = <VisionText>[];
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [
@@ -85,7 +91,26 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
           children: <Widget>[
             RaisedButton(
               child: Text('OCR'),
-              onPressed: () {},
+              onPressed: () async {
+                var image =
+                    await ImagePicker.pickImage(source: ImageSource.camera);
+                final FirebaseVisionImage visionImage =
+                    FirebaseVisionImage.fromFile(image);
+                var visionText = await textDetector.processImage(visionImage);
+                print(123132);
+                for (TextBlock block in visionText.blocks) {
+                  final String text = block.text;
+                  final List<RecognizedLanguage> languages =
+                      block.recognizedLanguages;
+                  print(text);
+                  for (TextLine line in block.lines) {
+                    // Same getters as TextBlock
+                    for (TextElement element in line.elements) {
+                      // Same getters as TextBlock
+                    }
+                  }
+                }
+              },
             ),
             RaisedButton(
                 child: Icon(Icons.image),

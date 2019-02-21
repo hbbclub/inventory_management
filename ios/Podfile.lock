@@ -1,0 +1,229 @@
+PODS:
+  - barcode_scan (0.0.1):
+    - Flutter
+    - MTBBarcodeScanner
+  - BSGridCollectionViewLayout (1.2.2)
+  - BSImagePicker (2.9.0):
+    - BSGridCollectionViewLayout (= 1.2.2)
+    - BSImageView (= 1.0.2)
+  - BSImageView (1.0.2)
+  - device_info (0.0.1):
+    - Flutter
+  - Firebase/Core (5.11.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.3.0)
+  - Firebase/CoreOnly (5.11.0):
+    - FirebaseCore (= 5.1.6)
+  - Firebase/MLVision (5.11.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVision (= 0.12.1)
+  - Firebase/MLVisionBarcodeModel (5.11.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVisionBarcodeModel (= 0.12.0)
+  - Firebase/MLVisionFaceModel (5.11.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVisionFaceModel (= 0.12.0)
+  - Firebase/MLVisionLabelModel (5.11.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVisionLabelModel (= 0.12.0)
+  - Firebase/MLVisionTextModel (5.11.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVisionTextModel (= 0.12.0)
+  - firebase_ml_vision (0.1.1):
+    - Firebase/Core
+    - Firebase/MLVision
+    - Flutter
+    - GoogleAppMeasurement (~> 5.3.0)
+  - FirebaseAnalytics (5.3.0):
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.3)
+    - GoogleAppMeasurement (~> 5.3)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (5.1.6):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseInstanceID (3.3.0):
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.3)
+    - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseMLCommon (0.12.1):
+    - FirebaseCore (~> 5.1)
+  - FirebaseMLVision (0.12.1):
+    - FirebaseCore (~> 5.1)
+    - FirebaseMLCommon (~> 0.12)
+    - GoogleAPIClientForREST/Core (~> 1.3)
+    - GoogleAPIClientForREST/Vision (~> 1.3)
+    - GoogleMobileVision/Detector (~> 1.4)
+  - FirebaseMLVisionBarcodeModel (0.12.0):
+    - GoogleMobileVision/BarcodeDetector (~> 1.4)
+  - FirebaseMLVisionFaceModel (0.12.0):
+    - GoogleMobileVision/FaceDetector (~> 1.4)
+  - FirebaseMLVisionLabelModel (0.12.0):
+    - GoogleMobileVision/LabelDetector (~> 1.4)
+  - FirebaseMLVisionTextModel (0.12.0):
+    - GoogleMobileVision/TextDetector (~> 1.4)
+  - Flutter (1.0.0)
+  - GoogleAPIClientForREST/Core (1.3.8):
+    - GTMSessionFetcher (>= 1.1.7)
+  - GoogleAPIClientForREST/Vision (1.3.8):
+    - GoogleAPIClientForREST/Core
+    - GTMSessionFetcher (>= 1.1.7)
+  - GoogleAppMeasurement (5.3.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleMobileVision/BarcodeDetector (1.5.0):
+    - GoogleMobileVision/Detector (~> 1.5)
+  - GoogleMobileVision/Detector (1.5.0):
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.1)
+  - GoogleMobileVision/FaceDetector (1.5.0):
+    - GoogleMobileVision/Detector (~> 1.5)
+  - GoogleMobileVision/LabelDetector (1.5.0):
+    - GoogleMobileVision/Detector (~> 1.5)
+  - GoogleMobileVision/TextDetector (1.5.0):
+    - GoogleMobileVision/Detector (~> 1.5)
+  - GoogleToolboxForMac/Defines (2.2.0)
+  - GoogleToolboxForMac/Logger (2.2.0):
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.0)":
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+  - GoogleUtilities/AppDelegateSwizzler (5.3.7):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.3.7)
+  - GoogleUtilities/Logger (5.3.7):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.3.7):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.3.7):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.3.7)"
+  - GoogleUtilities/Reachability (5.3.7):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.3.7):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher (1.2.1):
+    - GTMSessionFetcher/Full (= 1.2.1)
+  - GTMSessionFetcher/Core (1.2.1)
+  - GTMSessionFetcher/Full (1.2.1):
+    - GTMSessionFetcher/Core (= 1.2.1)
+  - image_picker (0.0.1):
+    - Flutter
+  - MTBBarcodeScanner (5.0.8)
+  - multi_image_picker (3.0.14):
+    - BSImagePicker (~> 2.9.0)
+    - Flutter
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - path_provider (0.0.1):
+    - Flutter
+  - Protobuf (3.6.1)
+  - shared_preferences (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - barcode_scan (from `.symlinks/plugins/barcode_scan/ios`)
+  - device_info (from `.symlinks/plugins/device_info/ios`)
+  - Firebase/MLVisionBarcodeModel
+  - Firebase/MLVisionFaceModel
+  - Firebase/MLVisionLabelModel
+  - Firebase/MLVisionTextModel
+  - firebase_ml_vision (from `.symlinks/plugins/firebase_ml_vision/ios`)
+  - Flutter (from `.symlinks/flutter/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - multi_image_picker (from `.symlinks/plugins/multi_image_picker/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BSGridCollectionViewLayout
+    - BSImagePicker
+    - BSImageView
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseMLCommon
+    - FirebaseMLVision
+    - FirebaseMLVisionBarcodeModel
+    - FirebaseMLVisionFaceModel
+    - FirebaseMLVisionLabelModel
+    - FirebaseMLVisionTextModel
+    - GoogleAPIClientForREST
+    - GoogleAppMeasurement
+    - GoogleMobileVision
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - MTBBarcodeScanner
+    - nanopb
+    - Protobuf
+
+EXTERNAL SOURCES:
+  barcode_scan:
+    :path: ".symlinks/plugins/barcode_scan/ios"
+  device_info:
+    :path: ".symlinks/plugins/device_info/ios"
+  firebase_ml_vision:
+    :path: ".symlinks/plugins/firebase_ml_vision/ios"
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
+  multi_image_picker:
+    :path: ".symlinks/plugins/multi_image_picker/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+
+SPEC CHECKSUMS:
+  barcode_scan: 8288e70cb430072003bce2c794a1431e7adbcb4d
+  BSGridCollectionViewLayout: 3e6f23b3a2b4f0ca9afae09ca01389d1057f7b32
+  BSImagePicker: 553707de1adaad42eac252e0b84d20dbdba83fe9
+  BSImageView: ab22ff8cae61f1ae17a3c9efeeb216af3cf84a09
+  device_info: 76ce0b32e13034d1883be4a382433648f9dcee63
+  Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
+  firebase_ml_vision: 44419b558d8edcfb2be8606cc76cdd5014bd2017
+  FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
+  FirebaseCore: d16552f06821489ce1affe2e5e3e5593402ddfe3
+  FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  FirebaseMLCommon: 5fb0152dc0e4de69f86ec37e813fb2555566ebbd
+  FirebaseMLVision: 7e9a7f2f81117be2796196f3901c36ad893366b1
+  FirebaseMLVisionBarcodeModel: 1956b7b0ae267b67571260e00cc0429a6a5e3091
+  FirebaseMLVisionFaceModel: 2bfc1e0cbdcfc6eef134926cf01d81179da87138
+  FirebaseMLVisionLabelModel: 926c57dfa63254ea22e005d39b795b560ab1eb30
+  FirebaseMLVisionTextModel: 97af06fa88b45cabbe39f04d2c825b9d7001cd66
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  GoogleAPIClientForREST: 5447a194eae517986cafe6421a5330b80b820591
+  GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
+  GoogleMobileVision: a1f93108b3527d67339e2de80e1db76645f9e8b9
+  GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
+  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
+  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  image_picker: ee00aab0487cedc80a304085219503cc6d0f2e22
+  MTBBarcodeScanner: 5b97f10a037e2560ff104da413343c5ce9413911
+  multi_image_picker: 80947139b787fcf1947757465aea4957c9e691ea
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
+
+PODFILE CHECKSUM: fa1c1046b1506722e6f6da3d3743578b2e561fc6
+
+COCOAPODS: 1.5.3

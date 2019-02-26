@@ -17,11 +17,11 @@ class AdvancedInfoPage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          MaterialInfoTile(),
-          MaterialInfoTile(),
-          MaterialInfoTile(),
-          MaterialInfoTile(),
-          MaterialInfoTile(),
+          // MaterialInfoTile(),
+          // MaterialInfoTile(),
+          // MaterialInfoTile(),
+          // MaterialInfoTile(),
+          // MaterialInfoTile(),
         ],
       ),
     );

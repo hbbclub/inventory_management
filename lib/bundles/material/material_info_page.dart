@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/material/material_Info_tile.dart';
 import 'package:inventory_management/bundles/material/search_material.dart';
@@ -56,23 +57,20 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
             ),
           ],
         ),
-        body: ListView(
-          children: <Widget>[
-            Icon(
-              Icons.score,
-              size: 60.0,
-            ),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-          ],
+        body: Container(
+          padding: EdgeInsets.all(16.0),
+          child: ListView(
+            children: <Widget>[
+              Image.asset(ImageAssets.materalIcon),
+              MaterialInfoTile('Stock Code', '部门编号'),
+              MaterialInfoTile('Description', '描述'),
+              MaterialInfoTile('UOM', '单价'),
+              MaterialInfoTile('Unit cost', '单价'),
+              MaterialInfoTile('Default location', '默认库位'),
+              MaterialInfoTile('QTY', '当前库存'),
+              MaterialInfoTile('TECH. SPEC', '技术规范'),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(

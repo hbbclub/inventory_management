@@ -1,6 +1,5 @@
 class ImageAssets {
-  // final String placeholder = 'assets/images/placeholder.jpg';
-  
+  static final String materalIcon = 'assets/images/materal_icon.png';
 }
 
 final ImageAssets imagePaths = ImageAssets();

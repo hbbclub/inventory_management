@@ -55,49 +55,52 @@ class InventoryPageState extends State<InventoryPage> {
         child: Icon(Icons.scanner),
         onPressed: scan,
       ),
-      body: ListView(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('Tag Number')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('Stock Code')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('Location')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('Lot Number')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('QTY')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-        ],
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: ListView(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                SizedBox(width: 88, child: Text('Tag Number')),
+                Expanded(
+                  child: TextField(),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 88, child: Text('Stock Code')),
+                Expanded(
+                  child: TextField(),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 88, child: Text('Location')),
+                Expanded(
+                  child: TextField(),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 88, child: Text('Lot Number')),
+                Expanded(
+                  child: TextField(),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 88, child: Text('QTY')),
+                Expanded(
+                  child: TextField(),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

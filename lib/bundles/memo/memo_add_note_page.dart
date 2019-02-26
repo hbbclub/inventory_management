@@ -22,9 +22,10 @@ class MemoAddNotePage extends StatefulWidget {
 class _MemoAddNotePageState extends State<MemoAddNotePage> {
   static final GlobalKey<ScaffoldState> scaffoldKey =
       GlobalKey<ScaffoldState>();
-  TextRecognizer textDetector = FirebaseVision.instance.textRecognizer();
+  static final TextRecognizer textDetector =
+      FirebaseVision.instance.textRecognizer();
   List<Asset> images = List<Asset>();
-  List<VisionText> _currentTextLabels = <VisionText>[];
+  List<TextBlock> _currentTextLabels = <TextBlock>[];
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [
@@ -44,17 +45,24 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
         ],
       ),
     ];
-    widgets.addAll(items.map((item) {
-      return new MemoAddNoteLabelTile(item);
-    }).toList());
+    widgets.addAll(
+      List.generate(_currentTextLabels.length, (index) {
+        return MemoAddNoteLabelTile(NoteLabel(
+            'note ' + index.toString(), _currentTextLabels[index].text));
+      }),
+    );
 
     widgets.addAll(
       List.generate(images.length, (index) {
-        return Container(
-          height: 150.0,
-          width: 150.0,
-          child: AssetView(index, images[index]),
-        );
+        return ImageLabel(Key(index.toString()), index, images[index], (i) {
+          setState(() {
+            print(i);
+            for (var item in images) {
+              print(item.name);
+            }
+            images.removeAt(i);
+          });
+        });
       }),
     );
     return Scaffold(
@@ -81,8 +89,11 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
           ),
         ],
       ),
-      body: ListView(
-        children: widgets,
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: ListView(
+          children: widgets,
+        ),
       ),
       floatingActionButton: Container(
         height: 100,
@@ -94,22 +105,15 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
               onPressed: () async {
                 var image =
                     await ImagePicker.pickImage(source: ImageSource.camera);
+                if (image == null) {
+                  return;
+                }
                 final FirebaseVisionImage visionImage =
                     FirebaseVisionImage.fromFile(image);
                 var visionText = await textDetector.processImage(visionImage);
-                print(123132);
-                for (TextBlock block in visionText.blocks) {
-                  final String text = block.text;
-                  final List<RecognizedLanguage> languages =
-                      block.recognizedLanguages;
-                  print(text);
-                  for (TextLine line in block.lines) {
-                    // Same getters as TextBlock
-                    for (TextElement element in line.elements) {
-                      // Same getters as TextBlock
-                    }
-                  }
-                }
+                setState(() {
+                  _currentTextLabels = visionText.blocks;
+                });
               },
             ),
             RaisedButton(
@@ -124,9 +128,9 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
   }
 
   Future<void> loadAssets() async {
-    setState(() {
-      images = List<Asset>();
-    });
+    // setState(() {
+    //   images = List<Asset>();
+    // });
 
     List<Asset> resultList;
     String error;
@@ -152,19 +156,38 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
   }
 }
 
+class ImageLabel extends StatelessWidget {
+  final int index;
+  final Asset image;
+  final Function onDelete;
+  ImageLabel(Key key, this.index, this.image, this.onDelete) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150.0,
+      width: 150.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          AssetView(key, index, image),
+          IconButton(
+            icon: Icon(
+              Icons.cancel,
+              color: Colors.red,
+            ),
+            onPressed: () => this.onDelete(index),
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class NoteLabel {
   String title;
   String initValue;
   NoteLabel(this.title, this.initValue);
 }
-
-var items = <NoteLabel>[
-  NoteLabel('UOM', '1111'),
-  NoteLabel('QTY', '1111'),
-  NoteLabel('Lot Number', '1111'),
-  NoteLabel('Print to', '1111'),
-  NoteLabel('# of labels', '1111'),
-];
 
 class MemoAddNoteLabelTile extends StatefulWidget {
   final NoteLabel label;

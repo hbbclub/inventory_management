@@ -112,7 +112,10 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
           ),
         ],
       ),
-      body: DropdownButtonHideUnderline(child: ListView(children: widgets)),
+      body: Container(
+          padding: EdgeInsets.all(16.0),
+          child:
+              DropdownButtonHideUnderline(child: ListView(children: widgets))),
     );
   }
 }

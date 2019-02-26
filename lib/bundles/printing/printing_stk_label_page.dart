@@ -43,9 +43,13 @@ class PrintingStkLabelPage extends StatelessWidget {
         child: Icon(FontAwesomeIcons.barcode),
         onPressed: () {},
       ),
-      body: ListView(
-        children: widgets,
-      ),
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: ListView(
+          children: widgets,
+        ),
+      )
+      ,
     );
   }
 }
@@ -56,6 +60,7 @@ class PrintingStkTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 44.0,
       child: Row(
         children: <Widget>[
           Container(

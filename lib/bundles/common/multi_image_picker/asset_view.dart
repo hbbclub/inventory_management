@@ -5,16 +5,13 @@ class AssetView extends StatefulWidget {
   final int _index;
   final Asset _asset;
 
-  AssetView(this._index, this._asset);
+  AssetView(Key key, this._index, this._asset) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => AssetState(this._index, this._asset);
+  State<StatefulWidget> createState() => AssetState();
 }
 
 class AssetState extends State<AssetView> {
-  int _index = 0;
-  Asset _asset;
-  AssetState(this._index, this._asset);
 
   @override
   void initState() {
@@ -22,8 +19,22 @@ class AssetState extends State<AssetView> {
     _loadImage();
   }
 
+  @override
+  void didUpdateWidget(AssetView oldWidget) {
+    _loadImage();
+    super.didUpdateWidget(oldWidget);
+    
+  }
+
+  @override
+  void deactivate() {
+    this.widget._asset.release();
+    super.deactivate();
+    
+  }
+
   void _loadImage() async {
-    await this._asset.requestThumbnail(300, 300, quality: 50);
+    await this.widget._asset.requestThumbnail(300, 300, quality: 50);
 
     if (this.mounted) {
       setState(() {});
@@ -32,16 +43,16 @@ class AssetState extends State<AssetView> {
 
   @override
   Widget build(BuildContext context) {
-    if (null != this._asset.thumbData) {
+    if (null != this.widget._asset.thumbData) {
       return Image.memory(
-        this._asset.thumbData.buffer.asUint8List(),
+        this.widget._asset.thumbData.buffer.asUint8List(),
         fit: BoxFit.contain,
         gaplessPlayback: true,
       );
     }
 
     return Text(
-      '${this._index}',
+      '${this.widget._index}',
       style: Theme.of(context).textTheme.headline,
     );
   }

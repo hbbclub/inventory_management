@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:inventory_management/bundles/agent/api_model.dart';
 import 'package:dio/dio.dart';
 
-final  BaseOptions options = BaseOptions(
-  baseUrl: "http://aab04c21.ngrok.io/mm",
+final BaseOptions options = BaseOptions(
+  baseUrl: "http://7ecd2dd1.ngrok.io/mm",
   connectTimeout: 5000,
   receiveTimeout: 8000,
   headers: <String, String>{
@@ -31,6 +31,8 @@ class Agent {
     Map<String, dynamic> params,
   }) async {
     try {
+      print('url:' + url);
+      print(params);
       Response res = await dio.get(url, queryParameters: params);
       return _handelResult(res, url);
     } catch (e) {
@@ -50,6 +52,8 @@ class Agent {
       return _handError('数据返回为空 url:' + url, -1);
     }
     // final result = json.decode(res.data.toString());
+    print('result:' + url);
+    print(res.data);
     var model =
         ApiModel.fromJson({'error': 0, 'data': res.data, 'message': ''});
     return model;

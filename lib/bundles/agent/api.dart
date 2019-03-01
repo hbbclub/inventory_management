@@ -1,18 +1,27 @@
 import 'package:inventory_management/bundles/agent/agent.dart';
 import 'package:inventory_management/bundles/agent/api_model.dart';
-export  'package:inventory_management/bundles/agent/api_model.dart';
+export 'package:inventory_management/bundles/agent/api_model.dart';
 
 class Api {
   //物料搜索
-  Future<ApiModel> materialSeach({
+  Future<ApiModel> materialList({
     keyword,
+  }) async {
+    return httpUtil.get(
+      '/material/list',
+      params: {
+        'keyword': keyword ?? '',
+      },
+    );
+  }
+  //物料详情
+  Future<ApiModel> materialDetail({
     partNo,
   }) async {
     return httpUtil.get(
       '/material/details',
       params: {
-        'keyword': keyword,
-        'part_no': partNo,
+        'part_no': partNo ?? '',
       },
     );
   }

@@ -1,20 +1,27 @@
 import 'package:inventory_management/bundles/agent/agent.dart';
 import 'package:inventory_management/bundles/agent/api_model.dart';
-import 'package:meta/meta.dart';
+export  'package:inventory_management/bundles/agent/api_model.dart';
 
 class Api {
-  Future<ApiModel> login({
-    @required String accessKey,
-    @required String secretKey,
+  //物料搜索
+  Future<ApiModel> materialSeach({
+    keyword,
+    partNo,
   }) async {
-    return httpUtil.post(
-      '/authen.do',
+    return httpUtil.get(
+      '/material/details',
       params: {
-        "access_key": accessKey ?? '',
-        'secret_key': secretKey ?? '',
-        'version': '3.0',
-        'device_info': '{}',
+        'keyword': keyword,
+        'part_no': partNo,
       },
+    );
+  }
+
+//标签列表
+  Future<ApiModel> labelList() async {
+    return httpUtil.get(
+      '/label/list',
+      params: {},
     );
   }
 }

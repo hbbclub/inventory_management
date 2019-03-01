@@ -2,17 +2,17 @@ import 'dart:async';
 import 'package:inventory_management/bundles/agent/api_model.dart';
 import 'package:dio/dio.dart';
 
-BaseOptions options = BaseOptions(
-  baseUrl: "http://dev01.aiqin.com/scm-neo-rpc/aq_rpc",
+final  BaseOptions options = BaseOptions(
+  baseUrl: "http://aab04c21.ngrok.io/mm",
   connectTimeout: 5000,
-  receiveTimeout: 3000,
+  receiveTimeout: 8000,
   headers: <String, String>{
     'Cache-Control': 'no-cache',
   },
 );
 
 class Agent {
-  Dio dio = new Dio(options);
+  static final Dio dio = new Dio(options);
 
   Future<ApiModel> post(
     String url, {
@@ -20,23 +20,39 @@ class Agent {
   }) async {
     try {
       Response res = await dio.post(url, data: params);
-      if (res.statusCode != 200) {
-        //http请求异常
-        return _handError(
-            "code:" + res.statusCode.toString() + ' body:' + res.data,
-            res.statusCode);
-      }
-      if (res.data == null || res.data == '') {
-        //接口数据异常
-        return _handError('数据返回为空 url:' + url, -1);
-      }
-      // final result = json.decode(res.data.toString());
-      var model =
-          ApiModel.fromJson({'error': 0, 'data': res.data, 'message': ''});
-      return model;
+      return _handelResult(res, url);
     } catch (e) {
       return _handError(e.toString(), 1);
     }
+  }
+
+  Future<ApiModel> get(
+    String url, {
+    Map<String, dynamic> params,
+  }) async {
+    try {
+      Response res = await dio.get(url, queryParameters: params);
+      return _handelResult(res, url);
+    } catch (e) {
+      return _handError(e.toString(), 1);
+    }
+  }
+
+  Future<ApiModel> _handelResult(Response res, String url) async {
+    if (res.statusCode != 200) {
+      //http请求异常
+      return _handError(
+          "code:" + res.statusCode.toString() + ' body:' + res.data,
+          res.statusCode);
+    }
+    if (res.data == null || res.data == '') {
+      //接口数据异常
+      return _handError('数据返回为空 url:' + url, -1);
+    }
+    // final result = json.decode(res.data.toString());
+    var model =
+        ApiModel.fromJson({'error': 0, 'data': res.data, 'message': ''});
+    return model;
   }
 
   Future<ApiModel> _handError(String errorMsg, int code) {
@@ -54,6 +70,13 @@ class HttpUtil {
     Map<String, dynamic> params,
   }) async {
     return await agent.post(url, params: params);
+  }
+
+  Future<ApiModel> get(
+    String url, {
+    Map<String, dynamic> params,
+  }) async {
+    return await agent.get(url, params: params);
   }
 }
 

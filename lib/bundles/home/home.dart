@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/inventory/inventory_page.dart';
 import 'package:inventory_management/bundles/material/material_info_page.dart';
 import 'package:inventory_management/bundles/memo/memo_page.dart';
@@ -162,7 +163,10 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
         physics: NeverScrollableScrollPhysics(),
         controller: controller,
         children: [
-          MaterialInfoPage(),
+          BlocProvider(
+            bloc: MaterialBloc(),
+            child: MaterialInfoPage(),
+          ),
           PrintingPage(),
           MemoPage(),
           InventoryPage(),

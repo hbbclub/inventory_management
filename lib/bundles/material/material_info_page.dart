@@ -17,7 +17,7 @@ class MaterialInfoPage extends StatefulWidget {
 
 class MaterialInfoPageState extends State<MaterialInfoPage> {
   TextEditingController controller;
-  MaterialModel model;
+  MaterialModel model = MaterialModel();
 
   @override
   void initState() {
@@ -28,6 +28,8 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
 
   @override
   Widget build(BuildContext context) {
+    AppBloc bloc = BlocProvider.of<AppBloc>(context);
+    model = bloc.resultModel;
     return Scaffold(
         appBar: AppBar(
           title: Container(
@@ -38,13 +40,15 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
             ),
             child: Container(
               child: InkWell(
-                onTap: () async{
-                  MaterialBloc materialBloc = BlocProvider.of<MaterialBloc>(context);
-                 await showSearch(
-                    delegate: SearchMaterial<MaterialBloc>(materialBloc),
+                onTap: () async {
+                  AppBloc bloc = BlocProvider.of<AppBloc>(context);
+                  await showSearch(
+                    delegate: SearchMaterial<AppBloc>(bloc),
                     context: context,
                   );
-                 
+                  setState(() {
+                    model = bloc.resultModel;
+                  });
                 },
               ),
               decoration: BoxDecoration(
@@ -66,13 +70,18 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
           padding: EdgeInsets.all(16.0),
           child: ListView(
             children: <Widget>[
-              Image.asset(ImageAssets.materalIcon),
-              MaterialInfoTile('Stock Code', '部门编号'),
-              MaterialInfoTile('Description', '描述'),
-              MaterialInfoTile('UOM', '单价'),
-              MaterialInfoTile('Unit cost', '单价'),
-              MaterialInfoTile('Default location', '默认库位'),
-              MaterialInfoTile('QTY', '当前库存'),
+              (model.imgs != null
+                  ? FadeInImage(
+                      placeholder: AssetImage(ImageAssets.materalIcon),
+                      image: NetworkImage(model.imgs.first.url),
+                    )
+                  : Image.asset(ImageAssets.materalIcon)),
+              MaterialInfoTile('Stock Code', model.partNo ?? ''),
+              MaterialInfoTile('Description', model.desc ?? ''),
+              MaterialInfoTile('UOM', model.uom ?? ''),
+              MaterialInfoTile('Unit cost', (model.unitCost ?? 0).toString()),
+              MaterialInfoTile('Default location', model.loc ?? ''),
+              MaterialInfoTile('QTY', (model.sapQty ?? 0).toString()),
               MaterialInfoTile('TECH. SPEC', '技术规范'),
             ],
           ),

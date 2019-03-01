@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/bundles/material/material_bloc.dart';
+import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
+import 'package:inventory_management/bundles/material/material_model.dart';
+
 
 class SearchMaterial<T> extends SearchDelegate<String> {
-  MaterialBloc materialBloc;
-  SearchMaterial(this.materialBloc);
+  AppBloc bloc;
+  SearchMaterial(this.bloc);
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -28,15 +30,27 @@ class SearchMaterial<T> extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          onTap: () {
-            close(context, null);
-          },
-          title: Text('abbbbb'),
-        );
+    bloc.handelSearchTextChanged(query);
+    return StreamBuilder(
+      stream: bloc.suggestChangedStream,
+      builder:
+          (BuildContext context, AsyncSnapshot<List<MaterialModel>> snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                onTap: () {
+                  bloc.resultModel = snapshot.data[index];
+                  close(context, null);
+                },
+                title: Text(snapshot.data[index].partNo),
+              );
+            },
+          );
+        } else {
+          return Container();
+        }
       },
     );
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/material/material_Info_tile.dart';
+import 'package:inventory_management/bundles/material/material_model.dart';
 import 'package:inventory_management/bundles/material/search_material.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
@@ -15,6 +17,7 @@ class MaterialInfoPage extends StatefulWidget {
 
 class MaterialInfoPageState extends State<MaterialInfoPage> {
   TextEditingController controller;
+  MaterialModel model;
 
   @override
   void initState() {
@@ -35,11 +38,13 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
             ),
             child: Container(
               child: InkWell(
-                onTap: () {
-                  showSearch(
-                    delegate: SearchMaterial(),
+                onTap: () async{
+                  MaterialBloc materialBloc = BlocProvider.of<MaterialBloc>(context);
+                 await showSearch(
+                    delegate: SearchMaterial<MaterialBloc>(materialBloc),
                     context: context,
                   );
+                 
                 },
               ),
               decoration: BoxDecoration(

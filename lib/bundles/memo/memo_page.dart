@@ -18,10 +18,10 @@ class MemoPage extends StatelessWidget {
           child: Container(
             child: InkWell(
               onTap: () {
-                showSearch(
-                  delegate: SearchMaterial(),
-                  context: context,
-                );
+                // showSearch(
+                //   delegate: SearchMaterial(),
+                //   context: context,
+                // );
               },
             ),
             decoration: BoxDecoration(

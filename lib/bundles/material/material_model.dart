@@ -4,16 +4,19 @@ part 'material_model.g.dart';
 
 @JsonSerializable()
 class MaterialModel {
+  @JsonKey(name: '_id', nullable: false)
   String id;
+  @JsonKey(name: 'part_no', nullable: false)
   String partNo;
   String loc;
   String desc;
   String uom;
   double unitCost;
+  @JsonKey(name: 'sap_qty', nullable: false)
   int sapQty;
   List<Img> imgs;
 
-factory MaterialModel.fromJson(Map<String, dynamic> json) =>
+  factory MaterialModel.fromJson(Map<String, dynamic> json) =>
       _$MaterialModelFromJson(json);
 
   MaterialModel({

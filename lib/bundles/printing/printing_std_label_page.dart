@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/common/images.dart';
 
 class PrintingStdLabelPage extends StatefulWidget {
@@ -11,6 +12,19 @@ class PrintingStdLabelPage extends StatefulWidget {
 
 class PrintingStdLabelPageState extends State<PrintingStdLabelPage> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    api.labelList().then((ApiModel data){
+      if (data.error != 0) {
+        return ;
+      }
+      //解析数据
+      List datas = data.data['labels']??[];
+      print(data);
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

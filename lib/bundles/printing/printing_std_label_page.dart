@@ -70,7 +70,6 @@ class PrintingStdLabelPageState extends State<PrintingStdLabelPage>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
 

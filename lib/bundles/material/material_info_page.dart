@@ -22,7 +22,6 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller = TextEditingController.fromValue(TextEditingValue.empty);
   }

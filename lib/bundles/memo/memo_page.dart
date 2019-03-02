@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
-import 'package:inventory_management/bundles/material/search_material.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
 class MemoPage extends StatelessWidget {

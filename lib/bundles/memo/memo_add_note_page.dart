@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:annotation_route/route.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
@@ -151,7 +149,9 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
 
     setState(() {
       images = resultList;
-      if (error == null) ;
+      if (error == null) {
+        print(error);
+      }
     });
   }
 }

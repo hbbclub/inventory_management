@@ -15,7 +15,8 @@ class MaterialInfoPage extends StatefulWidget {
   }
 }
 
-class MaterialInfoPageState extends State<MaterialInfoPage> {
+class MaterialInfoPageState extends State<MaterialInfoPage>
+    with AutomaticKeepAliveClientMixin {
   TextEditingController controller;
   MaterialModel model = MaterialModel();
 
@@ -28,7 +29,7 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    AppBloc bloc = BlocProvider.of<AppBloc>(context);
+    MaterialBloc bloc = BlocProvider.of<MaterialBloc>(context);
     model = bloc.resultModel;
     return Scaffold(
         appBar: AppBar(
@@ -41,9 +42,9 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
             child: Container(
               child: InkWell(
                 onTap: () async {
-                  AppBloc bloc = BlocProvider.of<AppBloc>(context);
+                  MaterialBloc bloc = BlocProvider.of<MaterialBloc>(context);
                   await showSearch(
-                    delegate: SearchMaterial<AppBloc>(bloc),
+                    delegate: SearchMaterial<MaterialBloc>(bloc),
                     context: context,
                   );
                   setState(() {
@@ -101,4 +102,7 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
           },
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

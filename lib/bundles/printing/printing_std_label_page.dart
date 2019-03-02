@@ -11,7 +11,8 @@ class PrintingStdLabelPage extends StatefulWidget {
   }
 }
 
-class PrintingStdLabelPageState extends State<PrintingStdLabelPage> {
+class PrintingStdLabelPageState extends State<PrintingStdLabelPage>
+    with AutomaticKeepAliveClientMixin {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   List<PrintingLabelModel> labels = [];
   @override
@@ -67,6 +68,10 @@ class PrintingStdLabelPageState extends State<PrintingStdLabelPage> {
           ),
         ));
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 class PrintingStdLabelTile extends StatelessWidget {

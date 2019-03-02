@@ -3,7 +3,7 @@ import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/material/material_model.dart';
 
 class SearchMaterial<T> extends SearchDelegate<String> {
-  AppBloc bloc;
+  MaterialBloc bloc;
   SearchMaterial(this.bloc);
   @override
   List<Widget> buildActions(BuildContext context) {

@@ -24,7 +24,6 @@ class SearchMaterial<T> extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    bloc.handelSearchTextChanged(query);
     return StreamBuilder(
       stream: bloc.suggestChangedStream,
       builder:

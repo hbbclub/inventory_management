@@ -22,7 +22,6 @@ class AppBloc extends BlocBase {
         for (Map item in result.data['parts']) {
           res.add(MaterialModel.fromJson(item));
         }
-        print(res.length);
         return res;
       });
 

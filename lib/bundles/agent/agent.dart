@@ -3,7 +3,7 @@ import 'package:inventory_management/bundles/agent/api_model.dart';
 import 'package:dio/dio.dart';
 
 final BaseOptions options = BaseOptions(
-  baseUrl: "http://7ecd2dd1.ngrok.io",
+  baseUrl: "http://mm.xwcbpx.com",
   connectTimeout: 5000,
   receiveTimeout: 8000,
   headers: <String, String>{

@@ -19,7 +19,10 @@ class SearchMaterial<T> extends SearchDelegate<String> {
 
   @override
   Widget buildLeading(BuildContext context) {
-    return null;
+    return IconButton(
+        icon: AnimatedIcon(
+            icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
+        onPressed: () => close(context, null));
   }
 
   @override

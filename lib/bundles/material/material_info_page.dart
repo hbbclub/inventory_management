@@ -19,7 +19,6 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
     with AutomaticKeepAliveClientMixin {
   TextEditingController controller;
   MaterialModel model = MaterialModel();
-
   @override
   void initState() {
     super.initState();
@@ -27,9 +26,14 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    MaterialBloc bloc = BlocProvider.of<MaterialBloc>(context);
-    model = bloc.resultModel;
+    super.build(context);
     return Scaffold(
         appBar: AppBar(
           title: Container(
@@ -43,7 +47,7 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
                 onTap: () async {
                   MaterialBloc bloc = BlocProvider.of<MaterialBloc>(context);
                   await showSearch(
-                    delegate: SearchMaterial<MaterialBloc>(bloc),
+                    delegate: SearchMaterial(bloc),
                     context: context,
                   );
                   setState(() {
@@ -87,6 +91,7 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: "moreInfo",
           child: Icon(
             Icons.more_horiz,
           ),

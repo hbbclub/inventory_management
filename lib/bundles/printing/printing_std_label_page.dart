@@ -40,6 +40,7 @@ class PrintingStdLabelPageState extends State<PrintingStdLabelPage>
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: 'print',
           child: Icon(FontAwesomeIcons.barcode),
           onPressed: () {},
         ),

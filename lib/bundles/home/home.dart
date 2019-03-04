@@ -105,7 +105,7 @@ class _TabScreenState extends State<Home>
       ),
       NavigationIconView(
         icon: const Icon(Icons.note),
-        title: 'meno',
+        title: 'memo',
         color: Colors.pink,
         vsync: this,
       ),

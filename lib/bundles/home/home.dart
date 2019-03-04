@@ -79,12 +79,13 @@ class Home extends StatefulWidget {
   _TabScreenState createState() => _TabScreenState();
 }
 
-class _TabScreenState extends State<Home> with TickerProviderStateMixin {
+class _TabScreenState extends State<Home>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   PageController controller;
   int _currentIndex = 0;
   BottomNavigationBarType _type = BottomNavigationBarType.fixed;
   List<NavigationIconView> _navigationViews;
-
+  List<Widget> _pages;
   @override
   void initState() {
     super.initState();
@@ -126,6 +127,16 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
       view.controller.addListener(_rebuild);
 
     _navigationViews[_currentIndex].controller.value = 1.0;
+    _pages = [
+      BlocProvider(
+        bloc: MaterialBloc(),
+        child: MaterialInfoPage(),
+      ),
+      PrintingPage(),
+      MemoPage(),
+      InventoryPage(),
+      Setting(),
+    ];
   }
 
   @override
@@ -142,6 +153,7 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final BottomNavigationBar botNavBar = BottomNavigationBar(
       items: _navigationViews
           .map((NavigationIconView navigationView) => navigationView.item)
@@ -162,18 +174,12 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
       body: new PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller,
-        children: [
-          BlocProvider(
-            bloc: MaterialBloc(),
-            child: MaterialInfoPage(),
-          ),
-          PrintingPage(),
-          MemoPage(),
-          InventoryPage(),
-          Setting(),
-        ],
+        children: _pages,
       ),
       bottomNavigationBar: botNavBar,
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

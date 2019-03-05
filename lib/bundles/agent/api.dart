@@ -37,6 +37,22 @@ class Api {
     );
   }
 
+  //添加记录
+  Future<ApiModel> addNote(Map<String, dynamic> note) async {
+    return httpUtil.post(
+      '/mm/note/add',
+      params: note,
+    );
+  }
+
+  //更新记录
+  Future<ApiModel> updateNote(Map<String, dynamic> note) async {
+    return httpUtil.post(
+      '/mm/note/update',
+      params: note,
+    );
+  }
+
   //上传文件
   Future<ApiModel> fileUpload(List<Asset> files) async {
     List<UploadFileInfo> infos = List.generate(files.length, (index) {

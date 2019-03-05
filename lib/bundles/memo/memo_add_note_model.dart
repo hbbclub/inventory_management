@@ -6,6 +6,7 @@ class MemoAddNoteModel {
   @JsonKey(name: '_id')
   String id;
   String category;
+  String notes;
   String keyword;
   int email;
   List<NodeItem> items;
@@ -18,6 +19,7 @@ class MemoAddNoteModel {
 
   MemoAddNoteModel({
     this.id,
+    this.notes,
     this.category,
     this.keyword,
     this.email,

@@ -24,6 +24,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       FirebaseVision.instance.textRecognizer();
   List<Asset> images = List<Asset>();
   List<TextBlock> _currentTextLabels = <TextBlock>[];
+  TextEditingController _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [
@@ -36,6 +37,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
           ),
           Expanded(
             child: TextField(
+              controller: _textEditingController,
               decoration: InputDecoration(border: OutlineInputBorder()),
               maxLines: 3,
             ),
@@ -46,7 +48,11 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
     widgets.addAll(
       List.generate(_currentTextLabels.length, (index) {
         return MemoAddNoteLabelTile(NoteLabel(
-            'note ' + index.toString(), _currentTextLabels[index].text));
+            'note ' + index.toString(), _currentTextLabels[index].text, () {
+          setState(() {
+            _currentTextLabels.removeAt(index);
+          });
+        }));
       }),
     );
 
@@ -54,10 +60,6 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       List.generate(images.length, (index) {
         return ImageLabel(Key(index.toString()), index, images[index], (i) {
           setState(() {
-            print(i);
-            for (var item in images) {
-              print(item.name);
-            }
             images.removeAt(i);
           });
         });
@@ -79,7 +81,11 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
               Widget page = MyRouter().findPage(
                 RouterPageOption(
                   url: 'router://MemoSaveNotePage',
-                  params: {},
+                  params: {
+                    'files': images,
+                    'notes': _textEditingController.text,
+                    'items': _currentTextLabels ?? [],
+                  },
                 ),
               );
               Utils.pushScreen(context, page);
@@ -186,42 +192,31 @@ class ImageLabel extends StatelessWidget {
 class NoteLabel {
   String title;
   String initValue;
-  NoteLabel(this.title, this.initValue);
+  Function onDelete;
+  NoteLabel(this.title, this.initValue, this.onDelete);
 }
 
-class MemoAddNoteLabelTile extends StatefulWidget {
+class MemoAddNoteLabelTile extends StatelessWidget {
   final NoteLabel label;
-  MemoAddNoteLabelTile(this.label) : super();
-
-  @override
-  MemoAddNoteLabelTileState createState() {
-    return new MemoAddNoteLabelTileState();
-  }
-}
-
-class MemoAddNoteLabelTileState extends State<MemoAddNoteLabelTile> {
-  bool selected = false;
+  MemoAddNoteLabelTile(this.label);
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
         children: <Widget>[
           Container(
-            child: Text(this.widget.label.title),
+            child: Text(label.title),
             width: 100.0,
           ),
           Expanded(
             child: TextField(
-              controller: TextEditingController(text: widget.label.initValue),
+              maxLines: null,
+              controller: TextEditingController(text: label.initValue),
             ),
           ),
-          Checkbox(
-            onChanged: (value) {
-              setState(() {
-                this.selected = value;
-              });
-            },
-            value: selected,
+          IconButton(
+            icon: Icon(Icons.cancel),
+            onPressed: label.onDelete,
           )
         ],
       ),

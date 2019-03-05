@@ -1,3 +1,4 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
@@ -66,7 +67,9 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
           actions: <Widget>[
             IconButton(
               icon: Icon(FontAwesomeIcons.barcode),
-              onPressed: () async {},
+              onPressed: () async {
+                String barcode = await BarcodeScanner.scan();
+              },
             ),
           ],
         ),

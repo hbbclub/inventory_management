@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
+import 'package:inventory_management/bundles/memo/memo_add_note_page.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
 class MemoPage extends StatelessWidget {
@@ -44,7 +45,7 @@ class MemoPage extends StatelessWidget {
           Widget page = MyRouter().findPage(
             RouterPageOption(
               url: 'router://MemoAddNotePage',
-              params: {},
+              params: {'type':NotePageType.NotePageTypeAdd},
             ),
           );
           Utils.pushScreen(context, page);
@@ -53,6 +54,15 @@ class MemoPage extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           ListTile(
+            onTap: () {
+              Widget page = MyRouter().findPage(
+                RouterPageOption(
+                  url: 'router://MemoAddNotePage',
+                  params: {'type':NotePageType.NotePageTypeNone},
+                ),
+              );
+              Utils.pushScreen(context, page);
+            },
             title: Container(
               padding: EdgeInsets.only(top: 5),
               child: Row(
@@ -75,7 +85,15 @@ class MemoPage extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+               Widget page = MyRouter().findPage(
+                RouterPageOption(
+                  url: 'router://MemoAddNotePage',
+                  params: {'type':NotePageType.NotePageTypeNone},
+                ),
+              );
+              Utils.pushScreen(context, page);
+            },
             title: Container(
               padding: EdgeInsets.only(top: 5),
               child: Row(

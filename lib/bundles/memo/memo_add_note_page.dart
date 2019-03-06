@@ -9,6 +9,11 @@ import 'package:inventory_management/bundles/route/route.route.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter/services.dart';
 
+enum NotePageType {
+  NotePageTypeNone,
+  NotePageTypeAdd,
+}
+
 @ARoute(url: 'router://MemoAddNotePage')
 class MemoAddNotePage extends StatefulWidget {
   final RouterPageOption initParam;
@@ -71,27 +76,29 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
         title: Text(
           'Add Note',
         ),
-        actions: <Widget>[
-          RawMaterialButton(
-            child: Text(
-              'done',
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () {
-              Widget page = MyRouter().findPage(
-                RouterPageOption(
-                  url: 'router://MemoSaveNotePage',
-                  params: {
-                    'files': images,
-                    'notes': _textEditingController.text,
-                    'items': _currentTextLabels ?? [],
+        actions: widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
+            ? <Widget>[
+                RawMaterialButton(
+                  child: Text(
+                    'done',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Widget page = MyRouter().findPage(
+                      RouterPageOption(
+                        url: 'router://MemoSaveNotePage',
+                        params: {
+                          'files': images,
+                          'notes': _textEditingController.text,
+                          'items': _currentTextLabels ?? [],
+                        },
+                      ),
+                    );
+                    Utils.pushScreen(context, page);
                   },
                 ),
-              );
-              Utils.pushScreen(context, page);
-            },
-          ),
-        ],
+              ]
+            : null,
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -99,36 +106,40 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
           children: widgets,
         ),
       ),
-      floatingActionButton: Container(
-        height: 100,
-        width: 80,
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              child: Text('OCR'),
-              onPressed: () async {
-                var image =
-                    await ImagePicker.pickImage(source: ImageSource.camera);
-                if (image == null) {
-                  return;
-                }
-                final FirebaseVisionImage visionImage =
-                    FirebaseVisionImage.fromFile(image);
-                var visionText = await textDetector.processImage(visionImage);
-                setState(() {
-                  _currentTextLabels.clear();
-                  _currentTextLabels.addAll(visionText.blocks);
-                });
-              },
-            ),
-            RaisedButton(
-                child: Icon(Icons.image),
-                onPressed: () {
-                  loadAssets();
-                }),
-          ],
-        ),
-      ),
+      floatingActionButton:
+          widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
+              ? Container(
+                  height: 100,
+                  width: 80,
+                  child: Column(
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text('OCR'),
+                        onPressed: () async {
+                          var image = await ImagePicker.pickImage(
+                              source: ImageSource.camera);
+                          if (image == null) {
+                            return;
+                          }
+                          final FirebaseVisionImage visionImage =
+                              FirebaseVisionImage.fromFile(image);
+                          var visionText =
+                              await textDetector.processImage(visionImage);
+                          setState(() {
+                            _currentTextLabels.clear();
+                            _currentTextLabels.addAll(visionText.blocks);
+                          });
+                        },
+                      ),
+                      RaisedButton(
+                          child: Icon(Icons.image),
+                          onPressed: () {
+                            loadAssets();
+                          }),
+                    ],
+                  ),
+                )
+              : null,
     );
   }
 

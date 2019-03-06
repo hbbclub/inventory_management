@@ -1,6 +1,8 @@
 import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:inventory_management/bundles/agent/api.dart';
+import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
 @ARoute(url: 'router://MemoSaveNotePage')
@@ -23,6 +25,22 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
   String _activity;
   bool _sendEmail = false;
   List<String> _allActivities = ['增加', '删除', '修改'];
+  MemoAddNoteModel model;
+
+  @override
+  void initState() {
+    super.initState();
+    model.items =
+        List.generate(widget.initParam.params['items']?.lenght ?? 0, (index) {
+      return NodeItem(
+          item: 'note' + (index + 1).toString(),
+          value: widget.initParam.params['items'][index]);
+    });
+    model.notes = widget.initParam.params['notes'];
+    api.fileUpload(widget.initParam.params['files']).then((data) {});
+    // model.items = List.generate(, generator)
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> widgets = [

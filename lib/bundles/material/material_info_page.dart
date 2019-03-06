@@ -1,6 +1,7 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
@@ -20,6 +21,7 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
     with AutomaticKeepAliveClientMixin {
   TextEditingController controller;
   MaterialModel model = MaterialModel();
+  String barcode = '';
   @override
   void initState() {
     super.initState();
@@ -69,6 +71,15 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
               icon: Icon(FontAwesomeIcons.barcode),
               onPressed: () async {
                 String barcode = await BarcodeScanner.scan();
+                if (barcode != null) {
+                  ApiModel result = await api.materialDetail(partNo: barcode);
+                  if (result.error != 0) {
+                    return [];
+                  }
+                  setState(() {
+                    model = MaterialModel.fromJson(result.data);
+                  });
+                }
               },
             ),
           ],

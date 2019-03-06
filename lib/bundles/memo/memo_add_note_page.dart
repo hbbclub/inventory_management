@@ -47,8 +47,8 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
     ];
     widgets.addAll(
       List.generate(_currentTextLabels.length, (index) {
-        return MemoAddNoteLabelTile(NoteLabel(
-            'note ' + index.toString(), _currentTextLabels[index].text, () {
+        return MemoAddNoteLabelTile(
+            NoteLabel('note*', _currentTextLabels[index].text, () {
           setState(() {
             _currentTextLabels.removeAt(index);
           });
@@ -116,7 +116,8 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
                     FirebaseVisionImage.fromFile(image);
                 var visionText = await textDetector.processImage(visionImage);
                 setState(() {
-                  _currentTextLabels = visionText.blocks;
+                  _currentTextLabels.clear();
+                  _currentTextLabels.addAll(visionText.blocks);
                 });
               },
             ),

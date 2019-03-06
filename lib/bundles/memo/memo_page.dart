@@ -40,12 +40,13 @@ class MemoPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'addNote',
         child: Icon(Icons.add),
         onPressed: () {
           Widget page = MyRouter().findPage(
             RouterPageOption(
               url: 'router://MemoAddNotePage',
-              params: {'type':NotePageType.NotePageTypeAdd},
+              params: {'type': NotePageType.NotePageTypeAdd},
             ),
           );
           Utils.pushScreen(context, page);
@@ -58,7 +59,7 @@ class MemoPage extends StatelessWidget {
               Widget page = MyRouter().findPage(
                 RouterPageOption(
                   url: 'router://MemoAddNotePage',
-                  params: {'type':NotePageType.NotePageTypeNone},
+                  params: {'type': NotePageType.NotePageTypeNone},
                 ),
               );
               Utils.pushScreen(context, page);
@@ -86,10 +87,10 @@ class MemoPage extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-               Widget page = MyRouter().findPage(
+              Widget page = MyRouter().findPage(
                 RouterPageOption(
                   url: 'router://MemoAddNotePage',
-                  params: {'type':NotePageType.NotePageTypeNone},
+                  params: {'type': NotePageType.NotePageTypeNone},
                 ),
               );
               Utils.pushScreen(context, page);

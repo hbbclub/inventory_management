@@ -74,7 +74,9 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       key: scaffoldKey,
       appBar: AppBar(
         title: Text(
-          'Add Note',
+          widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
+              ? 'Add Note'
+              : 'Note Detail',
         ),
         actions: widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
             ? <Widget>[

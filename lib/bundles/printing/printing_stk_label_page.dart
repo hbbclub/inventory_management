@@ -8,11 +8,12 @@ class PrintingStkLabel {
 }
 
 var items = <PrintingStkLabel>[
-  PrintingStkLabel('UOM', '1111'),
-  PrintingStkLabel('QTY', '1111'),
-  PrintingStkLabel('Lot Number', '1111'),
-  PrintingStkLabel('Print to', '1111'),
-  PrintingStkLabel('# of labels', '1111'),
+  PrintingStkLabel('Description', ' '),
+  PrintingStkLabel('UOM', ' '),
+  PrintingStkLabel('QTY', ' '),
+  PrintingStkLabel('Lot Number', ' '),
+  PrintingStkLabel('Print to', ' '),
+  PrintingStkLabel('# of labels', ' '),
 ];
 
 class PrintingStkLabelPage extends StatelessWidget {
@@ -48,8 +49,7 @@ class PrintingStkLabelPage extends StatelessWidget {
         child: ListView(
           children: widgets,
         ),
-      )
-      ,
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
+import 'package:inventory_management/bundles/common/images.dart';
 
 class InventoryPage extends StatefulWidget {
   @override
@@ -59,11 +60,11 @@ class InventoryPageState extends State<InventoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inventory'),
+        title: Text('INVENTORY'),
         actions: <Widget>[
           RawMaterialButton(
             child: Text(
-              'done',
+              'save',
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () {},
@@ -71,7 +72,7 @@ class InventoryPageState extends State<InventoryPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.scanner),
+        child: Image.asset(ImageAssets.scan,width: 20,),
         onPressed: scan,
       ),
       body: Container(

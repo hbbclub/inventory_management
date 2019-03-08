@@ -1,5 +1,7 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_page.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
@@ -9,11 +11,14 @@ class MemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0.0,
         title: Container(
           color: Colors.blue,
-          padding: EdgeInsets.symmetric(
-            horizontal: 5,
-            vertical: 10,
+          padding: EdgeInsets.only(
+            left: 20,
+            top: 10,
+            bottom: 10,
+            right: 0,
           ),
           child: Container(
             child: InkWell(
@@ -33,11 +38,21 @@ class MemoPage extends StatelessWidget {
           ),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(FontAwesomeIcons.barcode),
-            onPressed: () async {},
-          ),
-        ],
+             SizedBox(
+              width: 65,
+              child: MaterialButton(
+                child: Image.asset(
+                  ImageAssets.scan,
+                
+                ),
+                onPressed: () async {
+                  String barcode = await BarcodeScanner.scan();
+                  
+                },
+              ),
+            ),
+          ],
+       
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: 'addNote',
@@ -69,7 +84,7 @@ class MemoPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Text('Note:1   keyword:xxx  '),
+                  Text('keyword:xxx  '),
                   Expanded(
                     child: Text(
                       'date:1111-11-11',
@@ -80,7 +95,7 @@ class MemoPage extends StatelessWidget {
               ),
             ),
             subtitle: Container(
-              padding: EdgeInsets.only(left: 60.0),
+    
               child: Text(
                   'asdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsad'),
             ),
@@ -100,7 +115,7 @@ class MemoPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Text('Note:2   keyword:xxx  '),
+                  Text('keyword:xxx  '),
                   Expanded(
                     child: Text(
                       'date:1111-11-11',
@@ -111,7 +126,7 @@ class MemoPage extends StatelessWidget {
               ),
             ),
             subtitle: Container(
-              padding: EdgeInsets.only(left: 60.0),
+
               child: Text(
                   'asdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsad'),
             ),

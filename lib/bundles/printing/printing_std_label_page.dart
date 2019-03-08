@@ -41,7 +41,7 @@ class PrintingStdLabelPageState extends State<PrintingStdLabelPage>
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           heroTag: 'print',
-          child: Icon(FontAwesomeIcons.barcode),
+          child: Icon(Icons.print),
           onPressed: () {},
         ),
         resizeToAvoidBottomPadding: false,

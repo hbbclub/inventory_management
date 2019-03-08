@@ -1,6 +1,5 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/common/images.dart';
@@ -39,11 +38,14 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
     super.build(context);
     return Scaffold(
         appBar: AppBar(
+          titleSpacing: 0.0,
           title: Container(
             color: Colors.blue,
-            padding: EdgeInsets.symmetric(
-              horizontal: 5,
-              vertical: 10,
+            padding: EdgeInsets.only(
+              left: 20,
+              top: 10,
+              bottom: 10,
+              right: 0,
             ),
             child: Container(
               child: InkWell(
@@ -67,20 +69,26 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
             ),
           ),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(FontAwesomeIcons.barcode),
-              onPressed: () async {
-                String barcode = await BarcodeScanner.scan();
-                if (barcode != null) {
-                  ApiModel result = await api.materialDetail(partNo: barcode);
-                  if (result.error != 0) {
-                    return [];
+            SizedBox(
+              width: 65,
+              child: MaterialButton(
+                child: Image.asset(
+                  ImageAssets.scan,
+                
+                ),
+                onPressed: () async {
+                  String barcode = await BarcodeScanner.scan();
+                  if (barcode != null) {
+                    ApiModel result = await api.materialDetail(partNo: barcode);
+                    if (result.error != 0) {
+                      return [];
+                    }
+                    setState(() {
+                      model = MaterialModel.fromJson(result.data);
+                    });
                   }
-                  setState(() {
-                    model = MaterialModel.fromJson(result.data);
-                  });
-                }
-              },
+                },
+              ),
             ),
           ],
         ),
@@ -97,10 +105,10 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
               MaterialInfoTile('Stock Code', model.partNo ?? ''),
               MaterialInfoTile('Description', model.desc ?? ''),
               MaterialInfoTile('UOM', model.uom ?? ''),
-              MaterialInfoTile('Unit cost', (model.unitCost ?? 0).toString()),
-              MaterialInfoTile('Default location', model.loc ?? ''),
+              MaterialInfoTile('Unit Cost', (model.unitCost ?? 0).toString()),
+              MaterialInfoTile('Default Location', model.loc ?? ''),
               MaterialInfoTile('QTY', (model.sapQty ?? 0).toString()),
-              MaterialInfoTile('TECH. SPEC', '技术规范'),
+              MaterialInfoTile('Tech Spec', '技术规范'),
             ],
           ),
         ),

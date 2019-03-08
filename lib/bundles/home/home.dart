@@ -87,37 +87,38 @@ class _TabScreenState extends State<Home>
   List<NavigationIconView> _navigationViews;
   List<Widget> _pages;
   @override
+  // STOCK PRINTING  MEMO INVENTORY SETTING
   void initState() {
     super.initState();
     controller = new PageController(initialPage: _currentIndex);
     _navigationViews = <NavigationIconView>[
       NavigationIconView(
         icon: const Icon(Icons.gradient),
-        title: 'stock',
+        title: 'STOCK',
         color: Colors.teal,
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(Icons.print),
-        title: 'print',
+        title: 'PRINTING',
         color: Colors.indigo,
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(Icons.note),
-        title: 'memo',
+        title: 'MEMO',
         color: Colors.pink,
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(Icons.adjust),
-        title: 'inventory',
+        title: 'INVENTORY',
         color: Colors.pink,
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(Icons.settings),
-        title: 'setting',
+        title: 'SETTING',
         color: Colors.pink,
         vsync: this,
       )

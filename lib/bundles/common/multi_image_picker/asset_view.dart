@@ -46,7 +46,7 @@ class AssetState extends State<AssetView> {
     if (null != this.widget._asset.thumbData) {
       return Image.memory(
         this.widget._asset.thumbData.buffer.asUint8List(),
-        fit: BoxFit.contain,
+        fit: BoxFit.fill,
         gaplessPlayback: true,
       );
     }

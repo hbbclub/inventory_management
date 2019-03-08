@@ -41,7 +41,7 @@ class PrintingStkLabelPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       floatingActionButton: FloatingActionButton(
-        child: Icon(FontAwesomeIcons.barcode),
+        child: Icon(Icons.print),
         onPressed: () {},
       ),
       body: Container(

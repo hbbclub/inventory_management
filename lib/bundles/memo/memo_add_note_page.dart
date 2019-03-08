@@ -81,10 +81,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
         actions: widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
             ? <Widget>[
                 RawMaterialButton(
-                  child: Text(
-                    'done',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: Icon(Icons.save),
                   onPressed: () {
                     Widget page = MyRouter().findPage(
                       RouterPageOption(
@@ -108,12 +105,11 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
           children: widgets,
         ),
       ),
-      floatingActionButton:
+      bottomNavigationBar:
           widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
               ? Container(
-                  height: 100,
-                  width: 80,
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       RaisedButton(
                         child: Text('OCR'),
@@ -184,16 +180,19 @@ class ImageLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150.0,
       width: 150.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          AssetView(key, index, image),
+          SizedBox(
+            width: 40,
+          ),
+          Expanded(
+            child: AssetView(key, index, image),
+          ),
           IconButton(
             icon: Icon(
               Icons.cancel,
-              color: Colors.red,
             ),
             onPressed: () => this.onDelete(index),
           )
@@ -218,6 +217,9 @@ class MemoAddNoteLabelTile extends StatelessWidget {
     return Container(
       child: Row(
         children: <Widget>[
+          SizedBox(
+            width: 40,
+          ),
           Expanded(
             child: TextField(
               maxLines: null,

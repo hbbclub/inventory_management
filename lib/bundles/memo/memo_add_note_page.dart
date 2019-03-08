@@ -53,7 +53,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
     widgets.addAll(
       List.generate(_currentTextLabels.length, (index) {
         return MemoAddNoteLabelTile(
-            NoteLabel('note*', _currentTextLabels[index].text, () {
+            NoteLabel(_currentTextLabels[index].text, () {
           setState(() {
             _currentTextLabels.removeAt(index);
           });
@@ -202,10 +202,10 @@ class ImageLabel extends StatelessWidget {
 }
 
 class NoteLabel {
-  String title;
+  // String title;
   String initValue;
   Function onDelete;
-  NoteLabel(this.title, this.initValue, this.onDelete);
+  NoteLabel(this.initValue, this.onDelete);
 }
 
 class MemoAddNoteLabelTile extends StatelessWidget {
@@ -216,10 +216,6 @@ class MemoAddNoteLabelTile extends StatelessWidget {
     return Container(
       child: Row(
         children: <Widget>[
-          Container(
-            child: Text(label.title),
-            width: 100.0,
-          ),
           Expanded(
             child: TextField(
               maxLines: null,

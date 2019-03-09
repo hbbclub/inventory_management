@@ -64,6 +64,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
             child: TextField(
               controller: _textEditingController,
               decoration: InputDecoration(border: OutlineInputBorder()),
+              textInputAction: TextInputAction.done,
               maxLines: 3,
             ),
           ),

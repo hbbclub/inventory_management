@@ -8,6 +8,7 @@ class Utils {
   //应用名称
   static String appName = 'inventory_management';
   static String cacheKey = 'LOCAL_CACHE';
+  static String hostUri = 'http://mm.xwcbpx.com';
 
   // 返回当前时间戳
   static int currentTimeMillis() {
@@ -88,8 +89,8 @@ class Utils {
   }
 
   // 页面跳转
-  static void pushScreen(BuildContext context, Widget screen) {
-    Navigator.of(context).push(
+  static Future pushScreen(BuildContext context, Widget screen) {
+    return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
           return screen;
@@ -98,14 +99,24 @@ class Utils {
     );
   }
 
-  static void replaceScreen(BuildContext context, Widget screen) {
-    Navigator.of(context).pushReplacement(
+  static Future replaceScreen(BuildContext context, Widget screen) {
+    return Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (BuildContext context) {
           return screen;
         },
       ),
     );
+  }
+
+  static void popAll(BuildContext context) {
+    Navigator.of(context).popUntil((Route router) {
+      print(router.settings.name);
+      if (router.settings.name == '/') {
+        return true;
+      }
+      return false;
+    });
   }
 
   static Future<String> getDeviceUUID() async {

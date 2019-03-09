@@ -56,8 +56,8 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
       });
     }
 
-    ApiModel result = await api.addNote(model.toJson());
-    if (!result.isError() && (result.data['code'] == 0)) {
+    ApiModel addedResult = await api.addNote(model.toJson());
+    if (!addedResult.isError() && (addedResult.data['code'] == 0)) {
       Utils.popAll(context);
     }
   }

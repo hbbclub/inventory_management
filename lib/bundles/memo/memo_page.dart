@@ -128,7 +128,10 @@ class _MemoPageState extends State<MemoPage>
                   Text('keyword:' + item.keyword),
                   Expanded(
                     child: Text(
-                      'date:' + item.updatedAt.substring(0, 10),
+                      'date:' +
+                          (item.updatedAt != null
+                              ? item.updatedAt.substring(0, 10)
+                              : ''),
                       textAlign: TextAlign.right,
                     ),
                   )

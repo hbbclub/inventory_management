@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/printing/printing_label_model.dart';

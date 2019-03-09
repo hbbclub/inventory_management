@@ -9,13 +9,25 @@ class MemoAddNoteModel {
   String notes;
   String keyword;
   int email;
+  @JsonKey(toJson: _itemsToJson)
   List<NodeItem> items;
+  @JsonKey(toJson: _filesToJson)
   List<NodeFile> files;
 
   factory MemoAddNoteModel.fromJson(Map<String, dynamic> json) =>
       _$MemoAddNoteModelFromJson(json);
 
-  Map<String, dynamic> tojson() => _$MemoAddNoteModelToJson(this);
+  Map<String, dynamic> toJson() => _$MemoAddNoteModelToJson(this);
+
+  static List<Map<String, dynamic>> _itemsToJson(List<NodeItem> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
+
+  static List<Map<String, dynamic>> _filesToJson(List<NodeFile> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
 
   MemoAddNoteModel({
     this.id,
@@ -36,15 +48,20 @@ class NodeItem {
   factory NodeItem.fromJson(Map<String, dynamic> json) =>
       _$NodeItemFromJson(json);
 
+  Map<String, dynamic> toJson() => _$NodeItemToJson(this);
+
   NodeItem({this.item, this.value});
 }
 
 @JsonSerializable()
 class NodeFile {
-  @JsonKey(name: '_id')
+  @JsonKey(name: 'file_id')
   String id;
   String url;
   factory NodeFile.fromJson(Map<String, dynamic> json) =>
       _$NodeFileFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NodeFileToJson(this);
+
   NodeFile({this.id, this.url});
 }

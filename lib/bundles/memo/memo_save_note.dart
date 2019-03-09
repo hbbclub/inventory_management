@@ -23,22 +23,40 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
   static final GlobalKey<ScaffoldState> scaffoldKey =
       GlobalKey<ScaffoldState>();
   String _activity;
+  TextEditingController keywordController = TextEditingController();
   bool _sendEmail = false;
-  List<String> _allActivities = ['增加', '删除', '修改'];
-  MemoAddNoteModel model;
+  List<String> _allActivities = ['ADD', 'DELETE', 'UPDATE'];
+  MemoAddNoteModel model = MemoAddNoteModel();
 
   @override
   void initState() {
     super.initState();
-    model.items =
-        List.generate(widget.initParam.params['items']?.lenght ?? 0, (index) {
-      return NodeItem(
-          item: 'note' + (index + 1).toString(),
-          value: widget.initParam.params['items'][index]);
-    });
+  }
+
+  void save() async {
+    List images = widget.initParam.params['files'];
+    List notes = widget.initParam.params['items'];
     model.notes = widget.initParam.params['notes'];
-    api.fileUpload(widget.initParam.params['files']).then((data) {});
-    // model.items = List.generate(, generator)
+    model.keyword = keywordController.text;
+    if (notes.length > 0) {
+      model.items = List.generate(notes.length ?? 0, (index) {
+        return NodeItem(
+            item: 'note' + (index + 1).toString(), value: notes[index]);
+      });
+    }
+    if (images.length > 0) {
+      ApiModel result = await api.fileUpload(images);
+      if (result.isError()) {
+        return;
+      }
+      List rowFiles = result.data['sfiles'];
+      this.model.files = List.generate(rowFiles.length ?? 0, (index) {
+        return NodeFile.fromJson(rowFiles[index]);
+      });
+    }
+    print(model.toJson());
+    ApiModel result = await api.addNote(model.toJson());
+    print(result);
   }
 
   @override
@@ -55,6 +73,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
           child: DropdownButton<String>(
             value: _activity,
             onChanged: (String newValue) {
+              model.category = newValue;
               setState(() {
                 _activity = newValue;
               });
@@ -72,7 +91,10 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
         child: Row(
           children: <Widget>[
             Text('Key Word'),
-            Expanded(child: TextField()),
+            Expanded(
+                child: TextField(
+              controller: keywordController,
+            )),
             Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -98,6 +120,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
               onChanged: (bool value) {
                 setState(() {
                   _sendEmail = value;
+                  model.email = _sendEmail ? 1 : 0;
                 });
               },
               value: _sendEmail,
@@ -126,7 +149,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
               'done',
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: () async {},
+            onPressed: save,
           ),
         ],
       ),

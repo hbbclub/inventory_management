@@ -24,7 +24,7 @@ class PrintingStkLabelPage extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Container(
-              child: Text('stock code'),
+              child: Text('Stock Code'),
               width: 100.0,
             ),
             Expanded(

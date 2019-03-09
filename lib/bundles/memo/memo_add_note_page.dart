@@ -87,7 +87,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
                       RouterPageOption(
                         url: 'router://MemoSaveNotePage',
                         params: {
-                          'files': images,
+                          'files': images  ?? [],
                           'notes': _textEditingController.text,
                           'items': _currentTextLabels ?? [],
                         },

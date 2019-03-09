@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:inventory_management/bundles/agent/agent.dart';
 import 'package:inventory_management/bundles/agent/api_model.dart';
+import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 export 'package:inventory_management/bundles/agent/api_model.dart';
 
@@ -10,7 +11,7 @@ class Api {
     keyword,
   }) async {
     return httpUtil.get(
-      '/mm/material/list',
+      Utils.hostUri,
       params: {
         'keyword': keyword ?? '',
       },
@@ -46,7 +47,7 @@ class Api {
   }
 
   //获取note列表
-  Future<ApiModel> noteList(Map<String, dynamic> note) async {
+  Future<ApiModel> noteList() async {
     return httpUtil.get(
       '/mm/note/list',
       params: {},

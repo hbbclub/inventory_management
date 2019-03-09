@@ -45,6 +45,14 @@ class Api {
     );
   }
 
+  //获取note列表
+  Future<ApiModel> noteList(Map<String, dynamic> note) async {
+    return httpUtil.get(
+      '/mm/note/list',
+      params: {},
+    );
+  }
+
   //更新记录
   Future<ApiModel> updateNote(Map<String, dynamic> note) async {
     return httpUtil.post(

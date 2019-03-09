@@ -111,8 +111,8 @@ class Utils {
 
   static void popAll(BuildContext context) {
     Navigator.of(context).popUntil((Route router) {
-      print(router.settings.name);
-      if (router.settings.name == '/') {
+      print(router.isFirst);
+      if (router.isFirst) {
         return true;
       }
       return false;

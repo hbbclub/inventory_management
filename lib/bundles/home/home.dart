@@ -4,6 +4,7 @@ import 'package:inventory_management/bundles/inventory/inventory_page.dart';
 import 'package:inventory_management/bundles/material/material_info_page.dart';
 import 'package:inventory_management/bundles/memo/memo_page.dart';
 import 'package:inventory_management/bundles/printing/printing_page.dart';
+import 'package:inventory_management/bundles/route/route.route.dart';
 import 'package:inventory_management/bundles/setting/setting_page.dart';
 
 class NavigationIconView {
@@ -134,7 +135,7 @@ class _TabScreenState extends State<Home>
         child: MaterialInfoPage(),
       ),
       PrintingPage(),
-      MemoPage(),
+      MemoPage(RouterPageOption()),
       InventoryPage(),
       Setting(),
     ];

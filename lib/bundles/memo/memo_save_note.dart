@@ -2,6 +2,7 @@ import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
+import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
@@ -54,9 +55,11 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
         return NodeFile.fromJson(rowFiles[index]);
       });
     }
-    print(model.toJson());
+
     ApiModel result = await api.addNote(model.toJson());
-    print(result);
+    if (!result.isError() && (result.data['code'] == 0)) {
+      Utils.popAll(context);
+    }
   }
 
   @override

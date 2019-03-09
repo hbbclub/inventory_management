@@ -1,12 +1,48 @@
+import 'package:annotation_route/route.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
+import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_page.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
-class MemoPage extends StatelessWidget {
+@ARoute(url: 'router://MemoPage')
+class MemoPage extends StatefulWidget {
+  final RouterPageOption initParam;
+  MemoPage(this.initParam) : super();
+  @override
+  _MemoPageState createState() => _MemoPageState();
+}
+
+class _MemoPageState extends State<MemoPage>
+    with AutomaticKeepAliveClientMixin {
+  List<MemoAddNoteModel> list = [];
+  @override
+  void initState() {
+    super.initState();
+    requireNoteList();
+  }
+
+  requireNoteList() {
+    api.noteList().then((result) {
+      if (result.isError()) {
+        return;
+      }
+      List labels = result.data['notes'] ?? [];
+      List<MemoAddNoteModel> res = [];
+      for (Map item in labels) {
+        res.add(MemoAddNoteModel.fromJson(item));
+      }
+      if (this.mounted) {
+        setState(() {
+          this.list = res;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,21 +74,18 @@ class MemoPage extends StatelessWidget {
           ),
         ),
         actions: <Widget>[
-             SizedBox(
-              width: 65,
-              child: MaterialButton(
-                child: Image.asset(
-                  ImageAssets.scan,
-                
-                ),
-                onPressed: () async {
-                  String barcode = await BarcodeScanner.scan();
-                  
-                },
+          SizedBox(
+            width: 65,
+            child: MaterialButton(
+              child: Image.asset(
+                ImageAssets.scan,
               ),
+              onPressed: () async {
+                String barcode = await BarcodeScanner.scan();
+              },
             ),
-          ],
-       
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: 'addNote',
@@ -61,20 +94,28 @@ class MemoPage extends StatelessWidget {
           Widget page = MyRouter().findPage(
             RouterPageOption(
               url: 'router://MemoAddNotePage',
-              params: {'type': NotePageType.NotePageTypeAdd},
+              params: {
+                'type': NotePageType.NotePageTypeAdd,
+              },
             ),
           );
-          Utils.pushScreen(context, page);
+          Utils.pushScreen(context, page).then((result) {
+            requireNoteList();
+          });
         },
       ),
-      body: ListView(
-        children: <Widget>[
-          ListTile(
+      body: ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          var item = list[index];
+          return ListTile(
             onTap: () {
               Widget page = MyRouter().findPage(
                 RouterPageOption(
                   url: 'router://MemoAddNotePage',
-                  params: {'type': NotePageType.NotePageTypeNone},
+                  params: {
+                    'type': NotePageType.NotePageTypeNone,
+                    'model': list[index],
+                  },
                 ),
               );
               Utils.pushScreen(context, page);
@@ -84,10 +125,10 @@ class MemoPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Text('keyword:xxx  '),
+                  Text('keyword:' + item.keyword),
                   Expanded(
                     child: Text(
-                      'date:1111-11-11',
+                      'date:' + item.updatedAt.substring(0, 10),
                       textAlign: TextAlign.right,
                     ),
                   )
@@ -95,44 +136,15 @@ class MemoPage extends StatelessWidget {
               ),
             ),
             subtitle: Container(
-    
-              child: Text(
-                  'asdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsad'),
+              child: Text(item.notes ?? ''),
             ),
-          ),
-          ListTile(
-            onTap: () {
-              Widget page = MyRouter().findPage(
-                RouterPageOption(
-                  url: 'router://MemoAddNotePage',
-                  params: {'type': NotePageType.NotePageTypeNone},
-                ),
-              );
-              Utils.pushScreen(context, page);
-            },
-            title: Container(
-              padding: EdgeInsets.only(top: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text('keyword:xxx  '),
-                  Expanded(
-                    child: Text(
-                      'date:1111-11-11',
-                      textAlign: TextAlign.right,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            subtitle: Container(
-
-              child: Text(
-                  'asdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsadasdsadsadaadadsadsadsadsad'),
-            ),
-          )
-        ],
+          );
+        },
+        itemCount: list.length,
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

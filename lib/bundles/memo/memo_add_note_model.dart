@@ -8,6 +8,8 @@ class MemoAddNoteModel {
   String category;
   String notes;
   String keyword;
+  @JsonKey(name: 'updated_at')
+  String updatedAt;
   int email;
   @JsonKey(toJson: _itemsToJson)
   List<NodeItem> items;
@@ -37,6 +39,7 @@ class MemoAddNoteModel {
     this.email,
     this.items,
     this.files,
+    this.updatedAt,
   });
 }
 

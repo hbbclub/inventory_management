@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inventory_management/bundles/common/multi_image_picker/asset_view.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
+import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter/services.dart';
@@ -27,9 +28,28 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       GlobalKey<ScaffoldState>();
   static final TextRecognizer textDetector =
       FirebaseVision.instance.textRecognizer();
-  List<Asset> images = List<Asset>();
-  List<TextBlock> _currentTextLabels = <TextBlock>[];
+  List images = List();
+  List<String> _currentTextLabels = [];
   TextEditingController _textEditingController = TextEditingController();
+  @override
+  void initState() {
+    MemoAddNoteModel model = widget.initParam.params['model'];
+    if (model != null) {
+      _textEditingController.text = model.notes;
+      if (model.items != null) {
+        _currentTextLabels.addAll(List.generate(model.items.length, (index) {
+          return model.items[index].value;
+        }));
+      }
+      if (model.files != null) {
+        images.addAll(List.generate(model.files.length, (index) {
+          return model.files[index].url;
+        }));
+      }
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [
@@ -52,8 +72,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
     ];
     widgets.addAll(
       List.generate(_currentTextLabels.length, (index) {
-        return MemoAddNoteLabelTile(
-            NoteLabel(_currentTextLabels[index].text, () {
+        return MemoAddNoteLabelTile(NoteLabel(_currentTextLabels[index], () {
           setState(() {
             _currentTextLabels.removeAt(index);
           });
@@ -87,7 +106,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
                       RouterPageOption(
                         url: 'router://MemoSaveNotePage',
                         params: {
-                          'files': images  ?? [],
+                          'files': images ?? [],
                           'notes': _textEditingController.text,
                           'items': _currentTextLabels ?? [],
                         },
@@ -125,7 +144,10 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
                               await textDetector.processImage(visionImage);
                           setState(() {
                             _currentTextLabels.clear();
-                            _currentTextLabels.addAll(visionText.blocks);
+                            _currentTextLabels
+                                .addAll(visionText.blocks.map((block) {
+                              return block.text;
+                            }).toList());
                           });
                         },
                       ),
@@ -174,7 +196,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
 
 class ImageLabel extends StatelessWidget {
   final int index;
-  final Asset image;
+  final Object image;
   final Function onDelete;
   ImageLabel(Key key, this.index, this.image, this.onDelete) : super(key: key);
   @override
@@ -188,7 +210,9 @@ class ImageLabel extends StatelessWidget {
             width: 40,
           ),
           Expanded(
-            child: AssetView(key, index, image),
+            child: this.image.runtimeType == String
+                ? Image.network(Utils.hostUri + '/' + image)
+                : AssetView(key, index, image),
           ),
           IconButton(
             icon: Icon(

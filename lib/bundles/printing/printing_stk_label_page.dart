@@ -12,8 +12,8 @@ var items = <PrintingStkLabel>[
   PrintingStkLabel('UOM', ' '),
   PrintingStkLabel('QTY', ' '),
   PrintingStkLabel('Lot Number', ' '),
-  PrintingStkLabel('Print to', ' '),
-  PrintingStkLabel('# of labels', ' '),
+  PrintingStkLabel('Print To', ' '),
+  PrintingStkLabel('# Of Labels', ' '),
 ];
 
 class PrintingStkLabelPage extends StatelessWidget {
@@ -30,7 +30,7 @@ class PrintingStkLabelPage extends StatelessWidget {
             Expanded(
               child: TextField(),
             ),
-            Icon(FontAwesomeIcons.barcode),
+            // Icon(FontAwesomeIcons.barcode),
           ],
         ),
       ),
@@ -38,6 +38,22 @@ class PrintingStkLabelPage extends StatelessWidget {
     widgets.addAll(items.map((PrintingStkLabel item) {
       return new PrintingStkTile(item);
     }).toList());
+
+    widgets.addAll([
+      SizedBox(
+        height: 8,
+      ),
+      RaisedButton(
+        child: Text(
+          'SCAN',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        color: Colors.blue,
+        onPressed: () {},
+      )
+    ]);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       floatingActionButton: FloatingActionButton(

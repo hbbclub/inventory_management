@@ -120,8 +120,16 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
-        child: ListView(
-          children: widgets,
+        child: ListView.separated(
+          itemCount: widgets.length,
+          itemBuilder: (BuildContext context, int index) {
+            return widgets[index];
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 8,
+            );
+          },
         ),
       ),
       bottomNavigationBar:

@@ -20,7 +20,10 @@ class NavigationIconView {
         item = BottomNavigationBarItem(
           icon: icon,
           activeIcon: activeIcon,
-          title: Text(title),
+          title: Text(
+            title,
+            style: TextStyle(fontSize: 13),
+          ),
           backgroundColor: color,
         ),
         controller = AnimationController(

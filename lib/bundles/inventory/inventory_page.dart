@@ -81,7 +81,7 @@ class InventoryPageState extends State<InventoryPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                SizedBox(width: 88, child: Text('Tag Number')),
+                SizedBox(width: 100, child: Text('Tag Number')),
                 Expanded(
                   child: TextField(
                     controller: TextEditingController(text: model.tagNumber),
@@ -91,7 +91,7 @@ class InventoryPageState extends State<InventoryPage> {
             ),
             Row(
               children: <Widget>[
-                SizedBox(width: 88, child: Text('Stock Code')),
+                SizedBox(width: 100, child: Text('Stock Code')),
                 Expanded(
                   child: TextField(
                       controller:
@@ -101,7 +101,7 @@ class InventoryPageState extends State<InventoryPage> {
             ),
             Row(
               children: <Widget>[
-                SizedBox(width: 88, child: Text('Location')),
+                SizedBox(width: 100, child: Text('Location')),
                 Expanded(
                   child: TextField(
                       controller: TextEditingController(text: model.location)),
@@ -110,7 +110,7 @@ class InventoryPageState extends State<InventoryPage> {
             ),
             Row(
               children: <Widget>[
-                SizedBox(width: 88, child: Text('Lot Number')),
+                SizedBox(width: 100, child: Text('Lot Number')),
                 Expanded(
                   child: TextField(
                       controller: TextEditingController(text: model.lotNumber)),
@@ -119,7 +119,7 @@ class InventoryPageState extends State<InventoryPage> {
             ),
             Row(
               children: <Widget>[
-                SizedBox(width: 88, child: Text('QTY')),
+                SizedBox(width: 100, child: Text('QTY')),
                 Expanded(
                   child: TextField(
                       controller: TextEditingController(text: model.qty)),

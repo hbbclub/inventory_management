@@ -10,15 +10,14 @@ class PrintingPage extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
-          title: Text('PRINTING'),
-          bottom: new TabBar(
-            // isScrollable: true,
+          title: new TabBar(
             tabs: choices.map((Choice choice) {
               return Container(
                 width: Utils.getScreenWidth(context) / 2.0,
                 child: new Tab(
-                  text: choice.title,
-                  icon: new Icon(choice.icon),
+                  child: Text(choice.title ,style: TextStyle(fontSize: 18),),
+
+                  // icon: new Icon(choice.icon),
                 ),
               );
             }).toList(),
@@ -44,8 +43,8 @@ class Choice {
 
 const List<Choice> choices = const <Choice>[
   const Choice(
-    title: 'STD Label',
+    title: 'STANDARD',
     icon: Icons.label,
   ),
-  const Choice(title: 'Stk Code Label', icon: Icons.scanner),
+  const Choice(title: 'STOCK CODE', icon: Icons.scanner),
 ];

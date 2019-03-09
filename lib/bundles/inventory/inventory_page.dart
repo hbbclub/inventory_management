@@ -63,16 +63,16 @@ class InventoryPageState extends State<InventoryPage> {
         title: Text('INVENTORY'),
         actions: <Widget>[
           RawMaterialButton(
-            child: Text(
-              'save',
-              style: TextStyle(color: Colors.white),
-            ),
+            child: Icon(Icons.save),
             onPressed: () {},
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Image.asset(ImageAssets.scan,width: 20,),
+        child: Image.asset(
+          ImageAssets.scan,
+          width: 20,
+        ),
         onPressed: scan,
       ),
       body: Container(

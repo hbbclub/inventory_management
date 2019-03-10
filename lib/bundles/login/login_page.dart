@@ -60,8 +60,8 @@ class LoginPage extends StatelessWidget {
           Icons.person,
           size: 30.0,
         ),
-        hintText: '请输入您的账号/邮箱/手机号',
-        labelText: '账号',
+        hintText: 'Please enter your account number',
+        labelText: 'Account',
         contentPadding: EdgeInsets.all(10.0),
       ),
     );
@@ -81,8 +81,8 @@ class LoginPage extends StatelessWidget {
           Icons.lock,
           size: 30.0,
         ),
-        hintText: '请输入您密码',
-        labelText: '密码',
+        hintText: 'Please enter your password',
+        labelText: 'Password',
         contentPadding: EdgeInsets.all(10.0),
       ),
     );
@@ -96,7 +96,7 @@ class LoginPage extends StatelessWidget {
       child: RaisedButton(
           color: Color.fromRGBO(231, 183, 61, 1.0),
           textColor: Colors.white,
-          child: Text('登录'),
+          child: Text('Login'),
           onPressed: () {
             // loginBloc.login(context);
             Utils.replaceScreen(
@@ -115,7 +115,7 @@ class LoginPage extends StatelessWidget {
       alignment: Alignment.centerRight,
       width: double.infinity,
       child: Text(
-        '忘记密码?',
+        'Forget password?',
         style: TextStyle(color: Colors.white),
       ),
     );

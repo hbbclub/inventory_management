@@ -77,11 +77,9 @@ class _MemoPageState extends State<MemoPage>
           SizedBox(
             width: 65,
             child: MaterialButton(
-              child: Image.asset(
-                ImageAssets.scan,
-              ),
+              child: Icon(Icons.search,size: 40,color: Colors.white,),
               onPressed: () async {
-                String barcode = await BarcodeScanner.scan();
+                // String barcode = await BarcodeScanner.scan();
               },
             ),
           ),

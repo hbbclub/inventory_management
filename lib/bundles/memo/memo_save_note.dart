@@ -5,6 +5,7 @@ import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
+import 'package:multi_image_picker/asset.dart';
 
 @ARoute(url: 'router://MemoSaveNotePage')
 class MemoSaveNotePage extends StatefulWidget {
@@ -46,14 +47,36 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
       });
     }
     if (images.length > 0) {
-      ApiModel result = await api.fileUpload(images);
+      List<Asset> assets = images
+          .where((image) {
+            if (image.runtimeType == Asset) {
+              return true;
+            }
+            return false;
+          })
+          .toList()
+          .cast<Asset>();
+
+      ApiModel result = await api.fileUpload(assets);
       if (result.isError()) {
         return;
       }
-      List rowFiles = result.data['sfiles'];
-      this.model.files = List.generate(rowFiles.length ?? 0, (index) {
-        return NodeFile.fromJson(rowFiles[index]);
+      images.removeWhere((image) {
+        if (image.runtimeType == Asset) {
+          return true;
+        }
+        return false;
       });
+      List uploadImages = [];
+      List rowFiles = result.data['sfiles'];
+      uploadImages.addAll(rowFiles
+          .map<NodeFile>((json) {
+            return NodeFile.fromJson(json);
+          })
+          .toList()
+          .cast<NodeFile>());
+      uploadImages.addAll(images);
+      this.model.files = uploadImages.cast<NodeFile>();
     }
 
     ApiModel addedResult = await api.addNote(model.toJson());

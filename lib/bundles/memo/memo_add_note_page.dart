@@ -28,7 +28,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       GlobalKey<ScaffoldState>();
   static final TextRecognizer textDetector =
       FirebaseVision.instance.textRecognizer();
-  List images = List();
+  List images = [];
   List<String> _currentTextLabels = [];
   TextEditingController _textEditingController = TextEditingController();
   @override
@@ -195,7 +195,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
     if (!mounted) return;
 
     setState(() {
-      images = resultList;
+      images.addAll(resultList);
       if (error == null) {
         print(error);
       }

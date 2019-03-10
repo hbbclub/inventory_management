@@ -11,7 +11,7 @@ class Api {
     keyword,
   }) async {
     return httpUtil.get(
-      Utils.hostUri,
+      '/mm/material/list',
       params: {
         'keyword': keyword ?? '',
       },

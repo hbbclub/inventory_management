@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
           return Stack(children: <Widget>[
             Container(
               padding: EdgeInsets.only(left: 32.0, right: 32.0, bottom: 32.0),
-              color: appColors.mainColor,
+              // color: appColors.mainColor,
               child: ListView(
                 children: <Widget>[
                   SizedBox(height: Utils.getScreenWidth(context) / 6),
@@ -37,14 +37,13 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget buildTopLogImage() {
-
     return Container(
-      // child: Image.asset(
-      //   imagePaths.loginLog,
-      //   height: 109.0,
-      //   width: 223.0,
-      // ),
-    );
+        // child: Image.asset(
+        //   imagePaths.loginLog,
+        //   height: 109.0,
+        //   width: 223.0,
+        // ),
+        );
   }
 
   Widget buildAccountTextField() {
@@ -52,14 +51,14 @@ class LoginPage extends StatelessWidget {
       // onChanged: loginBloc.accountOnchange,
       textCapitalization: TextCapitalization.words,
       decoration: const InputDecoration(
-        border: UnderlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5.0))),
-        filled: true,
-        fillColor: Colors.white,
-        prefixIcon: Icon(
-          Icons.person,
-          size: 30.0,
-        ),
+        // border: UnderlineInputBorder(
+        //     borderRadius: BorderRadius.all(Radius.circular(5.0))),
+        // filled: true,
+        // fillColor: Colors.white,
+        // prefixIcon: Icon(
+        //   Icons.person,
+        //   size: 30.0,
+        // ),
         hintText: 'Please enter your account number',
         labelText: 'Account',
         contentPadding: EdgeInsets.all(10.0),
@@ -73,14 +72,14 @@ class LoginPage extends StatelessWidget {
       textCapitalization: TextCapitalization.words,
       obscureText: true,
       decoration: const InputDecoration(
-        border: UnderlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5.0))),
-        filled: true,
-        fillColor: Colors.white,
-        prefixIcon: Icon(
-          Icons.lock,
-          size: 30.0,
-        ),
+        // border: UnderlineInputBorder(
+        //     borderRadius: BorderRadius.all(Radius.circular(5.0))),
+        // filled: true,
+        // fillColor: Colors.white,
+        // prefixIcon: Icon(
+        //   Icons.lock,
+        //   size: 30.0,
+        // ),
         hintText: 'Please enter your password',
         labelText: 'Password',
         contentPadding: EdgeInsets.all(10.0),
@@ -94,7 +93,7 @@ class LoginPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: RaisedButton(
-          color: Color.fromRGBO(231, 183, 61, 1.0),
+          color: Colors.blue,
           textColor: Colors.white,
           child: Text('Login'),
           onPressed: () {
@@ -116,7 +115,7 @@ class LoginPage extends StatelessWidget {
       width: double.infinity,
       child: Text(
         'Forget password?',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.black),
       ),
     );
   }
@@ -128,7 +127,7 @@ class LoginPage extends StatelessWidget {
       width: double.infinity,
       child: Text(
         'Version:1.0.0',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.black),
       ),
     );
   }

@@ -3,6 +3,8 @@ import 'package:inventory_management/bundles/agent/api_model.dart';
 import 'package:dio/dio.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 
+enum HttpVerb { POST, GET, DELETE, PUT }
+
 final BaseOptions options = BaseOptions(
   baseUrl: Utils.hostUri,
   connectTimeout: 5000,
@@ -15,7 +17,8 @@ final BaseOptions options = BaseOptions(
 class _Agent {
   static final Dio dio = new Dio(options);
 
-  Future<ApiModel> post(
+  Future<ApiModel> request(
+    HttpVerb verb,
     String url, {
     Map<String, dynamic> params,
     Map<String, dynamic> header,
@@ -23,30 +26,34 @@ class _Agent {
     try {
       print('url:' + url);
       print(params);
-      Response res = await dio.post(
-        url,
-        data: params,
-        options: Options(headers: header),
-      );
-      return _handelResult(res, url);
-    } catch (e) {
-      return _handError(e.toString(), 1);
-    }
-  }
+      Response res;
 
-  Future<ApiModel> get(
-    String url, {
-    Map<String, dynamic> params,
-    Map<String, dynamic> header,
-  }) async {
-    try {
-      print('url:' + url);
-      print(params);
-      Response res = await dio.get(
-        url,
-        queryParameters: params,
-        options: Options(headers: header),
-      );
+      if (verb == HttpVerb.POST) {
+        res = await dio.post(
+          url,
+          data: params,
+          options: Options(headers: header),
+        );
+      } else if (verb == HttpVerb.GET) {
+        res = await dio.get(
+          url,
+          queryParameters: params,
+          options: Options(headers: header),
+        );
+      } else if (verb == HttpVerb.PUT) {
+        res = await dio.put(
+          url,
+          data: params,
+          options: Options(headers: header),
+        );
+      } else if (verb == HttpVerb.DELETE) {
+        res = await dio.delete(
+          url,
+          data: params,
+          options: Options(headers: header),
+        );
+      }
+
       return _handelResult(res, url);
     } catch (e) {
       return _handError(e.toString(), 1);
@@ -97,7 +104,8 @@ class HttpUtil {
     String url, {
     Map<String, dynamic> params,
   }) async {
-    return await agent.post(
+    return await agent.request(
+      HttpVerb.POST,
       url,
       params: params,
       header: commonHeader,
@@ -108,7 +116,8 @@ class HttpUtil {
     String url, {
     Map<String, dynamic> params,
   }) async {
-    return await agent.get(
+    return await agent.request(
+      HttpVerb.GET,
       url,
       params: params,
       header: commonHeader,

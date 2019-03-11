@@ -1,14 +1,21 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
   //应用名称
   static String appName = 'inventory_management';
-  static String cacheKey = 'LOCAL_CACHE';
+  //api
   static String hostUri = 'http://mm.xwcbpx.com';
+  static String linkWord = '';
+  //cache key
+  static String cacheKey = 'LOCAL_CACHE';
+  static String cacheKeyForHostUrl = 'LOCAL_CACHE_HOST_URL';
+  static String cacheKeyForlinkWord = 'LOCAL_CACHE_LINK_WORD';
 
   // 返回当前时间戳
   static int currentTimeMillis() {
@@ -139,5 +146,25 @@ class Utils {
       duration: Duration(seconds: duration ?? 1),
     );
     Scaffold.of(context).showSnackBar(snackBar);
+  }
+
+  static Future<Map<String, dynamic>> getLoaclCache() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String rawJson = prefs.getString(Utils.cacheKey);
+    if (rawJson == null) {
+      return {};
+    }
+    return json.decode(rawJson);
+  }
+
+  //会将参数的map融合到本地缓存的json对象中
+  static Future<bool> addLoaclCache(Map<String, dynamic> cacheMap) async {
+    if (cacheMap == null) {
+      return false;
+    }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map cache = await Utils.getLoaclCache();
+    cache.addAll(cacheMap);
+    return prefs.setString(Utils.cacheKey, json.encode(cache));
   }
 }

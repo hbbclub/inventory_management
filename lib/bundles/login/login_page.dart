@@ -1,34 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management/bundles/agent/agent.dart';
+import 'package:flutter_user_agent/flutter_user_agent.dart';
 import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
-import 'package:inventory_management/bundles/common/colors.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/home/home.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  // Platform messages are asynchronous, so we initialize in an async method.
+  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  Future<void> initUserAgentState() async {
+    String userAgent, hostUri, linkWord;
+    try {
+      //获取userAgent 添加到请求代理类中
+      userAgent = await FlutterUserAgent.getPropertyAsync('userAgent');
+      httpUtil.commonHeader.addAll({'User-Agent': userAgent});
+      //拿到缓存对象 设置对应的hostUri 和linkWord
+      Map<String, dynamic> localCache = await Utils.getLoaclCache();
+      print(localCache);
+      hostUri = Utils.hostUri = localCache[Utils.cacheKeyForHostUrl] ?? '';
+      linkWord = Utils.linkWord = localCache[Utils.cacheKeyForlinkWord] ?? '';
+    } on Exception {
+      // userAgent = webViewUserAgent = '<error>';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initUserAgentState().then((data) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // LoginBloc loginBloc = BlocProvider.of<LoginBloc>(context);
     return Scaffold(
       body: Builder(
         builder: (BuildContext context) {
           return Stack(children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: 32.0, right: 32.0, bottom: 32.0),
-              // color: appColors.mainColor,
-              child: ListView(
-                children: <Widget>[
-                  SizedBox(height: Utils.getScreenWidth(context) / 6),
-                  buildTopLogImage(),
-                  SizedBox(height: 20.0),
-                  buildAccountTextField(),
-                  SizedBox(height: 16.0),
-                  buildPasswordTextField(),
-                  SizedBox(height: 20.0),
-                  buildSubmitBottom(context),
-                  buildForgetText(),
-                ],
-              ),
-            ),
+                padding: EdgeInsets.only(left: 32.0, right: 32.0, bottom: 32.0),
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: <Widget>[
+                      SizedBox(height: Utils.getScreenWidth(context) / 6),
+                      buildTopLogImage(),
+                      SizedBox(height: 20.0),
+                      buildAccountTextField(),
+                      SizedBox(height: 16.0),
+                      buildPasswordTextField(),
+                      SizedBox(height: 20.0),
+                      buildServerTextField(),
+                      SizedBox(height: 20.0),
+                      buildLinkWordTextField(),
+                      SizedBox(height: 20.0),
+                      buildSubmitBottom(context),
+                      // buildForgetText(),
+                    ],
+                  ),
+                )),
             buildVersionText(),
           ]);
         },
@@ -47,18 +85,13 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget buildAccountTextField() {
-    return TextField(
+    return TextFormField(
       // onChanged: loginBloc.accountOnchange,
       textCapitalization: TextCapitalization.words,
+      validator: (text) {
+        return text.isEmpty ? 'account is invalid' : null;
+      },
       decoration: const InputDecoration(
-        // border: UnderlineInputBorder(
-        //     borderRadius: BorderRadius.all(Radius.circular(5.0))),
-        // filled: true,
-        // fillColor: Colors.white,
-        // prefixIcon: Icon(
-        //   Icons.person,
-        //   size: 30.0,
-        // ),
         hintText: 'Please enter your account number',
         labelText: 'Account',
         contentPadding: EdgeInsets.all(10.0),
@@ -67,21 +100,57 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget buildPasswordTextField() {
-    return TextField(
-      // onChanged: loginBloc.passwordOnchange,
+    return TextFormField(
       textCapitalization: TextCapitalization.words,
       obscureText: true,
+      validator: (text) {
+        return text.isEmpty ? 'password is invalid' : null;
+      },
       decoration: const InputDecoration(
-        // border: UnderlineInputBorder(
-        //     borderRadius: BorderRadius.all(Radius.circular(5.0))),
-        // filled: true,
-        // fillColor: Colors.white,
-        // prefixIcon: Icon(
-        //   Icons.lock,
-        //   size: 30.0,
-        // ),
         hintText: 'Please enter your password',
         labelText: 'Password',
+        contentPadding: EdgeInsets.all(10.0),
+      ),
+    );
+  }
+
+  Widget buildServerTextField() {
+    return TextFormField(
+      controller: TextEditingController(text: Utils.hostUri),
+      textCapitalization: TextCapitalization.words,
+      validator: (text) {
+        return text.isEmpty ? 'server address is invalid' : null;
+      },
+      onSaved: (text) {
+        Utils.hostUri = text;
+        Utils.addLoaclCache({
+          Utils.cacheKeyForHostUrl: text,
+        });
+      },
+      decoration: const InputDecoration(
+        hintText: 'Please enter server host address',
+        labelText: 'Server Address',
+        contentPadding: EdgeInsets.all(10.0),
+      ),
+    );
+  }
+
+  Widget buildLinkWordTextField() {
+    return TextFormField(
+      controller: TextEditingController(text: Utils.linkWord),
+      textCapitalization: TextCapitalization.words,
+      validator: (text) {
+        return text.isEmpty ? 'link word is invalid' : null;
+      },
+      onSaved: (text) {
+        Utils.linkWord = text;
+        Utils.addLoaclCache({
+          Utils.cacheKeyForlinkWord: text,
+        });
+      },
+      decoration: const InputDecoration(
+        hintText: 'Please enter link word',
+        labelText: 'Link Word',
         contentPadding: EdgeInsets.all(10.0),
       ),
     );
@@ -97,13 +166,15 @@ class LoginPage extends StatelessWidget {
           textColor: Colors.white,
           child: Text('Login'),
           onPressed: () {
-            // loginBloc.login(context);
-            Utils.replaceScreen(
-                context,
-                BlocProvider(
-                  bloc: appBloc,
-                  child: Home(),
-                ));
+            if (_formKey.currentState.validate()) {
+              _formKey.currentState.save();
+              Utils.replaceScreen(
+                  context,
+                  BlocProvider(
+                    bloc: appBloc,
+                    child: Home(),
+                  ));
+            }
           }),
     );
   }

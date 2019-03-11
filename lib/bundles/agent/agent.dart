@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:inventory_management/bundles/agent/api_model.dart';
 import 'package:dio/dio.dart';
+import 'package:inventory_management/bundles/common/utils.dart';
 
 final BaseOptions options = BaseOptions(
-  baseUrl: "http://mm.xwcbpx.com",
+  baseUrl: Utils.hostUri,
   connectTimeout: 5000,
   receiveTimeout: 8000,
   headers: <String, String>{
@@ -11,15 +12,20 @@ final BaseOptions options = BaseOptions(
   },
 );
 
-class Agent {
+class _Agent {
   static final Dio dio = new Dio(options);
 
   Future<ApiModel> post(
     String url, {
     Map<String, dynamic> params,
+    Map<String, dynamic> header,
   }) async {
     try {
-      Response res = await dio.post(url, data: params);
+      Response res = await dio.post(
+        url,
+        data: params,
+        options: Options(headers: header),
+      );
       return _handelResult(res, url);
     } catch (e) {
       return _handError(e.toString(), 1);
@@ -29,11 +35,16 @@ class Agent {
   Future<ApiModel> get(
     String url, {
     Map<String, dynamic> params,
+    Map<String, dynamic> header,
   }) async {
     try {
       print('url:' + url);
       print(params);
-      Response res = await dio.get(url, queryParameters: params);
+      Response res = await dio.get(
+        url,
+        queryParameters: params,
+        options: Options(headers: header),
+      );
       return _handelResult(res, url);
     } catch (e) {
       return _handError(e.toString(), 1);
@@ -68,19 +79,38 @@ class Agent {
 }
 
 class HttpUtil {
-  Agent agent = Agent();
+  //私有构造方法
+  HttpUtil._internal();
+
+  //保存单例
+  static HttpUtil _singleton = HttpUtil._internal();
+
+  //工厂方法
+  factory HttpUtil() => _singleton;
+
+  Map<String, dynamic> commonHeader = {};
+
+  _Agent agent = _Agent();
   Future<ApiModel> post(
     String url, {
     Map<String, dynamic> params,
   }) async {
-    return await agent.post(url, params: params);
+    return await agent.post(
+      url,
+      params: params,
+      header: commonHeader,
+    );
   }
 
   Future<ApiModel> get(
     String url, {
     Map<String, dynamic> params,
   }) async {
-    return await agent.get(url, params: params);
+    return await agent.get(
+      url,
+      params: params,
+      header: commonHeader,
+    );
   }
 }
 

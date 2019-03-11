@@ -66,6 +66,8 @@ PODS:
   - FirebaseMLVisionTextModel (0.12.0):
     - GoogleMobileVision/TextDetector (~> 1.4)
   - Flutter (1.0.0)
+  - flutter_user_agent (1.0.1):
+    - Flutter
   - GoogleAPIClientForREST/Core (1.3.8):
     - GTMSessionFetcher (>= 1.1.7)
   - GoogleAPIClientForREST/Vision (1.3.8):
@@ -144,6 +146,7 @@ DEPENDENCIES:
   - Firebase/MLVisionTextModel
   - firebase_ml_vision (from `.symlinks/plugins/firebase_ml_vision/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_user_agent (from `.symlinks/plugins/flutter_user_agent/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - multi_image_picker (from `.symlinks/plugins/multi_image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
@@ -183,6 +186,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_ml_vision/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
+  flutter_user_agent:
+    :path: ".symlinks/plugins/flutter_user_agent/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
   multi_image_picker:
@@ -210,6 +215,7 @@ SPEC CHECKSUMS:
   FirebaseMLVisionLabelModel: 926c57dfa63254ea22e005d39b795b560ab1eb30
   FirebaseMLVisionTextModel: 97af06fa88b45cabbe39f04d2c825b9d7001cd66
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_user_agent: 2a487a0bfef8b08e34a3ee74f99fdac5a67aeab1
   GoogleAPIClientForREST: 5447a194eae517986cafe6421a5330b80b820591
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleMobileVision: a1f93108b3527d67339e2de80e1db76645f9e8b9

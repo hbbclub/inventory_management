@@ -7,6 +7,11 @@ import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 import 'package:multi_image_picker/asset.dart';
 
+enum NotePageType {
+  None,
+  Add,
+}
+
 @ARoute(url: 'router://MemoSaveNotePage')
 class MemoSaveNotePage extends StatefulWidget {
   final RouterPageOption initParam;
@@ -38,6 +43,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
   void save() async {
     List images = widget.initParam.params['files'];
     List notes = widget.initParam.params['items'];
+    model.id = widget.initParam.params['id'];
     model.notes = widget.initParam.params['notes'];
     model.keyword = keywordController.text;
     if (notes.length > 0) {
@@ -56,11 +62,16 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
           })
           .toList()
           .cast<Asset>();
-
-      ApiModel result = await api.fileUpload(assets);
-      if (result.isError()) {
-        return;
+      ApiModel result;
+      List rowFiles = [];
+      if (assets.length > 0) {
+        result = await api.fileUpload(assets);
+        if (result.isError()) {
+          return;
+        }
+        rowFiles = result.data['sfiles'];
       }
+
       images.removeWhere((image) {
         if (image.runtimeType == Asset) {
           return true;
@@ -68,7 +79,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
         return false;
       });
       List uploadImages = [];
-      List rowFiles = result.data['sfiles'];
+
       uploadImages.addAll(rowFiles
           .map<NodeFile>((json) {
             return NodeFile.fromJson(json);
@@ -78,8 +89,17 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
       uploadImages.addAll(images);
       this.model.files = uploadImages.cast<NodeFile>();
     }
+    ApiModel addedResult;
+    if (widget.initParam.params['type'] == NotePageType.Add) {
+      addedResult = await api.addNote(model.toJson());
+    } else {
+      Map jsonMap = model.toJson();
+      jsonMap['id'] = jsonMap['_id'];
+      jsonMap.remove('_id');
+      print(jsonMap);
+      addedResult = await api.updateNote(jsonMap);
+    }
 
-    ApiModel addedResult = await api.addNote(model.toJson());
     if (!addedResult.isError() && (addedResult.data['code'] == 0)) {
       Utils.popAll(context);
     }

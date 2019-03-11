@@ -6,14 +6,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:inventory_management/bundles/common/multi_image_picker/asset_view.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
+import 'package:inventory_management/bundles/memo/memo_save_note.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter/services.dart';
-
-enum NotePageType {
-  NotePageTypeNone,
-  NotePageTypeAdd,
-}
 
 @ARoute(url: 'router://MemoAddNotePage')
 class MemoAddNotePage extends StatefulWidget {
@@ -43,7 +39,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       }
       if (model.files != null) {
         images.addAll(List.generate(model.files.length, (index) {
-          return model.files[index].url;
+          return model.files[index];
         }));
       }
     }
@@ -94,30 +90,30 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       key: scaffoldKey,
       appBar: AppBar(
         title: Text(
-          widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
+          widget.initParam.params['type'] == NotePageType.Add
               ? 'Add Note'
               : 'Note Detail',
         ),
-        actions: widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
-            ? <Widget>[
-                RawMaterialButton(
-                  child: Icon(Icons.save),
-                  onPressed: () {
-                    Widget page = MyRouter().findPage(
-                      RouterPageOption(
-                        url: 'router://MemoSaveNotePage',
-                        params: {
-                          'files': images ?? [],
-                          'notes': _textEditingController.text,
-                          'items': _currentTextLabels ?? [],
-                        },
-                      ),
-                    );
-                    Utils.pushScreen(context, page);
+        actions: <Widget>[
+          RawMaterialButton(
+            child: Icon(Icons.save),
+            onPressed: () {
+              Widget page = MyRouter().findPage(
+                RouterPageOption(
+                  url: 'router://MemoSaveNotePage',
+                  params: {
+                    'files': images ?? [],
+                    'notes': _textEditingController.text,
+                    'items': _currentTextLabels ?? [],
+                    'type': widget.initParam.params['type'],
+                    'id': widget.initParam.params['model']?.id,
                   },
                 ),
-              ]
-            : null,
+              );
+              Utils.pushScreen(context, page);
+            },
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -133,42 +129,37 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
           },
         ),
       ),
-      bottomNavigationBar:
-          widget.initParam.params['type'] == NotePageType.NotePageTypeAdd
-              ? Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      RaisedButton(
-                        child: Text('OCR'),
-                        onPressed: () async {
-                          var image = await ImagePicker.pickImage(
-                              source: ImageSource.camera);
-                          if (image == null) {
-                            return;
-                          }
-                          final FirebaseVisionImage visionImage =
-                              FirebaseVisionImage.fromFile(image);
-                          var visionText =
-                              await textDetector.processImage(visionImage);
-                          setState(() {
-                            _currentTextLabels.clear();
-                            _currentTextLabels
-                                .addAll(visionText.blocks.map((block) {
-                              return block.text;
-                            }).toList());
-                          });
-                        },
-                      ),
-                      RaisedButton(
-                          child: Icon(Icons.image),
-                          onPressed: () {
-                            loadAssets();
-                          }),
-                    ],
-                  ),
-                )
-              : null,
+      bottomNavigationBar: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            RaisedButton(
+              child: Text('OCR'),
+              onPressed: () async {
+                var image =
+                    await ImagePicker.pickImage(source: ImageSource.camera);
+                if (image == null) {
+                  return;
+                }
+                final FirebaseVisionImage visionImage =
+                    FirebaseVisionImage.fromFile(image);
+                var visionText = await textDetector.processImage(visionImage);
+                setState(() {
+                  _currentTextLabels.clear();
+                  _currentTextLabels.addAll(visionText.blocks.map((block) {
+                    return block.text;
+                  }).toList());
+                });
+              },
+            ),
+            RaisedButton(
+                child: Icon(Icons.image),
+                onPressed: () {
+                  loadAssets();
+                }),
+          ],
+        ),
+      ),
     );
   }
 
@@ -219,8 +210,8 @@ class ImageLabel extends StatelessWidget {
             width: 40,
           ),
           Expanded(
-            child: this.image.runtimeType == String
-                ? Image.network(Utils.hostUri + '/' + image)
+            child: this.image.runtimeType == NodeFile
+                ? Image.network(Utils.hostUri + '/' + (image as NodeFile).url)
                 : AssetView(key, index, image),
           ),
           IconButton(

@@ -1,11 +1,10 @@
 import 'package:annotation_route/route.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
-import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_page.dart';
+import 'package:inventory_management/bundles/memo/memo_save_note.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
 @ARoute(url: 'router://MemoPage')
@@ -93,7 +92,7 @@ class _MemoPageState extends State<MemoPage>
             RouterPageOption(
               url: 'router://MemoAddNotePage',
               params: {
-                'type': NotePageType.NotePageTypeAdd,
+                'type': NotePageType.Add,
               },
             ),
           );
@@ -111,7 +110,7 @@ class _MemoPageState extends State<MemoPage>
                 RouterPageOption(
                   url: 'router://MemoAddNotePage',
                   params: {
-                    'type': NotePageType.NotePageTypeNone,
+                    'type': NotePageType.None,
                     'model': list[index],
                   },
                 ),

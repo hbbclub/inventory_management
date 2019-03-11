@@ -25,7 +25,8 @@ class _LoginPageState extends State<LoginPage> {
       //拿到缓存对象 设置对应的hostUri 和linkWord
       Map<String, dynamic> localCache = await Utils.getLoaclCache();
       print(localCache);
-      hostUri = Utils.hostUri = localCache[Utils.cacheKeyForHostUrl] ?? '';
+      hostUri =
+          Utils.hostUri = localCache[Utils.cacheKeyForHostUrl] ?? Utils.hostUri;
       linkWord = Utils.linkWord = localCache[Utils.cacheKeyForlinkWord] ?? '';
     } on Exception {
       // userAgent = webViewUserAgent = '<error>';

@@ -1,11 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:inventory_management/bundles/agent/agent.dart';
 import 'package:inventory_management/bundles/agent/api_model.dart';
-import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 export 'package:inventory_management/bundles/agent/api_model.dart';
 
 class Api {
+  //登录
+  Future<ApiModel> login({username, password, linkWord}) async {
+    return httpUtil.post(
+      '/auth/login',
+      params: {
+        'username': username,
+        'password': password,
+        'linkWord': linkWord,
+      },
+    );
+  }
+
   //物料搜索
   Future<ApiModel> materialList({
     keyword,

@@ -27,7 +27,9 @@ class _LoginPageState extends State<LoginPage> {
       print(localCache);
       hostUri =
           Utils.hostUri = localCache[Utils.cacheKeyForHostUrl] ?? Utils.hostUri;
-      linkWord = Utils.linkWord = localCache[Utils.cacheKeyForlinkWord] ?? '';
+      linkWord = Utils.linkWord = localCache[Utils.cacheKeyForLinkWord] ?? '';
+      _username = localCache[Utils.cacheKeyForUsername] ?? '';
+      _password = localCache[Utils.cacheKeyForPassword] ?? '';
     } on Exception {
       // userAgent = webViewUserAgent = '<error>';
     }
@@ -90,13 +92,16 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildAccountTextField() {
     return TextFormField(
-      // onChanged: loginBloc.accountOnchange,
+      controller: TextEditingController(text: _username),
       textCapitalization: TextCapitalization.words,
       validator: (text) {
         return text.isEmpty ? 'account is invalid' : null;
       },
       onSaved: (text) {
         _username = text;
+        Utils.addLoaclCache({
+          Utils.cacheKeyForUsername: text,
+        });
       },
       decoration: const InputDecoration(
         hintText: 'Please enter your account number',
@@ -108,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildPasswordTextField() {
     return TextFormField(
+      controller: TextEditingController(text: _password),
       textCapitalization: TextCapitalization.words,
       obscureText: true,
       validator: (text) {
@@ -115,6 +121,9 @@ class _LoginPageState extends State<LoginPage> {
       },
       onSaved: (text) {
         _password = text;
+        Utils.addLoaclCache({
+          Utils.cacheKeyForPassword: text,
+        });
       },
       decoration: const InputDecoration(
         hintText: 'Please enter your password',
@@ -155,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
       onSaved: (text) {
         Utils.linkWord = text;
         Utils.addLoaclCache({
-          Utils.cacheKeyForlinkWord: text,
+          Utils.cacheKeyForLinkWord: text,
         });
       },
       decoration: const InputDecoration(

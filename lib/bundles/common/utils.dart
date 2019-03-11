@@ -15,7 +15,9 @@ class Utils {
   //cache key
   static String cacheKey = 'LOCAL_CACHE';
   static String cacheKeyForHostUrl = 'LOCAL_CACHE_HOST_URL';
-  static String cacheKeyForlinkWord = 'LOCAL_CACHE_LINK_WORD';
+  static String cacheKeyForLinkWord = 'LOCAL_CACHE_LINK_WORD';
+  static String cacheKeyForUsername = 'LOCAL_CACHE_USERNAME';
+  static String cacheKeyForPassword = 'LOCAL_CACHE_PASSWORD';
 
   // 返回当前时间戳
   static int currentTimeMillis() {

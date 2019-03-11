@@ -3,7 +3,7 @@ import 'package:inventory_management/bundles/agent/api_model.dart';
 import 'package:dio/dio.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 
-enum HttpVerb { POST, GET, DELETE, PUT }
+enum HttpVerb { POST, GET, DELETE, PUT, PATCH }
 
 final BaseOptions options = BaseOptions(
   baseUrl: Utils.hostUri,
@@ -48,6 +48,12 @@ class _Agent {
         );
       } else if (verb == HttpVerb.DELETE) {
         res = await dio.delete(
+          url,
+          data: params,
+          options: Options(headers: header),
+        );
+      } else if (verb == HttpVerb.PATCH) {
+        res = await dio.patch(
           url,
           data: params,
           options: Options(headers: header),
@@ -118,6 +124,17 @@ class HttpUtil {
   }) async {
     return await agent.request(
       HttpVerb.GET,
+      url,
+      params: params,
+      header: commonHeader,
+    );
+  }
+  Future<ApiModel> patch(
+    String url, {
+    Map<String, dynamic> params,
+  }) async {
+    return await agent.request(
+      HttpVerb.PATCH,
       url,
       params: params,
       header: commonHeader,

@@ -50,7 +50,7 @@ class Api {
   //添加记录
   Future<ApiModel> addNote(Map<String, dynamic> note) async {
     return httpUtil.post(
-      '/mm/note/add',
+      '/mm/note',
       params: note,
     );
   }

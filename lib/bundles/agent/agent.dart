@@ -11,6 +11,7 @@ final BaseOptions options = BaseOptions(
   receiveTimeout: 8000,
   headers: <String, String>{
     'Cache-Control': 'no-cache',
+    'Content-Type': 'application/json',
   },
 );
 
@@ -129,6 +130,7 @@ class HttpUtil {
       header: commonHeader,
     );
   }
+
   Future<ApiModel> patch(
     String url, {
     Map<String, dynamic> params,

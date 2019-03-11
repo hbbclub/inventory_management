@@ -12,7 +12,7 @@ class Api {
       params: {
         'username': username,
         'password': password,
-        'linkWord': linkWord,
+        'cmp_code': linkWord,
       },
     );
   }
@@ -22,7 +22,7 @@ class Api {
     keyword,
   }) async {
     return httpUtil.get(
-      '/mm/material/list',
+      '/mm/materials/list',
       params: {
         'keyword': keyword ?? '',
       },
@@ -34,17 +34,15 @@ class Api {
     partNo,
   }) async {
     return httpUtil.get(
-      '/mm/material/details',
-      params: {
-        'part_no': partNo ?? '',
-      },
+      '/mm/material/' + partNo,
+      params: {},
     );
   }
 
 //标签列表
   Future<ApiModel> labelList() async {
     return httpUtil.get(
-      '/mm/label/list',
+      '/mm/labels/list',
       params: {},
     );
   }
@@ -60,7 +58,7 @@ class Api {
   //获取note列表
   Future<ApiModel> noteList() async {
     return httpUtil.get(
-      '/mm/note/list',
+      '/mm/notes/list',
       params: {},
     );
   }

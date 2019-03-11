@@ -21,6 +21,8 @@ class _Agent {
     Map<String, dynamic> header,
   }) async {
     try {
+      print('url:' + url);
+      print(params);
       Response res = await dio.post(
         url,
         data: params,

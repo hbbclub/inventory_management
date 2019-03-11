@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/agent/agent.dart';
 import 'package:flutter_user_agent/flutter_user_agent.dart';
+import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/home/home.dart';
@@ -11,6 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String _username = '';
+  String _password = '';
   // Platform messages are asynchronous, so we initialize in an async method.
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   Future<void> initUserAgentState() async {
@@ -91,6 +94,9 @@ class _LoginPageState extends State<LoginPage> {
       validator: (text) {
         return text.isEmpty ? 'account is invalid' : null;
       },
+      onSaved: (text) {
+        _username = text;
+      },
       decoration: const InputDecoration(
         hintText: 'Please enter your account number',
         labelText: 'Account',
@@ -105,6 +111,9 @@ class _LoginPageState extends State<LoginPage> {
       obscureText: true,
       validator: (text) {
         return text.isEmpty ? 'password is invalid' : null;
+      },
+      onSaved: (text) {
+        _password = text;
       },
       decoration: const InputDecoration(
         hintText: 'Please enter your password',
@@ -165,9 +174,20 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.blue,
           textColor: Colors.white,
           child: Text('Login'),
-          onPressed: () {
+          onPressed: () async {
             if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
+              ApiModel result = await api.login(
+                  username: _username,
+                  password: _password,
+                  linkWord: Utils.linkWord);
+              if (result.isError()) {
+                return;
+              }
+
+              httpUtil.commonHeader.addAll({
+                'Authorization': result.data['token'],
+              });
               Utils.replaceScreen(
                   context,
                   BlocProvider(

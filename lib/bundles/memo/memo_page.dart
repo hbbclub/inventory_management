@@ -108,43 +108,68 @@ class _MemoPageState extends State<MemoPage>
       ),
       body: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
-          var item = list[index];
-          return ListTile(
-            onTap: () {
-              Widget page = MyRouter().findPage(
-                RouterPageOption(
-                  url: 'router://MemoAddNotePage',
-                  params: {
-                    'type': NotePageType.None,
-                    'model': list[index],
-                  },
-                ),
-              );
-              Utils.pushScreen(context, page).then((result) {
-                requireNoteList();
-              });
-              ;
-            },
-            title: Container(
-              padding: EdgeInsets.only(top: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text('keyword:' + item.keyword),
-                  Expanded(
-                    child: Text(
-                      'date:' +
-                          (item.updatedAt != null
-                              ? item.updatedAt.substring(0, 10)
-                              : ''),
-                      textAlign: TextAlign.right,
+          MemoAddNoteModel item = list[index];
+          return Dismissible(
+            background: Container(
+                color: Colors.red,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 40,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 20,
+                    )
+                  ],
+                )),
+            direction: DismissDirection.endToStart,
+            confirmDismiss: (direction) async {
+              return item.createUserId == Utils.user.username;
+            },
+            onDismissed: (direction) async {
+              list.removeAt(index);
+              await api.deleteNote(item.id);
+            },
+            key: Key(index.toString()),
+            child: ListTile(
+              onTap: () {
+                Widget page = MyRouter().findPage(
+                  RouterPageOption(
+                    url: 'router://MemoAddNotePage',
+                    params: {
+                      'type': NotePageType.None,
+                      'model': list[index],
+                    },
+                  ),
+                );
+                Utils.pushScreen(context, page).then((result) {
+                  requireNoteList();
+                });
+              },
+              title: Container(
+                padding: EdgeInsets.only(top: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text('keyword:' + item.keyword),
+                    Expanded(
+                      child: Text(
+                        'date:' +
+                            (item.updatedAt != null
+                                ? item.updatedAt.substring(0, 10)
+                                : ''),
+                        textAlign: TextAlign.right,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            subtitle: Container(
-              child: Text(item.notes ?? ''),
+              subtitle: Container(
+                child: Text(item.notes ?? ''),
+              ),
             ),
           );
         },

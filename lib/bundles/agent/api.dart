@@ -50,17 +50,25 @@ class Api {
 
   //添加记录
   Future<ApiModel> addNote(Map<String, dynamic> note) async {
-    note.addAll({'user':Utils.user.toJson()});
+    note.addAll({'user': Utils.user.toJson()});
     return httpUtil.post(
       '/mm/note',
       params: note,
     );
   }
+
   //修改记录
   Future<ApiModel> updateNote(Map<String, dynamic> note) async {
     return httpUtil.patch(
       '/mm/note',
       params: note,
+    );
+  }
+
+  //删除记录
+  Future<ApiModel> deleteNote(String id) async {
+    return httpUtil.delete(
+      '/mm/note/' + id,
     );
   }
 

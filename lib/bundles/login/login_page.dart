@@ -5,6 +5,7 @@ import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/home/home.dart';
+import 'package:inventory_management/bundles/login/user_model.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -194,7 +195,11 @@ class _LoginPageState extends State<LoginPage> {
               if (result.isError()) {
                 return;
               }
-
+              if (result.data['code'] != 0) {
+                Utils.showSnackBar(context, text: result.data['message']);
+                return;
+              }
+              Utils.user = UserModel.fromJson(result.data['user']);
               httpUtil.commonHeader.addAll({
                 'Authorization': result.data['token'],
               });

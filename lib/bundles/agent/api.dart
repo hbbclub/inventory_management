@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:inventory_management/bundles/agent/agent.dart';
 import 'package:inventory_management/bundles/agent/api_model.dart';
+import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 export 'package:inventory_management/bundles/agent/api_model.dart';
 
@@ -49,6 +50,7 @@ class Api {
 
   //添加记录
   Future<ApiModel> addNote(Map<String, dynamic> note) async {
+    note.addAll({'user':Utils.user.toJson()});
     return httpUtil.post(
       '/mm/note',
       params: note,

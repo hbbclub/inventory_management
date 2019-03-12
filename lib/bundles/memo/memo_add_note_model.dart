@@ -8,6 +8,10 @@ class MemoAddNoteModel {
   String category;
   String notes;
   String keyword;
+  @JsonKey(name: 'create_user_id')
+  String createUserId;
+  @JsonKey(name: 'create_user_group')
+  String createUserGroup;
   @JsonKey(name: 'updated_at')
   String updatedAt;
   int email;

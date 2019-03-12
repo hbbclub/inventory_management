@@ -34,6 +34,7 @@ class _MemoPageState extends State<MemoPage>
       for (Map item in labels) {
         res.add(MemoAddNoteModel.fromJson(item));
       }
+      print(res);
       if (this.mounted) {
         setState(() {
           this.list = res;
@@ -76,7 +77,11 @@ class _MemoPageState extends State<MemoPage>
           SizedBox(
             width: 65,
             child: MaterialButton(
-              child: Icon(Icons.search,size: 40,color: Colors.white,),
+              child: Icon(
+                Icons.search,
+                size: 40,
+                color: Colors.white,
+              ),
               onPressed: () async {
                 // String barcode = await BarcodeScanner.scan();
               },
@@ -115,7 +120,10 @@ class _MemoPageState extends State<MemoPage>
                   },
                 ),
               );
-              Utils.pushScreen(context, page);
+              Utils.pushScreen(context, page).then((result) {
+                requireNoteList();
+              });
+              ;
             },
             title: Container(
               padding: EdgeInsets.only(top: 5),

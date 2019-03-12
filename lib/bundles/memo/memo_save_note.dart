@@ -99,7 +99,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
       addedResult = await api.updateNote(jsonMap);
     }
 
-    if (!addedResult.isError() && (addedResult.data['code'] == 0)) {
+    if (!addedResult.isError()) {
       Utils.popAll(context);
     }
   }

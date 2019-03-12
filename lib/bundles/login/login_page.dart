@@ -196,9 +196,6 @@ class _LoginPageState extends State<LoginPage> {
                   password: _password,
                   linkWord: Utils.linkWord);
               if (result.isError()) {
-                return;
-              }
-              if (result.data['code'] != 0) {
                 Utils.showSnackBar(context, text: result.data['message']);
                 return;
               }

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
+import 'package:inventory_management/bundles/login/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
@@ -12,6 +13,8 @@ class Utils {
   //api
   static String hostUri = 'http://mm.xwcbpx.com';
   static String linkWord = '';
+  //user
+  static UserModel user = UserModel();
   //cache key
   static String cacheKey = 'LOCAL_CACHE';
   static String cacheKeyForHostUrl = 'LOCAL_CACHE_HOST_URL';

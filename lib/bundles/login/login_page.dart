@@ -6,6 +6,7 @@ import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/home/home.dart';
 import 'package:inventory_management/bundles/login/user_model.dart';
+import 'package:package_info/package_info.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,8 +24,8 @@ class _LoginPageState extends State<LoginPage> {
     try {
       //获取userAgent 添加到请求代理类中
       userAgent = await FlutterUserAgent.getPropertyAsync('userAgent');
-      await FlutterUserAgent.init();
-      _version = FlutterUserAgent.getProperty('applicationVersion');
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      _version = packageInfo.version;
       httpUtil.commonHeader.addAll({'User-Agent': userAgent});
       //拿到缓存对象 设置对应的hostUri 和linkWord
       Map<String, dynamic> localCache = await Utils.getLoaclCache();

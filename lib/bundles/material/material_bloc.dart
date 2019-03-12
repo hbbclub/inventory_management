@@ -20,7 +20,7 @@ class MaterialBloc extends BlocBase {
           return [];
         }
         List<MaterialModel> res = [];
-        for (Map item in result.data['parts']) {
+        for (Map item in result.data['data']) {
           res.add(MaterialModel.fromJson(item));
         }
         return res;

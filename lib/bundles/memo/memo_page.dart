@@ -29,12 +29,12 @@ class _MemoPageState extends State<MemoPage>
       if (result.isError()) {
         return;
       }
-      List labels = result.data['notes'] ?? [];
+      List labels = result.data['data'] ?? [];
       List<MemoAddNoteModel> res = [];
       for (Map item in labels) {
         res.add(MemoAddNoteModel.fromJson(item));
       }
-      print(res);
+
       if (this.mounted) {
         setState(() {
           this.list = res;

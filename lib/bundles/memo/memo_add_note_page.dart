@@ -31,6 +31,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
   void initState() {
     MemoAddNoteModel model = widget.initParam.params['model'];
     if (model != null) {
+      print(model.toJson());
       _textEditingController.text = model.notes;
       if (model.items != null) {
         _currentTextLabels.addAll(List.generate(model.items.length, (index) {

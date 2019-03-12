@@ -69,7 +69,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
         if (result.isError()) {
           return;
         }
-        rowFiles = result.data['sfiles'];
+        rowFiles = result.data['data'] ?? [];
       }
 
       images.removeWhere((image) {
@@ -96,7 +96,6 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
       Map jsonMap = model.toJson();
       jsonMap['id'] = jsonMap['_id'];
       jsonMap.remove('_id');
-      print(jsonMap);
       addedResult = await api.updateNote(jsonMap);
     }
 

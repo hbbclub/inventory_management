@@ -21,7 +21,7 @@ class PrintingStdLabelPageState extends State<PrintingStdLabelPage>
         return;
       }
       //解析数据
-      List labels = result.data['labels'] ?? [];
+      List labels = result.data['data'] ?? [];
       List<PrintingLabelModel> res = [];
       for (Map item in labels) {
         res.add(PrintingLabelModel.fromJson(item));

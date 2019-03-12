@@ -15,6 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String _username = '';
   String _password = '';
+  String _version = '';
   // Platform messages are asynchronous, so we initialize in an async method.
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   Future<void> initUserAgentState() async {
@@ -22,10 +23,11 @@ class _LoginPageState extends State<LoginPage> {
     try {
       //获取userAgent 添加到请求代理类中
       userAgent = await FlutterUserAgent.getPropertyAsync('userAgent');
+      await FlutterUserAgent.init();
+      _version = FlutterUserAgent.getProperty('applicationVersion');
       httpUtil.commonHeader.addAll({'User-Agent': userAgent});
       //拿到缓存对象 设置对应的hostUri 和linkWord
       Map<String, dynamic> localCache = await Utils.getLoaclCache();
-      print(localCache);
       hostUri =
           Utils.hostUri = localCache[Utils.cacheKeyForHostUrl] ?? Utils.hostUri;
       linkWord = Utils.linkWord = localCache[Utils.cacheKeyForLinkWord] ?? '';
@@ -232,7 +234,7 @@ class _LoginPageState extends State<LoginPage> {
       alignment: Alignment.bottomCenter,
       width: double.infinity,
       child: Text(
-        'Version:1.0.0',
+        'Version:' + _version,
         style: TextStyle(color: Colors.black),
       ),
     );

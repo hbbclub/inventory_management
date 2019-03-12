@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/login/login_page.dart';
 
 void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
+      // debugShowCheckedModeBanner: false,
       title: 'Inventory Management',
       theme: ThemeData(
         textTheme: TextTheme(

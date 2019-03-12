@@ -142,6 +142,18 @@ class HttpUtil {
       header: commonHeader,
     );
   }
+
+  Future<ApiModel> delete(
+    String url, {
+    Map<String, dynamic> params,
+  }) async {
+    return await agent.request(
+      HttpVerb.DELETE,
+      url,
+      params: params,
+      header: commonHeader,
+    );
+  }
 }
 
 final httpUtil = HttpUtil();

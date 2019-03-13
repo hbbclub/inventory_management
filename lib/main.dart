@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/home/welcome.dart';
 
-void main() => runApp(MaterialApp(
+void main() async {
+
+  runApp(MaterialApp(
       // debugShowCheckedModeBanner: false,
       title: 'Inventory Management',
       theme: ThemeData(
@@ -18,3 +20,4 @@ void main() => runApp(MaterialApp(
       ),
       home: Welcome(),
     ));
+} 

@@ -63,7 +63,10 @@ class InventoryPageState extends State<InventoryPage> {
         title: Text('INVENTORY'),
         actions: <Widget>[
           RawMaterialButton(
-            child: Icon(Icons.save),
+            child: Icon(
+              Icons.save,
+              size: 35,
+            ),
             onPressed: () {},
           ),
         ],

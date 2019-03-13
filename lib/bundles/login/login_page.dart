@@ -74,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
         return text.isEmpty ? 'account is invalid' : null;
       },
       onSaved: (text) {
+        Utils.userName =text;
         Utils.addLoaclCache({
           Utils.cacheKeyForUsername: text,
         });

@@ -80,6 +80,15 @@ class Api {
     );
   }
 
+  //获取note categories列表
+  Future<ApiModel> noteCategories() async {
+    return httpUtil.get(
+      '/mm/dict/categories',
+      params: {},
+    );
+  }
+
+  
   //上传文件
   Future<ApiModel> fileUpload(List<Asset> files) async {
     List<UploadFileInfo> infos = List.generate(files.length, (index) {

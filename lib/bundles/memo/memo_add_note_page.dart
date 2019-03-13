@@ -212,7 +212,8 @@ class ImageLabel extends StatelessWidget {
           ),
           Expanded(
             child: this.image.runtimeType == NodeFile
-                ? Image.network(Utils.hostUri + '/' + (image as NodeFile).url)
+                ? Image.network(
+                    'http://' + Utils.hostUri + '/' + (image as NodeFile).url)
                 : AssetView(key, index, image),
           ),
           IconButton(

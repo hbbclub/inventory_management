@@ -6,7 +6,7 @@ import 'package:inventory_management/bundles/common/utils.dart';
 enum HttpVerb { POST, GET, DELETE, PUT, PATCH }
 
 final BaseOptions options = BaseOptions(
-  baseUrl: Utils.hostUri,
+  baseUrl: 'http://' + Utils.hostUri,
   connectTimeout: 5000,
   receiveTimeout: 8000,
   headers: <String, String>{
@@ -15,8 +15,11 @@ final BaseOptions options = BaseOptions(
   },
 );
 
-class _Agent {
-  static final Dio dio = new Dio(options);
+class Agent {
+  static Dio dio = new Dio(options);
+  void changeHostUrl(String hostUrl) {
+    dio.options.baseUrl = hostUrl;
+  }
 
   Future<ApiModel> request(
     HttpVerb verb,
@@ -25,7 +28,7 @@ class _Agent {
     Map<String, dynamic> header,
   }) async {
     try {
-      print('url:' + url);
+      print('url:' + dio.options.baseUrl + url);
       print(params);
       Response res;
 
@@ -79,7 +82,7 @@ class _Agent {
       return _handError('数据返回为空 url:' + url, -1);
     }
     // final result = json.decode(res.data.toString());
-    print('result:' + url);
+    print('result:' + dio.options.baseUrl + url);
     print(res.data);
     var model =
         ApiModel.fromJson({'error': 0, 'data': res.data, 'message': ''});
@@ -106,7 +109,7 @@ class HttpUtil {
 
   Map<String, dynamic> commonHeader = {};
 
-  _Agent agent = _Agent();
+  Agent agent = Agent();
   Future<ApiModel> post(
     String url, {
     Map<String, dynamic> params,
@@ -153,6 +156,10 @@ class HttpUtil {
       params: params,
       header: commonHeader,
     );
+  }
+
+  changeHostUrl(String url) {
+    this.agent.changeHostUrl(url);
   }
 }
 

@@ -14,7 +14,7 @@ class Utils {
   static String password = '';
   static String appVersion = '';
   //api
-  static String hostUri = 'http://mm.xwcbpx.com';
+  static String hostUri = 'mm.xwcbpx.com';
   static String linkWord = '';
   //user
   static UserModel user = UserModel();

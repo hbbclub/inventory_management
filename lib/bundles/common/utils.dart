@@ -10,6 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Utils {
   //应用名称
   static String appName = 'inventory_management';
+  static String userName = '';
+  static String password = '';
+  static String appVersion = '';
   //api
   static String hostUri = 'http://mm.xwcbpx.com';
   static String linkWord = '';

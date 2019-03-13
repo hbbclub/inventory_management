@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/bundles/login/login_page.dart';
+import 'package:inventory_management/bundles/home/welcome.dart';
 
 void main() => runApp(MaterialApp(
       // debugShowCheckedModeBanner: false,
@@ -15,7 +15,6 @@ void main() => runApp(MaterialApp(
             color: Colors.black,
           ),
         ),
-        
       ),
-      home: LoginPage(),
+      home: Welcome(),
     ));

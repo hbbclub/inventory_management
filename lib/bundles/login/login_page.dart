@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/agent/agent.dart';
-import 'package:flutter_user_agent/flutter_user_agent.dart';
+
 import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/home/home.dart';
 import 'package:inventory_management/bundles/login/user_model.dart';
-import 'package:package_info/package_info.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,39 +13,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _username = '';
-  String _password = '';
-  String _version = '';
   // Platform messages are asynchronous, so we initialize in an async method.
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  Future<void> initUserAgentState() async {
-    String userAgent, hostUri, linkWord;
-    try {
-      //获取userAgent 添加到请求代理类中
-      userAgent = await FlutterUserAgent.getPropertyAsync('userAgent');
-      PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      _version = packageInfo.version;
-      httpUtil.commonHeader.addAll({'User-Agent': userAgent});
-      //拿到缓存对象 设置对应的hostUri 和linkWord
-      Map<String, dynamic> localCache = await Utils.getLoaclCache();
-      hostUri =
-          Utils.hostUri = localCache[Utils.cacheKeyForHostUrl] ?? Utils.hostUri;
-      linkWord = Utils.linkWord = localCache[Utils.cacheKeyForLinkWord] ?? '';
-      _username = localCache[Utils.cacheKeyForUsername] ?? '';
-      _password = localCache[Utils.cacheKeyForPassword] ?? '';
-    } on Exception {
-      // userAgent = webViewUserAgent = '<error>';
-    }
-  }
 
   @override
   void initState() {
     super.initState();
-    initUserAgentState().then((data) {
-      if (mounted) {
-        setState(() {});
-      }
-    });
   }
 
   @override
@@ -96,13 +68,12 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildAccountTextField() {
     return TextFormField(
-      controller: TextEditingController(text: _username),
+      controller: TextEditingController(text: Utils.userName),
       textCapitalization: TextCapitalization.words,
       validator: (text) {
         return text.isEmpty ? 'account is invalid' : null;
       },
       onSaved: (text) {
-        _username = text;
         Utils.addLoaclCache({
           Utils.cacheKeyForUsername: text,
         });
@@ -117,14 +88,14 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildPasswordTextField() {
     return TextFormField(
-      controller: TextEditingController(text: _password),
+      controller: TextEditingController(text: Utils.password),
       textCapitalization: TextCapitalization.words,
       obscureText: true,
       validator: (text) {
         return text.isEmpty ? 'password is invalid' : null;
       },
       onSaved: (text) {
-        _password = text;
+        Utils.password = text;
         Utils.addLoaclCache({
           Utils.cacheKeyForPassword: text,
         });
@@ -192,8 +163,8 @@ class _LoginPageState extends State<LoginPage> {
             if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
               ApiModel result = await api.login(
-                  username: _username,
-                  password: _password,
+                  username: Utils.userName,
+                  password: Utils.password,
                   linkWord: Utils.linkWord);
               if (result.isError()) {
                 Utils.showSnackBar(context, text: result.data['message']);
@@ -232,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
       alignment: Alignment.bottomCenter,
       width: double.infinity,
       child: Text(
-        'Version:' + _version,
+        'Version:' + Utils.appVersion,
         style: TextStyle(color: Colors.black),
       ),
     );

@@ -117,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       onSaved: (text) {
         Utils.hostUri = text;
+        httpUtil.changeHostUrl('http://' + text);
         Utils.addLoaclCache({
           Utils.cacheKeyForHostUrl: text,
         });

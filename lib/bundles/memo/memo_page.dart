@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
-import 'package:inventory_management/bundles/memo/memo_add_note_page.dart';
 import 'package:inventory_management/bundles/memo/memo_save_note.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 

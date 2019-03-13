@@ -34,6 +34,9 @@ dependencies:
   http: ^0.12.0
   dio: ^2.0.5
   flutter_user_agent: ^1.0.1
+  fast_qr_reader_view:
+    git:
+      url: git://github.com/facundomedica/fast_qr_reader_view.git
   package_info: ^0.4.0+2
 
 dev_dependencies:

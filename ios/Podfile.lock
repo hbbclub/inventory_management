@@ -9,6 +9,8 @@ PODS:
   - BSImageView (1.0.2)
   - device_info (0.0.1):
     - Flutter
+  - fast_qr_reader_view (0.0.1):
+    - Flutter
   - Firebase/Core (5.11.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.3.0)
@@ -142,6 +144,7 @@ PODS:
 DEPENDENCIES:
   - barcode_scan (from `.symlinks/plugins/barcode_scan/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
+  - fast_qr_reader_view (from `.symlinks/plugins/fast_qr_reader_view/ios`)
   - Firebase/MLVisionBarcodeModel
   - Firebase/MLVisionFaceModel
   - Firebase/MLVisionLabelModel
@@ -185,6 +188,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/barcode_scan/ios"
   device_info:
     :path: ".symlinks/plugins/device_info/ios"
+  fast_qr_reader_view:
+    :path: ".symlinks/plugins/fast_qr_reader_view/ios"
   firebase_ml_vision:
     :path: ".symlinks/plugins/firebase_ml_vision/ios"
   Flutter:
@@ -208,6 +213,7 @@ SPEC CHECKSUMS:
   BSImagePicker: 553707de1adaad42eac252e0b84d20dbdba83fe9
   BSImageView: ab22ff8cae61f1ae17a3c9efeeb216af3cf84a09
   device_info: 76ce0b32e13034d1883be4a382433648f9dcee63
+  fast_qr_reader_view: 8e7946be31e3d99b3355924e1f0ec1eca6e01fc9
   Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
   firebase_ml_vision: 44419b558d8edcfb2be8606cc76cdd5014bd2017
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba

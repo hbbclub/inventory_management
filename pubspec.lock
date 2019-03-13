@@ -169,6 +169,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.5"
+  fast_qr_reader_view:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "8138c700ed1a31ec78d5937aeec604a93c60bb61"
+      url: "git://github.com/facundomedica/fast_qr_reader_view.git"
+    source: git
+    version: "0.1.5"
   firebase_ml_vision:
     dependency: "direct main"
     description:

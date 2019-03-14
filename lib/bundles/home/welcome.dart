@@ -28,7 +28,9 @@ class Welcome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    initUserAgentState().then((data) {
+    initUserAgentState()
+        .timeout(Duration(seconds: 3), onTimeout: () => Future.value())
+        .then((data) {
       Utils.replaceScreen(context, LoginPage());
     });
     return Scaffold(

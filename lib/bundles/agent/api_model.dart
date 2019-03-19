@@ -10,4 +10,13 @@ class ApiModel {
   ApiModel();
   factory ApiModel.fromJson(Map<String, dynamic> json) =>
       _$ApiModelFromJson(json);
+
+  bool isError() {
+    return (this.error != 0) || (this.data['code'] != 0);
+  }
+
+  @override
+  String toString() {
+    return _$ApiModelToJson(this).toString();
+  }
 }

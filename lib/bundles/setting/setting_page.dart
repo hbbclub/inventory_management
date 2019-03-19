@@ -7,7 +7,7 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Setting'),
+        title: Text('SETTING'),
       ),
       body: ListView(
         children: <Widget>[

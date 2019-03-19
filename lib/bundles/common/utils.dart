@@ -1,13 +1,29 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
+import 'package:inventory_management/bundles/login/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
   //应用名称
   static String appName = 'inventory_management';
+  static String userName = '';
+  static String password = '';
+  static String appVersion = '';
+  //api
+  static String hostUri = 'mm.xwcbpx.com';
+  static String linkWord = '';
+  //user
+  static UserModel user = UserModel();
+  //cache key
   static String cacheKey = 'LOCAL_CACHE';
+  static String cacheKeyForHostUrl = 'LOCAL_CACHE_HOST_URL';
+  static String cacheKeyForLinkWord = 'LOCAL_CACHE_LINK_WORD';
+  static String cacheKeyForUsername = 'LOCAL_CACHE_USERNAME';
+  static String cacheKeyForPassword = 'LOCAL_CACHE_PASSWORD';
 
   // 返回当前时间戳
   static int currentTimeMillis() {
@@ -88,8 +104,8 @@ class Utils {
   }
 
   // 页面跳转
-  static void pushScreen(BuildContext context, Widget screen) {
-    Navigator.of(context).push(
+  static Future pushScreen(BuildContext context, Widget screen) {
+    return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
           return screen;
@@ -98,14 +114,24 @@ class Utils {
     );
   }
 
-  static void replaceScreen(BuildContext context, Widget screen) {
-    Navigator.of(context).pushReplacement(
+  static Future replaceScreen(BuildContext context, Widget screen) {
+    return Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (BuildContext context) {
           return screen;
         },
       ),
     );
+  }
+
+  static void popAll(BuildContext context) {
+    Navigator.of(context).popUntil((Route router) {
+      print(router.isFirst);
+      if (router.isFirst) {
+        return true;
+      }
+      return false;
+    });
   }
 
   static Future<String> getDeviceUUID() async {
@@ -128,5 +154,25 @@ class Utils {
       duration: Duration(seconds: duration ?? 1),
     );
     Scaffold.of(context).showSnackBar(snackBar);
+  }
+
+  static Future<Map<String, dynamic>> getLoaclCache() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String rawJson = prefs.getString(Utils.cacheKey);
+    if (rawJson == null) {
+      return {};
+    }
+    return json.decode(rawJson);
+  }
+
+  //会将参数的map融合到本地缓存的json对象中
+  static Future<bool> addLoaclCache(Map<String, dynamic> cacheMap) async {
+    if (cacheMap == null) {
+      return false;
+    }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map cache = await Utils.getLoaclCache();
+    cache.addAll(cacheMap);
+    return prefs.setString(Utils.cacheKey, json.encode(cache));
   }
 }

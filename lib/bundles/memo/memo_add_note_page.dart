@@ -1,8 +1,12 @@
 import 'package:annotation_route/route.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:inventory_management/bundles/common/multi_image_picker/asset_view.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
+import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
+import 'package:inventory_management/bundles/memo/memo_save_note.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +22,31 @@ class MemoAddNotePage extends StatefulWidget {
 class _MemoAddNotePageState extends State<MemoAddNotePage> {
   static final GlobalKey<ScaffoldState> scaffoldKey =
       GlobalKey<ScaffoldState>();
-  List<Asset> images = List<Asset>();
+  static final TextRecognizer textDetector =
+      FirebaseVision.instance.textRecognizer();
+  List images = [];
+  List<String> _currentTextLabels = [];
+  TextEditingController _textEditingController = TextEditingController();
+  @override
+  void initState() {
+    MemoAddNoteModel model = widget.initParam.params['model'];
+    if (model != null) {
+      print(model.toJson());
+      _textEditingController.text = model.notes;
+      if (model.items != null) {
+        _currentTextLabels.addAll(List.generate(model.items.length, (index) {
+          return model.items[index].value;
+        }));
+      }
+      if (model.files != null) {
+        images.addAll(List.generate(model.files.length, (index) {
+          return model.files[index];
+        }));
+      }
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [
@@ -31,43 +59,56 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
           ),
           Expanded(
             child: TextField(
+              controller: _textEditingController,
               decoration: InputDecoration(border: OutlineInputBorder()),
+              textInputAction: TextInputAction.done,
               maxLines: 3,
             ),
           ),
         ],
       ),
     ];
-    widgets.addAll(items.map((item) {
-      return new MemoAddNoteLabelTile(item);
-    }).toList());
+    widgets.addAll(
+      List.generate(_currentTextLabels.length, (index) {
+        return MemoAddNoteLabelTile(NoteLabel(_currentTextLabels[index], () {
+          setState(() {
+            _currentTextLabels.removeAt(index);
+          });
+        }));
+      }),
+    );
 
     widgets.addAll(
       List.generate(images.length, (index) {
-        return Container(
-          height: 150.0,
-          width: 150.0,
-          child: AssetView(index, images[index]),
-        );
+        return ImageLabel(Key(index.toString()), index, images[index], (i) {
+          setState(() {
+            images.removeAt(i);
+          });
+        });
       }),
     );
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
         title: Text(
-          'Add Note',
+          widget.initParam.params['type'] == NotePageType.Add
+              ? 'Add Note'
+              : 'Note Detail',
         ),
         actions: <Widget>[
           RawMaterialButton(
-            child: Text(
-              'done',
-              style: TextStyle(color: Colors.white),
-            ),
+            child: Icon(Icons.save),
             onPressed: () {
               Widget page = MyRouter().findPage(
                 RouterPageOption(
                   url: 'router://MemoSaveNotePage',
-                  params: {},
+                  params: {
+                    'files': images ?? [],
+                    'notes': _textEditingController.text,
+                    'items': _currentTextLabels ?? [],
+                    'type': widget.initParam.params['type'],
+                    'id': widget.initParam.params['model']?.id,
+                  },
                 ),
               );
               Utils.pushScreen(context, page);
@@ -75,17 +116,42 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
           ),
         ],
       ),
-      body: ListView(
-        children: widgets,
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: ListView.separated(
+          itemCount: widgets.length,
+          itemBuilder: (BuildContext context, int index) {
+            return widgets[index];
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 8,
+            );
+          },
+        ),
       ),
-      floatingActionButton: Container(
-        height: 100,
-        width: 80,
-        child: Column(
+      bottomNavigationBar: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             RaisedButton(
               child: Text('OCR'),
-              onPressed: () {},
+              onPressed: () async {
+                var image =
+                    await ImagePicker.pickImage(source: ImageSource.camera);
+                if (image == null) {
+                  return;
+                }
+                final FirebaseVisionImage visionImage =
+                    FirebaseVisionImage.fromFile(image);
+                var visionText = await textDetector.processImage(visionImage);
+                setState(() {
+                  _currentTextLabels.clear();
+                  _currentTextLabels.addAll(visionText.blocks.map((block) {
+                    return block.text;
+                  }).toList());
+                });
+              },
             ),
             RaisedButton(
                 child: Icon(Icons.image),
@@ -99,9 +165,9 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
   }
 
   Future<void> loadAssets() async {
-    setState(() {
-      images = List<Asset>();
-    });
+    // setState(() {
+    //   images = List<Asset>();
+    // });
 
     List<Asset> resultList;
     String error;
@@ -121,59 +187,74 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
     if (!mounted) return;
 
     setState(() {
-      images = resultList;
-      if (error == null) ;
+      images.addAll(resultList);
+      if (error == null) {
+        print(error);
+      }
     });
   }
 }
 
-class NoteLabel {
-  String title;
-  String initValue;
-  NoteLabel(this.title, this.initValue);
-}
-
-var items = <NoteLabel>[
-  NoteLabel('UOM', '1111'),
-  NoteLabel('QTY', '1111'),
-  NoteLabel('Lot Number', '1111'),
-  NoteLabel('Print to', '1111'),
-  NoteLabel('# of labels', '1111'),
-];
-
-class MemoAddNoteLabelTile extends StatefulWidget {
-  final NoteLabel label;
-  MemoAddNoteLabelTile(this.label) : super();
-
+class ImageLabel extends StatelessWidget {
+  final int index;
+  final Object image;
+  final Function onDelete;
+  ImageLabel(Key key, this.index, this.image, this.onDelete) : super(key: key);
   @override
-  MemoAddNoteLabelTileState createState() {
-    return new MemoAddNoteLabelTileState();
+  Widget build(BuildContext context) {
+    return Container(
+      width: 150.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            width: 40,
+          ),
+          Expanded(
+            child: this.image.runtimeType == NodeFile
+                ? Image.network(
+                    'http://' + Utils.hostUri + '/' + (image as NodeFile).url)
+                : AssetView(key, index, image),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.cancel,
+            ),
+            onPressed: () => this.onDelete(index),
+          )
+        ],
+      ),
+    );
   }
 }
 
-class MemoAddNoteLabelTileState extends State<MemoAddNoteLabelTile> {
-  bool selected = false;
+class NoteLabel {
+  // String title;
+  String initValue;
+  Function onDelete;
+  NoteLabel(this.initValue, this.onDelete);
+}
+
+class MemoAddNoteLabelTile extends StatelessWidget {
+  final NoteLabel label;
+  MemoAddNoteLabelTile(this.label);
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
         children: <Widget>[
-          Container(
-            child: Text(this.widget.label.title),
-            width: 100.0,
+          SizedBox(
+            width: 40,
           ),
           Expanded(
             child: TextField(
-              controller: TextEditingController(text: widget.label.initValue),
+              maxLines: null,
+              controller: TextEditingController(text: label.initValue),
             ),
           ),
-          Checkbox(
-            onChanged: (value) {
-              setState(() {
-                this.selected = value;
-              });
-            },
-            value: selected,
+          IconButton(
+            icon: Icon(Icons.cancel),
+            onPressed: label.onDelete,
           )
         ],
       ),

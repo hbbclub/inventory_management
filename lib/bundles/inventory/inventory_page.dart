@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
+import 'package:inventory_management/bundles/common/images.dart';
+import 'package:inventory_management/bundles/common/utils.dart';
+import 'package:inventory_management/bundles/inventory/scanner_page.dart';
 
 class InventoryPage extends StatefulWidget {
   @override
@@ -12,93 +13,103 @@ class InventoryPage extends StatefulWidget {
 
 class InventoryPageState extends State<InventoryPage> {
   String barcode = "";
+  InventoryModel model = InventoryModel();
   Future scan() async {
-    try {
-      String barcode = await BarcodeScanner.scan();
-      setState(() {
-        return this.barcode = barcode;
-      });
-    } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          return this.barcode = 'The user did not grant the camera permission!';
-        });
-      } else {
-        setState(() {
-          return this.barcode = 'Unknown error: $e';
-        });
-      }
-    } on FormatException {
-      setState(() => this.barcode =
-          'null (User returned using the "back"-button before scanning anything. Result)');
-    } catch (e) {
-      setState(() => this.barcode = 'Unknown error: $e');
-    }
+    Utils.pushScreen(context, CameraApp(model));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inventory'),
+        title: Text('INVENTORY'),
         actions: <Widget>[
           RawMaterialButton(
-            child: Text(
-              'done',
-              style: TextStyle(color: Colors.white),
+            child: Icon(
+              Icons.save,
+              size: 35,
             ),
             onPressed: () {},
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.scanner),
+        child: Image.asset(
+          ImageAssets.scan,
+          width: 20,
+        ),
         onPressed: scan,
       ),
-      body: ListView(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('Tag Number')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('Stock Code')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('Location')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('Lot Number')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              SizedBox(width: 88, child: Text('QTY')),
-              Expanded(
-                child: TextField(),
-              )
-            ],
-          ),
-        ],
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: ListView(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                SizedBox(width: 100, child: Text('Tag Number')),
+                Expanded(
+                  child: TextField(
+                    controller: TextEditingController(text: model.tagNumber),
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 100, child: Text('Stock Code')),
+                Expanded(
+                  child: TextField(
+                      controller:
+                          TextEditingController(text: model.stockNumber)),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 100, child: Text('Location')),
+                Expanded(
+                  child: TextField(
+                      controller: TextEditingController(text: model.location)),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 100, child: Text('Lot Number')),
+                Expanded(
+                  child: TextField(
+                      controller: TextEditingController(text: model.lotNumber)),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 100, child: Text('QTY')),
+                Expanded(
+                  child: TextField(
+                      controller: TextEditingController(text: model.qty)),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class InventoryModel {
+  String tagNumber;
+  String stockNumber;
+  String location;
+  String lotNumber;
+  String qty;
+
+  bool isfull() {
+    return tagNumber != null &&
+        stockNumber != null &&
+        location != null &&
+        lotNumber != null &&
+        qty != null;
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
 import 'package:inventory_management/bundles/inventory/inventory_page.dart';
 import 'package:inventory_management/bundles/material/material_info_page.dart';
 import 'package:inventory_management/bundles/memo/memo_page.dart';
 import 'package:inventory_management/bundles/printing/printing_page.dart';
+import 'package:inventory_management/bundles/route/route.route.dart';
 import 'package:inventory_management/bundles/setting/setting_page.dart';
 
 class NavigationIconView {
@@ -18,7 +20,10 @@ class NavigationIconView {
         item = BottomNavigationBarItem(
           icon: icon,
           activeIcon: activeIcon,
-          title: Text(title),
+          title: Text(
+            title,
+            style: TextStyle(fontSize: 13),
+          ),
           backgroundColor: color,
         ),
         controller = AnimationController(
@@ -78,44 +83,46 @@ class Home extends StatefulWidget {
   _TabScreenState createState() => _TabScreenState();
 }
 
-class _TabScreenState extends State<Home> with TickerProviderStateMixin {
+class _TabScreenState extends State<Home>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   PageController controller;
   int _currentIndex = 0;
   BottomNavigationBarType _type = BottomNavigationBarType.fixed;
   List<NavigationIconView> _navigationViews;
-
+  List<Widget> _pages;
   @override
+  // STOCK PRINTING  MEMO INVENTORY SETTING
   void initState() {
     super.initState();
     controller = new PageController(initialPage: _currentIndex);
     _navigationViews = <NavigationIconView>[
       NavigationIconView(
         icon: const Icon(Icons.gradient),
-        title: 'stock',
+        title: 'STOCK',
         color: Colors.teal,
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(Icons.print),
-        title: 'print',
+        title: 'PRINTING',
         color: Colors.indigo,
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(Icons.note),
-        title: 'meno',
+        title: 'MEMO',
         color: Colors.pink,
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(Icons.adjust),
-        title: 'inventory',
+        title: 'INVENTORY',
         color: Colors.pink,
         vsync: this,
       ),
       NavigationIconView(
         icon: const Icon(Icons.settings),
-        title: 'setting',
+        title: 'SETTING',
         color: Colors.pink,
         vsync: this,
       )
@@ -125,6 +132,16 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
       view.controller.addListener(_rebuild);
 
     _navigationViews[_currentIndex].controller.value = 1.0;
+    _pages = [
+      BlocProvider(
+        bloc: MaterialBloc(),
+        child: MaterialInfoPage(),
+      ),
+      PrintingPage(),
+      MemoPage(RouterPageOption()),
+      InventoryPage(),
+      Setting(),
+    ];
   }
 
   @override
@@ -141,6 +158,7 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final BottomNavigationBar botNavBar = BottomNavigationBar(
       items: _navigationViews
           .map((NavigationIconView navigationView) => navigationView.item)
@@ -161,15 +179,12 @@ class _TabScreenState extends State<Home> with TickerProviderStateMixin {
       body: new PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller,
-        children: [
-          MaterialInfoPage(),
-          PrintingPage(),
-          MemoPage(),
-          InventoryPage(),
-          Setting(),
-        ],
+        children: _pages,
       ),
       bottomNavigationBar: botNavBar,
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

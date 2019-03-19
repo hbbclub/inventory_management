@@ -1,7 +1,17 @@
 import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:inventory_management/bundles/agent/api.dart';
+import 'package:inventory_management/bundles/common/utils.dart';
+import 'package:inventory_management/bundles/memo/memo_add_categories_model.dart';
+import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
+import 'package:multi_image_picker/asset.dart';
+
+enum NotePageType {
+  None,
+  Add,
+}
 
 @ARoute(url: 'router://MemoSaveNotePage')
 class MemoSaveNotePage extends StatefulWidget {
@@ -21,8 +31,104 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
   static final GlobalKey<ScaffoldState> scaffoldKey =
       GlobalKey<ScaffoldState>();
   String _activity;
+  TextEditingController keywordController = TextEditingController();
   bool _sendEmail = false;
-  List<String> _allActivities = ['增加', '删除', '修改'];
+
+// Purchasing   采购
+// Receiving  收货
+// Warehouse  仓库
+// QA  质量
+// Engineer  工程师
+// Production  生产
+// Maintenance  维修
+// Shipping   发货
+// Traffic  运输
+// Customer Service  客服
+
+  List<String> _allActivities = [];
+  MemoAddNoteModel model = MemoAddNoteModel();
+
+  @override
+  void initState() {
+    super.initState();
+    api.noteCategories().then((ApiModel result) {
+      if (result.isError()) {
+        return;
+      }
+
+      for (var item in result.data['data']) {
+        _allActivities.add(CategoriesModel.fromJson(item).category);
+      }
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  void save() async {
+    List images = widget.initParam.params['files'];
+    List notes = widget.initParam.params['items'];
+    model.id = widget.initParam.params['id'];
+    model.notes = widget.initParam.params['notes'];
+    model.keyword = keywordController.text;
+    if (notes.length > 0) {
+      model.items = List.generate(notes.length ?? 0, (index) {
+        return NodeItem(
+            item: 'note' + (index + 1).toString(), value: notes[index]);
+      });
+    }
+    if (images.length > 0) {
+      List<Asset> assets = images
+          .where((image) {
+            if (image.runtimeType == Asset) {
+              return true;
+            }
+            return false;
+          })
+          .toList()
+          .cast<Asset>();
+      ApiModel result;
+      List rowFiles = [];
+      if (assets.length > 0) {
+        result = await api.fileUpload(assets);
+        if (result.isError()) {
+          return;
+        }
+        rowFiles = result.data['data'] ?? [];
+      }
+
+      images.removeWhere((image) {
+        if (image.runtimeType == Asset) {
+          return true;
+        }
+        return false;
+      });
+      List uploadImages = [];
+
+      uploadImages.addAll(rowFiles
+          .map<NodeFile>((json) {
+            return NodeFile.fromJson(json);
+          })
+          .toList()
+          .cast<NodeFile>());
+      uploadImages.addAll(images);
+      this.model.files = uploadImages.cast<NodeFile>();
+    }
+    ApiModel addedResult;
+    if (widget.initParam.params['type'] == NotePageType.Add) {
+      addedResult = await api.addNote(model.toJson());
+    } else {
+      Map jsonMap = model.toJson();
+      jsonMap['id'] = jsonMap['_id'];
+      jsonMap.remove('_id');
+      addedResult = await api.updateNote(jsonMap);
+    }
+
+    if (!addedResult.isError()) {
+      Utils.popAll(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> widgets = [
@@ -37,6 +143,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
           child: DropdownButton<String>(
             value: _activity,
             onChanged: (String newValue) {
+              model.category = newValue;
               setState(() {
                 _activity = newValue;
               });
@@ -53,21 +160,11 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
       SettingItem(
         child: Row(
           children: <Widget>[
-            Text('Key Word'),
-            Expanded(child: TextField()),
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.orange,
-              ),
-              child: IconButton(
-                color: Colors.white,
-                onPressed: () {},
-                icon: Icon(
-                  Icons.radio,
-                ),
-              ),
-            )
+            Text('Keyword'),
+            Expanded(
+                child: TextField(
+              controller: keywordController,
+            )),
           ],
         ),
       ),
@@ -75,11 +172,12 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text('Send eMail?'),
+            Text('Send Mail'),
             Switch(
               onChanged: (bool value) {
                 setState(() {
                   _sendEmail = value;
+                  model.email = _sendEmail ? 1 : 0;
                 });
               },
               value: _sendEmail,
@@ -108,11 +206,14 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
               'done',
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: () async {},
+            onPressed: save,
           ),
         ],
       ),
-      body: DropdownButtonHideUnderline(child: ListView(children: widgets)),
+      body: Container(
+          padding: EdgeInsets.all(16.0),
+          child:
+              DropdownButtonHideUnderline(child: ListView(children: widgets))),
     );
   }
 }

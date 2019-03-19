@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+export 'package:inventory_management/bundles/material/material_bloc.dart';
+export  'package:inventory_management/bundles/bloc/app_bloc.dart';
 
 abstract class BlocBase {
   void dispose();

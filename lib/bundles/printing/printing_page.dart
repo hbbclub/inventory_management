@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/printing/printing_std_label_page.dart';
 import 'package:inventory_management/bundles/printing/printing_stk_label_page.dart';
 
@@ -9,13 +10,15 @@ class PrintingPage extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
-          title: Text('Printing'),
-          bottom: new TabBar(
-            isScrollable: true,
+          title: new TabBar(
             tabs: choices.map((Choice choice) {
-              return new Tab(
-                text: choice.title,
-                icon: new Icon(choice.icon),
+              return Container(
+                width: Utils.getScreenWidth(context) / 2.0,
+                child: new Tab(
+                  child: Text(choice.title ,style: TextStyle(fontSize: 18),),
+
+                  // icon: new Icon(choice.icon),
+                ),
               );
             }).toList(),
           ),
@@ -39,6 +42,9 @@ class Choice {
 }
 
 const List<Choice> choices = const <Choice>[
-  const Choice(title: 'STD Label', icon: Icons.label),
-  const Choice(title: 'Stk Code Label', icon: Icons.scanner),
+  const Choice(
+    title: 'STANDARD',
+    icon: Icons.label,
+  ),
+  const Choice(title: 'STOCK CODE', icon: Icons.scanner),
 ];

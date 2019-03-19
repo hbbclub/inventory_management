@@ -1,7 +1,11 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/agent/api.dart';
+import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
+import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/material/material_Info_tile.dart';
+import 'package:inventory_management/bundles/material/material_model.dart';
 import 'package:inventory_management/bundles/material/search_material.dart';
 import 'package:inventory_management/bundles/route/route.route.dart';
 
@@ -12,33 +16,48 @@ class MaterialInfoPage extends StatefulWidget {
   }
 }
 
-class MaterialInfoPageState extends State<MaterialInfoPage> {
+class MaterialInfoPageState extends State<MaterialInfoPage>
+    with AutomaticKeepAliveClientMixin {
   TextEditingController controller;
-
+  MaterialModel model = MaterialModel();
+  String barcode = '';
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller = TextEditingController.fromValue(TextEditingValue.empty);
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         appBar: AppBar(
+          titleSpacing: 0.0,
           title: Container(
             color: Colors.blue,
-            padding: EdgeInsets.symmetric(
-              horizontal: 5,
-              vertical: 10,
+            padding: EdgeInsets.only(
+              left: 20,
+              top: 10,
+              bottom: 10,
+              right: 0,
             ),
             child: Container(
               child: InkWell(
-                onTap: () {
-                  showSearch(
-                    delegate: SearchMaterial(),
+                onTap: () async {
+                  MaterialBloc bloc = BlocProvider.of<MaterialBloc>(context);
+                  await showSearch(
+                    delegate: SearchMaterial(bloc),
                     context: context,
                   );
+                  setState(() {
+                    model = bloc.resultModel;
+                  });
                 },
               ),
               decoration: BoxDecoration(
@@ -50,31 +69,51 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
             ),
           ),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(FontAwesomeIcons.barcode),
-              onPressed: () async {},
+            SizedBox(
+              width: 65,
+              child: MaterialButton(
+                child: Image.asset(
+                  ImageAssets.scan,
+                
+                ),
+                onPressed: () async {
+                  String barcode = await BarcodeScanner.scan();
+                  if (barcode != null) {
+                    ApiModel result = await api.materialDetail(partNo: barcode);
+                    if (result.error != 0) {
+                      return [];
+                    }
+                    setState(() {
+                      model = MaterialModel.fromJson(result.data);
+                    });
+                  }
+                },
+              ),
             ),
           ],
         ),
-        body: ListView(
-          children: <Widget>[
-            Icon(
-              Icons.score,
-              size: 60.0,
-            ),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-            MaterialInfoTile(),
-          ],
+        body: Container(
+          padding: EdgeInsets.all(16.0),
+          child: ListView(
+            children: <Widget>[
+              (model.imgs != null
+                  ? FadeInImage(
+                      placeholder: AssetImage(ImageAssets.materalIcon),
+                      image: NetworkImage(model.imgs.first.url),
+                    )
+                  : Image.asset(ImageAssets.materalIcon)),
+              MaterialInfoTile('Stock Code', model.partNo ?? ''),
+              MaterialInfoTile('Description', model.desc ?? ''),
+              MaterialInfoTile('UOM', model.uom ?? ''),
+              MaterialInfoTile('Unit Cost', (model.unitCost ?? 0).toString()),
+              MaterialInfoTile('Default Location', model.loc ?? ''),
+              MaterialInfoTile('QTY', (model.sapQty ?? 0).toString()),
+              MaterialInfoTile('Tech Spec', '技术规范'),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: "moreInfo",
           child: Icon(
             Icons.more_horiz,
           ),
@@ -89,4 +128,7 @@ class MaterialInfoPageState extends State<MaterialInfoPage> {
           },
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

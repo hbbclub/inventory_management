@@ -7,16 +7,16 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  mlkit: ^0.9.0
+  firebase_ml_vision: ^0.6.0
   image_picker: ^0.4.12
   barcode_scan: ^0.0.8
   font_awesome_flutter: ^8.2.0
@@ -33,6 +33,11 @@ dependencies:
   device_info: ^0.2.1
   http: ^0.12.0
   dio: ^2.0.5
+  flutter_user_agent: ^1.0.1
+  fast_qr_reader_view:
+    git:
+      url: git://github.com/facundomedica/fast_qr_reader_view.git
+  package_info: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:

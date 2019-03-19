@@ -8,11 +8,12 @@ class PrintingStkLabel {
 }
 
 var items = <PrintingStkLabel>[
-  PrintingStkLabel('UOM', '1111'),
-  PrintingStkLabel('QTY', '1111'),
-  PrintingStkLabel('Lot Number', '1111'),
-  PrintingStkLabel('Print to', '1111'),
-  PrintingStkLabel('# of labels', '1111'),
+  PrintingStkLabel('Description', ' '),
+  PrintingStkLabel('UOM', ' '),
+  PrintingStkLabel('QTY', ' '),
+  PrintingStkLabel('Lot Number', ' '),
+  PrintingStkLabel('Print To', ' '),
+  PrintingStkLabel('# Of Labels', ' '),
 ];
 
 class PrintingStkLabelPage extends StatelessWidget {
@@ -23,13 +24,13 @@ class PrintingStkLabelPage extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Container(
-              child: Text('stock code'),
+              child: Text('Stock Code'),
               width: 100.0,
             ),
             Expanded(
               child: TextField(),
             ),
-            Icon(FontAwesomeIcons.barcode),
+            // Icon(FontAwesomeIcons.barcode),
           ],
         ),
       ),
@@ -37,14 +38,33 @@ class PrintingStkLabelPage extends StatelessWidget {
     widgets.addAll(items.map((PrintingStkLabel item) {
       return new PrintingStkTile(item);
     }).toList());
+
+    widgets.addAll([
+      SizedBox(
+        height: 8,
+      ),
+      RaisedButton(
+        child: Text(
+          'SCAN',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        color: Colors.blue,
+        onPressed: () {},
+      )
+    ]);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       floatingActionButton: FloatingActionButton(
-        child: Icon(FontAwesomeIcons.barcode),
+        child: Icon(Icons.print),
         onPressed: () {},
       ),
-      body: ListView(
-        children: widgets,
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: ListView(
+          children: widgets,
+        ),
       ),
     );
   }
@@ -56,6 +76,7 @@ class PrintingStkTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 44.0,
       child: Row(
         children: <Widget>[
           Container(

@@ -47,25 +47,30 @@ class _MemoPageState extends State<MemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MEMO'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: mainColor,
-        heroTag: 'addNote',
-        child: Icon(Icons.add),
-        onPressed: () {
-          Widget page = MyRouter().findPage(
-            RouterPageOption(
-              url: 'router://MemoAddNotePage',
-              params: {
-                'type': NotePageType.Add,
-              },
+        title: Text(
+          'MEMO',
+        ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Widget page = MyRouter().findPage(
+                RouterPageOption(
+                  url: 'router://MemoAddNotePage',
+                  params: {
+                    'type': NotePageType.Add,
+                  },
+                ),
+              );
+              Utils.pushScreen(context, page).then((result) {
+                requireNoteList();
+              });
+            },
+            child: Text(
+              'New',
+              style: TextStyle(color: Colors.white),
             ),
-          );
-          Utils.pushScreen(context, page).then((result) {
-            requireNoteList();
-          });
-        },
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.only(bottom: 16),
@@ -76,9 +81,7 @@ class _MemoPageState extends State<MemoPage>
               padding: EdgeInsets.fromLTRB(20, 5, 5, 8),
               color: Colors.white,
               child: TextField(
-                onSubmitted: (text) {
-                },
-                
+                onSubmitted: (text) {},
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Search',

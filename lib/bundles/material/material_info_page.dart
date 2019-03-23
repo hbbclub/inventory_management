@@ -2,6 +2,7 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
 import 'package:inventory_management/bundles/bloc/bloc_provider.dart';
+import 'package:inventory_management/bundles/common/colors.dart';
 import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/material/material_Info_tile.dart';
@@ -40,7 +41,7 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
         appBar: AppBar(
           titleSpacing: 0.0,
           title: Container(
-            color: Colors.blue,
+            color:mainColor,
             padding: EdgeInsets.only(
               left: 20,
               top: 10,
@@ -114,6 +115,7 @@ class MaterialInfoPageState extends State<MaterialInfoPage>
         ),
         floatingActionButton: FloatingActionButton(
           heroTag: "moreInfo",
+          backgroundColor: mainColor,
           child: Icon(
             Icons.more_horiz,
           ),

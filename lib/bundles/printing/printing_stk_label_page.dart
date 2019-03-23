@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:inventory_management/bundles/common/colors.dart';
 
 class PrintingStkLabel {
   String title;
@@ -50,13 +51,14 @@ class PrintingStkLabelPage extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        color: Colors.blue,
+        // color: main,
         onPressed: () {},
       )
     ]);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: mainColor,
         child: Icon(Icons.print),
         onPressed: () {},
       ),

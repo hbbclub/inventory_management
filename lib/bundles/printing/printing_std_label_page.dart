@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
+import 'package:inventory_management/bundles/common/colors.dart';
 import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/printing/printing_label_model.dart';
 
@@ -39,6 +40,7 @@ class PrintingStdLabelPageState extends State<PrintingStdLabelPage>
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
+          backgroundColor: mainColor,
           heroTag: 'print',
           child: Icon(Icons.print),
           onPressed: () {},

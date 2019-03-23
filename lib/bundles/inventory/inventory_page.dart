@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management/bundles/common/colors.dart';
 import 'dart:async';
 import 'package:inventory_management/bundles/common/images.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
@@ -34,6 +35,7 @@ class InventoryPageState extends State<InventoryPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: mainColor,
         child: Image.asset(
           ImageAssets.scan,
           width: 20,

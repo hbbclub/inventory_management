@@ -1,6 +1,7 @@
 import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
+import 'package:inventory_management/bundles/common/colors.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
 import 'package:inventory_management/bundles/memo/memo_save_note.dart';
@@ -48,7 +49,7 @@ class _MemoPageState extends State<MemoPage>
       appBar: AppBar(
         titleSpacing: 0.0,
         title: Container(
-          color: Colors.blue,
+          color: mainColor,
           padding: EdgeInsets.only(
             left: 20,
             top: 10,
@@ -89,6 +90,7 @@ class _MemoPageState extends State<MemoPage>
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: mainColor,
         heroTag: 'addNote',
         child: Icon(Icons.add),
         onPressed: () {

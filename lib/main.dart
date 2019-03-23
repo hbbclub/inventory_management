@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bundles/common/colors.dart';
+import 'package:inventory_management/bundles/home/home.dart';
 import 'package:inventory_management/bundles/home/welcome.dart';
 
 void main() async {
@@ -7,6 +8,8 @@ void main() async {
     // debugShowCheckedModeBanner: false,
     title: 'Inventory Management',
     theme: ThemeData(
+      
+      primaryColor: mainColor,
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: loginTextColor, width: 0.5)),

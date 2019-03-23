@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
               onChanged: () {
                 if (_formKey.currentState.validate()) {
                   // setState(() {
-                    canDoLogin = true;
+                  canDoLogin = true;
                   // });
                 }
               },
@@ -152,36 +152,51 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget buildServerTextField() {
-    return Container(
-        padding: EdgeInsets.symmetric(horizontal: 31),
-        child: TextFormField(
-          controller: TextEditingController(text: Utils.hostUri),
-          textCapitalization: TextCapitalization.words,
-          validator: (text) {
-            return text.isEmpty ? 'server address is invalid' : null;
-          },
-          style: TextStyle(fontSize: 20),
-          onSaved: (text) {
-            Utils.hostUri = text;
-            httpUtil.changeHostUrl('http://' + text);
-            Utils.addLoaclCache({
-              Utils.cacheKeyForHostUrl: text,
-            });
-          },
-          decoration: const InputDecoration(
-            hintText: 'Please enter server host address',
-            labelText: 'Server Address',
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: loginTextColor, width: 0.5)),
-            focusedBorder:
-                UnderlineInputBorder(borderSide: BorderSide(width: 0.5)),
-            labelStyle: TextStyle(
-              color: loginTextColor,
-              fontSize: 20,
-            ),
-            contentPadding: EdgeInsets.all(10.0),
+    return Theme(
+      data: Theme.of(context).copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: loginTextColor, width: 0.5)),
+          focusedBorder:
+              UnderlineInputBorder(borderSide: BorderSide(width: 0.5)),
+          labelStyle: TextStyle(
+            color: loginTextColor,
+            fontSize: 40,
           ),
-        ));
+          contentPadding: EdgeInsets.all(10.0),
+        ),
+      ),
+      child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 31),
+          child: TextFormField(
+            controller: TextEditingController(text: Utils.hostUri),
+            textCapitalization: TextCapitalization.words,
+            validator: (text) {
+              return text.isEmpty ? 'server address is invalid' : null;
+            },
+            style: TextStyle(fontSize: 20),
+            onSaved: (text) {
+              Utils.hostUri = text;
+              httpUtil.changeHostUrl('http://' + text);
+              Utils.addLoaclCache({
+                Utils.cacheKeyForHostUrl: text,
+              });
+            },
+            decoration: const InputDecoration(
+              hintText: 'Please enter server host address',
+              labelText: 'Server Address',
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: loginTextColor, width: 0.5)),
+              focusedBorder:
+                  UnderlineInputBorder(borderSide: BorderSide(width: 0.5)),
+              labelStyle: TextStyle(
+                color: loginTextColor,
+                fontSize: 20,
+              ),
+              contentPadding: EdgeInsets.all(10.0),
+            ),
+          )),
+    );
   }
 
   Widget buildLinkWordTextField() {
@@ -232,30 +247,29 @@ class _LoginPageState extends State<LoginPage> {
             ),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(40))),
-            onPressed:  () async {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      ApiModel result = await api.login(
-                          username: Utils.userName,
-                          password: Utils.password,
-                          linkWord: Utils.linkWord);
-                      if (result.isError()) {
-                        Utils.showSnackBar(context,
-                            text: result.data['message']);
-                        return;
-                      }
-                      Utils.user = UserModel.fromJson(result.data['user']);
-                      httpUtil.commonHeader.addAll({
-                        'Authorization': result.data['token'],
-                      });
-                      Utils.replaceScreen(
-                          context,
-                          BlocProvider(
-                            bloc: appBloc,
-                            child: Home(),
-                          ));
-                    }
-                  }),
+            onPressed: () async {
+              if (_formKey.currentState.validate()) {
+                _formKey.currentState.save();
+                ApiModel result = await api.login(
+                    username: Utils.userName,
+                    password: Utils.password,
+                    linkWord: Utils.linkWord);
+                if (result.isError()) {
+                  Utils.showSnackBar(context, text: result.data['message']);
+                  return;
+                }
+                Utils.user = UserModel.fromJson(result.data['user']);
+                httpUtil.commonHeader.addAll({
+                  'Authorization': result.data['token'],
+                });
+                Utils.replaceScreen(
+                    context,
+                    BlocProvider(
+                      bloc: appBloc,
+                      child: Home(),
+                    ));
+              }
+            }),
       ),
     );
   }

@@ -15,12 +15,14 @@ class InventoryPage extends StatefulWidget {
 class InventoryPageState extends State<InventoryPage> {
   String barcode = "";
   InventoryModel model = InventoryModel();
+  TextEditingController qtyController = TextEditingController();
   Future scan() async {
     Utils.pushScreen(context, CameraApp(model));
   }
 
   @override
   Widget build(BuildContext context) {
+    qtyController.text = model.qty ?? '0';
     return Scaffold(
       appBar: AppBar(
         title: Text('INVENTORY'),
@@ -57,8 +59,10 @@ class InventoryPageState extends State<InventoryPage> {
                   child: TextField(
                     style: TextStyle(color: Color(0Xfff999999)),
                     decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
+                        border: InputBorder.none,
                         labelText: 'Tag Number',
+                         hintText: 'Please enter tag number',
+                          hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
                         labelStyle:
                             TextStyle(fontSize: 20, color: Colors.black)),
                     controller: TextEditingController(text: model.tagNumber),
@@ -70,23 +74,30 @@ class InventoryPageState extends State<InventoryPage> {
               children: <Widget>[
                 Expanded(
                   child: TextField(
-                    style: TextStyle(color: Color(0Xfff999999)),
+                      style: TextStyle(color: Color(0Xfff999999)),
+                      
                       decoration: InputDecoration(
+                          border: InputBorder.none,
                           labelText: 'Stock Code',
+                          hintText: 'Please enter stock code',
+                          hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
                           labelStyle:
-                              TextStyle(fontSize: 20, color: Colors.black)),
+                              TextStyle(fontSize: 20, color: Colors.black),),
                       controller:
-                          TextEditingController(text: model.stockNumber)),
-                )
+                          TextEditingController(text: model.stockNumber),),
+                ),
               ],
             ),
             Row(
               children: <Widget>[
                 Expanded(
                   child: TextField(
-                    style: TextStyle(color: Color(0Xfff999999)),
+                      style: TextStyle(color: Color(0Xfff999999)),
                       decoration: InputDecoration(
+                          border: InputBorder.none,
                           labelText: 'Location',
+                           hintText: 'Please enter location',
+                          hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
                           labelStyle:
                               TextStyle(fontSize: 20, color: Colors.black)),
                       controller: TextEditingController(text: model.location)),
@@ -97,9 +108,12 @@ class InventoryPageState extends State<InventoryPage> {
               children: <Widget>[
                 Expanded(
                   child: TextField(
-                    style: TextStyle(color: Color(0Xfff999999)),
+                      style: TextStyle(color: Color(0Xfff999999)),
                       decoration: InputDecoration(
+                          border: InputBorder.none,
                           labelText: 'Lot Number',
+                           hintText: 'Please enter lot number',
+                          hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
                           labelStyle:
                               TextStyle(fontSize: 20, color: Colors.black)),
                       controller: TextEditingController(text: model.lotNumber)),
@@ -111,14 +125,44 @@ class InventoryPageState extends State<InventoryPage> {
                 // SizedBox(width: 100, child: Text('QTY')),
                 Expanded(
                   child: TextField(
-                      style: TextStyle(color: Color(0Xfff999999)),
-                      decoration: InputDecoration(
-                          labelText: 'QTY',
-                          labelStyle:
-                              TextStyle(fontSize: 20, color: Colors.black)),
-                      controller:
-                          TextEditingController(text: model.qty ?? '0')),
-                )
+                    style: TextStyle(color: Color(0Xfff999999)),
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                      labelText: 'QTY',
+                       hintText: 'Please enter qty',
+                          hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
+                      labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                      suffixIcon: Container(
+                        // color: Colors.white,
+                        width: 100,
+                        child: Row(
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(Icons.remove_circle_outline),
+                              onPressed: () {
+                                if (int.parse(qtyController.text) <= 0) {
+                                  return;
+                                }
+                                qtyController.text =
+                                    (int.parse(qtyController.text) - 1)
+                                        .toString();
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.add_circle_outline),
+                              onPressed: () {
+                                qtyController.text =
+                                    (int.parse(qtyController.text) + 1)
+                                        .toString();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    controller: qtyController,
+                  ),
+                ),
               ],
             ),
           ],

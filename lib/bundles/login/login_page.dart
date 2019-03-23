@@ -27,51 +27,66 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Builder(
-        builder: (BuildContext context) {
-          return Container(
-            color: Colors.white,
-            child: Form(
-              onChanged: () {
-                if (_formKey.currentState.validate()) {
-                  // setState(() {
-                  canDoLogin = true;
-                  // });
-                }
-              },
-              key: _formKey,
-              child: ListView(
-                children: <Widget>[
-                  Stack(children: <Widget>[
-                    Image.asset(
-                      ImageAssets.loginTitle,
-                      width: Utils.getScreenWidth(context),
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Positioned(
-                      bottom: 16,
-                      right: 16,
-                      child: buildVersionText(),
-                    )
-                  ]),
-                  SizedBox(height: 30),
-                  buildTopLogImage(),
-                  // SizedBox(height: 20.0),
-                  buildAccountTextField(),
-                  // SizedBox(height: 16.0),
-                  buildPasswordTextField(),
-                  // SizedBox(height: 20.0),
-                  buildServerTextField(),
-                  // SizedBox(height: 20.0),
-                  buildLinkWordTextField(),
-                  SizedBox(height: 20.0),
-                  buildSubmitBottom(context),
-                  // buildForgetText(),
-                ],
-              ),
+      body: Theme(
+        data: Theme.of(context).copyWith(
+          inputDecorationTheme: InputDecorationTheme(
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: loginTextColor, width: 0.5)),
+            focusedBorder:
+                UnderlineInputBorder(borderSide: BorderSide(width: 0.5)),
+            labelStyle: TextStyle(
+              color: loginTextColor,
+              fontSize: 40,
             ),
-          );
-        },
+            contentPadding: EdgeInsets.all(10.0),
+          ),
+        ),
+        child: Builder(
+          builder: (BuildContext context) {
+            return Container(
+              color: Colors.white,
+              child: Form(
+                onChanged: () {
+                  if (_formKey.currentState.validate()) {
+                    // setState(() {
+                    canDoLogin = true;
+                    // });
+                  }
+                },
+                key: _formKey,
+                child: ListView(
+                  children: <Widget>[
+                    Stack(children: <Widget>[
+                      Image.asset(
+                        ImageAssets.loginTitle,
+                        width: Utils.getScreenWidth(context),
+                        fit: BoxFit.fitWidth,
+                      ),
+                      Positioned(
+                        bottom: 16,
+                        right: 16,
+                        child: buildVersionText(),
+                      )
+                    ]),
+                    SizedBox(height: 30),
+                    buildTopLogImage(),
+                    // SizedBox(height: 20.0),
+                    buildAccountTextField(),
+                    // SizedBox(height: 16.0),
+                    buildPasswordTextField(),
+                    // SizedBox(height: 20.0),
+                    buildServerTextField(),
+                    // SizedBox(height: 20.0),
+                    buildLinkWordTextField(),
+                    SizedBox(height: 20.0),
+                    buildSubmitBottom(context),
+                    // buildForgetText(),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -152,51 +167,36 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget buildServerTextField() {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        inputDecorationTheme: InputDecorationTheme(
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: loginTextColor, width: 0.5)),
-          focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(width: 0.5)),
-          labelStyle: TextStyle(
-            color: loginTextColor,
-            fontSize: 40,
-          ),
-          contentPadding: EdgeInsets.all(10.0),
-        ),
-      ),
-      child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 31),
-          child: TextFormField(
-            controller: TextEditingController(text: Utils.hostUri),
-            textCapitalization: TextCapitalization.words,
-            validator: (text) {
-              return text.isEmpty ? 'server address is invalid' : null;
-            },
-            style: TextStyle(fontSize: 20),
-            onSaved: (text) {
-              Utils.hostUri = text;
-              httpUtil.changeHostUrl('http://' + text);
-              Utils.addLoaclCache({
-                Utils.cacheKeyForHostUrl: text,
-              });
-            },
-            decoration: const InputDecoration(
-              hintText: 'Please enter server host address',
-              labelText: 'Server Address',
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: loginTextColor, width: 0.5)),
-              focusedBorder:
-                  UnderlineInputBorder(borderSide: BorderSide(width: 0.5)),
-              labelStyle: TextStyle(
-                color: loginTextColor,
-                fontSize: 20,
-              ),
-              contentPadding: EdgeInsets.all(10.0),
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 31),
+        child: TextFormField(
+          controller: TextEditingController(text: Utils.hostUri),
+          textCapitalization: TextCapitalization.words,
+          validator: (text) {
+            return text.isEmpty ? 'server address is invalid' : null;
+          },
+          style: TextStyle(fontSize: 20),
+          onSaved: (text) {
+            Utils.hostUri = text;
+            httpUtil.changeHostUrl('http://' + text);
+            Utils.addLoaclCache({
+              Utils.cacheKeyForHostUrl: text,
+            });
+          },
+          decoration: const InputDecoration(
+            hintText: 'Please enter server host address',
+            labelText: 'Server Address',
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: loginTextColor, width: 0.5)),
+            focusedBorder:
+                UnderlineInputBorder(borderSide: BorderSide(width: 0.5)),
+            labelStyle: TextStyle(
+              color: loginTextColor,
+              fontSize: 20,
             ),
-          )),
-    );
+            contentPadding: EdgeInsets.all(10.0),
+          ),
+        ));
   }
 
   Widget buildLinkWordTextField() {

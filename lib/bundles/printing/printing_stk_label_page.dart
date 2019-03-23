@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:inventory_management/bundles/common/colors.dart';
 
 class PrintingStkLabel {
   String title;
@@ -9,58 +7,102 @@ class PrintingStkLabel {
 }
 
 var items = <PrintingStkLabel>[
-  PrintingStkLabel('Description', ' '),
-  PrintingStkLabel('UOM', ' '),
-  PrintingStkLabel('QTY', ' '),
-  PrintingStkLabel('Lot Number', ' '),
-  PrintingStkLabel('Print To', ' '),
-  PrintingStkLabel('# Of Labels', ' '),
+  PrintingStkLabel('Stock Code', ''),
+  PrintingStkLabel('Description', ''),
+  PrintingStkLabel('UOM', ''),
+  PrintingStkLabel('QTY', ''),
+  PrintingStkLabel('Lot Number', ''),
+  PrintingStkLabel('Print To', ''),
+  // PrintingStkLabel('# Of Labels', ''),
 ];
 
 class PrintingStkLabelPage extends StatelessWidget {
+  final TextEditingController textController = TextEditingController(text: '0');
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [
       Container(
         child: Row(
           children: <Widget>[
-            Container(
-              child: Text('Stock Code'),
-              width: 100.0,
-            ),
-            Expanded(
-              child: TextField(),
-            ),
-            // Icon(FontAwesomeIcons.barcode),
+            //  TextField(
+            //   controller: TextEditingController(),
+            //   decoration: InputDecoration(
+            //     labelText: 'asdsda',
+            //     hintText: 'Please enter ',
+            //     labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+            //     hintStyle: TextStyle(fontSize: 20, color: Colors.red),
+            //     border: InputBorder.none,
+            //   ),
+            // ),
           ],
         ),
       ),
     ];
     widgets.addAll(items.map((PrintingStkLabel item) {
-      return new PrintingStkTile(item);
+      return PrintingStkTile(item);
     }).toList());
 
     widgets.addAll([
-      SizedBox(
-        height: 8,
-      ),
-      RaisedButton(
-        child: Text(
-          'SCAN',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+      Container(
+        height: 60.0,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: TextField(
+                controller: textController,
+                decoration: InputDecoration(
+                  labelText: '# Of Labels',
+                  hintText: 'Please enter # of labels',
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                  hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
+                  border: InputBorder.none,
+                  suffixIcon: Container(
+                    width: 100,
+                    child: Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.remove_circle_outline),
+                          onPressed: () {
+                            if (int.parse(textController.text) <= 0) {
+                              return;
+                            }
+                            textController.text =
+                                (int.parse(textController.text) - 1).toString();
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.add_circle_outline),
+                          onPressed: () {
+                            textController.text =
+                                (int.parse(textController.text) + 1).toString();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        // color: main,
-        onPressed: () {},
-      )
+      ),
     ]);
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: mainColor,
-        child: Icon(Icons.print),
-        onPressed: () {},
+      // resizeToAvoidBottomPadding: false,
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        height: 44,
+        child: FlatButton(
+            onPressed: () {},
+            child: Column(
+              children: <Widget>[
+                Icon(
+                  Icons.print,
+                  size: 20,
+                ),
+                Text('Print Label')
+              ],
+            )),
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -78,16 +120,19 @@ class PrintingStkTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 44.0,
+      // height: 60.0,
       child: Row(
         children: <Widget>[
-          Container(
-            child: Text(this.label.title),
-            width: 100.0,
-          ),
           Expanded(
             child: TextField(
-              controller: TextEditingController(text: label.initValue),
+              controller: TextEditingController(),
+              decoration: InputDecoration(
+                labelText: this.label.title,
+                hintText: 'Please enter ${this.label.title.toLowerCase()}',
+                labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
+                border: InputBorder.none,
+              ),
             ),
           ),
         ],

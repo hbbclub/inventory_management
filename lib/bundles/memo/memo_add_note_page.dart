@@ -248,7 +248,7 @@ class MemoAddNoteLabelTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      // height: 60,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(3.0)),
       child: Row(

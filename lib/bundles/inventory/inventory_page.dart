@@ -26,21 +26,26 @@ class InventoryPageState extends State<InventoryPage> {
         title: Text('INVENTORY'),
         actions: <Widget>[
           RawMaterialButton(
-            child: Icon(
-              Icons.save,
-              size: 35,
-            ),
+            textStyle: TextStyle(color: Colors.white),
+            child: Text('Save'),
             onPressed: () {},
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: mainColor,
-        child: Image.asset(
-          ImageAssets.scan,
-          width: 20,
-        ),
-        onPressed: scan,
+      bottomNavigationBar: Container(
+        height: 44,
+        child: FlatButton(
+            onPressed: scan,
+            child: Column(
+              children: <Widget>[
+                Image.asset(
+                  ImageAssets.scan,
+                  color: Colors.black,
+                  width: 20,
+                ),
+                Text('scan')
+              ],
+            )),
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -48,9 +53,14 @@ class InventoryPageState extends State<InventoryPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                SizedBox(width: 100, child: Text('Tag Number')),
                 Expanded(
                   child: TextField(
+                    style: TextStyle(color: Color(0Xfff999999)),
+                    decoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Tag Number',
+                        labelStyle:
+                            TextStyle(fontSize: 20, color: Colors.black)),
                     controller: TextEditingController(text: model.tagNumber),
                   ),
                 )
@@ -58,9 +68,13 @@ class InventoryPageState extends State<InventoryPage> {
             ),
             Row(
               children: <Widget>[
-                SizedBox(width: 100, child: Text('Stock Code')),
                 Expanded(
                   child: TextField(
+                    style: TextStyle(color: Color(0Xfff999999)),
+                      decoration: InputDecoration(
+                          labelText: 'Stock Code',
+                          labelStyle:
+                              TextStyle(fontSize: 20, color: Colors.black)),
                       controller:
                           TextEditingController(text: model.stockNumber)),
                 )
@@ -68,28 +82,42 @@ class InventoryPageState extends State<InventoryPage> {
             ),
             Row(
               children: <Widget>[
-                SizedBox(width: 100, child: Text('Location')),
                 Expanded(
                   child: TextField(
+                    style: TextStyle(color: Color(0Xfff999999)),
+                      decoration: InputDecoration(
+                          labelText: 'Location',
+                          labelStyle:
+                              TextStyle(fontSize: 20, color: Colors.black)),
                       controller: TextEditingController(text: model.location)),
                 )
               ],
             ),
             Row(
               children: <Widget>[
-                SizedBox(width: 100, child: Text('Lot Number')),
                 Expanded(
                   child: TextField(
+                    style: TextStyle(color: Color(0Xfff999999)),
+                      decoration: InputDecoration(
+                          labelText: 'Lot Number',
+                          labelStyle:
+                              TextStyle(fontSize: 20, color: Colors.black)),
                       controller: TextEditingController(text: model.lotNumber)),
                 )
               ],
             ),
             Row(
               children: <Widget>[
-                SizedBox(width: 100, child: Text('QTY')),
+                // SizedBox(width: 100, child: Text('QTY')),
                 Expanded(
                   child: TextField(
-                      controller: TextEditingController(text: model.qty)),
+                      style: TextStyle(color: Color(0Xfff999999)),
+                      decoration: InputDecoration(
+                          labelText: 'QTY',
+                          labelStyle:
+                              TextStyle(fontSize: 20, color: Colors.black)),
+                      controller:
+                          TextEditingController(text: model.qty ?? '0')),
                 )
               ],
             ),

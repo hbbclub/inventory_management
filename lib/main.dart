@@ -31,6 +31,6 @@ void main() async {
         ),
       ),
     ),
-    home: Welcome(),
+    home: Home(),
   ));
 }

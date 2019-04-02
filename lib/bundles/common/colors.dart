@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
 
-class AppColors {
-  final Color mainColor = Color.fromRGBO(79, 231, 246, 1.0);
-}
-
-final appColors = AppColors();
+const Color mainColor = Color(0xFF426478);
+const Color loginTextColor = Color.fromRGBO(204, 204, 204, 1.0);

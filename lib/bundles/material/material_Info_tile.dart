@@ -1,21 +1,31 @@
-
 import 'package:flutter/material.dart';
 
 class MaterialInfoTile extends StatelessWidget {
-  final String title ;
-  final String subtext ;
-  MaterialInfoTile(this.title,this.subtext);
+  final String title;
+  final String subtext;
+  MaterialInfoTile(this.title, this.subtext);
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 44.0,
-      child: Row(
+      alignment: Alignment.centerLeft,
+      height: 80.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            child: Text(title),
+            flex: 1,
+            child: Text(
+              title,
+              textAlign: TextAlign.left,
+            ),
           ),
           Expanded(
-            child: Text(subtext),
+            flex: 1,
+            child: Text(
+              subtext,
+              textAlign: TextAlign.left,
+              style: TextStyle(color: Color(0XFF999999)),
+            ),
           )
         ],
       ),

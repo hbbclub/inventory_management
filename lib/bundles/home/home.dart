@@ -97,31 +97,31 @@ class _TabScreenState extends State<Home>
     controller = new PageController(initialPage: _currentIndex);
     _navigationViews = <NavigationIconView>[
       NavigationIconView(
-        icon: const Icon(Icons.gradient),
+        icon:  Icon(Icons.gradient),
         title: 'STOCK',
         color: Colors.teal,
         vsync: this,
       ),
       NavigationIconView(
-        icon: const Icon(Icons.print),
+        icon:  Icon(Icons.print),
         title: 'PRINTING',
         color: Colors.indigo,
         vsync: this,
       ),
       NavigationIconView(
-        icon: const Icon(Icons.note),
+        icon:  Icon(Icons.note),
         title: 'MEMO',
         color: Colors.pink,
         vsync: this,
       ),
       NavigationIconView(
-        icon: const Icon(Icons.adjust),
+        icon:  Icon(Icons.adjust),
         title: 'INVENTORY',
         color: Colors.pink,
         vsync: this,
       ),
       NavigationIconView(
-        icon: const Icon(Icons.settings),
+        icon:  Icon(Icons.settings),
         title: 'SETTING',
         color: Colors.pink,
         vsync: this,

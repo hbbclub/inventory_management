@@ -53,14 +53,15 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
       Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('note'),
           SizedBox(
             width: 10.0,
           ),
           Expanded(
             child: TextField(
               controller: _textEditingController,
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  hintText: 'Please enter words  here',
+                  border: InputBorder.none),
               textInputAction: TextInputAction.done,
               maxLines: 3,
             ),
@@ -97,7 +98,8 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
         ),
         actions: <Widget>[
           RawMaterialButton(
-            child: Icon(Icons.save),
+            textStyle: TextStyle(color: Colors.white),
+            child: Text('Save'),
             onPressed: () {
               Widget page = MyRouter().findPage(
                 RouterPageOption(
@@ -117,6 +119,7 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
         ],
       ),
       body: Container(
+        color: Color(0XffEEEEEE),
         padding: EdgeInsets.all(16.0),
         child: ListView.separated(
           itemCount: widgets.length,
@@ -131,11 +134,20 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
         ),
       ),
       bottomNavigationBar: Container(
+        color: Colors.white,
+        height: 44,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            RaisedButton(
-              child: Text('OCR'),
+            FlatButton(
+                child: Column(
+                    children: <Widget>[Icon(Icons.image), Text('Gallary')]),
+                onPressed: () {
+                  loadAssets();
+                }),
+            FlatButton(
+              child: Column(
+                  children: <Widget>[Icon(Icons.camera_alt), Text('Ocr')]),
               onPressed: () async {
                 var image =
                     await ImagePicker.pickImage(source: ImageSource.camera);
@@ -153,11 +165,6 @@ class _MemoAddNotePageState extends State<MemoAddNotePage> {
                 });
               },
             ),
-            RaisedButton(
-                child: Icon(Icons.image),
-                onPressed: () {
-                  loadAssets();
-                }),
           ],
         ),
       ),
@@ -241,13 +248,19 @@ class MemoAddNoteLabelTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // height: 60,
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(3.0)),
       child: Row(
         children: <Widget>[
           SizedBox(
-            width: 40,
+            width: 10,
           ),
           Expanded(
             child: TextField(
+              decoration: InputDecoration(
+                  labelStyle: TextStyle(fontSize: 16, color: Colors.black),
+                  border: InputBorder.none),
               maxLines: null,
               controller: TextEditingController(text: label.initValue),
             ),

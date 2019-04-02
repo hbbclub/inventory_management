@@ -2,6 +2,7 @@ import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:inventory_management/bundles/agent/api.dart';
+import 'package:inventory_management/bundles/common/colors.dart';
 import 'package:inventory_management/bundles/common/utils.dart';
 import 'package:inventory_management/bundles/memo/memo_add_categories_model.dart';
 import 'package:inventory_management/bundles/memo/memo_add_note_model.dart';
@@ -136,11 +137,14 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
         child: InputDecorator(
           decoration: const InputDecoration(
             labelText: 'Category',
+            labelStyle: TextStyle(fontSize: 16, color: Colors.black),
+            hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
             hintText: 'Choose an Category',
             contentPadding: EdgeInsets.zero,
           ),
           isEmpty: _activity == null,
           child: DropdownButton<String>(
+
             value: _activity,
             onChanged: (String newValue) {
               model.category = newValue;
@@ -160,9 +164,15 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
       SettingItem(
         child: Row(
           children: <Widget>[
-            Text('Keyword'),
             Expanded(
                 child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                labelText: 'Key Word',
+                hintText: 'Pleast enter key word',
+                labelStyle: TextStyle(fontSize: 16, color: Colors.black),
+                hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
+              ),
               controller: keywordController,
             )),
           ],
@@ -174,6 +184,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
           children: <Widget>[
             Text('Send Mail'),
             Switch(
+              activeColor: mainColor,
               onChanged: (bool value) {
                 setState(() {
                   _sendEmail = value;
@@ -203,7 +214,7 @@ class _MemoAddNotePageState extends State<MemoSaveNotePage> {
         actions: <Widget>[
           RawMaterialButton(
             child: Text(
-              'done',
+              'Done',
               style: TextStyle(color: Colors.white),
             ),
             onPressed: save,

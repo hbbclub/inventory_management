@@ -114,6 +114,7 @@ class Utils {
     );
   }
 
+//替换当前页面
   static Future replaceScreen(BuildContext context, Widget screen) {
     return Navigator.of(context).pushReplacement(
       MaterialPageRoute(
@@ -124,6 +125,7 @@ class Utils {
     );
   }
 
+//pop页面站知道只有一个页面
   static void popAll(BuildContext context) {
     Navigator.of(context).popUntil((Route router) {
       print(router.isFirst);
@@ -133,7 +135,18 @@ class Utils {
       return false;
     });
   }
-
+//推出指定个数页面
+  static void popNum(BuildContext context, int number) {
+    int i = 0;
+    Navigator.of(context).popUntil((Route router) {
+      if ((router.isFirst) || (i == number)) {
+        return true;
+      }
+      i++;
+      return false;
+    });
+  }
+//获取设备uuid
   static Future<String> getDeviceUUID() async {
     DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
 
@@ -146,7 +159,7 @@ class Utils {
     }
     return null;
   }
-
+//显示提示框
   static showSnackBar(BuildContext context,
       {@required String text, int duration}) {
     final snackBar = SnackBar(
@@ -155,7 +168,7 @@ class Utils {
     );
     Scaffold.of(context).showSnackBar(snackBar);
   }
-
+//获取本地存储对象
   static Future<Map<String, dynamic>> getLoaclCache() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String rawJson = prefs.getString(Utils.cacheKey);

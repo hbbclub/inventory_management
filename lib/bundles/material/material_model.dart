@@ -13,7 +13,7 @@ class MaterialModel {
   String uom;
   double unitCost;
   @JsonKey(name: 'sap_qty', nullable: false)
-  int sapQty;
+  String sapQty;
   List<Img> imgs;
 
   factory MaterialModel.fromJson(Map<String, dynamic> json) =>

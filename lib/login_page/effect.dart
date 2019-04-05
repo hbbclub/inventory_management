@@ -1,5 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:inventory_management/Tab_page/page.dart';
+import 'package:inventory_management/tab_page/page.dart';
 import 'package:inventory_management/agent/agent.dart';
 import 'package:inventory_management/agent/api.dart';
 import 'package:inventory_management/common/utils.dart';

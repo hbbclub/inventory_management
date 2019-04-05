@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/agent/agent.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:flutter_user_agent/flutter_user_agent.dart';
-import 'package:inventory_management/login/login_page.dart';
+import 'package:inventory_management/login_page/page.dart';
+import 'package:inventory_management/route/route.route.dart';
 import 'package:package_info/package_info.dart';
 
 class Welcome extends StatelessWidget {
@@ -28,10 +29,19 @@ class Welcome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    initScreenUtil(context);
+
     initUserAgentState()
         .timeout(Duration(seconds: 3), onTimeout: () => Future.value())
         .then((data) {
-      Utils.replaceScreen(context, LoginPage());
+      router.replaceScreen(
+          context,
+          RouterPageOption(url: routerNameForLoginPage, params: {
+            'account': Utils.userName,
+            'password': Utils.password,
+            'hostUri': Utils.hostUri,
+            'linkWord': Utils.linkWord,
+          }));
     });
     return Scaffold(
       body: SafeArea(

@@ -4,6 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/home/welcome.dart';
 
 void main() async {
+  
   runApp(AppProvider(
     child: MaterialApp(
       // debugShowCheckedModeBanner: false,

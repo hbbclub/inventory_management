@@ -1,4 +1,5 @@
 import 'package:annotation_route/route.dart';
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'route.route.internal.dart';
 
@@ -14,29 +15,39 @@ class MyRouter {
   ARouterInternal internal = ARouterInternalImpl();
   Widget findPage(RouterPageOption option) {
     ARouterResult routeResult = internal.findPage(
-      ARouteOption(
-        option.url,
-        option.query,
-      ),
-      option,
-    );
+        ARouteOption(
+          option.url,
+          option.query,
+        ),
+        option.params);
     if (routeResult.state == ARouterResultState.FOUND) {
       return routeResult.widget;
     }
-    return Container(
-      child: Text('error: can\'t find a page'),
-    );
+    return throw ArgumentError('The page can not be find');
+  }
+
+  Page takePage(RouterPageOption option) {
+    ARouterResult routeResult = internal.findPage(
+        ARouteOption(
+          option.url,
+          option.query,
+        ),
+        option.params);
+    if (routeResult.state == ARouterResultState.FOUND) {
+      return routeResult.widget;
+    }
+    return throw ArgumentError('The page can not be find');
   }
 
   // 页面跳转
   Future pushScreen(BuildContext context, RouterPageOption option) {
-    Widget screen = findPage(option);
+    Page screen = takePage(option);
 
     return Navigator.of(context).push(
       MaterialPageRoute(
         settings: RouteSettings(name: option.url),
         builder: (BuildContext context) {
-          return screen;
+          return screen.buildPage(option.params ?? Map<String, dynamic>());
         },
       ),
     );
@@ -44,12 +55,12 @@ class MyRouter {
 
 //替换当前页面
   Future replaceScreen(BuildContext context, RouterPageOption option) {
-    Widget screen = findPage(option);
+    Page screen = takePage(option);
     return Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         settings: RouteSettings(name: option.url),
         builder: (BuildContext context) {
-          return screen;
+          return screen.buildPage(option.params ?? Map<String, dynamic>());
         },
       ),
     );

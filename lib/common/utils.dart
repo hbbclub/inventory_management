@@ -4,12 +4,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
-import 'package:inventory_management/login/user_model.dart';
+import 'package:inventory_management/login_page/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+ScreenUtil initScreenUtil(context){
+  return ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+}
+
+double h(int height){
+  return ScreenUtil().setHeight(height);
+}
+double w(int width){
+  return ScreenUtil().setWidth(width);
+}
+
+double sp(size){
+  return ScreenUtil().setSp(size);
+}
 
 class Utils {
   //应用名称
-  static String appName = 'inventory_management';
+  static const String appName = 'inventory_management';
   static String userName = '';
   static String password = '';
   static String appVersion = '';
@@ -24,6 +40,8 @@ class Utils {
   static String cacheKeyForLinkWord = 'LOCAL_CACHE_LINK_WORD';
   static String cacheKeyForUsername = 'LOCAL_CACHE_USERNAME';
   static String cacheKeyForPassword = 'LOCAL_CACHE_PASSWORD';
+
+  
 
   // 返回当前时间戳
   static int currentTimeMillis() {
@@ -171,6 +189,15 @@ class Utils {
     );
     Scaffold.of(context).showSnackBar(snackBar);
   }
+//显示提示框
+  static showSnackBarWithKey(GlobalKey<ScaffoldState> key,
+      {@required String text, int duration}) {
+    final snackBar = SnackBar(
+      content: new Text(text ?? ' '),
+      duration: Duration(seconds: duration ?? 1),
+    );
+    key.currentState.showSnackBar(snackBar);
+  }
 
 //获取本地存储对象
   static Future<Map<String, dynamic>> getLoaclCache() async {
@@ -193,3 +220,5 @@ class Utils {
     return prefs.setString(Utils.cacheKey, json.encode(cache));
   }
 }
+
+

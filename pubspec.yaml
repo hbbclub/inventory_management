@@ -39,6 +39,7 @@ dependencies:
       url: git://github.com/facundomedica/fast_qr_reader_view.git
   package_info: ^0.4.0+2
 
+  fish_redux: ^0.1.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

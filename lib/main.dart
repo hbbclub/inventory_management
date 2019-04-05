@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/bundles/common/colors.dart';
+import 'package:inventory_management/common/colors.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:inventory_management/bundles/home/welcome.dart';
+import 'package:inventory_management/home/welcome.dart';
 
 void main() async {
   runApp(AppProvider(

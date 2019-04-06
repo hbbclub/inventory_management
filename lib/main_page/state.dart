@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/common/images.dart';
+import 'package:inventory_management/inventory_page/page.dart';
 import 'package:inventory_management/printing/std_label_page/page.dart';
 
 class MainModel {
@@ -27,6 +28,6 @@ MainState initState(Map<String, dynamic> args) {
       MainModel(ImageAssets.main1, '', 'SKU Query'),
       MainModel(ImageAssets.main2, routerNameForStdLabelPage, 'Label Print'),
       MainModel(ImageAssets.main3, '', 'Note'),
-      MainModel(ImageAssets.main4, '', 'Physical Inv')
+      MainModel(ImageAssets.main4, routerNameForInventoryPage, 'Physical Inv')
     ];
 }

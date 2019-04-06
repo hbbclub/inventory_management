@@ -49,11 +49,11 @@ Widget buildView(StdState state, Dispatch dispatch, ViewService viewService) {
                   children: <Widget>[
                     IconButton(
                       icon: Icon(Icons.remove_circle_outline),
-                      onPressed: () => dispatch(StdActionCreator.add()),
+                      onPressed: () => dispatch(StdActionCreator.subtract()),
                     ),
                     IconButton(
                       icon: Icon(Icons.add_circle_outline),
-                      onPressed: () => dispatch(StdActionCreator.subtract()),
+                      onPressed: () => dispatch(StdActionCreator.add()),
                     ),
                   ],
                 ),

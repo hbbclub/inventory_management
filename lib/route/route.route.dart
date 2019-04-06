@@ -6,7 +6,7 @@ import 'route.route.internal.dart';
 class RouterPageOption {
   String url;
   Map<String, dynamic> query;
-  Map<String, dynamic> params;
+  dynamic params;
   RouterPageOption({this.url, this.query, this.params});
 }
 
@@ -51,6 +51,11 @@ class MyRouter {
         },
       ),
     );
+  }
+
+  // 页面弹出
+  bool popScreen<T>(BuildContext context, [T result]) {
+    return Navigator.of(context).pop<T>(result);
   }
 
 //替换当前页面

@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/common/images.dart';
+import 'package:inventory_management/printing/std_label_page/page.dart';
 
 class MainModel {
   String iconPath;
@@ -21,10 +22,11 @@ class MainState implements Cloneable<MainState> {
 }
 
 MainState initState(Map<String, dynamic> args) {
-  return MainState()..modules=[
-    MainModel(ImageAssets.main1,'','SKU Query'),
-    MainModel(ImageAssets.main2,'','Label Print'),
-    MainModel(ImageAssets.main3,'','Label Print'),
-    MainModel(ImageAssets.main4,'','Physical Inv')
-  ];
+  return MainState()
+    ..modules = [
+      MainModel(ImageAssets.main1, '', 'SKU Query'),
+      MainModel(ImageAssets.main2, routerNameForStdLabelPage, 'Label Print'),
+      MainModel(ImageAssets.main3, '', 'Note'),
+      MainModel(ImageAssets.main4, '', 'Physical Inv')
+    ];
 }

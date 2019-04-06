@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/utils.dart';
-import 'package:inventory_management/printing/printing_std_label_page.dart';
+// import 'package:inventory_management/printing/printing_std_label_page.dart';
 import 'package:inventory_management/printing/printing_stk_label_page.dart';
 
 class PrintingPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class PrintingPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            PrintingStdLabelPage(),
+            // PrintingStdLabelPage(),
             PrintingStkLabelPage(),
           ],
         ),

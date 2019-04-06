@@ -51,6 +51,6 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
   httpUtil.commonHeader.addAll({
     'Authorization': result.data['token'],
   });
-  router.pushScreen(ctx.context, RouterPageOption(url: routerNameForTabPage));
+  router.replaceScreen(ctx.context, RouterPageOption(url: routerNameForTabPage));
   // Utils.pushScreen(ctx.context, Tab());
 }

@@ -8,7 +8,7 @@ class OcrListActionCreator {
   static Action init(List<OcrLabelState> labels) {
     return Action(OcrListAction.init, payload: labels);
   }
-  static Action onSubmit(List<OcrLabelState> labels) {
-    return Action(OcrListAction.onSubmit, payload: labels);
+  static Action onSubmit() {
+    return Action(OcrListAction.onSubmit);
   }
 }

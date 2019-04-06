@@ -3,8 +3,8 @@ import 'package:fish_redux/fish_redux.dart';
 class OcrLabelState implements Cloneable<OcrLabelState> {
   String text;
   String id;
-  bool selected = false;
-  OcrLabelState({this.id, this.text, this.selected = false});
+  bool selected = true;
+  OcrLabelState({this.id, this.text, this.selected = true});
   @override
   OcrLabelState clone() {
     return OcrLabelState()

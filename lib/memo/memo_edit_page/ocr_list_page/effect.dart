@@ -34,6 +34,6 @@ void _onInit(Action action, Context<OcrListState> ctx) async {
 void _onSubmit(Action action, Context<OcrListState> ctx) async {
   List<String> strList = ctx.state.currentTextLabels.map((OcrLabelState state) {
     return state.selected ? state.text : '';
-  });
+  }).toList();
   router.popScreen(ctx.context, strList.join());
 }

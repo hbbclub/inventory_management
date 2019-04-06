@@ -7,7 +7,7 @@ import 'state.dart';
 Reducer<MemoEditState> buildReducer() {
   return asReducer(
     <Object, Reducer<MemoEditState>>{
-      MemoEditPageActionCreator.didOcr: _didOcr,
+      MemoEditPageAction.didOcr: _didOcr,
     },
   );
 }

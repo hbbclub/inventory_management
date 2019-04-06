@@ -17,7 +17,7 @@ Widget buildView(
         RawMaterialButton(
           textStyle: TextStyle(color: Colors.white),
           child: Text('Submit'),
-          onPressed: () {},
+          onPressed: () =>dispatch(OcrListActionCreator.onSubmit()),
         ),
       ],
     ),

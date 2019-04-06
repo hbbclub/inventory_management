@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/common/colors.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -25,8 +26,10 @@ Widget buildView(
           ),
         ),
         IconButton(
-          icon: Icon(Icons.check_circle,
-              color: state.selected ? Colors.white : Colors.black),
+          icon: Icon(
+            Icons.check_circle,
+            color: state.selected ? mainColor : Colors.grey,
+          ),
           onPressed: () => dispatch(OcrLabelActionCreator.check(state.id)),
         )
       ],

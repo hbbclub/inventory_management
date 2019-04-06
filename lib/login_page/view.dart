@@ -27,7 +27,6 @@ Widget buildView(LoginState state, Dispatch dispatch, ViewService viewService) {
       child: Builder(
         builder: (BuildContext context) {
           return Container(
-            color: Colors.white,
             child: Form(
               onChanged: () {
                 if (state.formKey.currentState.validate()) {
@@ -37,28 +36,30 @@ Widget buildView(LoginState state, Dispatch dispatch, ViewService viewService) {
                 }
               },
               key: state.formKey,
-              child: ListView(
-                children: <Widget>[
-                  Stack(children: <Widget>[
-                    Image.asset(
-                      ImageAssets.loginTitle,
-                      width: Utils.getScreenWidth(context),
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Positioned(
-                      bottom: 16,
-                      right: 16,
-                      child: buildVersionText(state, dispatch, viewService),
-                    )
-                  ]),
-                  SizedBox(height: 30),
-                  buildAccountTextField(state, dispatch, viewService),
-                  buildPasswordTextField(state, dispatch, viewService),
-                  buildServerTextField(state, dispatch, viewService),
-                  buildLinkWordTextField(state, dispatch, viewService),
-                  SizedBox(height: 20.0),
-                  buildSubmitBottom(state, dispatch, viewService),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Stack(children: <Widget>[
+                      Image.asset(
+                        ImageAssets.loginTitle,
+                        width: Utils.getScreenWidth(context),
+                        fit: BoxFit.fitWidth,
+                      ),
+                      Positioned(
+                        bottom: 16,
+                        right: 16,
+                        child: buildVersionText(state, dispatch, viewService),
+                      )
+                    ]),
+                    SizedBox(height: 30),
+                    buildAccountTextField(state, dispatch, viewService),
+                    buildPasswordTextField(state, dispatch, viewService),
+                    buildServerTextField(state, dispatch, viewService),
+                    buildLinkWordTextField(state, dispatch, viewService),
+                    SizedBox(height: 20.0),
+                    buildSubmitBottom(state, dispatch, viewService),
+                  ],
+                ),
               ),
             ),
           );

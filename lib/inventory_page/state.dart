@@ -2,10 +2,10 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
 class InventoryState implements Cloneable<InventoryState> {
-  TextEditingController tagNumber;
-  TextEditingController stockNumber;
-  TextEditingController location;
-  TextEditingController lotNumber;
+  TextEditingController tagNumber = TextEditingController();
+  TextEditingController stockNumber = TextEditingController();
+  TextEditingController location = TextEditingController();
+  TextEditingController lotNumber = TextEditingController();
   TextEditingController qty = TextEditingController(text: '0');
 
   @override

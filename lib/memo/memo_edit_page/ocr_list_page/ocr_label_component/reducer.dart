@@ -4,15 +4,15 @@ import 'action.dart';
 import 'state.dart';
 
 Reducer<OcrLabelState> buildReducer() {
-  
   return asReducer(
     <Object, Reducer<OcrLabelState>>{
-      // OcrLabelAction.action: _onAction,
+      OcrLabelAction.check: _check,
     },
   );
 }
 
-// OcrLabelState _onAction(OcrLabelState state, Action action) {
-//   final OcrLabelState newState = state.clone();
-//   return newState;
-// }
+OcrLabelState _check(OcrLabelState state, Action action) {
+  final OcrLabelState newState = state.clone();
+  newState.selected = !newState.selected;
+  return newState;
+}

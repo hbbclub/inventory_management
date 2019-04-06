@@ -25,11 +25,11 @@ Widget buildView(
           ),
         ),
         IconButton(
-          icon: Icon(Icons.check),
+          icon: Icon(Icons.check_circle,
+              color: state.selected ? Colors.white : Colors.black),
           onPressed: () => dispatch(OcrLabelActionCreator.check(state.id)),
         )
       ],
     ),
   );
-  
 }

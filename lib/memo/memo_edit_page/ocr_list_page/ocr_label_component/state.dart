@@ -4,7 +4,7 @@ class OcrLabelState implements Cloneable<OcrLabelState> {
   String text;
   String id;
   bool selected = false;
-  OcrLabelState({this.id, this.text, this.selected});
+  OcrLabelState({this.id, this.text, this.selected = false});
   @override
   OcrLabelState clone() {
     return OcrLabelState()

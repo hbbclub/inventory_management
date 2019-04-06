@@ -13,8 +13,11 @@ Reducer<ScannerState> buildReducer() {
 }
 
 ScannerState _init(ScannerState state, Action action) {
-  // final ScannerState newState = state.clone();
-  return action.payload;
+  ScannerState payload =action.payload;
+  final ScannerState newState = state.clone();
+  newState.controller = payload.controller;
+  newState.cameras = payload.cameras;
+  return newState;
 }
 
 ScannerState _scaned(ScannerState state, Action action) {

@@ -5,19 +5,19 @@ import 'package:inventory_management/inventory_page/state.dart';
 
 class ScannerState implements Cloneable<ScannerState> {
   List<CameraDescription> cameras;
-  TextEditingController tagNumber;
+  TextEditingController tagNumber = TextEditingController();
   TextEditingController stockNumber;
   TextEditingController location;
   TextEditingController lotNumber;
-  TextEditingController qty = TextEditingController(text: '0');
+  TextEditingController qty;
   QRReaderController controller;
 
   bool isfull() {
-    return tagNumber.text != null &&
-        stockNumber.text != null &&
-        location.text != null &&
-        lotNumber.text != null &&
-        qty.text != null;
+    return tagNumber.text != '' &&
+        stockNumber.text != '' &&
+        location.text != '' &&
+        lotNumber.text != '' &&
+        qty.text != '';
   }
 
   @override
@@ -35,9 +35,9 @@ class ScannerState implements Cloneable<ScannerState> {
 
 ScannerState initState(InventoryState args) {
   return ScannerState()
-    ..tagNumber = args.tagNumber
-    ..stockNumber = args.stockNumber
-    ..location = args.location
-    ..lotNumber = args.lotNumber
-    ..qty = args.qty;
+    ..tagNumber = args.tagNumber ?? TextEditingController()
+    ..stockNumber = args.stockNumber ?? TextEditingController()
+    ..location = args.location ?? TextEditingController()
+    ..lotNumber = args.lotNumber ?? TextEditingController()
+    ..qty = args.qty ?? TextEditingController(text: '0');
 }

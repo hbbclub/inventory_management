@@ -21,19 +21,21 @@ void _onInit(Action action, Context<ScannerState> ctx) async {
     CodeFormat.code39,
     CodeFormat.code93,
   ], (dynamic value) {
+    print(value);
     if (value == null) {
       return;
     }
     ctx.dispatch(ScannerActionCreator.scaned(value));
     if (state.isfull()) {
       Navigator.of(ctx.context).pop<ScannerState>(ctx.state);
+    } else {
+      Future.delayed(
+          const Duration(seconds: 2), ctx.state.controller.startScanning);
     }
-    Future.delayed(
-        const Duration(seconds: 2), ctx.state.controller.startScanning);
   });
   await state.controller.initialize();
-  await state.controller.startScanning();
   ctx.dispatch(ScannerActionCreator.init(state));
+  await state.controller.startScanning();
 }
 
 void _dispose(Action action, Context<ScannerState> ctx) async {

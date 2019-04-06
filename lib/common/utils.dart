@@ -8,18 +8,20 @@ import 'package:inventory_management/login_page/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-ScreenUtil initScreenUtil(context){
-  return ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+ScreenUtil initScreenUtil(context) {
+  return ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)
+    ..init(context);
 }
 
-double h(int height){
+double h(int height) {
   return ScreenUtil().setHeight(height);
 }
-double w(int width){
+
+double w(int width) {
   return ScreenUtil().setWidth(width);
 }
 
-double sp(size){
+double sp(size) {
   return ScreenUtil().setSp(size);
 }
 
@@ -41,11 +43,14 @@ class Utils {
   static String cacheKeyForUsername = 'LOCAL_CACHE_USERNAME';
   static String cacheKeyForPassword = 'LOCAL_CACHE_PASSWORD';
 
-  
-
   // 返回当前时间戳
   static int currentTimeMillis() {
     return new DateTime.now().millisecondsSinceEpoch;
+  }
+
+  //当前事件戳 增加acc
+  static int currentTimeMillisAccumulation(int acc) {
+    return new DateTime.now().millisecondsSinceEpoch + acc;
   }
 
   // 返回当前时间字符串 年月日 YYYY年MM月DD日
@@ -189,6 +194,7 @@ class Utils {
     );
     Scaffold.of(context).showSnackBar(snackBar);
   }
+
 //显示提示框
   static showSnackBarWithKey(GlobalKey<ScaffoldState> key,
       {@required String text, int duration}) {
@@ -220,5 +226,3 @@ class Utils {
     return prefs.setString(Utils.cacheKey, json.encode(cache));
   }
 }
-
-

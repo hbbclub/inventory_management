@@ -4,30 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
 import 'package:package_info/package_info.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-ScreenUtil initScreenUtil(context) {
-  return ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)
-    ..init(context);
-}
 
 double h(int height) {
-  return ScreenUtil().setHeight(height);
+  return height / 2.0;
 }
 
 double w(int width) {
-  return ScreenUtil().setWidth(width);
+  return width / 2.0;
 }
 
-double sp(size) {
-  return ScreenUtil().setSp(size);
+double sp(int size) {
+  return size / 2.0;
 }
 
 class Utils {
   //应用名称
   static const String appName = 'inventory_management';
   static String appVersion = '';
-  
 
 //******************计算******** */
   // 返回当前时间戳

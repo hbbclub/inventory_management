@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:inventory_management/common/colors.dart';
 import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/common/utils.dart';
@@ -24,7 +23,8 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
         Container(
           alignment: Alignment.topRight,
           height: 44,
-          padding: EdgeInsets.only(top: h(ScreenUtil.statusBarHeight.toInt())),
+          padding: EdgeInsets.only(
+              top: h(Utils.getSysStatsHeight(viewService.context).toInt())),
           child: Center(
             child: Text(
               'HOME',

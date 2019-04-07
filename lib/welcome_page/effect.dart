@@ -11,7 +11,6 @@ import 'state.dart';
 Effect<WelcomeState> buildEffect() {
   return combineEffects(<Object, Effect<WelcomeState>>{
     Lifecycle.initState: _onInit,
-    Lifecycle.build: _onBuild,
   });
 }
 
@@ -27,10 +26,6 @@ void _onInit(Action action, Context<WelcomeState> ctx) async {
         'hostUri': cacheModel.hostUrl,
         'linkWord': cacheModel.linkword,
       }));
-}
-
-void _onBuild(Action action, Context<WelcomeState> ctx) async {
-  initScreenUtil(ctx.context);
 }
 
 Future<void> initUserAgentState() async {

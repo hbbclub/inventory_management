@@ -86,7 +86,7 @@ class NoteTile extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     model.notes ?? '',
-                    maxLines: 4,
+                    maxLines: 1,
                     style: TextStyle(fontSize: 16, color: Color(0XFF333333)),
                     overflow: TextOverflow.ellipsis,
                   ),

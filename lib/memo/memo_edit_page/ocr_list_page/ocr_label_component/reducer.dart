@@ -12,7 +12,7 @@ Reducer<OcrLabelState> buildReducer() {
 }
 
 OcrLabelState _check(OcrLabelState state, Action action) {
+ 
   final OcrLabelState newState = state.clone();
-  newState.selected = !newState.selected;
   return newState;
 }

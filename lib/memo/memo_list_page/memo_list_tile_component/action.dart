@@ -1,7 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
 
-//TODO replace with your own action
 enum MemoListTileAction { onRemove, remove, onEdit }
 
 class MemoListTileActionCreator {

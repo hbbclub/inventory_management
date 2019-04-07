@@ -28,7 +28,7 @@ _onIndexChanged(Action action, Context<TabState> ctx) {
 }
 
 void _onInit(Action action, Context<TabState> ctx) {
-  final TickerProvider tickerProvider = ctx.stfState as IndexComponentState;
+  final TickerProvider tickerProvider = ctx.stfState as TickerComponentState;
   TabState state = TabState();
   state.controller = new PageController(initialPage: 0);
   state.navigationViews = <NavigationIconView>[

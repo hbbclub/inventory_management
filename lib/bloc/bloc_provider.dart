@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-export 'package:inventory_management/material/material_bloc.dart';
+export 'package:inventory_management/material/bloc/material_bloc.dart';
 export 'package:inventory_management/bloc/app_bloc.dart';
 
 abstract class BlocBase {

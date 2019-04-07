@@ -1,8 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum MemoImageAction { onRemove,
-  remove, }
+enum MemoImageAction {
+  onRemove,
+  remove,
+}
 
 class MemoImageActionCreator {
   static Action onRemove(String id) {

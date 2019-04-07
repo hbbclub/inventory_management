@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:inventory_management/agent/api_model.dart';
 import 'package:dio/dio.dart';
-import 'package:inventory_management/common/utils.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 enum HttpVerb { POST, GET, DELETE, PUT, PATCH }
 
 final BaseOptions options = BaseOptions(
-  baseUrl: 'http://' + Utils.hostUri,
+  baseUrl: 'http://' + cacheModel.hostUrl,
   connectTimeout: 5000,
   receiveTimeout: 8000,
   headers: <String, String>{

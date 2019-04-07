@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
-import 'package:inventory_management/login_page/model/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:package_info/package_info.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ScreenUtil initScreenUtil(context) {
@@ -28,21 +26,10 @@ double sp(size) {
 class Utils {
   //应用名称
   static const String appName = 'inventory_management';
-  static String userName = '';
-  static String password = '';
   static String appVersion = '';
-  //api
-  static String hostUri = 'mm.xwcbpx.com';
-  static String linkWord = '';
-  //user
-  static UserModel user = UserModel();
-  //cache key
-  static String cacheKey = 'LOCAL_CACHE';
-  static String cacheKeyForHostUrl = 'LOCAL_CACHE_HOST_URL';
-  static String cacheKeyForLinkWord = 'LOCAL_CACHE_LINK_WORD';
-  static String cacheKeyForUsername = 'LOCAL_CACHE_USERNAME';
-  static String cacheKeyForPassword = 'LOCAL_CACHE_PASSWORD';
+  
 
+//******************计算******** */
   // 返回当前时间戳
   static int currentTimeMillis() {
     return new DateTime.now().millisecondsSinceEpoch;
@@ -111,6 +98,7 @@ class Utils {
     }
   }
 
+//**********************UI******************* */
   // 获取屏幕宽度
   static double getScreenWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
@@ -119,56 +107,6 @@ class Utils {
   // 获取屏幕高度
   static double getScreenHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
-  }
-
-  // 获取系统状态栏高度
-  static double getSysStatsHeight(BuildContext context) {
-    return MediaQuery.of(context).padding.top;
-  }
-
-  // 页面跳转
-  static Future pushScreen(BuildContext context, Widget screen) {
-    return Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (BuildContext context) {
-          return screen;
-        },
-      ),
-    );
-  }
-
-//替换当前页面
-  static Future replaceScreen(BuildContext context, Widget screen) {
-    return Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (BuildContext context) {
-          return screen;
-        },
-      ),
-    );
-  }
-
-//pop页面站知道只有一个页面
-  static void popAll(BuildContext context) {
-    Navigator.of(context).popUntil((Route router) {
-      print(router.isFirst);
-      if (router.isFirst) {
-        return true;
-      }
-      return false;
-    });
-  }
-
-//推出指定个数页面
-  static void popNum(BuildContext context, int number) {
-    int i = 0;
-    Navigator.of(context).popUntil((Route router) {
-      if ((router.isFirst) || (i == number)) {
-        return true;
-      }
-      i++;
-      return false;
-    });
   }
 
 //获取设备uuid
@@ -185,6 +123,63 @@ class Utils {
     return null;
   }
 
+  //获取应用版本号
+  static Future<String> getAppVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
+
+  // 获取系统状态栏高度
+  static double getSysStatsHeight(BuildContext context) {
+    return MediaQuery.of(context).padding.top;
+  }
+
+//******************页面******************** */
+//   // 页面跳转
+//   static Future pushScreen(BuildContext context, Widget screen) {
+//     return Navigator.of(context).push(
+//       MaterialPageRoute(
+//         builder: (BuildContext context) {
+//           return screen;
+//         },
+//       ),
+//     );
+//   }
+
+// //替换当前页面
+//   static Future replaceScreen(BuildContext context, Widget screen) {
+//     return Navigator.of(context).pushReplacement(
+//       MaterialPageRoute(
+//         builder: (BuildContext context) {
+//           return screen;
+//         },
+//       ),
+//     );
+//   }
+
+// //pop页面站知道只有一个页面
+//   static void popAll(BuildContext context) {
+//     Navigator.of(context).popUntil((Route router) {
+//       print(router.isFirst);
+//       if (router.isFirst) {
+//         return true;
+//       }
+//       return false;
+//     });
+//   }
+
+// //推出指定个数页面
+//   static void popNum(BuildContext context, int number) {
+//     int i = 0;
+//     Navigator.of(context).popUntil((Route router) {
+//       if ((router.isFirst) || (i == number)) {
+//         return true;
+//       }
+//       i++;
+//       return false;
+//     });
+//   }
+
 //显示提示框
   static showSnackBar(BuildContext context,
       {@required String text, int duration}) {
@@ -195,7 +190,7 @@ class Utils {
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
-//显示提示框
+//显示提示框通过key
   static showSnackBarWithKey(GlobalKey<ScaffoldState> key,
       {@required String text, int duration}) {
     final snackBar = SnackBar(
@@ -203,26 +198,5 @@ class Utils {
       duration: Duration(seconds: duration ?? 1),
     );
     key.currentState.showSnackBar(snackBar);
-  }
-
-//获取本地存储对象
-  static Future<Map<String, dynamic>> getLoaclCache() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String rawJson = prefs.getString(Utils.cacheKey);
-    if (rawJson == null) {
-      return {};
-    }
-    return json.decode(rawJson);
-  }
-
-  //会将参数的map融合到本地缓存的json对象中
-  static Future<bool> addLoaclCache(Map<String, dynamic> cacheMap) async {
-    if (cacheMap == null) {
-      return false;
-    }
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Map cache = await Utils.getLoaclCache();
-    cache.addAll(cacheMap);
-    return prefs.setString(Utils.cacheKey, json.encode(cache));
   }
 }

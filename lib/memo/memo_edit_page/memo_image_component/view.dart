@@ -1,7 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/multi_image_picker/asset_view.dart';
-import 'package:inventory_management/common/utils.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -18,7 +18,7 @@ Widget buildView(
         ),
         Expanded(
           child: state.url != null
-              ? Image.network('http://' + Utils.hostUri + '/' + state.url)
+              ? Image.network('http://' + cacheModel.hostUrl + '/' + state.url)
               : state.asset != null
                   ? AssetView(Key(state.asset.identifier), 0, state.asset)
                   : Container(),

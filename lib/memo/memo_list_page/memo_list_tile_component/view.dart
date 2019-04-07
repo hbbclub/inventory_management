@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_management/common/utils.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -25,7 +25,7 @@ Widget buildView(
         )),
     direction: DismissDirection.endToStart,
     confirmDismiss: (direction) async {
-      return state.createUserId == Utils.user.username;
+      return state.createUserId == cacheModel.user.username;
     },
     onDismissed: (direction) async {
       dispatch(MemoListTileActionCreator.onRemove(state.id));

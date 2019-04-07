@@ -1,17 +1,22 @@
 import 'package:inventory_management/bloc/bloc_provider.dart';
 import 'package:inventory_management/agent/api.dart';
-import 'package:inventory_management/material/material_model.dart';
+import 'package:inventory_management/material/model/material_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MaterialBloc extends BlocBase {
-  MaterialBloc();
-  MaterialModel resultModel = MaterialModel();
+  MaterialBloc() {
+    _suggestChangedStream.pipe(_searchSource);
+  }
   final BehaviorSubject<String> _searchSubject = BehaviorSubject<String>();
+  final BehaviorSubject<List<MaterialModel>> _searchSource =
+      BehaviorSubject<List<MaterialModel>>();
 
-//启动时调用
+  //接受搜索文字
   Function(String) get handelSearchTextChanged => _searchSubject.sink.add;
+//向外报漏的数据源
+  Stream<List<MaterialModel>> get source => _searchSource.stream;
 
-  Stream<List<MaterialModel>> get suggestChangedStream => _searchSubject.stream
+  Stream<List<MaterialModel>> get _suggestChangedStream => _searchSubject.stream
           .debounce(Duration(milliseconds: 1000))
           .asyncMap((text) {
         return api.materialList(keyword: text);
@@ -29,5 +34,6 @@ class MaterialBloc extends BlocBase {
   @override
   void dispose() {
     _searchSubject.close();
+    _searchSource.close();
   }
 }

@@ -38,7 +38,6 @@ class _OcrConnector extends ConnOp<OcrListState, List<ItemBean>> {
 
   @override
   subReducer(reducer) {
-    // TODO: implement subReducer
     return super.subReducer(reducer);
   }
 }

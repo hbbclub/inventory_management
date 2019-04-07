@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/common/utils.dart';
-import 'package:inventory_management/common/utils.dart' show h, w, sp;
+import 'package:inventory_management/common/utils.dart' show h,  sp;
 
 import 'action.dart';
 import 'state.dart';

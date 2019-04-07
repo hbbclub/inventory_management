@@ -7,14 +7,15 @@ import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class IndexComponentState extends ComponentState<TabState>
+class TickerComponentState extends ComponentState<TabState>
     with TickerProviderStateMixin {}
 
 const routerNameForTabPage = 'router://TabPage';
+
 @ARoute(url: routerNameForTabPage)
 class TabPage extends Page<TabState, Map<String, dynamic>> {
   @override
-  IndexComponentState createState() => IndexComponentState();
+  TickerComponentState createState() => TickerComponentState();
 
   TabPage(param)
       : super(

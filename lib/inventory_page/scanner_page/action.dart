@@ -1,7 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/inventory_page/scanner_page/state.dart';
-
-//TODO replace with your own action
 enum ScannerAction { init, scaned }
 
 class ScannerActionCreator {

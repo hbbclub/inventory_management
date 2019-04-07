@@ -11,7 +11,7 @@ Reducer<MemoImageState> buildReducer() {
   );
 }
 
-MemoImageState _onAction(MemoImageState state, Action action) {
-  final MemoImageState newState = state.clone();
-  return newState;
-}
+// MemoImageState _onAction(MemoImageState state, Action action) {
+//   final MemoImageState newState = state.clone();
+//   return newState;
+// }

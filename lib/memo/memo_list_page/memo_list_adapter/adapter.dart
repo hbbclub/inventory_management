@@ -21,7 +21,8 @@ class _MemoListConnector extends ConnOp<MemoListState, List<ItemBean>> {
   List<ItemBean> get(MemoListState state) {
     if (state.list?.isNotEmpty == true) {
       return state.list
-          .map<ItemBean>((MemoListTileState data) => ItemBean('memoListTile', data))
+          .map<ItemBean>(
+              (MemoListTileState data) => ItemBean('memoListTile', data))
           .toList(growable: true);
     } else {
       return <ItemBean>[];
@@ -40,7 +41,6 @@ class _MemoListConnector extends ConnOp<MemoListState, List<ItemBean>> {
 
   @override
   subReducer(reducer) {
-    // TODO: implement subReducer
     return super.subReducer(reducer);
   }
 }

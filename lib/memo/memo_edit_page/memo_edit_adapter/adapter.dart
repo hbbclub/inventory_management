@@ -38,7 +38,6 @@ class _MemoEditConnector extends ConnOp<MemoEditState, List<ItemBean>> {
 
   @override
   subReducer(reducer) {
-    // TODO: implement subReducer
     return super.subReducer(reducer);
   }
 }

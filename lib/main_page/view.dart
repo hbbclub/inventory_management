@@ -12,25 +12,13 @@ Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
   print(state.modules);
   return Scaffold(
       body: Container(
-    color: mainColor,
+    color: Color(0x113042),
     child: Stack(
       children: <Widget>[
         Image.asset(
           ImageAssets.mainBack,
           width: Utils.getScreenWidth(viewService.context),
           fit: BoxFit.fitWidth,
-        ),
-        Container(
-          alignment: Alignment.topRight,
-          height: 44,
-          padding: EdgeInsets.only(
-              top: h(Utils.getSysStatsHeight(viewService.context).toInt())),
-          child: Center(
-            child: Text(
-              'HOME',
-              style: TextStyle(color: Colors.white, fontSize: sp(36)),
-            ),
-          ),
         ),
         Container(
           padding: EdgeInsets.only(

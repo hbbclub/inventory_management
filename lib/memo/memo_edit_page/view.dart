@@ -20,19 +20,7 @@ Widget buildView(
           textStyle: TextStyle(color: Colors.white),
           child: Text('Save'),
           onPressed: () {
-            // Widget page = MyRouter().findPage(
-            //   RouterPageOption(
-            //     url: 'router://MemoSaveNotePage',
-            //     params: {
-            //       'files': images ?? [],
-            //       'notes': _textEditingController.text,
-            //       'items': _currentTextLabels ?? [],
-            //       'type': widget.initParam.params['type'],
-            //       'id': widget.initParam.params['model']?.id,
-            //     },
-            //   ),
-            // );
-            // Utils.pushScreen(context, page);
+            dispatch(MemoEditPageActionCreator.onSave());
           },
         ),
       ],

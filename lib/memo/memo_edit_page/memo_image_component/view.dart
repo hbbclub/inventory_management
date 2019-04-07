@@ -19,7 +19,9 @@ Widget buildView(
         Expanded(
           child: state.url != null
               ? Image.network('http://' + Utils.hostUri + '/' + state.url)
-              : AssetView(Key(state.asset.identifier), 0, state.asset),
+              : state.asset != null
+                  ? AssetView(Key(state.asset.identifier), 0, state.asset)
+                  : Container(),
         ),
         IconButton(
           icon: Icon(

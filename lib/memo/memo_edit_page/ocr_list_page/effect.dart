@@ -25,7 +25,7 @@ void _onInit(Action action, Context<OcrListState> ctx) async {
   List<OcrLabelState> labels =
       List.generate(visionText.blocks.length, (int index) {
     return OcrLabelState(
-        id: Utils.currentTimeMillisAccumulation(1).toString(),
+        id: Utils.currentTimeMillisAccumulation(index).toString(),
         text: visionText.blocks[index].text);
   }).toList();
   ctx.dispatch(OcrListActionCreator.init(labels));

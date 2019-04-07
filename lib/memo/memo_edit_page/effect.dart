@@ -4,6 +4,7 @@ import 'package:inventory_management/memo/memo_edit_page/memo_edit_adapter/actio
 
 import 'package:inventory_management/memo/memo_edit_page/memo_image_component/state.dart';
 import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/page.dart';
+import 'package:inventory_management/memo/memo_save_page/page.dart';
 import 'package:inventory_management/route/route.route.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'action.dart';
@@ -15,6 +16,7 @@ Effect<MemoEditState> buildEffect() {
     Lifecycle.initState: _onInit,
     MemoEditPageAction.onLoadAssets: _onLoadAssets,
     MemoEditPageAction.onOcr: _onOcr,
+    MemoEditPageAction.onSave: _onSave,
   });
 }
 
@@ -26,6 +28,16 @@ void _onOcr(Action action, Context<MemoEditState> ctx) async {
   if (result != null) {
     ctx.dispatch(MemoEditPageActionCreator.didOcr(result));
   }
+}
+
+void _onSave(Action action, Context<MemoEditState> ctx) async {
+  router.pushScreen(
+      ctx.context,
+      RouterPageOption(url: routerNameForMemoSavePage, params: {
+        'notes': ctx.state.textEditingController.text,
+        'images': ctx.state.images,
+        'tileState': ctx.state.listTileState,
+      }));
 }
 
 void _onLoadAssets(Action action, Context<MemoEditState> ctx) async {

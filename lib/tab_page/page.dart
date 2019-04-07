@@ -25,13 +25,5 @@ class TabPage extends Page<TabState, Map<String, dynamic>> {
           dependencies: Dependencies<TabState>(
               adapter: null, slots: <String, Dependent<TabState>>{}),
           middleware: <Middleware<TabState>>[],
-          // wrapper: wrapperFunc,
         );
-
-  static Widget wrapperFunc(Widget widget) {
-    return KeepAlive(
-      child: widget,
-      keepAlive: true,
-    );
-  }
 }

@@ -92,7 +92,7 @@ class Api {
   Future<ApiModel> fileUpload(List<Asset> files) async {
     List<UploadFileInfo> infos = List.generate(files.length, (index) {
       return UploadFileInfo.fromBytes(
-          files[index].thumbData.buffer.asUint8List(), 'file');
+          files[index].thumbData?.buffer?.asUint8List(), 'file');
     });
     FormData formData = FormData.from({
       "file": infos,

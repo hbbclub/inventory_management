@@ -1,8 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/setting_page/page.dart';
 import 'package:inventory_management/tab_page/page.dart';
 import 'package:inventory_management/main_page/page.dart';
-import 'package:inventory_management/setting/setting_page.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -47,7 +47,7 @@ void _onInit(Action action, Context<TabState> ctx) {
   ];
   state.pages = [
     MainPage(null).buildPage({}),
-    Setting(),
+    SettingPage(null).buildPage({}),
   ];
   ctx.dispatch(TabActionCreator.init(state));
 }

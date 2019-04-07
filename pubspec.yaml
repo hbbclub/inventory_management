@@ -38,7 +38,7 @@ dependencies:
     git:
       url: git://github.com/facundomedica/fast_qr_reader_view.git
   package_info: ^0.4.0+2
-  flutter_screenutil: ^0.4.2
+  flutter_screenutil: ^0.5.1
   fish_redux:
     git:
       url: git://github.com/alibaba/fish-redux.git

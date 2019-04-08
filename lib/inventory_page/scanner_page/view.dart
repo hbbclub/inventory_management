@@ -20,44 +20,74 @@ Widget buildView(
         children: <Widget>[
           Row(
             children: <Widget>[
-              SizedBox(width: 100, child: Text('Tag Number')),
+              SizedBox(
+                  width: 140,
+                  child: Text(
+                    'Tag Number',
+                    style: TextStyle(fontSize: 20),
+                  )),
               Expanded(
                 child: TextField(
                   enabled: false,
                   controller: state.tagNumber,
+                  style: TextStyle(fontSize: 20),
                 ),
               )
             ],
           ),
           Row(
             children: <Widget>[
-              SizedBox(width: 100, child: Text('Stock Code')),
+              SizedBox(
+                  width: 140,
+                  child: Text('Stock Code', style: TextStyle(fontSize: 20))),
               Expanded(
-                child: TextField(enabled: false, controller: state.stockNumber),
+                child: TextField(
+                  enabled: false,
+                  controller: state.stockNumber,
+                  style: TextStyle(fontSize: 20),
+                ),
               )
             ],
           ),
           Row(
             children: <Widget>[
-              SizedBox(width: 100, child: Text('Location')),
+              SizedBox(
+                  width: 140,
+                  child: Text('Location', style: TextStyle(fontSize: 20))),
               Expanded(
-                child: TextField(enabled: false, controller: state.location),
+                child: TextField(
+                  enabled: false,
+                  controller: state.location,
+                  style: TextStyle(fontSize: 20),
+                ),
               )
             ],
           ),
           Row(
             children: <Widget>[
-              SizedBox(width: 100, child: Text('Lot Number')),
+              SizedBox(
+                  width: 140,
+                  child: Text('Lot Number', style: TextStyle(fontSize: 20))),
               Expanded(
-                child: TextField(enabled: false, controller: state.lotNumber),
+                child: TextField(
+                  enabled: false,
+                  controller: state.lotNumber,
+                  style: TextStyle(fontSize: 20),
+                ),
               )
             ],
           ),
           Row(
             children: <Widget>[
-              SizedBox(width: 100, child: Text('QTY')),
+              SizedBox(
+                  width: 140,
+                  child: Text('QTY', style: TextStyle(fontSize: 20))),
               Expanded(
-                child: TextField(enabled: false, controller: state.qty),
+                child: TextField(
+                  enabled: false,
+                  controller: state.qty,
+                  style: TextStyle(fontSize: 20),
+                ),
               )
             ],
           ),

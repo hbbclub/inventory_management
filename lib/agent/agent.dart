@@ -6,7 +6,7 @@ import 'package:inventory_management/welcome_page/model/cache_model.dart';
 enum HttpVerb { POST, GET, DELETE, PUT, PATCH }
 
 final BaseOptions options = BaseOptions(
-  baseUrl: 'http://' + cacheModel.hostUrl,
+  baseUrl: 'http://' + cacheModel.hostUrl ?? '',
   connectTimeout: 5000,
   receiveTimeout: 8000,
   headers: <String, String>{
@@ -110,6 +110,7 @@ class HttpUtil {
   Map<String, dynamic> commonHeader = {};
 
   Agent agent = Agent();
+  
   Future<ApiModel> post(
     String url, {
     Map<String, dynamic> params,

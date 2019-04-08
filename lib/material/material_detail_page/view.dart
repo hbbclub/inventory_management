@@ -39,10 +39,7 @@ Widget buildView(
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onPressed: () async {
-                      // var image = await ImagePicker.pickImage(
-                      //     source: ImageSource.gallery);
-                    },
+                    onPressed: () =>dispatch(MaterialDetailActionCreator.onSelectImage()),
                   ),
                 ),
               ),

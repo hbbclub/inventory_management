@@ -7,6 +7,7 @@ Reducer<MaterialDetailState> buildReducer() {
   return asReducer(
     <Object, Reducer<MaterialDetailState>>{
       MaterialDetailAction.init: _init,
+      MaterialDetailAction.selectdImage: _selectdImage,
     },
   );
 }
@@ -14,5 +15,10 @@ Reducer<MaterialDetailState> buildReducer() {
 MaterialDetailState _init(MaterialDetailState state, Action action) {
   final MaterialDetailState newState = state.clone();
   newState.mTabController = action.payload['tab'];
+  return newState;
+}
+
+MaterialDetailState _selectdImage(MaterialDetailState state, Action action) {
+  final MaterialDetailState newState = state.clone();
   return newState;
 }

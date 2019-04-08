@@ -1,5 +1,7 @@
+import 'package:analyzer/file_system/file_system.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -7,6 +9,7 @@ Effect<MaterialDetailState> buildEffect() {
   return combineEffects(<Object, Effect<MaterialDetailState>>{
     Lifecycle.initState: _onInit,
     Lifecycle.dispose: _dispose,
+    MaterialDetailAction.onSelectImage: _onSelectImage,
   });
 }
 
@@ -27,6 +30,12 @@ void _onInit(Action action, Context<MaterialDetailState> ctx) {
 
 void _dispose(Action action, Context<MaterialDetailState> ctx) {
   ctx.state.controller.dispose();
+}
+
+void _onSelectImage(Action action, Context<MaterialDetailState> ctx) async {
+  if (ctx.state.model.imgs?.length == 0) {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  }
 }
 
 _onPageChange(Context<MaterialDetailState> ctx, int index,

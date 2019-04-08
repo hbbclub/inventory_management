@@ -41,7 +41,7 @@ Widget buildView(
             decoration: InputDecoration(
               border: InputBorder.none,
               labelText: 'Key Word',
-              hintText: 'Pleast enter key word',
+              hintText: 'Please enter key word',
               labelStyle: TextStyle(fontSize: 16, color: Colors.black),
               hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
             ),

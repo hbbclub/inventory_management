@@ -2,6 +2,8 @@ import 'package:analyzer/file_system/file_system.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:inventory_management/printing/stk_label_page/page.dart';
+import 'package:inventory_management/route/route.route.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -10,6 +12,7 @@ Effect<MaterialDetailState> buildEffect() {
     Lifecycle.initState: _onInit,
     Lifecycle.dispose: _dispose,
     MaterialDetailAction.onSelectImage: _onSelectImage,
+    MaterialDetailAction.jumpToStkPrint: _jumpToStkPrint,
   });
 }
 
@@ -30,6 +33,11 @@ void _onInit(Action action, Context<MaterialDetailState> ctx) {
 
 void _dispose(Action action, Context<MaterialDetailState> ctx) {
   ctx.state.controller.dispose();
+}
+
+void _jumpToStkPrint(Action action, Context<MaterialDetailState> ctx) {
+  router.pushScreen(
+      ctx.context, RouterPageOption(url: routerNameForStkLabelPage));
 }
 
 void _onSelectImage(Action action, Context<MaterialDetailState> ctx) async {

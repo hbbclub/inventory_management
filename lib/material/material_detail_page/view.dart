@@ -13,6 +13,11 @@ Widget buildView(
       titleSpacing: 0.0,
       title: Text('SKU Detail'),
     ),
+    floatingActionButton: FloatingActionButton(
+      backgroundColor: mainColor,
+      onPressed: () =>dispatch(MaterialDetailActionCreator.jumpToStkPrint()),
+      child: Icon(Icons.print),
+    ),
     body: Container(
       padding: EdgeInsets.all(16.0),
       child: Column(
@@ -39,7 +44,8 @@ Widget buildView(
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onPressed: () =>dispatch(MaterialDetailActionCreator.onSelectImage()),
+                    onPressed: () =>
+                        dispatch(MaterialDetailActionCreator.onSelectImage()),
                   ),
                 ),
               ),
@@ -90,5 +96,4 @@ Widget buildView(
       ),
     ),
   );
-  
 }

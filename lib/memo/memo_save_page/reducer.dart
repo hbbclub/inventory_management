@@ -18,7 +18,7 @@ MemoSaveState _init(MemoSaveState state, Action action) {
   final MemoSaveState newState = state.clone();
   List<CategoriesModel> allActivities = action.payload['activities'];
   newState.allActivities = allActivities;
-  if (allActivities.length > 0) {
+  if (allActivities.length > 0 && newState.activity == null) {
     newState.activity = allActivities[0].category;
   }
   return newState;

@@ -30,9 +30,12 @@ class MemoSaveState implements Cloneable<MemoSaveState> {
 }
 
 MemoSaveState initState(Map<String, dynamic> args) {
+  MemoListTileState state = args['tileState'];
   return MemoSaveState()
     ..notes = args['notes']
-    ..listTileState = args['tileState']
+    ..listTileState = state
+    ..keywordController = TextEditingController(text: state.keyword)
+    ..activity = state.category
     ..images = args['images'];
 }
 

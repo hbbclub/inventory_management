@@ -28,7 +28,7 @@ class AssetState extends State<AssetView> {
 
   @override
   void deactivate() {
-    this.widget._asset.release();
+    // this.widget._asset.release();
     super.deactivate();
     
   }

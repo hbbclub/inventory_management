@@ -14,13 +14,28 @@ import 'package:flutter/services.dart';
 Effect<MemoEditState> buildEffect() {
   return combineEffects(<Object, Effect<MemoEditState>>{
     Lifecycle.initState: _onInit,
+    Lifecycle.dispose: _dispose,
     MemoEditPageAction.onLoadAssets: _onLoadAssets,
     MemoEditPageAction.onOcr: _onOcr,
     MemoEditPageAction.onSave: _onSave,
   });
 }
 
-void _onInit(Action action, Context<MemoEditState> ctx) {}
+void _dispose(Action action, Context<MemoEditState> ctx) async {
+  for (MemoImageState image in ctx.state.images) {
+    if (image.asset != null) {
+      image.asset.release();
+    }
+  }
+}
+
+void _onInit(Action action, Context<MemoEditState> ctx) async {
+  for (MemoImageState image in ctx.state.images) {
+    if (image.asset != null) {
+      await image.asset.requestThumbnail(300, 300, quality: 50);
+    }
+  }
+}
 
 void _onOcr(Action action, Context<MemoEditState> ctx) async {
   String result = await router.pushScreen(
@@ -52,11 +67,14 @@ void _onLoadAssets(Action action, Context<MemoEditState> ctx) async {
     error = e.message;
   }
   if (error == null) {
-    List<MemoImageState> states = List.generate(resultList.length, (int index) {
+    List<MemoImageState> images = List.generate(resultList.length, (int index) {
       return MemoImageState(
           id: Utils.currentTimeMillisAccumulation(index).toString(),
           asset: resultList[index]);
     });
-    ctx.dispatch(MemoEditActionCreator.loadAssets(states ?? []));
+    for (MemoImageState image in images) {
+      await image.asset.requestThumbnail(300, 300, quality: 50);
+    }
+    ctx.dispatch(MemoEditActionCreator.loadAssets(images ?? []));
   }
 }

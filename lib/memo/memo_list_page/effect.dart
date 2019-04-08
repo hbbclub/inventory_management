@@ -25,13 +25,13 @@ void _onInit(Action action, Context<MemoListState> ctx) async {
   for (Map item in labels) {
     res.add(MemoListTileState.fromJson(item));
   }
-  ctx.dispatch(MemoPageActionCreator.init(res));
+  ctx.dispatch(MemoPageActionCreator.init(res.reversed.toList()));
 }
 
 void _onEdit(Action action, Context<MemoListState> ctx) async {
   MemoListTileState state = action.payload;
 
-  await router.pushScreen(
-      ctx.context, RouterPageOption(url: routerNameForMemoEditPage, params: state));
+  await router.pushScreen(ctx.context,
+      RouterPageOption(url: routerNameForMemoEditPage, params: state));
   _onInit(action, ctx);
 }

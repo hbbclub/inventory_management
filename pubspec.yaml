@@ -7,7 +7,7 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.0.1+2
+version: 1.0.3+3
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -18,7 +18,7 @@ dependencies:
 
   firebase_ml_vision: ^0.6.0
   image_picker: ^0.4.12
-  barcode_scan: ^0.0.8
+  barcode_scan: ^1.0.0
   font_awesome_flutter: ^8.2.0
   cupertino_icons: ^0.1.2
   path_provider: ^0.4.1
@@ -38,6 +38,9 @@ dependencies:
     git:
       url: git://github.com/facundomedica/fast_qr_reader_view.git
   package_info: ^0.4.0+2
+  fish_redux:
+    git:
+      url: git://github.com/alibaba/fish-redux.git
 
 dev_dependencies:
   flutter_test:

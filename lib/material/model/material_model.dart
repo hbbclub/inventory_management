@@ -14,6 +14,8 @@ class MaterialModel {
   double unitCost;
   @JsonKey(name: 'sap_qty', nullable: false)
   String sapQty;
+  @JsonKey(name: 'tech_spec', nullable: false)
+  String techSpec;
   List<Img> imgs;
 
   factory MaterialModel.fromJson(Map<String, dynamic> json) =>

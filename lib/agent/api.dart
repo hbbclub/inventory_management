@@ -59,6 +59,7 @@ class Api {
 
   //修改记录
   Future<ApiModel> updateNote(Map<String, dynamic> note) async {
+    note.addAll({'user': cacheModel.user.toJson()});
     return httpUtil.patch(
       '/mm/note',
       params: note,

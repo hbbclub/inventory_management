@@ -102,7 +102,7 @@ Widget buildView(
                             TextStyle(fontSize: 16, color: Color(0XFF999999)),
                         labelStyle:
                             TextStyle(fontSize: 20, color: Colors.black)),
-                    controller: state.location),
+                    controller: state.lotNumber),
               )
             ],
           ),

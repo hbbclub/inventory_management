@@ -40,8 +40,8 @@ Widget buildView(
               child: TextField(
             decoration: InputDecoration(
               border: InputBorder.none,
-              labelText: 'Key Word',
-              hintText: 'Please enter key word',
+              labelText: 'Keyword',
+              hintText: 'Please enter keyword',
               labelStyle: TextStyle(fontSize: 16, color: Colors.black),
               hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
             ),

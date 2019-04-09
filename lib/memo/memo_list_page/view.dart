@@ -36,7 +36,9 @@ Widget buildView(
             padding: EdgeInsets.fromLTRB(20, 5, 5, 8),
             color: Colors.white,
             child: TextField(
-              onSubmitted: (text) {},
+              controller: state.keywordController,
+              onSubmitted: (text) =>
+                  dispatch(MemoPageActionCreator.onSearch(text)),
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search',

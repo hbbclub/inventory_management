@@ -13,7 +13,7 @@ Widget buildView(
   return Scaffold(
     appBar: AppBar(
       title: Text(
-        'MEMO',
+        'Note',
       ),
       actions: <Widget>[
         FlatButton(

@@ -12,7 +12,7 @@ Widget buildView(
     SettingState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
     appBar: AppBar(
-      title: Text('SETTING'),
+      title: Text('Setting'),
       elevation: 0,
     ),
     body: Container(

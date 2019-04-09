@@ -9,7 +9,7 @@ Widget buildView(
     InventoryState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
     appBar: AppBar(
-      title: Text('INVENTORY'),
+      title: Text('Inventory'),
       actions: <Widget>[
         RawMaterialButton(
           textStyle: TextStyle(color: Colors.white),

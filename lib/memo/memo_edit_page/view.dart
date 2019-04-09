@@ -10,10 +10,9 @@ Widget buildView(
   final ListAdapter adapter = viewService.buildAdapter();
 
   return Scaffold(
-    key: state.scaffoldKey,
     appBar: AppBar(
       title: Text(
-        state.type == NotePageType.Add ? 'Add Note' : 'Note Detail',
+        state.listTileState.id == null ? 'Add Note' : 'Note Detail',
       ),
       actions: <Widget>[
         RawMaterialButton(

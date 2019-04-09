@@ -3,6 +3,7 @@ import 'package:inventory_management/common/utils.dart';
 import 'package:inventory_management/memo/memo_edit_page/memo_edit_adapter/action.dart';
 
 import 'package:inventory_management/memo/memo_edit_page/memo_image_component/state.dart';
+import 'package:inventory_management/memo/memo_edit_page/memo_notes_component/state.dart';
 import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/page.dart';
 import 'package:inventory_management/memo/memo_save_page/page.dart';
 import 'package:inventory_management/route/route.route.dart';
@@ -22,16 +23,16 @@ Effect<MemoEditState> buildEffect() {
 }
 
 void _dispose(Action action, Context<MemoEditState> ctx) async {
-  for (MemoImageState image in ctx.state.images) {
-    if (image.asset != null) {
+  for (var image in ctx.state.images) {
+    if (image is MemoImageState && image.asset != null) {
       image.asset.release();
     }
   }
 }
 
 void _onInit(Action action, Context<MemoEditState> ctx) async {
-  for (MemoImageState image in ctx.state.images) {
-    if (image.asset != null) {
+  for (var image in ctx.state.images) {
+    if (image is MemoImageState && image.asset != null) {
       await image.asset.requestThumbnail(300, 300, quality: 50);
     }
   }
@@ -46,11 +47,13 @@ void _onOcr(Action action, Context<MemoEditState> ctx) async {
 }
 
 void _onSave(Action action, Context<MemoEditState> ctx) async {
+  MemoNotesState textState = ctx.state.images[0];
   router.pushScreen(
       ctx.context,
       RouterPageOption(url: routerNameForMemoSavePage, params: {
-        'notes': ctx.state.textEditingController.text,
-        'images': ctx.state.images,
+        'notes': textState.textEditingController.text,
+        'images':
+            ctx.state.images.getRange(1, ctx.state.images.length).toList(),
         'tileState': ctx.state.listTileState,
       }));
 }

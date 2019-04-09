@@ -1,6 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/memo/memo_edit_page/memo_image_component/component.dart';
 import 'package:inventory_management/memo/memo_edit_page/memo_image_component/state.dart';
+import 'package:inventory_management/memo/memo_edit_page/memo_notes_component/component.dart';
 import 'package:inventory_management/memo/memo_edit_page/state.dart';
 
 import 'reducer.dart';
@@ -8,7 +9,10 @@ import 'reducer.dart';
 class MemoEditAdapter extends DynamicFlowAdapter<MemoEditState> {
   MemoEditAdapter()
       : super(
-          pool: <String, Component<Object>>{'image': MemoImageComponent()},
+          pool: <String, Component<Object>>{
+            'image': MemoImageComponent(),
+            'text': MemoNotesComponent(),
+          },
           connector: _MemoEditConnector(),
           reducer: buildReducer(),
         );
@@ -18,9 +22,13 @@ class _MemoEditConnector extends ConnOp<MemoEditState, List<ItemBean>> {
   @override
   List<ItemBean> get(MemoEditState state) {
     if (state.images?.isNotEmpty == true) {
-      return state.images
-          .map<ItemBean>((MemoImageState data) => ItemBean('image', data))
-          .toList(growable: true);
+      return state.images.map<ItemBean>((data) {
+        if (data is MemoImageState) {
+          return ItemBean('image', data);
+        } else {
+          return ItemBean('text', data);
+        }
+      }).toList(growable: true);
     } else {
       return <ItemBean>[];
     }

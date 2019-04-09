@@ -31,12 +31,14 @@ class MemoSaveState implements Cloneable<MemoSaveState> {
 
 MemoSaveState initState(Map<String, dynamic> args) {
   MemoListTileState state = args['tileState'];
+  print(args);
+  print('--------------------');
   return MemoSaveState()
     ..notes = args['notes']
     ..listTileState = state
     ..keywordController = TextEditingController(text: state.keyword)
     ..activity = state.category
-    ..images = args['images'];
+    ..images = args['images'].cast<MemoImageState>();
 }
 
 class SettingItem {

@@ -14,12 +14,11 @@ Reducer<MemoEditState> buildReducer() {
   );
 }
 
-
-
 MemoEditState _remove(MemoEditState state, Action action) {
   final MemoEditState newState = state.clone();
   final String id = action.payload;
-  newState.images.removeWhere((MemoImageState item) => item.id == id);
+  newState.images
+      .removeWhere((item) => (item is MemoImageState) && (item.id == id));
   return newState;
 }
 

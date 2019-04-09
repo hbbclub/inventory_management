@@ -14,7 +14,15 @@ class StkLabelState implements Cloneable<StkLabelState> {
 
   @override
   StkLabelState clone() {
-    return StkLabelState()..items = items;
+    return StkLabelState()
+      ..items = items
+      ..stockController = stockController
+      ..descController = descController
+      ..uomController = uomController
+      ..qtyController = qtyController
+      ..printController = printController
+      ..lotNumberController = lotNumberController
+      ..countController = countController;
   }
 }
 

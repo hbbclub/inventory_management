@@ -14,6 +14,7 @@ Reducer<StkLabelState> buildReducer() {
 
 StkLabelState _add(StkLabelState state, Action action) {
   final StkLabelState newState = state.clone();
+  
   newState.countController.text = (int.parse(newState.countController.text) + 1).toString();
   return newState;
 }

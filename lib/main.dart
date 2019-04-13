@@ -10,7 +10,6 @@ void main() async {
       bloc: appBloc,
       child: AppProvider(
         child: MaterialApp(
-          // debugShowCheckedModeBanner: false,
           title: 'Inventory Management',
           theme: ThemeData(
             primaryColor: mainColor,

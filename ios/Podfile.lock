@@ -137,6 +137,8 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
+  - printer (0.0.1):
+    - Flutter
   - Protobuf (3.6.1)
   - shared_preferences (0.0.1):
     - Flutter
@@ -156,6 +158,7 @@ DEPENDENCIES:
   - multi_image_picker (from `.symlinks/plugins/multi_image_picker/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - printer (from `.symlinks/plugins/printer/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
 SPEC REPOS:
@@ -204,6 +207,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  printer:
+    :path: ".symlinks/plugins/printer/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
@@ -239,6 +244,7 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   package_info: d7c98b64f60add4c2908b9d94d82a45d3c8827ad
   path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
+  printer: 2876002b39a3dfce2f8dc6855da47b4f3e23ca17
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
 

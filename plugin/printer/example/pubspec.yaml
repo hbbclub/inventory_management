@@ -1,13 +1,6 @@
-name: inventory_management
-description: A new Flutter project.
-
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# Read more about versioning at semver.org.
-version: 1.0.5+5
+name: printer_example
+description: Demonstrates how to use the printer plugin.
+publish_to: 'none'
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -16,56 +9,39 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_ml_vision: ^0.6.0
-  image_picker: ^0.4.12
-  barcode_scan: ^1.0.0
-  font_awesome_flutter: ^8.2.0
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  path_provider: ^0.4.1
-  multi_image_picker: ^3.0.13
-  #  flutter packages pub run build_runner clean
-  # flutter packages pub run build_runner build --delete-conflicting-outputs
-  # flutter packages pub run build_runner watch
-  json_annotation: ^2.0.0
-  annotation_route: any
-  rxdart: ^0.20.0
-  shared_preferences: ^0.4.0
-  device_info: ^0.2.1
-  http: ^0.12.0
-  dio: ^2.0.5
-  flutter_user_agent: ^1.0.1
-  fast_qr_reader_view:
-    git:
-      url: git://github.com/facundomedica/fast_qr_reader_view.git
-  package_info: ^0.4.0+2
-  fish_redux:
-    git:
-      url: git://github.com/alibaba/fish-redux.git
-  printer:
-    path: ./plugin/printer
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^1.1.2
-  json_serializable: ^2.0.0
+  printer:
+    path: ../
+
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images/
+  # assets:
+  #  - images/a_dot_burr.jpeg
+  #  - images/a_dot_ham.jpeg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
+
   # For details regarding adding assets from package dependencies, see
   # https://flutter.io/assets-and-images/#from-packages
+
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

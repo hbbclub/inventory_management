@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-// import 'package:printer/printer.dart';
+import 'package:printer/printer.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,7 +25,10 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      // platformVersion = await Printer.platformVersion;
+      Printer.init((aa) {
+          print(aa);
+      });
+      await Printer.start();
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }

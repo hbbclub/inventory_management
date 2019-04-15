@@ -2,22 +2,32 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
+typedef void MessageCallBack(dynamic value) ;
+
 class Printer {
-  static const MethodChannel _channel = const MethodChannel('printer_method');
+  static const MethodChannel _channel =
+      const MethodChannel('plugins.flutter.io/printer_method');
 
-   static const BasicMessageChannel<dynamic> runTimer = const BasicMessageChannel("printer_message", StandardMessageCodec());
+  static const BasicMessageChannel<dynamic> dataSource =
+      const BasicMessageChannel(
+          "plugins.flutter.io/printer_message",
+          StandardMessageCodec());
 
-  static void initMessageHandler() {
-    print("initMessageHandler");
-    runTimer.setMessageHandler((dynamic value) {
-      // 接收到的时间
-      int time = value;
-      print("value = $time");
+  static void  init(MessageCallBack callBack) {
+    dataSource.setMessageHandler((dynamic value) {
+      callBack(value);
     });
   }
-  
-  static Future  printHello() async {
-    final  version = await _channel.invokeMethod('printHello');
-    return version;
+
+  static Future start() async {
+    return await _channel.invokeMethod('start');
+  }
+
+  static Future stop() async {
+    return await _channel.invokeMethod('stop');
+  }
+
+  static Future connect(String uuid) async {
+    return await _channel.invokeMethod('connect', uuid);
   }
 }

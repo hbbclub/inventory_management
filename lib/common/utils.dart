@@ -3,18 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
+import 'package:inventory_management/common/screen_adapter.dart';
 import 'package:package_info/package_info.dart';
 
 double h(int height) {
-  return height / 2.0;
+  return screenAdapter.pxToDp(height);
 }
 
 double w(int width) {
-  return width / 2.0;
+  return screenAdapter.pxToDp(width);
 }
 
 double sp(int size) {
-  return size / 2.0;
+  return screenAdapter.pxToDp(size, Aspect.aspectHeight);
 }
 
 class Utils {

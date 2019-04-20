@@ -2,6 +2,8 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/inventory_page/scanner_page/state.dart';
 import 'package:inventory_management/inventory_page/state.dart';
 import 'package:inventory_management/login_page/state.dart';
+import 'package:inventory_management/main_page/state.dart';
+import 'package:inventory_management/tab_page/state.dart';
 import 'package:inventory_management/welcome_page/state.dart';
 
 class AppState implements Cloneable<AppState> {
@@ -9,6 +11,8 @@ class AppState implements Cloneable<AppState> {
   LoginState loginState = LoginState();
   InventoryState inventoryState = InventoryState();
   ScannerState scannerState = ScannerState();
+  MainState mainState = MainState();
+  TabState tabState = TabState();
 
   @override
   AppState clone() {
@@ -17,6 +21,8 @@ class AppState implements Cloneable<AppState> {
     ..inventoryState = inventoryState.clone()
     ..loginState = loginState.clone()
     ..scannerState = scannerState.clone()
+    ..mainState = mainState.clone()
+    ..tabState = tabState.clone()
     ;
   }
 }

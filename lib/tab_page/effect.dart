@@ -46,7 +46,7 @@ void _onInit(Action action, Context<TabState> ctx) {
     )
   ];
   state.pages = [
-    MainPage(null).buildPage({}),
+    MainPage().buildPage({}),
     SettingPage(null).buildPage({}),
   ];
   ctx.dispatch(TabActionCreator.init(state));

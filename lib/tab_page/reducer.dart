@@ -8,8 +8,13 @@ Reducer<TabState> buildReducer() {
     <Object, Reducer<TabState>>{
       TabAction.init: _init,
       TabAction.indexChanged: _indexChanged,
+      RouteAction.route: _route,
     },
   );
+}
+
+TabState _route(TabState state, Action action) {
+  return initState(action.payload).clone();
 }
 
 TabState _init(TabState state, Action action) {

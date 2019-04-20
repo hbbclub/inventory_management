@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +11,11 @@ class TickerComponentState extends ComponentState<TabState>
 
 const routerNameForTabPage = 'router://TabPage';
 
-@ARoute(url: routerNameForTabPage)
 class TabPage extends Page<TabState, Map<String, dynamic>> {
   @override
   TickerComponentState createState() => TickerComponentState();
 
-  TabPage(param)
+  TabPage()
       : super(
           initState: initState,
           effect: buildEffect(),

@@ -12,6 +12,7 @@ import 'package:inventory_management/memo/memo_list_page/state.dart';
 import 'package:inventory_management/memo/memo_save_page/state.dart';
 import 'package:inventory_management/printing/std_label_page/state.dart';
 import 'package:inventory_management/printing/stk_label_page/state.dart';
+import 'package:inventory_management/setting_page/reset_password_page/state.dart';
 import 'package:inventory_management/setting_page/state.dart';
 import 'package:inventory_management/tab_page/state.dart';
 import 'package:inventory_management/welcome_page/state.dart';
@@ -32,6 +33,7 @@ class AppState implements Cloneable<AppState> {
   OcrListState ocrListState = OcrListState();
   StdLabelState stdLabelState = StdLabelState();
   SettingState settingState = SettingState();
+  ResetPasswordState resetPasswordState = ResetPasswordState();
 
   @override
   AppState clone() {
@@ -45,12 +47,13 @@ class AppState implements Cloneable<AppState> {
       ..materialListState = materialListState.clone()
       ..materialDetailState = materialDetailState.clone()
       ..memoSaveState = memoSaveState.clone()
+      ..memoEditState = memoEditState.clone()
       ..memoListState = memoListState.clone()
       ..memoListState = memoListState.clone()
       ..ocrListState = ocrListState.clone()
       ..stkLabelState = stkLabelState.clone()
       ..stdLabelState = stdLabelState.clone()
-      ..settingState = settingState.clone()
-      ..memoEditState = memoEditState.clone();
+      ..resetPasswordState = resetPasswordState.clone()
+      ..settingState = settingState.clone();
   }
 }

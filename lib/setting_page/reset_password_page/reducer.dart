@@ -6,12 +6,11 @@ import 'state.dart';
 Reducer<ResetPasswordState> buildReducer() {
   return asReducer(
     <Object, Reducer<ResetPasswordState>>{
-      // ResetPasswordAction.action: _onAction,
+      RouteAction.route: _route,
     },
   );
 }
 
-// ResetPasswordState _onAction(ResetPasswordState state, Action action) {
-//   final ResetPasswordState newState = state.clone();
-//   return newState;
-// }
+ResetPasswordState _route(ResetPasswordState state, Action action) {
+  return initState(action.payload).clone();
+}

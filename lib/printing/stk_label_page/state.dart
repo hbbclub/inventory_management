@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/route/app_state.dart';
 
 class StkLabelState implements Cloneable<StkLabelState> {
   List<PrintingStkLabel> items;
@@ -44,4 +45,19 @@ class PrintingStkLabel {
   String initValue;
   TextEditingController controller;
   PrintingStkLabel(this.title, this.initValue, this.controller);
+}
+
+
+class StkLabelConnector extends ConnOp<AppState, StkLabelState> {
+  @override
+  StkLabelState get(AppState appState) {
+    final StkLabelState state = appState.stkLabelState.clone();
+    return state;
+  }
+
+  @override
+  void set(AppState appState, StkLabelState subState) {
+
+    appState.stkLabelState = subState.clone();
+  }
 }

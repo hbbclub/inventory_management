@@ -10,6 +10,8 @@ import 'package:inventory_management/memo/memo_edit_page/state.dart';
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
 import 'package:inventory_management/memo/memo_list_page/state.dart';
 import 'package:inventory_management/memo/memo_save_page/state.dart';
+import 'package:inventory_management/printing/std_label_page/state.dart';
+import 'package:inventory_management/printing/stk_label_page/state.dart';
 import 'package:inventory_management/tab_page/state.dart';
 import 'package:inventory_management/welcome_page/state.dart';
 
@@ -25,7 +27,9 @@ class AppState implements Cloneable<AppState> {
   MemoSaveState memoSaveState = MemoSaveState();
   MemoListState memoListState = MemoListState();
   MemoEditState memoEditState = MemoEditState();
+  StkLabelState stkLabelState = StkLabelState();
   OcrListState ocrListState = OcrListState();
+  StdLabelState stdLabelState = StdLabelState();
 
   @override
   AppState clone() {
@@ -40,7 +44,10 @@ class AppState implements Cloneable<AppState> {
       ..materialDetailState = materialDetailState.clone()
       ..memoSaveState = memoSaveState.clone()
       ..memoListState = memoListState.clone()
+      ..memoListState = memoListState.clone()
       ..ocrListState = ocrListState.clone()
+      ..stkLabelState = stkLabelState.clone()
+      ..stdLabelState = stdLabelState.clone()
       ..memoEditState = memoEditState.clone();
   }
 }

@@ -1,4 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:inventory_management/inventory_page/page.dart';
+import 'package:inventory_management/route/router.dart';
 import 'package:inventory_management/tab_page/page.dart';
 import 'package:inventory_management/agent/agent.dart';
 import 'package:inventory_management/agent/api.dart';
@@ -50,7 +52,7 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
   httpUtil.commonHeader.addAll({
     'Authorization': result.data['token'],
   });
-  router.replaceScreen(
-      ctx.context, RouterPageOption(url: routerNameForTabPage));
+  appRouter.replaceScreen(ctx.context,
+      routerNameForInventoryPage,);
   // Utils.pushScreen(ctx.context, Tab());
 }

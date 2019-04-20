@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/route/app_state.dart';
 
 class InventoryState implements Cloneable<InventoryState> {
   TextEditingController tagNumber = TextEditingController();
@@ -21,4 +22,20 @@ class InventoryState implements Cloneable<InventoryState> {
 
 InventoryState initState(Map<String, dynamic> args) {
   return InventoryState();
+}
+
+
+class InventoryConnector extends ConnOp<AppState, InventoryState> {
+  @override
+  InventoryState get(AppState appState) {
+
+    final InventoryState state = appState.inventoryState.clone();
+    return state;
+  }
+
+  @override
+  void set(AppState appState, InventoryState subState) {
+
+    appState.inventoryState = subState.clone();
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:inventory_management/inventory_page/scanner_page/state.dart';
+import 'package:inventory_management/inventory_page/scanner_page/state.dart'
+    as scanState;
 
 import 'action.dart';
 import 'state.dart';
@@ -10,8 +11,13 @@ Reducer<InventoryState> buildReducer() {
       InventoryAction.add: _add,
       InventoryAction.subtract: _subtract,
       InventoryAction.scaned: _scaned,
+      RouteAction.route: _route,
     },
   );
+}
+
+InventoryState _route(InventoryState state, Action action) {
+  return initState(action.payload);
 }
 
 InventoryState _add(InventoryState state, Action action) {
@@ -31,7 +37,7 @@ InventoryState _subtract(InventoryState state, Action action) {
 
 InventoryState _scaned(InventoryState state, Action action) {
   final InventoryState newState = state.clone();
-  ScannerState sannerResult = action.payload;
+  scanState.ScannerState sannerResult = action.payload;
   newState
     ..tagNumber = sannerResult.tagNumber
     ..stockNumber = sannerResult.stockNumber

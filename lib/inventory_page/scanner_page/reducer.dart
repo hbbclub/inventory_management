@@ -8,9 +8,15 @@ Reducer<ScannerState> buildReducer() {
     <Object, Reducer<ScannerState>>{
       ScannerAction.init: _init,
       ScannerAction.scaned: _scaned,
+    RouteAction.route: _route,
     },
   );
 }
+
+ScannerState _route(ScannerState state, Action action) {
+  return initState(action.payload);
+}
+
 
 ScannerState _init(ScannerState state, Action action) {
   ScannerState payload =action.payload;

@@ -2,6 +2,7 @@ import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/inventory_page/state.dart';
+import 'package:inventory_management/route/app_state.dart';
 
 class ScannerState implements Cloneable<ScannerState> {
   List<CameraDescription> cameras;
@@ -40,4 +41,19 @@ ScannerState initState(InventoryState args) {
     ..location = args.location ?? TextEditingController()
     ..lotNumber = args.lotNumber ?? TextEditingController()
     ..qty = args.qty ?? TextEditingController(text: '0');
+}
+
+class ScannerConnector extends ConnOp<AppState, ScannerState> {
+  @override
+  ScannerState get(AppState appState) {
+
+    final ScannerState state = appState.scannerState.clone();
+    return state;
+  }
+
+  @override
+  void set(AppState appState, ScannerState subState) {
+
+    appState.scannerState = subState.clone();
+  }
 }

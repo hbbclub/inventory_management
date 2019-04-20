@@ -6,9 +6,9 @@ import 'state.dart';
 Reducer<LoginState> buildReducer() {
   return asReducer(
     <Object, Reducer<LoginState>>{
-      RouteAction.route: _route,
+    
       LoginAction.changeCanLogin: _changeCanLogin,
-      
+      RouteAction.route: _route,
     },
   );
 }

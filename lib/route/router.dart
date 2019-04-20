@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/inventory_page/scanner_page/state.dart';
 import 'package:inventory_management/login_page/state.dart';
 import 'package:inventory_management/route/app_state.dart';
 import 'package:inventory_management/welcome_page/page.dart';
@@ -26,6 +27,8 @@ class AppRoute {
     router = AppRoutes<AppState>(preloadedState: AppState(), pages: {
       routerNameForWelcomePage: WelcomeConnector() + WelcomePage(),
       routerNameForLoginPage: LoginConnector() + LoginPage(),
+      routerNameForInventoryPage: InventoryConnector() + InventoryPage(),
+      routerNameForScannerPage: ScannerConnector() + ScannerPage(),
     });
   }
   //保存单例

@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/material/searchDelegate/search_material.dart';
 import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -22,5 +23,5 @@ void _onInit(Action action, Context<MaterialListState> ctx) async {
     delegate: SearchMaterial(ctx),
     context: ctx.context,
   );
-  router.popScreen(ctx.context);
+  appRouter.popScreen(ctx.context);
 }

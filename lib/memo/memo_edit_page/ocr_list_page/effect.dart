@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/ocr_label_component/state.dart';
 import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -35,5 +36,5 @@ void _onSubmit(Action action, Context<OcrListState> ctx) async {
   List<String> strList = ctx.state.currentTextLabels.map((OcrLabelState state) {
     return state.selected ? state.text : '';
   }).toList();
-  router.popScreen(ctx.context, strList.join());
+  appRouter.popScreen(ctx.context, strList.join());
 }

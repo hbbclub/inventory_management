@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inventory_management/printing/stk_label_page/page.dart';
 import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -36,8 +37,7 @@ void _dispose(Action action, Context<MaterialDetailState> ctx) {
 }
 
 void _jumpToStkPrint(Action action, Context<MaterialDetailState> ctx) {
-  router.pushScreen(
-      ctx.context, RouterPageOption(url: routerNameForStkLabelPage));
+  appRouter.pushScreen(ctx.context,routerNameForStkLabelPage);
 }
 
 void _onSelectImage(Action action, Context<MaterialDetailState> ctx) async {

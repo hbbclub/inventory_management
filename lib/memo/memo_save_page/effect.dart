@@ -5,6 +5,7 @@ import 'package:inventory_management/memo/memo_edit_page/memo_image_component/st
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
 import 'package:inventory_management/memo/memo_save_page/model/memo_add_categories_model.dart';
 import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -94,6 +95,6 @@ void _onSave(Action action, Context<MemoSaveState> ctx) async {
     addedResult = await api.updateNote(jsonMap);
   }
   if (!addedResult.isError()) {
-    router.popNum(ctx.context, 2);
+    appRouter.popNum(ctx.context, 2);
   }
 }

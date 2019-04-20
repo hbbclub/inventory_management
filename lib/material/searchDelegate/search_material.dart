@@ -7,6 +7,7 @@ import 'package:inventory_management/material/material_detail_page/page.dart';
 import 'package:inventory_management/material/material_list_page/state.dart';
 import 'package:inventory_management/material/model/material_model.dart';
 import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 
 class SearchMaterial<T> extends SearchDelegate<String> {
   Context<MaterialListState> ctx;
@@ -53,11 +54,9 @@ class SearchMaterial<T> extends SearchDelegate<String> {
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
                 onTap: () {
-                  router.pushScreen(
-                      ctx.context,
-                      RouterPageOption(
-                          url: routerNameForMaterialDetailPage,
-                          params: snapshot.data[index]));
+                  appRouter.pushScreen(
+                      ctx.context, routerNameForMaterialDetailPage,
+                      arguments: snapshot.data[index]);
                 },
                 child: MaterialSearchTile(snapshot.data[index]),
               );
@@ -87,11 +86,9 @@ class SearchMaterial<T> extends SearchDelegate<String> {
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
                 onTap: () {
-                  router.pushScreen(
-                      ctx.context,
-                      RouterPageOption(
-                          url: routerNameForMaterialDetailPage,
-                          params: snapshot.data[index]));
+                  appRouter.pushScreen(
+                      ctx.context, routerNameForMaterialDetailPage,
+                      arguments: snapshot.data[index]);
                 },
                 child: MaterialSearchTile(snapshot.data[index]),
               );

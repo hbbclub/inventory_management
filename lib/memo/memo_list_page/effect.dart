@@ -5,6 +5,7 @@ import 'package:inventory_management/memo/memo_list_page/memo_list_tile_componen
     as listTileAction;
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
 import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -32,8 +33,8 @@ void _onInit(Action action, Context<MemoListState> ctx) async {
 void _onEdit(Action action, Context<MemoListState> ctx) async {
   MemoListTileState state = action.payload;
 
-  await router.pushScreen(ctx.context,
-      RouterPageOption(url: routerNameForMemoEditPage, params: state));
+  await appRouter.pushScreen(ctx.context, routerNameForMemoEditPage,
+      arguments: state);
   _onInit(action, ctx);
 }
 

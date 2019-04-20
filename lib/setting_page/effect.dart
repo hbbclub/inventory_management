@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'package:inventory_management/setting_page/reset_password_page/page.dart';
 import 'action.dart';
 import 'state.dart';
@@ -16,8 +17,8 @@ Effect<SettingState> buildEffect() {
 }
 
 void _onJumpToResetPassword(Action action, Context<SettingState> ctx) {
-  router.pushScreen(
-      ctx.context, RouterPageOption(url: routerNameForResetPasswordPage));
+  appRouter.pushScreen(
+      ctx.context, routerNameForResetPasswordPage);
 }
 
 void _onClearCache(Action action, Context<SettingState> ctx) {

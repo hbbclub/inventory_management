@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/inventory_page/scanner_page/page.dart';
 import 'package:inventory_management/inventory_page/scanner_page/state.dart';
 import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -12,8 +13,8 @@ Effect<InventoryState> buildEffect() {
 }
 
 void _onScan(Action action, Context<InventoryState> ctx) async {
-  ScannerState result = await router.pushScreen(ctx.context,
-      RouterPageOption(url: routerNameForScannerPage, params: ctx.state));
+  ScannerState result = await appRouter
+      .pushScreen(ctx.context, routerNameForScannerPage, arguments: ctx.state);
 
   if (result?.isfull() ?? false) {
     ctx.dispatch(InventoryActionCreator.scaned(result));

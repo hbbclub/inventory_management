@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/route/app_state.dart';
 
 class LoginState implements Cloneable<LoginState> {
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();
@@ -30,4 +31,19 @@ LoginState initState(Map<String, dynamic> args) {
     ..hostUrl = TextEditingController(text: args['hostUri'])
     ..linkWord = TextEditingController(text: args['linkWord'])
     ..canDoLogin = false;
+}
+
+class LoginConnector extends ConnOp<AppState, LoginState> {
+  @override
+  LoginState get(AppState appState) {
+
+    final LoginState state = appState.loginState.clone();
+    return state;
+  }
+
+  @override
+  void set(AppState appState, LoginState subState) {
+
+    appState.loginState = subState.clone();
+  }
 }

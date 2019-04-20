@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'effect.dart';
@@ -7,9 +6,8 @@ import 'state.dart';
 import 'view.dart';
 
 const routerNameForLoginPage = 'router://LoginPage';
-@ARoute(url: routerNameForLoginPage)
 class LoginPage extends Page<LoginState, Map<String, dynamic> > {
-  LoginPage(Map<String, dynamic> params)
+  LoginPage()
       : super(
             initState: initState,
             effect: buildEffect(),

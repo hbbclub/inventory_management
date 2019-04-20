@@ -15,13 +15,13 @@ WelcomeState initState(Map<String, dynamic> args) {
 
 class WelcomeConnector extends ConnOp<AppState, WelcomeState> {
   @override
-  WelcomeState get(AppState state) {
-    final WelcomeState welcomeState =  state.welcomeState.clone();
-    return welcomeState;
+  WelcomeState get(AppState appState) {
+    final WelcomeState state =  appState.welcomeState.clone();
+    return state;
   }
 
   @override
-  void set(AppState state, WelcomeState subState) {
-    state.welcomeState = subState;
+  void set(AppState appState, WelcomeState subState) {
+    appState.welcomeState = subState.clone();
   }
 }

@@ -8,6 +8,7 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(LoginState state, Dispatch dispatch, ViewService viewService) {
+
   return Scaffold(
     key: state.scaffoldkey,
     body: Theme(

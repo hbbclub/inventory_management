@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/material/material_detail_page/advanced_component/component.dart';
@@ -16,12 +15,11 @@ class TickerComponentState extends ComponentState<MaterialDetailState>
 
 const routerNameForMaterialDetailPage = 'router://MaterialDetailPage';
 
-@ARoute(url: routerNameForMaterialDetailPage)
 class MaterialDetailPage extends Page<MaterialDetailState, MaterialModel> {
   @override
   TickerComponentState createState() => TickerComponentState();
 
-  MaterialDetailPage(param)
+  MaterialDetailPage()
       : super(
           initState: initState,
           effect: buildEffect(),

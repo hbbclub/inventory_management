@@ -4,6 +4,7 @@ import 'package:inventory_management/material/material_detail_page/advanced_comp
 import 'package:inventory_management/material/material_detail_page/info_component/state.dart';
 import 'package:inventory_management/material/material_detail_page/stock_component/state.dart';
 import 'package:inventory_management/material/model/material_model.dart';
+import 'package:inventory_management/route/app_state.dart';
 
 class MaterialDetailState implements Cloneable<MaterialDetailState> {
   TextEditingController controller =
@@ -45,6 +46,22 @@ const List<Choice> choices = const <Choice>[
   const Choice(title: 'Advanced', icon: Icons.scanner),
 ];
 
+
+class MaterialDetailConnector extends ConnOp<AppState, MaterialDetailState> {
+  @override
+  MaterialDetailState get(AppState appState) {
+    final MaterialDetailState state = appState.materialDetailState.clone();
+    return state;
+  }
+
+  @override
+  void set(AppState appState, MaterialDetailState subState) {
+
+    appState.materialDetailState = subState.clone();
+  }
+}
+
+
 class InfoConnector extends ConnOp<MaterialDetailState, InfoState> {
   @override
   InfoState get(MaterialDetailState state) {
@@ -80,3 +97,4 @@ class AdvancedConnector extends ConnOp<MaterialDetailState, AdvancedState> {
   @override
   void set(MaterialDetailState state, AdvancedState subState) {}
 }
+

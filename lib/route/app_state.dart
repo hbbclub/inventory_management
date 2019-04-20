@@ -3,6 +3,8 @@ import 'package:inventory_management/inventory_page/scanner_page/state.dart';
 import 'package:inventory_management/inventory_page/state.dart';
 import 'package:inventory_management/login_page/state.dart';
 import 'package:inventory_management/main_page/state.dart';
+import 'package:inventory_management/material/material_detail_page/state.dart';
+import 'package:inventory_management/material/material_list_page/state.dart';
 import 'package:inventory_management/tab_page/state.dart';
 import 'package:inventory_management/welcome_page/state.dart';
 
@@ -13,6 +15,8 @@ class AppState implements Cloneable<AppState> {
   ScannerState scannerState = ScannerState();
   MainState mainState = MainState();
   TabState tabState = TabState();
+  MaterialListState materialListState = MaterialListState();
+  MaterialDetailState materialDetailState = MaterialDetailState();
 
   @override
   AppState clone() {
@@ -23,6 +27,8 @@ class AppState implements Cloneable<AppState> {
     ..scannerState = scannerState.clone()
     ..mainState = mainState.clone()
     ..tabState = tabState.clone()
+    ..materialListState = materialListState.clone()
+    ..materialDetailState = materialDetailState.clone()
     ;
   }
 }

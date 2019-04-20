@@ -8,8 +8,13 @@ Reducer<MaterialDetailState> buildReducer() {
     <Object, Reducer<MaterialDetailState>>{
       MaterialDetailAction.init: _init,
       MaterialDetailAction.selectdImage: _selectdImage,
+      RouteAction.route: _route,
     },
   );
+}
+
+MaterialDetailState _route(MaterialDetailState state, Action action) {
+  return initState(action.payload).clone();
 }
 
 MaterialDetailState _init(MaterialDetailState state, Action action) {

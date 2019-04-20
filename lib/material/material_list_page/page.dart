@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/bloc/bloc_provider.dart';
@@ -10,9 +9,8 @@ import 'view.dart';
 
 const routerNameForMaterialListPage = 'router://MaterialListPage';
 
-@ARoute(url: routerNameForMaterialListPage)
 class MaterialListPage extends Page<MaterialListState, Map<String, dynamic>> {
-  MaterialListPage(param)
+  MaterialListPage()
       : super(
           initState: initState,
           effect: buildEffect(),

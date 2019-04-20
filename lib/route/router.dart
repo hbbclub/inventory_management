@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/inventory_page/scanner_page/state.dart';
 import 'package:inventory_management/login_page/state.dart';
 import 'package:inventory_management/main_page/state.dart';
+import 'package:inventory_management/material/material_detail_page/state.dart';
+import 'package:inventory_management/material/material_list_page/state.dart';
 import 'package:inventory_management/route/app_state.dart';
 import 'package:inventory_management/tab_page/state.dart';
 import 'package:inventory_management/welcome_page/page.dart';
@@ -33,6 +35,10 @@ class AppRoute {
       routerNameForScannerPage: ScannerConnector() + ScannerPage(),
       routerNameForMainPage: MainConnector() + MainPage(),
       routerNameForTabPage: TabConnector() + TabPage(),
+      routerNameForMaterialListPage:
+          MaterialListConnector() + MaterialListPage(),
+      routerNameForMaterialDetailPage:
+          MaterialDetailConnector() + MaterialDetailPage(),
     });
   }
   //保存单例

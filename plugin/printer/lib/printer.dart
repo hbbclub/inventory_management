@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-typedef void MessageCallBack(dynamic value) ;
+typedef void MessageCallBack(dynamic value);
 
 class Printer {
   static const MethodChannel _channel =
@@ -10,10 +10,9 @@ class Printer {
 
   static const BasicMessageChannel<dynamic> dataSource =
       const BasicMessageChannel(
-          "plugins.flutter.io/printer_message",
-          StandardMessageCodec());
+          "plugins.flutter.io/printer_message", StandardMessageCodec());
 
-  static void  init(MessageCallBack callBack) {
+  static void init(MessageCallBack callBack) {
     dataSource.setMessageHandler((dynamic value) {
       callBack(value);
     });
@@ -25,6 +24,10 @@ class Printer {
 
   static Future stop() async {
     return await _channel.invokeMethod('stop');
+  }
+
+  static Future print(Map args) async {
+    return await _channel.invokeMethod('print',args);
   }
 
   static Future connect(String uuid) async {

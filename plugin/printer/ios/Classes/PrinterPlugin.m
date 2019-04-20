@@ -1,5 +1,6 @@
 #import "PrinterPlugin.h"
 #import "ConnecterManager.h"
+#import "TscCommand.h"
 
 #define WeakSelf(type) __weak typeof(type) weak##type = type
 
@@ -7,6 +8,8 @@
 
 @property(strong, nonatomic)FlutterBasicMessageChannel * messageChannel;
 @property(nonatomic,strong)NSMutableDictionary *dicts;
+@property(nonatomic,assign)NSInteger state;
+
 @end
 
 
@@ -33,8 +36,6 @@
 
 
 -(void)startScane {
-    
-    
     if (Manager.bleConnecter == nil) {
         [Manager didUpdateState:^(NSInteger state) {
             switch (state) {
@@ -132,19 +133,21 @@
             case CONNECT_STATE_CONNECTING:
 //                self.connState.text = @"连接状态：连接中....";
                 [self sendMessageWithType:@"state" data:@"connecting..." code:0];
-
+                self.state = CONNECT_STATE_CONNECTING;
                 break;
             case CONNECT_STATE_CONNECTED:
                 [self sendMessageWithType:@"state" data:@"connected" code:0];
-
+                self.state = CONNECT_STATE_CONNECTED;
                 break;
             case CONNECT_STATE_FAILT:
 //                [SVProgressHUD showErrorWithStatus:@"连接失败"];
                 [self sendMessageWithType:@"state" data:@"connect failt" code:0];
+                self.state = CONNECT_STATE_FAILT;
 //                self.connState.text = @"连接状态：连接失败";
                 break;
             case CONNECT_STATE_DISCONNECT:
                 [self sendMessageWithType:@"state" data:@"disconnected" code:0];
+                self.state = CONNECT_STATE_DISCONNECT;
                 break;
             default:
                 [self sendMessageWithType:@"state" data:@"timeout..." code:0];
@@ -154,8 +157,124 @@
 }
 
 
+
+-(TscCommand *)printAllInfoLabel:( TscCommand *) command info:(NSDictionary *)info{
+    [command addSize:75 :50];
+    [command addGapWithM:2 withN:0];
+    [command addQueryPrinterStatus:BATCH];
+    [command addReference:0 :0];
+    [command addTear:@"ON"];
+    [command addCls];
+    [command addBox:0: 20: 560: 390: 1];
+    [command addBox:0: 20: 560: 150: 1];
+    [command addBox:0: 20: 560: 270: 1];
+    [command addBox:0: 270: 260: 390: 1];
+    [command addBox:0: 270: 400: 390: 1];
+    //TOP LEFT
+   
+    [command addTextwithX:5 withY:24 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"STOCK NO."];
+    
+    [command addTextwithX:25 withY:48 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"stockCode"]];
+
+    [command add1DBarcode:25 :86 :@"39"  :40 :0 :0 :3 :5 :info[@"stockCode"]];
+    
+    // Middle
+
+    [command addTextwithX:25 withY:179 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"desc"]];
+//    [command addTextwithX:25 withY:215 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"CHILD SEAT TETHER BRACKET CHILD"];
+
+    //BOTTOM LEFT
+ 
+    [command addTextwithX:5 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"LOT NO."];
+
+    [command addTextwithX:25 withY:298 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"lotNumber"]];
+
+    
+    [command add1DBarcode:25 :330 :@"39"  :50 :0 :0 :2 :4 :@"050718"];
+    
+    //BOTTOM Middle
+
+     [command addTextwithX:265 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"QTY"];
+
+    [command addTextwithX:290 withY:320 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"qty"]];
+
+    //BOTTOM RIGHT
+  
+    [command addTextwithX:405 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"LOCATION"];
+    [command addTextwithX:435 withY:320 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"location"]];
+  
+    return command;
+}
+
+
+-(TscCommand *)printCountedLabel:( TscCommand *) command{
+    [command addSize:48 :80];
+    [command addGapWithM:2 withN:0];
+    [command addReference:0 :0];
+    [command addTear:@"ON"];
+    [command addQueryPrinterStatus:BATCH];
+    [command addCls];
+    [command addTextwithX:120 withY:60 withFont:@"TSS24.BF2"  withRotation:0 withXscal:2 withYscal:2 withText:@"COUNTED"];
+    [command addBox:20: 378: 560: 380: 2];
+    return command;
+}
+
+-(TscCommand *)printHoldLabel:( TscCommand *) command{
+
+    [command addSize:48 :80];
+    [command addGapWithM:2 withN:0];
+    [command addReference:0 :0];
+    [command addTear:@"ON"];
+    [command addQueryPrinterStatus:BATCH];
+    [command addCls];
+    [command addTextwithX:120 withY:160 withFont:@"TSS24.BF2"  withRotation:0 withXscal:4 withYscal:4 withText:@"HOLD"];
+    return command;
+}
+
+-(TscCommand *)printQCPassedLabel:( TscCommand *) command{
+    
+    [command addSize:48 :80];
+    [command addGapWithM:2 withN:0];
+    [command addReference:0 :0];
+    [command addTear:@"ON"];
+    [command addQueryPrinterStatus:BATCH];
+    [command addCls];
+    [command addBitmapwithX:0 withY:100 withMode:0 withWidth:200 withImage:[UIImage imageNamed:@"test.png"]];
+   
+    return command;
+}
+
+-(void)print:(NSDictionary *)args{
+    NSString *type = args[@"type"];
+    if ([type isEqualToString:@"std"]) {
+        for (NSDictionary *dic in args[@"data"]) {
+            TscCommand *comm = [[TscCommand alloc] init];
+            int count = [dic[@"count"] intValue];
+            if([dic[@"type"] isEqualToString:@"counted"]){
+               comm=  [self printCountedLabel:comm];
+            }else if ([dic[@"type"] isEqualToString:@"hold"]){
+               comm=  [self printHoldLabel:comm];
+            }else if ([dic[@"type"] isEqualToString:@"qc"]){
+               comm=  [self printQCPassedLabel:comm];
+            }
+            [comm addPrint:count :1];
+            [Manager write:[comm getCommand]];
+        }
+    }else if ([type isEqualToString:@"stk"]){
+        TscCommand *comm = [[TscCommand alloc] init];
+        NSDictionary *dic = args[@"data"];
+        int count = [dic[@"count"] intValue];
+        comm    =  [self printAllInfoLabel:comm info:dic];
+        [comm addPrint:count :1];
+        [Manager write:[comm getCommand]];
+    }
+}
+
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"connect" isEqualToString:call.method]) {
+      if (self.state == CONNECT_STATE_CONNECTING) {
+          return [self resultWithType:result data:@{} message:@"正在连接中" code:1];
+      }
      NSString *uuid =  call.arguments;
       if (uuid) {
           [self connectDevice:uuid];
@@ -169,7 +288,13 @@
   } else if([@"stop" isEqualToString:call.method]){
        [Manager stopScan];
       [self resultWithType:result data:@{} message:@"" code:0];
-  }{
+  }else if([@"print" isEqualToString:call.method]){
+//      [Manager write:[self printAllInfoLabel]];
+//      [Manager write:[self printCountedLabel:1]];
+       NSDictionary *args =  call.arguments;
+      [self print:args];
+      [self resultWithType:result data:@{} message:@"" code:0];
+  }else{
     result(FlutterMethodNotImplemented);
   }
 }

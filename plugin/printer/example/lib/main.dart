@@ -12,8 +12,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
+  List datas = [];
+  String connState;
   @override
   void initState() {
     super.initState();
@@ -26,7 +26,17 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       Printer.init((aa) {
-          print(aa);
+        if (aa['type'] == 'data') {
+          if (!mounted) return;
+          setState(() {
+            datas = aa['data'];
+          });
+        } else {
+          if (!mounted) return;
+          setState(() {
+            connState = aa['data'];
+          });
+        }
       });
       await Printer.start();
     } on PlatformException {
@@ -37,10 +47,6 @@ class _MyAppState extends State<MyApp> {
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
@@ -48,11 +54,40 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: Text(connState),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Printer.print({
+                  'type': 'stk',
+                  'data': {
+                    'stockCode': '11',
+                    'desc': 'aaa',
+                    'lotNumber': '123',
+                    'qty': '1',
+                    'location': 'hahah',
+                    'count': 1,
+                  }
+                });
+              },
+              child: Text(
+                'Print',
+                style: TextStyle(color: Colors.white),
+              ),
+            )
+          ],
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+            child: ListView(
+          children: datas.map((item) {
+            return ListTile(
+              title: Text(item['name']),
+              onTap: () {
+                Printer.connect(item['uuid']);
+              },
+            );
+          }).toList(),
+        )),
       ),
     );
   }

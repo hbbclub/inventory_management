@@ -6,12 +6,11 @@ import 'state.dart';
 Reducer<SettingState> buildReducer() {
   return asReducer(
     <Object, Reducer<SettingState>>{
-      // SettingAction.action: _onAction,
+      RouteAction.route: _route,
     },
   );
 }
 
-// SettingState _onAction(SettingState state, Action action) {
-//   final SettingState newState = state.clone();
-//   return newState;
-// }
+SettingState _route(SettingState state, Action action) {
+  return initState(action.payload).clone();
+}

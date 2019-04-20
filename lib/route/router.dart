@@ -12,6 +12,7 @@ import 'package:inventory_management/memo/memo_save_page/state.dart';
 import 'package:inventory_management/printing/std_label_page/state.dart';
 import 'package:inventory_management/printing/stk_label_page/state.dart';
 import 'package:inventory_management/route/app_state.dart';
+import 'package:inventory_management/setting_page/state.dart';
 import 'package:inventory_management/tab_page/state.dart';
 import 'package:inventory_management/welcome_page/page.dart';
 import 'package:inventory_management/welcome_page/state.dart';
@@ -51,6 +52,7 @@ class AppRoute {
       routerNameForOcrListPage: OcrListConnector() + OcrListPage(),
       routerNameForStkLabelPage: StkLabelConnector() + StkLabelPage(),
       routerNameForStdLabelPage: StdLabelConnector() + StdLabelPage(),
+      routerNameForSettingPage: SettingConnector() + SettingPage(),
     });
   }
   //保存单例

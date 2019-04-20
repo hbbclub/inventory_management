@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'effect.dart';
@@ -8,9 +7,8 @@ import 'view.dart';
 
 const routerNameForSettingPage = 'router://SettingPage';
 
-@ARoute(url: routerNameForSettingPage)
 class SettingPage extends Page<SettingState, Map<String, dynamic>> {
-  SettingPage(param)
+  SettingPage()
       : super(
           initState: initState,
           effect: buildEffect(),

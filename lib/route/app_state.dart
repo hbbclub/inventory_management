@@ -7,7 +7,6 @@ import 'package:inventory_management/material/material_detail_page/state.dart';
 import 'package:inventory_management/material/material_list_page/state.dart';
 import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/state.dart';
 import 'package:inventory_management/memo/memo_edit_page/state.dart';
-import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
 import 'package:inventory_management/memo/memo_list_page/state.dart';
 import 'package:inventory_management/memo/memo_save_page/state.dart';
 import 'package:inventory_management/printing/std_label_page/state.dart';

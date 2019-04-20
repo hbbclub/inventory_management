@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management/common/colors.dart';
 import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/common/utils.dart';

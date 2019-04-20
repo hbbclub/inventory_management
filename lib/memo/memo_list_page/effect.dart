@@ -4,7 +4,6 @@ import 'package:inventory_management/memo/memo_edit_page/page.dart';
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/action.dart'
     as listTileAction;
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
-import 'package:inventory_management/route/route.route.dart';
 import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';

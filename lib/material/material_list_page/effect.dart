@@ -1,7 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/material/searchDelegate/search_material.dart';
-import 'package:inventory_management/route/route.route.dart';
 import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';

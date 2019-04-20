@@ -1,9 +1,7 @@
-import 'package:analyzer/file_system/file_system.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inventory_management/printing/stk_label_page/page.dart';
-import 'package:inventory_management/route/route.route.dart';
 import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';

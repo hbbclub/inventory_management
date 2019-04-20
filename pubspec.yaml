@@ -27,7 +27,6 @@ dependencies:
   # flutter packages pub run build_runner build --delete-conflicting-outputs
   # flutter packages pub run build_runner watch
   json_annotation: ^2.0.0
-  annotation_route: any
   rxdart: ^0.20.0
   shared_preferences: ^0.4.0
   device_info: ^0.2.1

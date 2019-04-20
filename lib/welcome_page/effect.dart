@@ -4,7 +4,6 @@ import 'package:inventory_management/agent/agent.dart';
 import 'package:inventory_management/common/screen_adapter.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:inventory_management/login_page/page.dart';
-import 'package:inventory_management/route/route.route.dart';
 import 'package:inventory_management/route/router.dart';
 import 'package:inventory_management/welcome_page/model/cache_model.dart';
 import 'action.dart';

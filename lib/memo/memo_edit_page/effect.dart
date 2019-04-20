@@ -6,7 +6,6 @@ import 'package:inventory_management/memo/memo_edit_page/memo_image_component/st
 import 'package:inventory_management/memo/memo_edit_page/memo_notes_component/state.dart';
 import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/page.dart';
 import 'package:inventory_management/memo/memo_save_page/page.dart';
-import 'package:inventory_management/route/route.route.dart';
 import 'package:inventory_management/route/router.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'action.dart';

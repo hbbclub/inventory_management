@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'effect.dart';
@@ -8,9 +7,8 @@ import 'view.dart';
 
 const routerNameForWelcomePage = 'router://WelcomePage';
 
-@ARoute(url: routerNameForWelcomePage)
 class WelcomePage extends Page<WelcomeState, Map<String, dynamic>> {
-  WelcomePage(param)
+  WelcomePage()
       : super(
           initState: initState,
           effect: buildEffect(),

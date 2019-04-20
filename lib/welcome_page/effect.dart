@@ -27,7 +27,6 @@ void _onBuild(Action action, Context<WelcomeState> ctx) async {
 void _onInit(Action action, Context<WelcomeState> ctx) async {
   await initUserAgentState()
       .timeout(Duration(seconds: 3), onTimeout: () => Future.value());
-
   router.replaceScreen(
       ctx.context,
       RouterPageOption(url: routerNameForLoginPage, params: {

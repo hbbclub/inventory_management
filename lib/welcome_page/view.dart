@@ -7,7 +7,6 @@ import 'state.dart';
 Widget buildView(
     WelcomeState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
-    body:Container(
-    ),
+    body: Container(),
   );
 }

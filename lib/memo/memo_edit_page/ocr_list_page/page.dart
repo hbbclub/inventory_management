@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/ocr_adapter/adapter.dart';
 
@@ -9,9 +8,8 @@ import 'view.dart';
 
 const routerNameForOcrListPage = 'router://OcrListPage';
 
-@ARoute(url: routerNameForOcrListPage)
 class OcrListPage extends Page<OcrListState, Map<String, dynamic>> {
-  OcrListPage(param)
+  OcrListPage()
       : super(
           initState: initState,
           effect: buildEffect(),

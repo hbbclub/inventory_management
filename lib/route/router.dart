@@ -5,6 +5,10 @@ import 'package:inventory_management/login_page/state.dart';
 import 'package:inventory_management/main_page/state.dart';
 import 'package:inventory_management/material/material_detail_page/state.dart';
 import 'package:inventory_management/material/material_list_page/state.dart';
+import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/state.dart';
+import 'package:inventory_management/memo/memo_edit_page/state.dart';
+import 'package:inventory_management/memo/memo_list_page/state.dart';
+import 'package:inventory_management/memo/memo_save_page/state.dart';
 import 'package:inventory_management/route/app_state.dart';
 import 'package:inventory_management/tab_page/state.dart';
 import 'package:inventory_management/welcome_page/page.dart';
@@ -39,6 +43,10 @@ class AppRoute {
           MaterialListConnector() + MaterialListPage(),
       routerNameForMaterialDetailPage:
           MaterialDetailConnector() + MaterialDetailPage(),
+      routerNameForMemoSavePage: MemoSaveConnector() + MemoSavePage(),
+      routerNameForMemoListPage: MemoListConnector() + MemoListPage(),
+      routerNameForMemoEditPage: MemoEditConnector() + MemoEditPage(),
+      routerNameForOcrListPage: OcrListConnector() + OcrListPage(),
     });
   }
   //保存单例

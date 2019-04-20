@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/memo/memo_edit_page/memo_image_component/state.dart';
 import 'package:inventory_management/memo/memo_edit_page/memo_notes_component/state.dart';
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
+import 'package:inventory_management/route/app_state.dart';
 
 enum NotePageType {
   Edit,
@@ -30,4 +31,20 @@ MemoEditState initState(MemoListTileState args) {
     // ..textEditingController = TextEditingController(text: args.notes)
     ..listTileState = args.clone()
     ..images = images;
+}
+
+
+
+class MemoEditConnector extends ConnOp<AppState, MemoEditState> {
+  @override
+  MemoEditState get(AppState appState) {
+    final MemoEditState state = appState.memoEditState.clone();
+    return state;
+  }
+
+  @override
+  void set(AppState appState, MemoEditState subState) {
+
+    appState.memoEditState = subState.clone();
+  }
 }

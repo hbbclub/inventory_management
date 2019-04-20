@@ -10,8 +10,13 @@ Reducer<MemoSaveState> buildReducer() {
       MemoSaveAction.init: _init,
       MemoSaveAction.switchSendMail: _switchSendMail,
       MemoSaveAction.selectCategory: _selectCategory,
+      RouteAction.route: _route,
     },
   );
+}
+
+MemoSaveState _route(MemoSaveState state, Action action) {
+  return initState(action.payload).clone();
 }
 
 MemoSaveState _init(MemoSaveState state, Action action) {

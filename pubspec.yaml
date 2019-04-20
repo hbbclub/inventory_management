@@ -39,8 +39,9 @@ dependencies:
       url: git://github.com/facundomedica/fast_qr_reader_view.git
   package_info: ^0.4.0+2
   fish_redux:
-    git:
-      url: git://github.com/alibaba/fish-redux.git
+    ^0.1.6
+    # git:
+    #   url: git://github.com/alibaba/fish-redux.git
   printer:
     path: ./plugin/printer
 

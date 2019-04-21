@@ -29,7 +29,9 @@ void _onInit(Action action, Context<StdLabelState> ctx) async {
 
 void _onPrinterStd(Action action, Context<StdLabelState> ctx) {
   Map<String, dynamic> args = {};
-  List<Map<String, dynamic>> data = ctx.state.labels.map((item) {
+  List<Map<String, dynamic>> data = ctx.state.labels
+      .where((item) => int.parse(item.textController.text) > 0)
+      .map((item) {
     Map<String, dynamic> itemMap = item.toJson();
     itemMap['count'] = int.parse(item.textController.text);
     return itemMap;

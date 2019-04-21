@@ -1,6 +1,7 @@
 import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/common/utils.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -94,8 +95,8 @@ Widget buildView(
           Expanded(
             child: Center(
               child: Container(
-                width: double.infinity,
-                height: 200,
+                width: Utils.getScreenWidth(viewService.context),
+                height: Utils.getScreenWidth(viewService.context),
                 child: AspectRatio(
                     aspectRatio: state.controller.value.aspectRatio,
                     child: new QRReaderPreview(state.controller)),

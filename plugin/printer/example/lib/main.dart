@@ -49,6 +49,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
   }
 
+//{type: stk, data: {_id: 5c76591dd33ed7d8ff5adb66, part_no: AS11234AD, loc: SB01, desc: LH ARM AND BLADE ASY, uom: EA, unitCost: null, sap_qty: 22, tech_spec: null, count: 1}
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -61,11 +62,12 @@ class _MyAppState extends State<MyApp> {
                 Printer.print({
                   'type': 'stk',
                   'data': {
-                    'stockCode': '11',
-                    'desc': 'aaa',
-                    'lotNumber': '123',
-                    'qty': '1',
-                    'location': 'hahah',
+                    'part_no': 'AS11234AD',
+                    'desc': 'TEST TEST TEST TEST TEST TEST',
+                    'lot': '111',
+                    'sap_qty': '22',
+                    'loc': 'test',
+                    'uom': 'EA',
                     'count': 1,
                   }
                 });

@@ -58,7 +58,7 @@ Widget buildView(
                 ),
               ),
               leading: Image.asset(
-                ImageAssets.setting1,
+                ImageAssets.setting5,
                 height: h(40),
               ),
               trailing: Icon(Icons.arrow_right, color: Color(0xFF333333)),

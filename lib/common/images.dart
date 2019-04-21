@@ -11,4 +11,5 @@ class ImageAssets {
   static final String setting2 = 'assets/images/setting_2.png';
   static final String setting3 = 'assets/images/setting_3.png';
   static final String setting4 = 'assets/images/setting_4.png';
+  static final String setting5 = 'assets/images/setting_5.png';
 }

@@ -42,6 +42,11 @@ void _onInit(Action action, Context<SettingState> ctx) async {
         cacheModel.bluetourhName = ctx.state.activity;
         cacheModel.setLoaclCache();
       }
+      if (value['code'] > 0) {
+        //蓝牙设备状态
+        //清除activity
+        ctx.dispatch(SettingActionCreator.updateActivity(null));
+      }
       ctx.dispatch(SettingActionCreator.updateFlag(value['data']));
     }
   });

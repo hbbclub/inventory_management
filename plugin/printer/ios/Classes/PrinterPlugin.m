@@ -40,20 +40,20 @@
         [Manager didUpdateState:^(NSInteger state) {
             switch (state) {
                 case CBCentralManagerStateUnsupported:
-                    [self sendMessageWithType:@"state" data:@"The platform/hardware doesn't support Bluetooth Low Energy." code:0];
+                    [self sendMessageWithType:@"state" data:@"Bluetooth be not supported " code:1];
                     break;
                 case CBCentralManagerStateUnauthorized:
-                    [self sendMessageWithType:@"state" data:@"The app is not authorized to use Bluetooth Low Energy." code:0];
+                    [self sendMessageWithType:@"state" data:@"Bluetooth be not authorized " code:2];
                     break;
                 case CBCentralManagerStatePoweredOff:
-                    [self sendMessageWithType:@"state" data:@"Bluetooth is currently powered off." code:0];
+                    [self sendMessageWithType:@"state" data:@"Bluetooth powered off." code:3];
                     break;
                 case CBCentralManagerStatePoweredOn:
-                    [self sendMessageWithType:@"state" data:@"Bluetooth is currently powered on." code:0];
+                    [self sendMessageWithType:@"state" data:@"Bluetooth powered on." code:4];
                     [self scan];
                     break;
                 case CBCentralManagerStateUnknown:
-                    [self sendMessageWithType:@"state" data:@"unKnown" code:0];
+                    [self sendMessageWithType:@"state" data:@"unKnown" code:5];
                 default:
                     break;
             }
@@ -132,25 +132,25 @@
         switch (state) {
             case CONNECT_STATE_CONNECTING:
 //                self.connState.text = @"连接状态：连接中....";
-                [self sendMessageWithType:@"state" data:@"connecting..." code:0];
+                [self sendMessageWithType:@"state" data:@"connecting..." code:-1];
                 self.state = CONNECT_STATE_CONNECTING;
                 break;
             case CONNECT_STATE_CONNECTED:
-                [self sendMessageWithType:@"state" data:@"connected" code:0];
+                [self sendMessageWithType:@"state" data:@"connected" code:-2];
                 self.state = CONNECT_STATE_CONNECTED;
                 break;
             case CONNECT_STATE_FAILT:
 //                [SVProgressHUD showErrorWithStatus:@"连接失败"];
-                [self sendMessageWithType:@"state" data:@"connect failt" code:0];
+                [self sendMessageWithType:@"state" data:@"connect failt" code:-3];
                 self.state = CONNECT_STATE_FAILT;
 //                self.connState.text = @"连接状态：连接失败";
                 break;
             case CONNECT_STATE_DISCONNECT:
-                [self sendMessageWithType:@"state" data:@"disconnected" code:0];
+                [self sendMessageWithType:@"state" data:@"disconnected" code:-4];
                 self.state = CONNECT_STATE_DISCONNECT;
                 break;
             default:
-                [self sendMessageWithType:@"state" data:@"timeout..." code:0];
+                [self sendMessageWithType:@"state" data:@"timeout..." code:-5];
                 break;
         }
     });

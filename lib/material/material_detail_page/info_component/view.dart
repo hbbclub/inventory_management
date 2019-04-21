@@ -17,7 +17,7 @@ Widget buildView(InfoState state, Dispatch dispatch, ViewService viewService) {
       MaterialInfoTile('Unit Cost', (state.model.unitCost ?? 0).toString()),
       MaterialInfoTile('Default Location', state.model.loc ?? ''),
       MaterialInfoTile('QTY', (state.model.sapQty ?? 0).toString()),
-      MaterialInfoTile('Tech Spec', state.model.techSpec),
+      MaterialInfoTile('Tech Spec', state.model.techSpec??''),
     ],
   );
 }

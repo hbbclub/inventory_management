@@ -35,7 +35,8 @@ void _dispose(Action action, Context<MaterialDetailState> ctx) {
 }
 
 void _jumpToStkPrint(Action action, Context<MaterialDetailState> ctx) {
-  appRouter.pushScreen(ctx.context,routerNameForStkLabelPage);
+  appRouter.pushScreen(ctx.context, routerNameForStkLabelPage,
+      arguments: ctx.state.model);
 }
 
 void _onSelectImage(Action action, Context<MaterialDetailState> ctx) async {

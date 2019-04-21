@@ -243,18 +243,18 @@
    
     return command;
 }
-
+//[{id: null, cd: hold, name: HOLD, type: IMG, paper: , size: , printer: , desc: HOLD, imgs: [Instance of 'Img'], count: 0}, {id: null, cd: counted, name: COUNTED, type: IMG, paper: , size: , printer: , desc: COUNTED, imgs: [Instance of 'Img'], count: 0}, {id: null, cd: passed, name: QC PASSED, type: IMG, paper: , size: , printer: , desc: QC PASSED, imgs: [Instance of 'Img'], count: 0}]
 -(void)print:(NSDictionary *)args{
     NSString *type = args[@"type"];
     if ([type isEqualToString:@"std"]) {
         for (NSDictionary *dic in args[@"data"]) {
             TscCommand *comm = [[TscCommand alloc] init];
             int count = [dic[@"count"] intValue];
-            if([dic[@"type"] isEqualToString:@"counted"]){
+            if([dic[@"cd"] isEqualToString:@"counted"]){
                comm=  [self printCountedLabel:comm];
-            }else if ([dic[@"type"] isEqualToString:@"hold"]){
+            }else if ([dic[@"cd"] isEqualToString:@"hold"]){
                comm=  [self printHoldLabel:comm];
-            }else if ([dic[@"type"] isEqualToString:@"qc"]){
+            }else if ([dic[@"cd"] isEqualToString:@"passed"]){
                comm=  [self printQCPassedLabel:comm];
             }
             [comm addPrint:count :1];

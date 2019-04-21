@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/common/keep_alive_widget.dart';
 
 import 'effect.dart';
 import 'reducer.dart';
@@ -24,5 +25,10 @@ class TabPage extends Page<TabState, Map<String, dynamic>> {
           dependencies: Dependencies<TabState>(
               adapter: null, slots: <String, Dependent<TabState>>{}),
           middleware: <Middleware<TabState>>[],
+          wrapper: wrapperFunc,
         );
+
+  static Widget wrapperFunc(Widget widget) {
+    return KeepAliveWidget(widget);
+  }
 }

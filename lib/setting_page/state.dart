@@ -1,11 +1,18 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/route/app_state.dart';
+import 'package:inventory_management/setting_page/model/blue_tooth_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 class SettingState implements Cloneable<SettingState> {
-
+  String activity;
+  String flag = '';
+  List<BlueToothModel> blueToothList = [];
   @override
   SettingState clone() {
-    return SettingState();
+    return SettingState()
+      ..activity = activity
+      ..blueToothList = blueToothList
+      ..flag = flag;
   }
 }
 
@@ -22,7 +29,6 @@ class SettingConnector extends ConnOp<AppState, SettingState> {
 
   @override
   void set(AppState appState, SettingState subState) {
-
     appState.settingState = subState.clone();
   }
 }

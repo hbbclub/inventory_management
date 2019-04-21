@@ -16,10 +16,18 @@ class MaterialModel {
   String sapQty;
   @JsonKey(name: 'tech_spec', nullable: false)
   String techSpec;
+  @JsonKey(toJson: _imgToJson, defaultValue: [])
   List<Img> imgs;
 
   factory MaterialModel.fromJson(Map<String, dynamic> json) =>
       _$MaterialModelFromJson(json);
+
+  static List<Map<String, dynamic>> _imgToJson(List<Img> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
+
+  Map<String, dynamic> toJson() => _$MaterialModelToJson(this);
 
   MaterialModel({
     this.id,
@@ -42,4 +50,5 @@ class Img {
   });
 
   factory Img.fromJson(Map<String, dynamic> json) => _$ImgFromJson(json);
+  Map<String, dynamic> toJson() => _$ImgToJson(this);
 }

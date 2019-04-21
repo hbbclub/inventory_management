@@ -57,7 +57,7 @@ Widget buildView(
       color: Colors.white,
       height: 44,
       child: FlatButton(
-          onPressed: () {},
+          onPressed: () =>dispatch(StkLabelActionCreator.onPrinterStk()),
           child: Column(
             children: <Widget>[
               Icon(
@@ -88,6 +88,7 @@ class PrintingStkTile extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: TextField(
+              enabled: false,
               controller: label.controller,
               decoration: InputDecoration(
                 labelText: this.label.title,

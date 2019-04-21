@@ -1,17 +1,19 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/material/model/material_model.dart';
 import 'package:inventory_management/route/app_state.dart';
 
 class StkLabelState implements Cloneable<StkLabelState> {
   List<PrintingStkLabel> items;
+  MaterialModel model;
   TextEditingController stockController = TextEditingController();
   TextEditingController descController = TextEditingController();
   TextEditingController uomController = TextEditingController();
   TextEditingController qtyController = TextEditingController();
   TextEditingController lotNumberController = TextEditingController();
-  TextEditingController printController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
 
-  TextEditingController countController = TextEditingController(text: '0');
+  TextEditingController countController = TextEditingController(text: '1');
 
   @override
   StkLabelState clone() {
@@ -21,22 +23,16 @@ class StkLabelState implements Cloneable<StkLabelState> {
       ..descController = descController
       ..uomController = uomController
       ..qtyController = qtyController
-      ..printController = printController
       ..lotNumberController = lotNumberController
-      ..countController = countController;
+      ..locationController = locationController
+      ..countController = countController
+      ..model = model;
   }
 }
 
 StkLabelState initState(Map<String, dynamic> args) {
   StkLabelState state = StkLabelState();
-  state.items = [
-    PrintingStkLabel('Stock Code', '', state.stockController),
-    PrintingStkLabel('Description', '', state.descController),
-    PrintingStkLabel('UOM', '', state.uomController),
-    PrintingStkLabel('QTY', '', state.qtyController),
-    PrintingStkLabel('Lot Number', '', state.lotNumberController),
-    PrintingStkLabel('Printer', '', state.printController),
-  ];
+
   return state;
 }
 
@@ -47,7 +43,6 @@ class PrintingStkLabel {
   PrintingStkLabel(this.title, this.initValue, this.controller);
 }
 
-
 class StkLabelConnector extends ConnOp<AppState, StkLabelState> {
   @override
   StkLabelState get(AppState appState) {
@@ -57,7 +52,6 @@ class StkLabelConnector extends ConnOp<AppState, StkLabelState> {
 
   @override
   void set(AppState appState, StkLabelState subState) {
-
     appState.stkLabelState = subState.clone();
   }
 }

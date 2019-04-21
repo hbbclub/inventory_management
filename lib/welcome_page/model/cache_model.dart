@@ -17,6 +17,8 @@ class CacheModel {
   String linkword;
   @JsonKey(defaultValue: '')
   String hostUrl;
+   @JsonKey(defaultValue: '')
+  String bluetourhName;
   @JsonKey(toJson: _userToJson)
   UserModel user = UserModel();
 
@@ -25,6 +27,7 @@ class CacheModel {
     this.password = '',
     this.linkword = '',
     this.hostUrl = '',
+    this.bluetourhName = '',
     this.user,
   });
 

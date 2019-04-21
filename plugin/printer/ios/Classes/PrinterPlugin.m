@@ -157,7 +157,7 @@
 }
 
 
-
+//{type: stk, data: {_id: 5c76591dd33ed7d8ff5adb66, part_no: AS11234AD, loc: SB01, desc: LH ARM AND BLADE ASY, uom: EA, unitCost: null, sap_qty: 22, tech_spec: null, imgs: [Instance of 'Img'], count: 1}
 -(TscCommand *)printAllInfoLabel:( TscCommand *) command info:(NSDictionary *)info{
     [command addSize:75 :50];
     [command addGapWithM:2 withN:0];
@@ -174,9 +174,9 @@
    
     [command addTextwithX:5 withY:24 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"STOCK NO."];
     
-    [command addTextwithX:25 withY:48 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"stockCode"]];
+    [command addTextwithX:25 withY:48 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"part_no"]];
 
-    [command add1DBarcode:25 :86 :@"39"  :40 :0 :0 :3 :5 :info[@"stockCode"]];
+    [command add1DBarcode:25 :86 :@"39"  :40 :0 :0 :3 :5 :info[@"part_no"]];
     
     // Middle
 
@@ -187,7 +187,7 @@
  
     [command addTextwithX:5 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"LOT NO."];
 
-    [command addTextwithX:25 withY:298 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"lotNumber"]];
+    [command addTextwithX:25 withY:298 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"uom"]];
 
     
     [command add1DBarcode:25 :330 :@"39"  :50 :0 :0 :2 :4 :@"050718"];
@@ -196,12 +196,12 @@
 
      [command addTextwithX:265 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"QTY"];
 
-    [command addTextwithX:290 withY:320 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"qty"]];
+    [command addTextwithX:290 withY:320 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"sap_qty"]];
 
     //BOTTOM RIGHT
   
     [command addTextwithX:405 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"LOCATION"];
-    [command addTextwithX:435 withY:320 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"location"]];
+    [command addTextwithX:435 withY:320 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"loc"]];
   
     return command;
 }

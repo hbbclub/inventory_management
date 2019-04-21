@@ -16,7 +16,7 @@ Widget buildView(
         color: Colors.white,
         height: 44,
         child: FlatButton(
-            onPressed: () {},
+            onPressed: () => dispatch(StdLabelActionCreator.onPrinterStd()),
             child: Column(
               children: <Widget>[
                 Icon(

@@ -13,6 +13,7 @@ class StdState implements Cloneable<StdState> {
   String size = '';
   String printer = '';
   String desc = '';
+  @JsonKey(toJson: _imgToJson, defaultValue: [])
   List<Img> imgs = [];
   @JsonKey(ignore: true)
   TextEditingController textController = TextEditingController(text: '0');
@@ -20,6 +21,12 @@ class StdState implements Cloneable<StdState> {
   factory StdState.fromJson(Map<String, dynamic> json) =>
       _$StdStateFromJson(json);
 
+  Map<String, dynamic> toJson() => _$StdStateToJson(this);
+
+  static List<Map<String, dynamic>> _imgToJson(List<Img> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
   StdState({
     this.id,
     this.cd,
@@ -60,6 +67,7 @@ class Img {
   Img({
     this.url,
   });
+  Map<String, dynamic> toJson() => _$ImgToJson(this);
 
   factory Img.fromJson(Map<String, dynamic> json) => _$ImgFromJson(json);
 }

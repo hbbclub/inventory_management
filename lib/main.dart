@@ -5,6 +5,9 @@ import 'package:inventory_management/route/router.dart';
 import 'package:inventory_management/welcome_page/page.dart';
 
 void main() async {
+  FlutterError.onError = (FlutterErrorDetails details) async {
+    print(details);
+  };
   runApp(
     BlocProvider(
       bloc: appBloc,

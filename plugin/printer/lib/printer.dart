@@ -19,18 +19,26 @@ class Printer {
   }
 
   static Future start() async {
-    return await _channel.invokeMethod('start');
+    try {
+      return await _channel.invokeMethod('start');
+    } catch (e) {}
   }
 
   static Future stop() async {
-    return await _channel.invokeMethod('stop');
+    try {
+      return await _channel.invokeMethod('stop');
+    } catch (e) {}
   }
 
   static Future print(Map args) async {
-    return await _channel.invokeMethod('print',args);
+    try {
+      return await _channel.invokeMethod('print', args);
+    } catch (e) {}
   }
 
   static Future connect(String uuid) async {
-    return await _channel.invokeMethod('connect', uuid);
+    try {
+      return await _channel.invokeMethod('connect', uuid);
+    } catch (e) {}
   }
 }

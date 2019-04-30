@@ -40,9 +40,9 @@ void _jumpToStkPrint(Action action, Context<MaterialDetailState> ctx) {
 }
 
 void _onSelectImage(Action action, Context<MaterialDetailState> ctx) async {
-  if (ctx.state.model.imgs?.length == 0) {
+  // if (ctx.state.model.imgs?.length == 0) {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-  }
+  // }
 }
 
 _onPageChange(Context<MaterialDetailState> ctx, int index,

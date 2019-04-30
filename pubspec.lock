@@ -22,6 +22,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.8"
+  audioplayer:
+    dependency: "direct main"
+    description:
+      name: audioplayer
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.2"
   barcode_scan:
     dependency: "direct main"
     description:

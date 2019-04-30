@@ -36,7 +36,7 @@ import 'package:inventory_management/main_page/page.dart';
 class AppRoute {
   AppRoutes<AppState> router;
   AppRoute._internal() {
-    router = AppRoutes<AppState>(preloadedState: AppState(), pages: {
+    router = AppRoutes<AppState>(preloadedState: AppState(), slots: {
       routerNameForWelcomePage: WelcomeConnector() + WelcomePage(),
       routerNameForLoginPage: LoginConnector() + LoginPage(),
       routerNameForInventoryPage: InventoryConnector() + InventoryPage(),

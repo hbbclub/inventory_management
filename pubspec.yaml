@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_refresh: ^0.0.1
   firebase_ml_vision: ^0.6.0
   image_picker: ^0.4.12
   barcode_scan: ^1.0.0
@@ -38,7 +39,7 @@ dependencies:
       url: git://github.com/facundomedica/fast_qr_reader_view.git
   package_info: ^0.4.0+2
   fish_redux:
-    ^0.1.6
+    ^0.1.7
     # git:
     #   url: git://github.com/alibaba/fish-redux.git
   printer:

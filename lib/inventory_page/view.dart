@@ -1,6 +1,8 @@
+import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/images.dart';
+import 'package:inventory_management/common/utils.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -18,21 +20,21 @@ Widget buildView(
         ),
       ],
     ),
-    bottomNavigationBar: Container(
-      height: 44,
-      child: FlatButton(
-          onPressed: () => dispatch(InventoryActionCreator.onScan()),
-          child: Column(
-            children: <Widget>[
-              Image.asset(
-                ImageAssets.scan,
-                color: Colors.black,
-                width: 20,
-              ),
-              Text('scan')
-            ],
-          )),
-    ),
+    // bottomNavigationBar: Container(
+    //   height: 44,
+    //   child: FlatButton(
+    //       onPressed: () => dispatch(InventoryActionCreator.onScan()),
+    //       child: Column(
+    //         children: <Widget>[
+    //           Image.asset(
+    //             ImageAssets.scan,
+    //             color: Colors.black,
+    //             width: 20,
+    //           ),
+    //           Text('scan')
+    //         ],
+    //       )),
+    // ),
     body: Container(
       padding: EdgeInsets.all(16.0),
       child: ListView(
@@ -146,6 +148,14 @@ Widget buildView(
               ),
             ],
           ),
+          Container(
+                width: Utils.getScreenWidth(viewService.context),
+                height: Utils.getScreenWidth(viewService.context),
+                child: AspectRatio(
+                    aspectRatio: state.controller.value.aspectRatio,
+                    child: new QRReaderPreview(state.controller)),
+              ),
+            
         ],
       ),
     ),

@@ -11,6 +11,7 @@ Reducer<InventoryState> buildReducer() {
       InventoryAction.add: _add,
       InventoryAction.subtract: _subtract,
       InventoryAction.scaned: _scaned,
+      InventoryAction.init: _init,
       RouteAction.route: _route,
     },
   );
@@ -35,14 +36,28 @@ InventoryState _subtract(InventoryState state, Action action) {
   return newState;
 }
 
-InventoryState _scaned(InventoryState state, Action action) {
+
+InventoryState _init(InventoryState state, Action action) {
+  InventoryState payload =action.payload;
   final InventoryState newState = state.clone();
-  scanState.ScannerState sannerResult = action.payload;
-  newState
-    ..tagNumber = sannerResult.tagNumber
-    ..stockNumber = sannerResult.stockNumber
-    ..location = sannerResult.location
-    ..lotNumber = sannerResult.lotNumber
-    ..qty = sannerResult.qty;
+  newState.controller = payload.controller;
+  newState.cameras = payload.cameras;
+  return newState;
+}
+
+InventoryState _scaned(InventoryState state, Action action) {
+  String code = action.payload;
+  final InventoryState newState = state.clone();
+  if (RegExp(r"^[T].*").matchAsPrefix(code) != null) {
+    newState.tagNumber.text = code.substring(1);
+  } else if (RegExp(r"^[S].*").matchAsPrefix(code) != null) {
+    newState.stockNumber.text = code.substring(1);
+  } else if (RegExp(r"^[Q].*").matchAsPrefix(code) != null) {
+    newState.qty.text = code.substring(1);
+  } else if (RegExp(r"^[N].*").matchAsPrefix(code) != null) {
+    newState.lotNumber.text = code.substring(1);
+  } else if (RegExp(r"^[L].*").matchAsPrefix(code) != null) {
+    newState.location.text = code.substring(1);
+  }
   return newState;
 }

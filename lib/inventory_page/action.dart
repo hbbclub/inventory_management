@@ -1,9 +1,14 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/inventory_page/scanner_page/state.dart';
+import 'package:inventory_management/inventory_page/state.dart';
 
-enum InventoryAction { add, subtract, onScan, scaned }
+enum InventoryAction { add, subtract, onScan, scaned ,init}
 
 class InventoryActionCreator {
+static Action init(InventoryState state) {
+    return Action(InventoryAction.init, payload: state);
+  }
+
   static Action add() {
     return const Action(InventoryAction.add);
   }

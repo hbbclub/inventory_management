@@ -1,3 +1,4 @@
+import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/route/app_state.dart';
@@ -8,6 +9,8 @@ class InventoryState implements Cloneable<InventoryState> {
   TextEditingController location = TextEditingController();
   TextEditingController lotNumber = TextEditingController();
   TextEditingController qty = TextEditingController(text: '0');
+  List<CameraDescription> cameras;
+  QRReaderController controller;
 
   @override
   InventoryState clone() {
@@ -16,6 +19,8 @@ class InventoryState implements Cloneable<InventoryState> {
       ..stockNumber = stockNumber
       ..location = location
       ..lotNumber = lotNumber
+      ..controller = controller
+      ..cameras = cameras
       ..qty = qty;
   }
 }

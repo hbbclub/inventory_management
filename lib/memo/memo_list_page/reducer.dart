@@ -10,12 +10,19 @@ Reducer<MemoListState> buildReducer() {
     <Object, Reducer<MemoListState>>{
       MemoPageAction.init: _init,
       RouteAction.route: _route,
+      MemoPageAction.clearSearch: _clearSearch,
     },
   );
 }
 
 MemoListState _route(MemoListState state, Action action) {
   return initState(action.payload).clone();
+}
+
+MemoListState _clearSearch(MemoListState state, Action action) {
+  final MemoListState newState = state.clone();
+  newState.keywordController.text = '';
+  return newState;
 }
 
 MemoListState _init(MemoListState state, Action action) {

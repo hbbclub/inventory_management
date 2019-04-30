@@ -149,13 +149,18 @@ Widget buildView(
             ],
           ),
           Container(
-                width: Utils.getScreenWidth(viewService.context),
-                height: Utils.getScreenWidth(viewService.context),
-                child: AspectRatio(
-                    aspectRatio: state.controller.value.aspectRatio,
-                    child: new QRReaderPreview(state.controller)),
-              ),
-            
+            width: Utils.getScreenWidth(viewService.context),
+            height: Utils.getScreenWidth(viewService.context),
+            child: () {
+              if (state.controller == null ||
+                  !state.controller.value.isInitialized) {
+                return new Container();
+              }
+              return AspectRatio(
+                  aspectRatio: state.controller.value.aspectRatio,
+                  child: new QRReaderPreview(state.controller));
+            }(),
+          ),
         ],
       ),
     ),

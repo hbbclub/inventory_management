@@ -16,7 +16,6 @@ Effect<InventoryState> buildEffect() {
 
 void _onInit(Action action, Context<InventoryState> ctx) async {
   InventoryState state = ctx.state.clone();
-
   try {
     state.cameras = await availableCameras();
     state.controller =
@@ -26,10 +25,10 @@ void _onInit(Action action, Context<InventoryState> ctx) async {
       CodeFormat.code39,
       CodeFormat.code93,
     ], (dynamic value) {
-      print(value);
       if (value == null) {
         return;
       }
+      state.player.playLocal();
       ctx.dispatch(InventoryActionCreator.scaned(value));
       Future.delayed(
           const Duration(seconds: 1), ctx.state.controller.startScanning);

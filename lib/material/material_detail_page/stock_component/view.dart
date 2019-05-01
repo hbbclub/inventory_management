@@ -36,6 +36,7 @@ Widget buildView(StockState state, Dispatch dispatch, ViewService viewService) {
       MaterialStockTile('loc1', '11111'),
       MaterialStockTile('loc1', '222'),
       MaterialStockTile('loc1', '333'),
+      MaterialStockTile('qty total', '777'),
     ],
   );
 }

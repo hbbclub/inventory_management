@@ -6,18 +6,14 @@ import 'state.dart';
 
 Widget buildView(
     AdvancedState state, Dispatch dispatch, ViewService viewService) {
-  return ListView(
-    children: <Widget>[
-      SizedBox(
-        height: 16,
-      ),
-      MaterialInfoTile('Stock Code', state.model.partNo ?? ''),
-      MaterialInfoTile('Description', state.model.desc ?? ''),
-      MaterialInfoTile('UOM', state.model.uom ?? ''),
-      MaterialInfoTile('Unit Cost', (state.model.unitCost ?? 0).toString()),
-      MaterialInfoTile('Default Location', state.model.loc ?? ''),
-      MaterialInfoTile('QTY', (state.model.sapQty ?? 0).toString()),
-      MaterialInfoTile('Tech Spec', state.model.techSpec??''),
-    ],
+  return Container(
+    padding: EdgeInsets.only(top: 16),
+    child: ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return MaterialInfoTile(state.model.advInfo[index].name ?? '',
+            state.model.advInfo[index].value ?? '');
+      },
+      itemCount: state.model.advInfo?.length ?? 0,
+    ),
   );
 }

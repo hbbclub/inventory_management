@@ -19,10 +19,18 @@ class MaterialModel {
   @JsonKey(toJson: _imgToJson, defaultValue: [])
   List<Img> imgs;
 
+  @JsonKey(name: 'adv_info',toJson: _advInfoToJson, defaultValue: [])
+  List<InfoItem> advInfo;
+
   factory MaterialModel.fromJson(Map<String, dynamic> json) =>
       _$MaterialModelFromJson(json);
 
   static List<Map<String, dynamic>> _imgToJson(List<Img> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
+
+  static List<Map<String, dynamic>> _advInfoToJson(List<InfoItem> list) =>
       list.map<Map<String, dynamic>>((item) {
         return item.toJson();
       }).toList();
@@ -51,4 +59,18 @@ class Img {
 
   factory Img.fromJson(Map<String, dynamic> json) => _$ImgFromJson(json);
   Map<String, dynamic> toJson() => _$ImgToJson(this);
+}
+
+@JsonSerializable()
+class InfoItem {
+  String name;
+  String value;
+
+  InfoItem({
+    this.name,
+    this.value,
+  });
+
+  factory InfoItem.fromJson(Map<String, dynamic> json) => _$InfoItemFromJson(json);
+  Map<String, dynamic> toJson() => _$InfoItemToJson(this);
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -41,7 +43,8 @@ void _jumpToStkPrint(Action action, Context<MaterialDetailState> ctx) {
 
 void _onSelectImage(Action action, Context<MaterialDetailState> ctx) async {
   // if (ctx.state.model.imgs?.length == 0) {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
   // }
 }
 

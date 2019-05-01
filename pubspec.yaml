@@ -28,7 +28,7 @@ dependencies:
   #  flutter packages pub run build_runner clean
   # flutter packages pub run build_runner build --delete-conflicting-outputs
   # flutter packages pub run build_runner watch
-  json_annotation: ^2.0.0
+  json_annotation: ^2.2.0
   rxdart: ^0.20.0
   shared_preferences: ^0.4.0
   device_info: ^0.2.1
@@ -51,7 +51,7 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^1.1.2
-  json_serializable: ^2.0.0
+  json_serializable: ^2.2.0
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 

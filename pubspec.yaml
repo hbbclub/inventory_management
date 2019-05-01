@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_advanced_networkimage: ^0.4.15
   audioplayer: ^0.5.2
   flutter_refresh: ^0.0.1
   firebase_ml_vision: ^0.6.0
@@ -23,7 +24,7 @@ dependencies:
   barcode_scan: ^1.0.0
   font_awesome_flutter: ^8.2.0
   cupertino_icons: ^0.1.2
-  path_provider: ^0.4.1
+  path_provider: ^0.5.0
   multi_image_picker: ^3.0.13
   #  flutter packages pub run build_runner clean
   # flutter packages pub run build_runner build --delete-conflicting-outputs

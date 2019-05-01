@@ -7,13 +7,7 @@ import 'package:flutter_refresh/flutter_refresh.dart';
 import 'action.dart';
 import 'state.dart';
 
-Future<Null> onFooterRefresh() {
-  return new Future.delayed(new Duration(seconds: 2), () {});
-}
 
-Future<Null> onHeaderRefresh() {
-  return new Future.delayed(new Duration(seconds: 2), () {});
-}
 
 Widget buildView(
     MemoListState state, Dispatch dispatch, ViewService viewService) {
@@ -63,7 +57,7 @@ Widget buildView(
           ),
           Expanded(
             child: Refresh(
-              onFooterRefresh: onFooterRefresh,
+              onFooterRefresh: ()=>dispatch(MemoPageActionCreator.onLoadmore(state.list.length)),
               // onHeaderRefresh: onHeaderRefresh,
               childBuilder: (BuildContext context,
                   {ScrollController controller, ScrollPhysics physics}) {

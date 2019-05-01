@@ -74,11 +74,12 @@ class Api {
   }
 
   //获取note列表
-  Future<ApiModel> noteList({keyword}) async {
+  Future<ApiModel> noteList({keyword, current}) async {
     return httpUtil.get(
       '/mm/notes/list',
       params: {
         "keyword": keyword,
+        "current": current,
       },
     );
   }

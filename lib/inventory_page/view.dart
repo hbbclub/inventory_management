@@ -1,7 +1,6 @@
 import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/common/utils.dart';
 
 import 'action.dart';

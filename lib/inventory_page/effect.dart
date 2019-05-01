@@ -24,13 +24,13 @@ void _onInit(Action action, Context<InventoryState> ctx) async {
       CodeFormat.code128,
       CodeFormat.code39,
       CodeFormat.code93,
-    ], (dynamic value) {
+    ], (dynamic value) async {
       if (value == null) {
         return;
       }
-      state.player.playLocal();
+      await ctx.state.player.playLocal();
       ctx.dispatch(InventoryActionCreator.scaned(value));
-      Future.delayed(
+      await Future.delayed(
           const Duration(seconds: 1), ctx.state.controller.startScanning);
     });
     await state.controller.initialize();

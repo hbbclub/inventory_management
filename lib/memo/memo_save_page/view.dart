@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/colors.dart';
 import 'package:inventory_management/memo/memo_save_page/model/memo_add_categories_model.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -23,13 +24,13 @@ Widget buildView(
           value: state.activity,
           onChanged: (String newValue) =>
               dispatch(MemoSaveActionCreator.selectCategory(newValue)),
-          items: state.allActivities
-              .map<DropdownMenuItem<String>>((CategoriesModel value) {
+          items: cacheModel.user.categories?.write
+              ?.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
-              value: value.category,
-              child: Text(value.category),
+              value: value,
+              child: Text(value),
             );
-          }).toList(),
+          })?.toList() ??[],
         ),
       ),
     ),

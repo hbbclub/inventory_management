@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/memo/memo_save_page/model/memo_add_categories_model.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -21,10 +22,10 @@ MemoSaveState _route(MemoSaveState state, Action action) {
 
 MemoSaveState _init(MemoSaveState state, Action action) {
   final MemoSaveState newState = state.clone();
-  List<CategoriesModel> allActivities = action.payload['activities'];
-  newState.allActivities = allActivities;
-  if (allActivities.length > 0 && newState.activity == null) {
-    newState.activity = allActivities[0].category;
+  List<String> categories = cacheModel.user.categories?.write ?? [];
+  // newState.allActivities = allActivities;
+  if (categories.length > 0 && newState.activity == null) {
+    newState.activity = categories[0];
   }
   return newState;
 }

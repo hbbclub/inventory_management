@@ -1,6 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/inventory_page/scanner_page/state.dart'
     as scanState;
+import 'package:inventory_management/login_page/model/user_model.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -36,9 +38,8 @@ InventoryState _subtract(InventoryState state, Action action) {
   return newState;
 }
 
-
 InventoryState _init(InventoryState state, Action action) {
-  InventoryState payload =action.payload;
+  InventoryState payload = action.payload;
   final InventoryState newState = state.clone();
   newState.controller = payload.controller;
   newState.cameras = payload.cameras;
@@ -46,18 +47,22 @@ InventoryState _init(InventoryState state, Action action) {
 }
 
 InventoryState _scaned(InventoryState state, Action action) {
-  String code = action.payload;
   final InventoryState newState = state.clone();
-  if (RegExp(r"^[T].*").matchAsPrefix(code) != null) {
-    newState.tagNumber.text = code.substring(1);
-  } else if (RegExp(r"^[S].*").matchAsPrefix(code) != null) {
-    newState.stockNumber.text = code.substring(1);
-  } else if (RegExp(r"^[Q].*").matchAsPrefix(code) != null) {
-    newState.qty.text = code.substring(1);
-  } else if (RegExp(r"^[N].*").matchAsPrefix(code) != null) {
-    newState.lotNumber.text = code.substring(1);
-  } else if (RegExp(r"^[L].*").matchAsPrefix(code) != null) {
-    newState.location.text = code.substring(1);
+  String code = action.payload;
+  Initial initial = cacheModel.user.initial;
+  if (initial != null) {
+    if (RegExp('^[${initial.tag}].*').matchAsPrefix(code) != null) {
+      newState.tagNumber.text = code.substring(1);
+    } else if (RegExp("^[${initial.part}].*").matchAsPrefix(code) != null) {
+      newState.stockNumber.text = code.substring(1);
+    } else if (RegExp("^[${initial.qty}].*").matchAsPrefix(code) != null) {
+      newState.qty.text = code.substring(1);
+    } else if (RegExp("^[${initial.lot}].*").matchAsPrefix(code) != null) {
+      newState.lotNumber.text = code.substring(1);
+    } else if (RegExp("^[${initial.loc}].*").matchAsPrefix(code) != null) {
+      newState.location.text = code.substring(1);
+    }
   }
+
   return newState;
 }

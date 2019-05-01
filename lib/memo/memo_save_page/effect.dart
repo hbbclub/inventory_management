@@ -17,23 +17,21 @@ Effect<MemoSaveState> buildEffect() {
 }
 
 void _init(Action action, Context<MemoSaveState> ctx) async {
-  ApiModel result = await api.noteCategories();
+  // ApiModel result = await api.noteCategories();
 
-  if (result.isError()) {
-    return;
-  }
-  List<CategoriesModel> activities = [];
-  for (var item in result.data['data']) {
-    activities.add(CategoriesModel.fromJson(item));
-  }
+  // if (result.isError()) {
+  //   return;
+  // }
+  // List<CategoriesModel> activities = [];
+  // for (var item in result.data['data']) {
+  //   activities.add(CategoriesModel.fromJson(item));
+  // }
   for (MemoImageState image in ctx.state.images) {
     if (image.asset != null) {
       await image.asset.requestThumbnail(300, 300, quality: 50);
     }
   }
-  ctx.dispatch(MemoSaveActionCreator.init({
-    'activities': activities,
-  }));
+  ctx.dispatch(MemoSaveActionCreator.init());
 }
 
 void _dispose(Action action, Context<MemoSaveState> ctx) async {

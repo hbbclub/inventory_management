@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_advanced_networkimage/provider.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:inventory_management/agent/api.dart';
 import 'package:inventory_management/printing/std_label_page/std_component/state.dart';
 import 'package:printer/printer.dart';
@@ -43,12 +44,12 @@ void _onPrinterStd(Action action, Context<StdLabelState> ctx) async {
 
   for (var item in data) {
     Uint8List list = await DiskCache().load(item['url'].hashCode.toString());
-    // List<int> result = await FlutterImageCompress.compressWithList(
-    //   List<int>.from(list),
-    //   minHeight: 500,
-    //   minWidth: 500,
-    // );
-    item['imageData'] = list;
+    List<int> result = await FlutterImageCompress.compressWithList(
+      List<int>.from(list),
+      minHeight: 200,
+      minWidth: 200,
+    );
+    item['imageData'] = Uint8List.fromList(result);
   }
   args['type'] = 'std';
   args['data'] = data;

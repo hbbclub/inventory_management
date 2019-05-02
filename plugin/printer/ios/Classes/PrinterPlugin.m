@@ -233,14 +233,14 @@
 
 -(TscCommand *)printStdLabel:( TscCommand *) command data:(NSData *)data{
     
-    [command addSize:48 :80];
+    [command addSize:100 :300];
     [command addGapWithM:2 withN:0];
     [command addReference:0 :0];
     [command addTear:@"ON"];
     [command addQueryPrinterStatus:BATCH];
     [command addCls];
     
-    [command addBitmapwithX:0 withY:0 withMode:0 withWidth:200 withImage:[UIImage imageWithData:data]];
+    [command addBitmapwithX:100 withY:30 withMode:0 withWidth:400 withImage:[UIImage imageWithData:data]];
 //    [command addBitmapwithX:0 withY:0 withWidth:200 withHeight:100 withMode:0 withData:data];
     return command;
 }

@@ -6,6 +6,7 @@ part 'user_model.g.dart';
 @JsonSerializable()
 class UserModel {
   String username;
+  String name;
   @JsonKey(toJson: _companyToJson)
   Company company;
   @JsonKey(toJson: _categoriesToJson, defaultValue: [])
@@ -15,6 +16,7 @@ class UserModel {
 
   UserModel({
     this.username,
+    this.name,
     this.company,
     this.categories,
     this.initial,

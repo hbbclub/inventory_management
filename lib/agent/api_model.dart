@@ -15,6 +15,10 @@ class ApiModel {
     return (this.error != 0) || (this.data['code'] != 0);
   }
 
+  String get errMsg {
+     return this.data == null ? this.message : this.data['message'];
+  } 
+
   @override
   String toString() {
     return _$ApiModelToJson(this).toString();

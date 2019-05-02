@@ -7,7 +7,6 @@ import 'package:inventory_management/printing/std_label_page/std_component/state
 import 'package:printer/printer.dart';
 import 'action.dart';
 import 'state.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 Effect<StdLabelState> buildEffect() {
   return combineEffects(<Object, Effect<StdLabelState>>{

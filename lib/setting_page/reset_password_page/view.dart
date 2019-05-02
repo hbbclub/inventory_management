@@ -37,5 +37,4 @@ Widget buildView(
       ),
     ),
   );
-  ;
 }

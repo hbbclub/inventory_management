@@ -1,5 +1,4 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:inventory_management/memo/memo_save_page/model/memo_add_categories_model.dart';
 import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';

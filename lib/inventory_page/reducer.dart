@@ -1,6 +1,4 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:inventory_management/inventory_page/scanner_page/state.dart'
-    as scanState;
 import 'package:inventory_management/login_page/model/user_model.dart';
 import 'package:inventory_management/welcome_page/model/cache_model.dart';
 

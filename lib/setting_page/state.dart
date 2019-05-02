@@ -1,7 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/route/app_state.dart';
 import 'package:inventory_management/setting_page/model/blue_tooth_model.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 class SettingState implements Cloneable<SettingState> {
   String activity;

@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:inventory_management/route/router.dart';
 import 'package:inventory_management/setting_page/model/blue_tooth_model.dart';
@@ -70,8 +71,31 @@ void _onConnenctBluetooth(Action action, Context<SettingState> ctx) {
   }
 }
 
-void _onClearCache(Action action, Context<SettingState> ctx) {
+void _onClearCache(Action action, Context<SettingState> ctx) async {
   Utils.showSnackBar(ctx.context, text: 'Cache has been cleaned.');
+  int cacheSize = await DiskCache().cacheSize();
+  await showDialog(
+      context: ctx.context,
+      builder: (_) {
+        return AlertDialog(
+          title: Text("Clear cache (${Utils.getRollupSize(cacheSize)})"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(ctx.context).pop();
+              },
+            ),
+            new FlatButton(
+              child: new Text("Confirm"),
+              onPressed: () async {
+                await DiskCache().clear();
+                Navigator.of(ctx.context).pop();
+              },
+            ),
+          ],
+        );
+      });
 }
 
 void _onServerManagerment(Action action, Context<SettingState> ctx) {

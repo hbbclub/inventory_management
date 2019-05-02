@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:inventory_management/agent/api.dart';
@@ -5,6 +7,7 @@ import 'package:inventory_management/printing/std_label_page/std_component/state
 import 'package:printer/printer.dart';
 import 'action.dart';
 import 'state.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 Effect<StdLabelState> buildEffect() {
   return combineEffects(<Object, Effect<StdLabelState>>{
@@ -38,8 +41,15 @@ void _onPrinterStd(Action action, Context<StdLabelState> ctx) async {
     itemMap['url'] = item.imgs.first.url;
     return itemMap;
   }).toList();
+
   for (var item in data) {
-    item['imageData'] = await DiskCache().load(item['url'].hashCode.toString());
+    Uint8List list = await DiskCache().load(item['url'].hashCode.toString());
+    // List<int> result = await FlutterImageCompress.compressWithList(
+    //   List<int>.from(list),
+    //   minHeight: 500,
+    //   minWidth: 500,
+    // );
+    item['imageData'] = list;
   }
   args['type'] = 'std';
   args['data'] = data;

@@ -231,7 +231,7 @@
     return command;
 }
 
--(TscCommand *)printQCPassedLabel:( TscCommand *) command data:(NSData *)data{
+-(TscCommand *)printStdLabel:( TscCommand *) command data:(NSData *)data{
     
     [command addSize:48 :80];
     [command addGapWithM:2 withN:0];
@@ -239,8 +239,9 @@
     [command addTear:@"ON"];
     [command addQueryPrinterStatus:BATCH];
     [command addCls];
-//    [command addBitmapwithX:0 withY:100 withMode:0 withWidth:200 withImage:[UIImage imageNamed:@"test.png"]];
-    [command addBitmapwithX:0 withY:0 withWidth:200 withHeight:100 withMode:0 withData:data];
+    
+    [command addBitmapwithX:0 withY:0 withMode:0 withWidth:200 withImage:[UIImage imageWithData:data]];
+//    [command addBitmapwithX:0 withY:0 withWidth:200 withHeight:100 withMode:0 withData:data];
     return command;
 }
 //[{id: null, cd: hold, name: HOLD, type: IMG, paper: , size: , printer: , desc: HOLD, imgs: [Instance of 'Img'], count: 0}, {id: null, cd: counted, name: COUNTED, type: IMG, paper: , size: , printer: , desc: COUNTED, imgs: [Instance of 'Img'], count: 0}, {id: null, cd: passed, name: QC PASSED, type: IMG, paper: , size: , printer: , desc: QC PASSED, imgs: [Instance of 'Img'], count: 0}]
@@ -252,13 +253,13 @@
             NSData *data =  flutterData.data;
             TscCommand *comm = [[TscCommand alloc] init];
             int count = [dic[@"count"] intValue];
-            if([dic[@"cd"] isEqualToString:@"counted"]){
-               comm=  [self printCountedLabel:comm data:data];
-            }else if ([dic[@"cd"] isEqualToString:@"hold"]){
-               comm=  [self printHoldLabel:comm data:data];
-            }else if ([dic[@"cd"] isEqualToString:@"passed"]){
-               comm=  [self printQCPassedLabel:comm data:data] ;
-            }
+//            if([dic[@"cd"] isEqualToString:@"counted"]){
+//               comm=  [self printCountedLabel:comm data:data];
+//            }else if ([dic[@"cd"] isEqualToString:@"hold"]){
+//               comm=  [self printHoldLabel:comm data:data];
+//            }else if ([dic[@"cd"] isEqualToString:@"passed"]){
+               comm=  [self printStdLabel:comm data:data] ;
+//            }
             [comm addPrint:count :1];
             [Manager write:[comm getCommand]];
         }

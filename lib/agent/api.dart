@@ -21,11 +21,13 @@ class Api {
   //物料搜索
   Future<ApiModel> materialList({
     keyword,
+    current = 0,
   }) async {
     return httpUtil.get(
       '/mm/materials/list',
       params: {
         'keyword': keyword ?? '',
+        'current': keyword ?? '',
       },
     );
   }
@@ -74,7 +76,10 @@ class Api {
   }
 
   //获取note列表
-  Future<ApiModel> noteList({keyword, current}) async {
+  Future<ApiModel> noteList({
+    keyword,
+    current = 0,
+  }) async {
     return httpUtil.get(
       '/mm/notes/list',
       params: {

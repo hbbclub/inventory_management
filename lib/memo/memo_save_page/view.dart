@@ -1,8 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/colors.dart';
-import 'package:inventory_management/welcome_page/model/cache_model.dart';
-
 import 'action.dart';
 import 'state.dart';
 

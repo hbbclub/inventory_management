@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:inventory_management/agent/api.dart';
 import 'package:inventory_management/printing/std_label_page/std_component/state.dart';
 import 'package:printer/printer.dart';
@@ -27,15 +28,19 @@ void _onInit(Action action, Context<StdLabelState> ctx) async {
   ctx.dispatch(StdLabelActionCreator.init(res));
 }
 
-void _onPrinterStd(Action action, Context<StdLabelState> ctx) {
+void _onPrinterStd(Action action, Context<StdLabelState> ctx) async {
   Map<String, dynamic> args = {};
   List<Map<String, dynamic>> data = ctx.state.labels
       .where((item) => int.parse(item.textController.text) > 0)
       .map((item) {
     Map<String, dynamic> itemMap = item.toJson();
     itemMap['count'] = int.parse(item.textController.text);
+    itemMap['url'] = item.imgs.first.url;
     return itemMap;
   }).toList();
+  for (var item in data) {
+    item['imageData'] = await DiskCache().load(item['url'].hashCode.toString());
+  }
   args['type'] = 'std';
   args['data'] = data;
   print(args);

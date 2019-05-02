@@ -1,7 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_networkimage/provider.dart';
-import 'package:inventory_management/common/images.dart';
 
 import 'action.dart';
 import 'state.dart';

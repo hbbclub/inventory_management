@@ -12,7 +12,7 @@ class MemoSaveState implements Cloneable<MemoSaveState> {
   String notes = '';
 
   String activity;
-  // List<CategoriesModel> allActivities = [];
+  List<String> allActivities = [];
   List<MemoImageState> images = [];
   MemoListTileState listTileState = MemoListTileState();
 
@@ -25,15 +25,13 @@ class MemoSaveState implements Cloneable<MemoSaveState> {
       ..notes = notes
       ..activity = activity
       ..images = images
-      ..listTileState = listTileState.clone();
-      // ..allActivities = allActivities;
+      ..listTileState = listTileState.clone()
+      ..allActivities = allActivities;
   }
 }
 
 MemoSaveState initState(Map<String, dynamic> args) {
   MemoListTileState state = args['tileState'];
-  print(args);
-  print('--------------------');
   return MemoSaveState()
     ..notes = args['notes']
     ..listTileState = state

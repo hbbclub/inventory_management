@@ -44,7 +44,10 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
     Utils.showSnackBarWithKey(ctx.state.scaffoldkey, text: result.errMsg);
     return;
   }
-  cacheModel.user = UserModel.fromJson(result.data['user']);
+  Map<String, dynamic> userMap = result.data['user'];
+  userMap['categories'] = result.data['categories'];
+  userMap['initial'] = result.data['initial'];
+  cacheModel.user = UserModel.fromJson(userMap);
   cacheModel.setLoaclCache();
   httpUtil.commonHeader.addAll({
     'Authorization': result.data['token'],

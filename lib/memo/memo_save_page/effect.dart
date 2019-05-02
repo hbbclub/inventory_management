@@ -31,7 +31,6 @@ void _init(Action action, Context<MemoSaveState> ctx) async {
       await image.asset.requestThumbnail(300, 300, quality: 50);
     }
   }
-  ctx.dispatch(MemoSaveActionCreator.init());
 }
 
 void _dispose(Action action, Context<MemoSaveState> ctx) async {

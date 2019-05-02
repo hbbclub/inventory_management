@@ -8,7 +8,6 @@ import 'state.dart';
 Reducer<MemoSaveState> buildReducer() {
   return asReducer(
     <Object, Reducer<MemoSaveState>>{
-      MemoSaveAction.init: _init,
       MemoSaveAction.switchSendMail: _switchSendMail,
       MemoSaveAction.selectCategory: _selectCategory,
       RouteAction.route: _route,
@@ -17,16 +16,15 @@ Reducer<MemoSaveState> buildReducer() {
 }
 
 MemoSaveState _route(MemoSaveState state, Action action) {
-  return initState(action.payload).clone();
-}
-
-MemoSaveState _init(MemoSaveState state, Action action) {
-  final MemoSaveState newState = state.clone();
-  List<String> categories = cacheModel.user.categories?.write ?? [];
-  // newState.allActivities = allActivities;
+  final MemoSaveState newState = initState(action.payload).clone();
+  List<String> categories = List.from(cacheModel.user.categories?.write ?? []);
   if (categories.length > 0 && newState.activity == null) {
     newState.activity = categories[0];
   }
+  if (newState.activity != null && !categories.contains(newState.activity)) {
+    categories.insert(0, newState.activity);
+  }
+  newState.allActivities = categories;
   return newState;
 }
 
@@ -38,6 +36,8 @@ MemoSaveState _switchSendMail(MemoSaveState state, Action action) {
 
 MemoSaveState _selectCategory(MemoSaveState state, Action action) {
   final MemoSaveState newState = state.clone();
+  print(action.payload);
+  print(newState.allActivities);
   newState.activity = action.payload;
   return newState;
 }

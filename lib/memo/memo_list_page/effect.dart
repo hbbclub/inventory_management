@@ -32,7 +32,7 @@ void _onInit(Action action, Context<MemoListState> ctx) async {
 
 Future<Null> _onLoadmore(Action action, Context<MemoListState> ctx) async {
   int current = action.payload;
-  ApiModel result = await api.noteList(current: current);
+  ApiModel result = await api.noteList(current: current,keyword: ctx.state.keywordController.text);
   if (result.isError()) {
     return ;
   }

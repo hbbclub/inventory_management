@@ -33,22 +33,23 @@ void _onInit(Action action, Context<InventoryState> ctx) async {
             const Duration(seconds: 1), ctx.state.controller.startScanning);
         return;
       }
+
       await ctx.state.player.playLocal();
       Initial initial = cacheModel.user.initials;
       String code = '';
       String flag = '';
       if (RegExp('^[${initial.tag}].*').matchAsPrefix(value) != null) {
-        code = code.substring(1);
+        code = value.substring(1);
         flag = 'TAG';
       } else if (RegExp("^[${initial.part}].*").matchAsPrefix(value) != null) {
         flag = 'PART';
-        code = code.substring(1);
+        code = value.substring(1);
       } else if (RegExp("^[${initial.lot}].*").matchAsPrefix(value) != null) {
         flag = 'LOT';
-        code = code.substring(1);
+        code = value.substring(1);
       } else if (RegExp("^[${initial.loc}].*").matchAsPrefix(value) != null) {
         flag = 'LOC';
-        code = code.substring(1);
+        code = value.substring(1);
       } else {
         await showDialog(
             context: ctx.context,
@@ -61,13 +62,7 @@ void _onInit(Action action, Context<InventoryState> ctx) async {
                     onPressed: () {
                       Navigator.of(ctx.context).pop();
                     },
-                  ),
-                  new FlatButton(
-                    child: new Text("Sign out"),
-                    onPressed: () {
-                      Navigator.of(ctx.context).pop();
-                    },
-                  ),
+                  )
                 ],
               );
             });
@@ -76,7 +71,7 @@ void _onInit(Action action, Context<InventoryState> ctx) async {
         return;
       }
       ctx.dispatch(
-          InventoryActionCreator.scaned({'flag': flag, 'value': value}));
+          InventoryActionCreator.scaned({'flag': flag, 'value': code}));
       await Future.delayed(
           const Duration(seconds: 1), ctx.state.controller.startScanning);
     });

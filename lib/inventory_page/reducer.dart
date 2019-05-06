@@ -48,7 +48,7 @@ InventoryState _scaned(InventoryState state, Action action) {
     newState.tagNumber.text = data['value'];
   } else if (data['flag'] == 'PART') {
     newState.stockNumber.text = data['value'];
-  } else if (data['flag'] == 'LOCT') {
+  } else if (data['flag'] == 'LOT') {
     newState.lotNumber.text = data['value'];
   } else if (data['flag'] == 'LOC') {
     newState.location.text = data['value'];

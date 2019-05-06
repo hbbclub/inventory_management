@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/colors.dart';
 import 'package:inventory_management/common/images.dart';
+import 'package:inventory_management/common/utils.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -35,12 +36,16 @@ Widget buildView(
         children: <Widget>[
           Stack(
             children: <Widget>[
-              (state.model.imgs != null
-                  ? FadeInImage(
-                      placeholder: AssetImage(ImageAssets.materalIcon),
-                      image: NetworkImage(state.model.imgs.first.url),
-                    )
-                  : Image.asset(ImageAssets.materalIcon)),
+              Container(
+                width: Utils.getScreenWidth(viewService.context),
+                height: Utils.getScreenWidth(viewService.context)/2,
+                child: (state.model.imgs.length > 0
+                    ? FadeInImage(
+                        placeholder: AssetImage(ImageAssets.materalIcon),
+                        image: NetworkImage(state.model.imgs.first.url),
+                      )
+                    : Image.asset(ImageAssets.materalIcon)),
+              ),
               Positioned(
                 bottom: 3,
                 right: 16,

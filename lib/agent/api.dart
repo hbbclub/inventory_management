@@ -27,7 +27,7 @@ class Api {
       '/mm/materials/list',
       params: {
         'keyword': keyword ?? '',
-        'current': keyword ?? '',
+        'current': current,
       },
     );
   }
@@ -83,7 +83,7 @@ class Api {
     return httpUtil.get(
       '/mm/notes/list',
       params: {
-        "keyword": keyword,
+        "keyword": keyword ?? '',
         "current": current,
       },
     );

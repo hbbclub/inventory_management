@@ -20,7 +20,7 @@ class InventoryActionCreator {
     return const Action(InventoryAction.onScan);
   }
 
-  static Action scaned(String code) {
-    return Action(InventoryAction.scaned, payload: code);
+  static Action scaned(Map<String,String> data) {
+    return Action(InventoryAction.scaned, payload: data);
   }
 }

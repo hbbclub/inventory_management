@@ -46,21 +46,15 @@ InventoryState _init(InventoryState state, Action action) {
 
 InventoryState _scaned(InventoryState state, Action action) {
   final InventoryState newState = state.clone();
-  String code = action.payload;
-  Initial initial = cacheModel.user.initials;
-  if (initial != null) {
-    if (RegExp('^[${initial.tag}].*').matchAsPrefix(code) != null) {
-      newState.tagNumber.text = code.substring(1);
-    } else if (RegExp("^[${initial.part}].*").matchAsPrefix(code) != null) {
-      newState.stockNumber.text = code.substring(1);
-    } else if (RegExp("^[${initial.qty}].*").matchAsPrefix(code) != null) {
-      newState.qty.text = code.substring(1);
-    } else if (RegExp("^[${initial.lot}].*").matchAsPrefix(code) != null) {
-      newState.lotNumber.text = code.substring(1);
-    } else if (RegExp("^[${initial.loc}].*").matchAsPrefix(code) != null) {
-      newState.location.text = code.substring(1);
-    }
+  Map<String, String> data = action.payload;
+  if (data['flag'] == 'TAG') {
+    newState.tagNumber.text = data['value'];
+  } else if (data['flag'] == 'PART') {
+    newState.stockNumber.text = data['value'];
+  } else if (data['flag'] == 'LOCT') {
+    newState.lotNumber.text = data['value'];
+  } else if (data['flag'] == 'LOC') {
+    newState.location.text = data['value'];
   }
-
   return newState;
 }

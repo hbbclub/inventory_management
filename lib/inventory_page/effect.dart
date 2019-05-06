@@ -1,8 +1,11 @@
 import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart';
 import 'package:inventory_management/inventory_page/scanner_page/page.dart';
 import 'package:inventory_management/inventory_page/scanner_page/state.dart';
+import 'package:inventory_management/login_page/model/user_model.dart';
 import 'package:inventory_management/route/router.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -24,12 +27,56 @@ void _onInit(Action action, Context<InventoryState> ctx) async {
       CodeFormat.code128,
       CodeFormat.code39,
       CodeFormat.code93,
-    ], (dynamic value) async {
+    ], (String value) async {
       if (value == null) {
+        await Future.delayed(
+            const Duration(seconds: 1), ctx.state.controller.startScanning);
         return;
       }
       await ctx.state.player.playLocal();
-      ctx.dispatch(InventoryActionCreator.scaned(value));
+      Initial initial = cacheModel.user.initials;
+      String code = '';
+      String flag = '';
+      if (RegExp('^[${initial.tag}].*').matchAsPrefix(value) != null) {
+        code = code.substring(1);
+        flag = 'TAG';
+      } else if (RegExp("^[${initial.part}].*").matchAsPrefix(value) != null) {
+        flag = 'PART';
+        code = code.substring(1);
+      } else if (RegExp("^[${initial.lot}].*").matchAsPrefix(value) != null) {
+        flag = 'LOT';
+        code = code.substring(1);
+      } else if (RegExp("^[${initial.loc}].*").matchAsPrefix(value) != null) {
+        flag = 'LOC';
+        code = code.substring(1);
+      } else {
+        await showDialog(
+            context: ctx.context,
+            builder: (_) {
+              return AlertDialog(
+                title: Text("Invalid Barcode:${value.toString()}"),
+                actions: <Widget>[
+                  new FlatButton(
+                    child: new Text("Close"),
+                    onPressed: () {
+                      Navigator.of(ctx.context).pop();
+                    },
+                  ),
+                  new FlatButton(
+                    child: new Text("Sign out"),
+                    onPressed: () {
+                      Navigator.of(ctx.context).pop();
+                    },
+                  ),
+                ],
+              );
+            });
+        await Future.delayed(
+            const Duration(seconds: 1), ctx.state.controller.startScanning);
+        return;
+      }
+      ctx.dispatch(
+          InventoryActionCreator.scaned({'flag': flag, 'value': value}));
       await Future.delayed(
           const Duration(seconds: 1), ctx.state.controller.startScanning);
     });

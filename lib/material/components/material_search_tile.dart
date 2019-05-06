@@ -37,13 +37,13 @@ class MaterialSearchTile extends StatelessWidget {
                   Text(
                     model.partNo ?? '',
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: sp(40)),
+                    style: TextStyle(fontSize: sp(40),fontWeight: FontWeight.w600),
                   ),
                   Text(
                     model.desc ?? '',
                     overflow: TextOverflow.ellipsis,
                     style:
-                        TextStyle(fontSize: sp(32), color: Color(0xFF999999)),
+                        TextStyle(fontSize: sp(40), color: Color(0xFF999999)),
                   ),
                   Text(
                     model.loc ?? '',

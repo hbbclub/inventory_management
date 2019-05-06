@@ -9,6 +9,7 @@ import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/state.dar
 import 'package:inventory_management/memo/memo_edit_page/state.dart';
 import 'package:inventory_management/memo/memo_list_page/state.dart';
 import 'package:inventory_management/memo/memo_save_page/state.dart';
+import 'package:inventory_management/printing/printing_page/state.dart';
 import 'package:inventory_management/printing/std_label_page/state.dart';
 import 'package:inventory_management/printing/stk_label_page/state.dart';
 import 'package:inventory_management/setting_page/reset_password_page/state.dart';
@@ -33,6 +34,7 @@ class AppState implements Cloneable<AppState> {
   StdLabelState stdLabelState = StdLabelState();
   SettingState settingState = SettingState();
   ResetPasswordState resetPasswordState = ResetPasswordState();
+  PrintingState printingState = PrintingState();
 
   @override
   AppState clone() {
@@ -53,6 +55,7 @@ class AppState implements Cloneable<AppState> {
       ..stkLabelState = stkLabelState.clone()
       ..stdLabelState = stdLabelState.clone()
       ..resetPasswordState = resetPasswordState.clone()
+      ..printingState = printingState.clone()
       ..settingState = settingState.clone();
   }
 }

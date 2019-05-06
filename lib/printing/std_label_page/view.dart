@@ -9,9 +9,6 @@ Widget buildView(
   final ListAdapter adapter = viewService.buildAdapter();
 
   return Scaffold(
-      appBar: AppBar(
-        title: Text('Label Print'),
-      ),
       bottomNavigationBar: Container(
         color: Colors.white,
         height: 44,

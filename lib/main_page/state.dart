@@ -3,7 +3,7 @@ import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/inventory_page/page.dart';
 import 'package:inventory_management/material/material_list_page/page.dart';
 import 'package:inventory_management/memo/memo_list_page/page.dart';
-import 'package:inventory_management/printing/std_label_page/page.dart';
+import 'package:inventory_management/printing/printing_page/page.dart';
 import 'package:inventory_management/route/app_state.dart';
 
 class MainModel {
@@ -29,7 +29,7 @@ MainState initState(Map<String, dynamic> args) {
   return MainState()
     ..modules = [
       MainModel(ImageAssets.main1, routerNameForMaterialListPage, 'SKU Query'),
-      MainModel(ImageAssets.main2, routerNameForStdLabelPage, 'Label Print'),
+      MainModel(ImageAssets.main2, routerNameForPrintingPage, 'Label Print'),
       MainModel(ImageAssets.main3, routerNameForMemoListPage, 'Note'),
       MainModel(ImageAssets.main4, routerNameForInventoryPage, 'Physical Inv')
     ];

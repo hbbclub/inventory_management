@@ -14,22 +14,22 @@ Widget buildView(
       titleSpacing: 0.0,
       title: Text('SKU Detail'),
     ),
-    bottomNavigationBar: Container(
-      color: Colors.white,
-      height: 44,
-      child: FlatButton(
-          onPressed: () =>
-              dispatch(MaterialDetailActionCreator.jumpToStkPrint()),
-          child: Column(
-            children: <Widget>[
-              Icon(
-                Icons.print,
-                size: 20,
-              ),
-              Text('Print SKU Label')
-            ],
-          )),
-    ),
+    // bottomNavigationBar: Container(
+    //   color: Colors.white,
+    //   height: 44,
+    //   child: FlatButton(
+    //       onPressed: () =>
+    //           dispatch(MaterialDetailActionCreator.jumpToStkPrint()),
+    //       child: Column(
+    //         children: <Widget>[
+    //           Icon(
+    //             Icons.print,
+    //             size: 20,
+    //           ),
+    //           Text('Print SKU Label')
+    //         ],
+    //       )),
+    // ),
     body: Container(
       padding: EdgeInsets.all(16.0),
       child: Column(

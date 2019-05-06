@@ -9,6 +9,8 @@ import 'package:inventory_management/memo/memo_edit_page/ocr_list_page/state.dar
 import 'package:inventory_management/memo/memo_edit_page/state.dart';
 import 'package:inventory_management/memo/memo_list_page/state.dart';
 import 'package:inventory_management/memo/memo_save_page/state.dart';
+import 'package:inventory_management/printing/printing_page/page.dart';
+import 'package:inventory_management/printing/printing_page/state.dart';
 import 'package:inventory_management/printing/std_label_page/state.dart';
 import 'package:inventory_management/printing/stk_label_page/state.dart';
 import 'package:inventory_management/route/app_state.dart';
@@ -54,6 +56,8 @@ class AppRoute {
       routerNameForStkLabelPage: StkLabelConnector() + StkLabelPage(),
       routerNameForStdLabelPage: StdLabelConnector() + StdLabelPage(),
       routerNameForSettingPage: SettingConnector() + SettingPage(),
+      routerNameForPrintingPage:
+          createDependent(PrintingConnector(), PrintingPage()),
       routerNameForResetPasswordPage:
           ResetPasswordConnector() + ResetPasswordPage(),
     });
@@ -63,6 +67,13 @@ class AppRoute {
 
   //工厂方法
   factory AppRoute() => _singleton;
+
+  Widget buildPage(
+    String routeName, {
+    Object arguments,
+  }) {
+    return router.buildPage(routeName, arguments);
+  }
 
   // 页面跳转
   Future pushScreen(

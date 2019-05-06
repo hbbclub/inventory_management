@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:inventory_management/login_page/model/user_model.dart';
 import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';
@@ -16,13 +17,11 @@ Reducer<MemoSaveState> buildReducer() {
 
 MemoSaveState _route(MemoSaveState state, Action action) {
   final MemoSaveState newState = initState(action.payload).clone();
-  List<String> categories = List.from(cacheModel.user.categories?.write ?? []);
+  List<Categorie> categories = List.from(cacheModel.user.categories ?? []);
   if (categories.length > 0 && newState.activity == null) {
-    newState.activity = categories[0];
+    newState.activity = categories[0].category;
   }
-  if (newState.activity != null && !categories.contains(newState.activity)) {
-    categories.insert(0, newState.activity);
-  }
+
   newState.allActivities = categories;
   return newState;
 }

@@ -10,21 +10,25 @@ class UserModel {
   @JsonKey(toJson: _companyToJson)
   Company company;
   @JsonKey(toJson: _categoriesToJson, defaultValue: [])
-  Categories categories;
-  @JsonKey(defaultValue: {})
-  Initial initial;
+  List<Categorie> categories;
+  @JsonKey(toJson: _initialsToJson, defaultValue: {})
+  Initial initials;
 
   UserModel({
     this.username,
     this.name,
     this.company,
     this.categories,
-    this.initial,
+    this.initials,
   });
 
   static Map<String, dynamic> _companyToJson(Company cmp) => cmp.toJson();
-  static Map<String, dynamic> _categoriesToJson(Categories categories) =>
-      categories.toJson();
+  static Map<String, dynamic> _initialsToJson(Initial initials) =>
+      initials.toJson();
+  static List<Map<String, dynamic>> _categoriesToJson(List<Categorie> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
@@ -48,16 +52,18 @@ class Company {
 }
 
 @JsonSerializable()
-class Categories {
-  List<String> write;
+class Categorie {
+  String acronym;
+  String category;
 
-  Categories({
-    this.write,
+  Categorie({
+    this.acronym,
+    this.category,
   });
-  factory Categories.fromJson(Map<String, dynamic> json) =>
-      _$CategoriesFromJson(json);
+  factory Categorie.fromJson(Map<String, dynamic> json) =>
+      _$CategorieFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CategoriesToJson(this);
+  Map<String, dynamic> toJson() => _$CategorieToJson(this);
 }
 
 @JsonSerializable()

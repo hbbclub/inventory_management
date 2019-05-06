@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/login_page/model/user_model.dart';
 import 'package:inventory_management/memo/memo_edit_page/memo_image_component/state.dart';
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
 
@@ -12,7 +13,7 @@ class MemoSaveState implements Cloneable<MemoSaveState> {
   String notes = '';
 
   String activity;
-  List<String> allActivities = [];
+  List<Categorie> allActivities = [];
   List<MemoImageState> images = [];
   MemoListTileState listTileState = MemoListTileState();
 

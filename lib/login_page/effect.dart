@@ -45,8 +45,6 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
     return;
   }
   Map<String, dynamic> userMap = result.data['user'];
-  userMap['categories'] = result.data['categories'];
-  userMap['initial'] = result.data['initial'];
   cacheModel.user = UserModel.fromJson(userMap);
   cacheModel.setLoaclCache();
   httpUtil.commonHeader.addAll({

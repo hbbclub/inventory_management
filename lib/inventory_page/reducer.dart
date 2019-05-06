@@ -47,7 +47,7 @@ InventoryState _init(InventoryState state, Action action) {
 InventoryState _scaned(InventoryState state, Action action) {
   final InventoryState newState = state.clone();
   String code = action.payload;
-  Initial initial = cacheModel.user.initial;
+  Initial initial = cacheModel.user.initials;
   if (initial != null) {
     if (RegExp('^[${initial.tag}].*').matchAsPrefix(code) != null) {
       newState.tagNumber.text = code.substring(1);

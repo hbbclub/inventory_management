@@ -1,6 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/colors.dart';
+import 'package:inventory_management/login_page/model/user_model.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -22,11 +23,11 @@ Widget buildView(
           onChanged: (String newValue) =>
               dispatch(MemoSaveActionCreator.selectCategory(newValue)),
           items:
-              state.allActivities.map<DropdownMenuItem<String>>((String value) {
+              state.allActivities.map<DropdownMenuItem<String>>((Categorie value) {
               
                     return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
+                      value: value.category,
+                      child: Text(value.acronym),
                     );
                   })?.toList(),
         ),

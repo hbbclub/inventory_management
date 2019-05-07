@@ -92,11 +92,11 @@ class Agent {
 
   Future<ApiModel> _handError(String errorMsg, int code) {
     Fluttertoast.showToast(
-        msg: errorMsg,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIos: 1,
-        fontSize: 16.0);
+      msg: errorMsg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIos: 1,
+    );
     var model =
         ApiModel.fromJson({'error': code, 'data': null, 'message': errorMsg});
     return Future.value(model);

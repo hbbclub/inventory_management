@@ -8,11 +8,11 @@ import 'package:inventory_management/welcome_page/page.dart';
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) async {
     Fluttertoast.showToast(
-        msg: details.exceptionAsString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIos: 1,
-        fontSize: 16.0);
+      msg: details.exceptionAsString(),
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIos: 1,
+    );
     print(details);
   };
   runApp(

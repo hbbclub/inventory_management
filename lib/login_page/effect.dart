@@ -41,7 +41,9 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
       password: ctx.state.password.text,
       linkWord: ctx.state.linkWord.text);
   if (result.isError()) {
-    Utils.showSnackBarWithKey(ctx.state.scaffoldkey, text: result.errMsg);
+    if (result.errDtaitl == ApiErrorDetail.logicError) {
+      Utils.showSnackBarWithKey(ctx.state.scaffoldkey, text: result.errMsg);
+    }
     return;
   }
   Map<String, dynamic> userMap = result.data['user'];

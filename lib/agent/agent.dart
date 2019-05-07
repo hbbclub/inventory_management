@@ -29,8 +29,10 @@ class Agent {
     Map<String, dynamic> header,
   }) async {
     try {
+      print('-------------------------------------------');
       print('url:' + dio.options.baseUrl + url);
       print(params);
+      print('--------------------------------------------');
       Response res;
 
       if (verb == HttpVerb.POST) {

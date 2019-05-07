@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inventory_management/agent/api_model.dart';
 import 'package:dio/dio.dart';
 import 'package:inventory_management/welcome_page/model/cache_model.dart';
+import 'package:flutter/foundation.dart';
 
 enum HttpVerb { POST, GET, DELETE, PUT, PATCH }
 
@@ -86,7 +87,8 @@ class Agent {
     }
     // final result = json.decode(res.data.toString());
     print('result:' + dio.options.baseUrl + url);
-    print(res.data);
+    debugPrint(res.data.toString(),wrapWidth:1000);
+    
     var model =
         ApiModel.fromJson({'error': 0, 'data': res.data, 'message': ''});
     return model;

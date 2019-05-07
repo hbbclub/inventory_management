@@ -9,20 +9,22 @@ Widget buildView(
   final ListAdapter adapter = viewService.buildAdapter();
 
   return Scaffold(
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        height: 44,
-        child: FlatButton(
-            onPressed: () => dispatch(StdLabelActionCreator.onPrinterStd()),
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.print,
-                  size: 20,
-                ),
-                Text('Print Label')
-              ],
-            )),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          color: Colors.white,
+          height: 44,
+          child: FlatButton(
+              onPressed: () => dispatch(StdLabelActionCreator.onPrinterStd()),
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.print,
+                    size: 20,
+                  ),
+                  Text('Print Label')
+                ],
+              )),
+        ),
       ),
       resizeToAvoidBottomPadding: false,
       body: InkWell(

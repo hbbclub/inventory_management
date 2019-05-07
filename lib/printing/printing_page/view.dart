@@ -22,9 +22,11 @@ Widget buildView(
         }).toList(),
       ),
     ),
-    body: TabBarView(
-      controller: state.controller,
-      children: state.pages,
+    body: SafeArea(
+      child: TabBarView(
+        controller: state.controller,
+        children: state.pages,
+      ),
     ),
   );
 }

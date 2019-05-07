@@ -73,20 +73,22 @@ Widget buildView(
       title: Text('Print SKU Label'),
     ),
     // resizeToAvoidBottomPadding: false,
-    bottomNavigationBar: Container(
-      color: Colors.white,
-      height: 44,
-      child: FlatButton(
-          onPressed: () => dispatch(StkLabelActionCreator.onPrinterStk()),
-          child: Column(
-            children: <Widget>[
-              Icon(
-                Icons.print,
-                size: 20,
-              ),
-              Text('Print Label')
-            ],
-          )),
+    bottomNavigationBar: SafeArea(
+      child: Container(
+        color: Colors.white,
+        height: 44,
+        child: FlatButton(
+            onPressed: () => dispatch(StkLabelActionCreator.onPrinterStk()),
+            child: Column(
+              children: <Widget>[
+                Icon(
+                  Icons.print,
+                  size: 20,
+                ),
+                Text('Print Label')
+              ],
+            )),
+      ),
     ),
     body: Container(
       padding: EdgeInsets.all(16.0),

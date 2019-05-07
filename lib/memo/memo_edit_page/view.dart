@@ -45,26 +45,28 @@ Widget buildView(
         ],
       ),
     ),
-    bottomNavigationBar: Container(
-      color: Colors.white,
-      height: 44,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          FlatButton(
+    bottomNavigationBar: SafeArea(
+      child: Container(
+        color: Colors.white,
+        height: 44,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            FlatButton(
+                child: Column(
+                    children: <Widget>[Icon(Icons.image), Text('Gallary')]),
+                onPressed: () {
+                  dispatch(MemoEditPageActionCreator.onLoadAssets());
+                }),
+            FlatButton(
               child: Column(
-                  children: <Widget>[Icon(Icons.image), Text('Gallary')]),
-              onPressed: () {
-                dispatch(MemoEditPageActionCreator.onLoadAssets());
-              }),
-          FlatButton(
-            child:
-                Column(children: <Widget>[Icon(Icons.camera_alt), Text('Ocr')]),
-            onPressed: () async {
-              dispatch(MemoEditPageActionCreator.onOcr());
-            },
-          ),
-        ],
+                  children: <Widget>[Icon(Icons.camera_alt), Text('Ocr')]),
+              onPressed: () async {
+                dispatch(MemoEditPageActionCreator.onOcr());
+              },
+            ),
+          ],
+        ),
       ),
     ),
   );

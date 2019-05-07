@@ -53,6 +53,5 @@ void _onPrinterStd(Action action, Context<StdLabelState> ctx) async {
   }
   args['type'] = 'std';
   args['data'] = data;
-  print(args);
   Printer.print(args);
 }

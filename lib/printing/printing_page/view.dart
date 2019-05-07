@@ -5,7 +5,6 @@ import 'state.dart';
 
 Widget buildView(
     PrintingState state, Dispatch dispatch, ViewService viewService) {
-  print(1213);
   return Scaffold(
     resizeToAvoidBottomPadding: false,
     appBar: AppBar(

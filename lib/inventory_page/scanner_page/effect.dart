@@ -23,7 +23,6 @@ void _onInit(Action action, Context<ScannerState> ctx) async {
       CodeFormat.code39,
       CodeFormat.code93,
     ], (dynamic value) {
-      print(value);
       if (value == null) {
         return;
       }

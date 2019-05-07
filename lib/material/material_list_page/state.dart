@@ -22,8 +22,7 @@ class MaterialListState implements Cloneable<MaterialListState> {
 }
 
 MaterialListState initState(Map<String, dynamic> args) {
-  print(args);
-  print(1111);
+
   return MaterialListState()
     ..type = args != null ? args['type'] ?? MaterialListType.page : MaterialListType.page;
 }

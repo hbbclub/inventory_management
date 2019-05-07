@@ -9,7 +9,6 @@ import 'state.dart';
 
 Widget buildView(
     MaterialListState state, Dispatch dispatch, ViewService viewService) {
-  print(state.list.length);
   return Scaffold(
     body: SafeArea(
       child: Container(

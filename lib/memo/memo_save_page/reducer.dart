@@ -33,9 +33,7 @@ MemoSaveState _switchSendMail(MemoSaveState state, Action action) {
 }
 
 MemoSaveState _selectCategory(MemoSaveState state, Action action) {
-  final MemoSaveState newState = state.clone();
-  print(action.payload);
-  print(newState.allActivities);
+  final MemoSaveState newState = state.clone();  
   newState.activity = action.payload;
   return newState;
 }

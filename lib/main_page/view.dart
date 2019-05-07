@@ -8,7 +8,6 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
-  print(state.modules);
   return Scaffold(
       body: Container(
     color: Color(0xFF113042),

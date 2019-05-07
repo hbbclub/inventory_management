@@ -38,6 +38,7 @@ Widget buildView(
           Expanded(
             child: TextField(
               controller: state.countController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Amount',
                 hintText: 'Please enter # of labels',

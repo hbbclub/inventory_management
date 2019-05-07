@@ -17,11 +17,7 @@ void _onPrinterStk(Action action, Context<StkLabelState> ctx) {
   Map<String, dynamic> info = ctx.state.model.toJson();
   info.addAll({'count': int.parse(ctx.state.countController.text ?? '0')});
   info.addAll({
-    'lot': initials.lot +
-        int.parse(ctx.state.lotNumberController.text.length > 0
-                ? ctx.state.lotNumberController.text
-                : '0')
-            .toString()
+    'lot': initials.lot + (ctx.state.lotNumberController.text ?? '0').toString()
   });
   info['part_no'] = initials.part + (info['part_no'] ?? '').toString();
   info['loc'] = initials.loc + (info['loc'] ?? '').toString();

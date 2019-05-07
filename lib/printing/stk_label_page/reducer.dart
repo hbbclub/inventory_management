@@ -18,21 +18,20 @@ Reducer<StkLabelState> buildReducer() {
 StkLabelState _route(StkLabelState state, Action action) {
   final StkLabelState newState = state.clone();
   MaterialModel model = action.payload;
-  
+
   newState
-  ..model = model
+    ..model = model
     ..stockController = TextEditingController(text: model.partNo)
     ..descController = TextEditingController(text: model.desc)
     ..uomController = TextEditingController(text: model.uom)
     ..qtyController = TextEditingController(text: model.sapQty)
-    ..lotNumberController = TextEditingController(text: model.loc)
+    ..lotNumberController = TextEditingController()
     ..locationController = TextEditingController(text: model.loc);
   newState.items = [
     PrintingStkLabel('Stock Code', '', newState.stockController),
     PrintingStkLabel('Description', '', newState.descController),
     PrintingStkLabel('UOM', '', newState.uomController),
     PrintingStkLabel('QTY', '', newState.qtyController),
-    PrintingStkLabel('Lot Number', '', newState.lotNumberController),
     PrintingStkLabel('Location', '', newState.locationController),
   ];
   return newState;

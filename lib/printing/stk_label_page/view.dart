@@ -18,6 +18,25 @@ Widget buildView(
         children: <Widget>[
           Expanded(
             child: TextField(
+              controller: state.lotNumberController,
+              decoration: InputDecoration(
+                labelText: 'Lot Number',
+                hintText: 'Please enter lot number',
+                labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+    Container(
+      height: 60.0,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: TextField(
               controller: state.countController,
               decoration: InputDecoration(
                 labelText: 'Amount',
@@ -57,7 +76,7 @@ Widget buildView(
       color: Colors.white,
       height: 44,
       child: FlatButton(
-          onPressed: () =>dispatch(StkLabelActionCreator.onPrinterStk()),
+          onPressed: () => dispatch(StkLabelActionCreator.onPrinterStk()),
           child: Column(
             children: <Widget>[
               Icon(

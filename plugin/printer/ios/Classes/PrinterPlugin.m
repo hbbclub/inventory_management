@@ -187,7 +187,7 @@
  
     [command addTextwithX:5 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"LOT NO."];
 
-    [command addTextwithX:25 withY:298 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"uom"]];
+    [command addTextwithX:25 withY:298 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"lot"]];
 
     
     [command add1DBarcode:25 :330 :@"39"  :50 :0 :0 :2 :4 :@"050718"];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inventory_management/bloc/bloc_provider.dart';
 import 'package:inventory_management/common/colors.dart';
 import 'package:inventory_management/route/router.dart';
@@ -6,6 +7,12 @@ import 'package:inventory_management/welcome_page/page.dart';
 
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) async {
+    Fluttertoast.showToast(
+        msg: details.exceptionAsString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIos: 1,
+        fontSize: 16.0);
     print(details);
   };
   runApp(

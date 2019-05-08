@@ -13,7 +13,7 @@ Widget buildView(
       controller: state.textEditingController,
       decoration: InputDecoration(
           hintText: 'Please enter words  here', border: InputBorder.none),
-      textInputAction: TextInputAction.done,
+      textInputAction: TextInputAction.newline,
       maxLines: null,
     ),
   );

@@ -36,7 +36,7 @@ dependencies:
   shared_preferences: ^0.4.0
   device_info: ^0.2.1
   http: ^0.12.0
-  dio: ^2.0.5
+  dio: ^2.1.3
   flutter_user_agent: ^1.0.1
   fast_qr_reader_view:
     git:

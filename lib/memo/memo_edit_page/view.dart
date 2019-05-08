@@ -26,23 +26,27 @@ Widget buildView(
     body: Container(
       color: Color(0XffEEEEEE),
       padding: EdgeInsets.all(16.0),
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            width: 10.0,
-          ),
-          Expanded(
-            child: ListView.separated(
-              itemCount: adapter.itemCount,
-              itemBuilder: adapter.itemBuilder,
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: 8,
-                );
-              },
+      child: InkWell(
+        onTap: () =>
+            FocusScope.of(viewService.context).requestFocus(new FocusNode()),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              width: 10.0,
             ),
-          ),
-        ],
+            Expanded(
+              child: ListView.separated(
+                itemCount: adapter.itemCount,
+                itemBuilder: adapter.itemBuilder,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 8,
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     ),
     bottomNavigationBar: SafeArea(

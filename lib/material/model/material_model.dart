@@ -63,11 +63,11 @@ class Img {
 
 @JsonSerializable()
 class InfoItem {
-  String name;
+  String label;
   String value;
 
   InfoItem({
-    this.name,
+    this.label,
     this.value,
   });
 

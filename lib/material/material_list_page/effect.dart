@@ -1,3 +1,4 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:inventory_management/agent/api.dart';
 import 'package:inventory_management/material/material_detail_page/page.dart';
@@ -15,6 +16,7 @@ Effect<MaterialListState> buildEffect() {
     MaterialListAction.onEnterDetail: _onEnterDetail,
     MaterialListAction.onClearSearch: _onClearSearch,
     MaterialListAction.onBack: _onBack,
+    MaterialListAction.onScan: _onScan,
   });
 }
 
@@ -49,6 +51,12 @@ void _onClearSearch(Action action, Context<MaterialListState> ctx) async {
 
 void _onBack(Action action, Context<MaterialListState> ctx) async {
   appRouter.popScreen(ctx.context);
+}
+
+void _onScan(Action action, Context<MaterialListState> ctx) async {
+  try {
+    String barcode = await BarcodeScanner.scan();
+  } catch (e) {}
 }
 
 Future<Null> _onLoadmore(Action action, Context<MaterialListState> ctx) async {

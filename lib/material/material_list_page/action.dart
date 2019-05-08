@@ -8,6 +8,7 @@ enum MaterialListAction {
   onClearSearch,
   onLoadmore,
   onEnterDetail,
+  onScan,
   onBack
 }
 
@@ -37,5 +38,8 @@ class MaterialListActionCreator {
 
   static Action onBack() {
     return Action(MaterialListAction.onBack);
+  }
+  static Action onScan() {
+    return Action(MaterialListAction.onScan);
   }
 }

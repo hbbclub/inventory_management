@@ -2,13 +2,14 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_refresh/flutter_refresh.dart';
 import 'package:inventory_management/material/components/material_search_tile.dart';
-import 'package:inventory_management/route/router.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'action.dart';
 import 'state.dart';
 
 Widget buildView(
     MaterialListState state, Dispatch dispatch, ViewService viewService) {
+      
   return Scaffold(
     body: SafeArea(
       child: Container(
@@ -38,9 +39,9 @@ Widget buildView(
                           )
                         : null,
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
+                      icon: Icon(FontAwesomeIcons.search),
                       onPressed: () =>
-                          dispatch(MaterialListActionCreator.onClearSearch()),
+                          dispatch(MaterialListActionCreator.onScan()),
                     )),
               ),
             ),

@@ -10,7 +10,7 @@ Widget buildView(
     padding: EdgeInsets.only(top: 16),
     child: ListView.builder(
       itemBuilder: (BuildContext context, int index) {
-        return MaterialInfoTile(state.model.advInfo[index].name ?? '',
+        return MaterialInfoTile(state.model.advInfo[index].label ?? '',
             state.model.advInfo[index].value ?? '');
       },
       itemCount: state.model.advInfo?.length ?? 0,

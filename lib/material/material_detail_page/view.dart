@@ -9,6 +9,9 @@ import 'state.dart';
 
 Widget buildView(
     MaterialDetailState state, Dispatch dispatch, ViewService viewService) {
+  if (state.model == null) {
+    return Container(color: Colors.white,);
+  }
   return Scaffold(
     appBar: AppBar(
       titleSpacing: 0.0,
@@ -38,7 +41,7 @@ Widget buildView(
             children: <Widget>[
               Container(
                 width: Utils.getScreenWidth(viewService.context),
-                height: Utils.getScreenWidth(viewService.context)/2,
+                height: Utils.getScreenWidth(viewService.context) / 2,
                 child: (state.model.imgs.length > 0
                     ? FadeInImage(
                         placeholder: AssetImage(ImageAssets.materalIcon),

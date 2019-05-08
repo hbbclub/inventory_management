@@ -2,12 +2,19 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'material_model.g.dart';
 
+class StockTileModel {
+  String title;
+  String label;
+  StockTileModel(this.title, this.label);
+}
+
 @JsonSerializable()
 class MaterialModel {
   @JsonKey(name: '_id', nullable: false)
   String id;
   @JsonKey(name: 'part_no', nullable: false)
   String partNo;
+  Stock stocks;
   String loc;
   String desc;
   String uom;
@@ -19,8 +26,10 @@ class MaterialModel {
   @JsonKey(toJson: _imgToJson, defaultValue: [])
   List<Img> imgs;
 
-  @JsonKey(name: 'adv_info',toJson: _advInfoToJson, defaultValue: [])
+  @JsonKey(name: 'adv_info', toJson: _advInfoToJson, defaultValue: [])
   List<InfoItem> advInfo;
+  @JsonKey(ignore: true)
+  List<StockTileModel> list = [];
 
   factory MaterialModel.fromJson(Map<String, dynamic> json) =>
       _$MaterialModelFromJson(json);
@@ -71,6 +80,26 @@ class InfoItem {
     this.value,
   });
 
-  factory InfoItem.fromJson(Map<String, dynamic> json) => _$InfoItemFromJson(json);
+  factory InfoItem.fromJson(Map<String, dynamic> json) =>
+      _$InfoItemFromJson(json);
   Map<String, dynamic> toJson() => _$InfoItemToJson(this);
+}
+
+@JsonSerializable()
+class Stock {
+  int total;
+  List<String> loc;
+
+  Stock({
+    this.total,
+    this.loc,
+  });
+
+  factory Stock.fromJson(Map<String, dynamic> json) => _$StockFromJson(json);
+  Map<String, dynamic> toJson() => _$StockToJson(this);
+
+  @override
+  String toString() {
+    return this.toJson().toString();
+  }
 }

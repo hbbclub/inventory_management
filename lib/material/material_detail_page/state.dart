@@ -9,7 +9,8 @@ import 'package:inventory_management/route/app_state.dart';
 class MaterialDetailState implements Cloneable<MaterialDetailState> {
   TextEditingController controller =
       TextEditingController.fromValue(TextEditingValue.empty);
-  MaterialModel model = MaterialModel();
+  MaterialModel model;
+  String partNo;
   String barcode = '';
   var isPageCanChanged = true;
   TabController mTabController;
@@ -20,6 +21,7 @@ class MaterialDetailState implements Cloneable<MaterialDetailState> {
     return MaterialDetailState()
       ..controller = controller
       ..model = model
+      ..partNo = partNo
       ..barcode = barcode
       ..isPageCanChanged = isPageCanChanged
       ..mTabController = mTabController
@@ -28,7 +30,7 @@ class MaterialDetailState implements Cloneable<MaterialDetailState> {
 }
 
 MaterialDetailState initState(MaterialModel args) {
-  return MaterialDetailState()..model = args;
+  return MaterialDetailState()..partNo = args.partNo;
 }
 
 class Choice {
@@ -46,7 +48,6 @@ const List<Choice> choices = const <Choice>[
   const Choice(title: 'Advanced', icon: Icons.scanner),
 ];
 
-
 class MaterialDetailConnector extends ConnOp<AppState, MaterialDetailState> {
   @override
   MaterialDetailState get(AppState appState) {
@@ -56,11 +57,9 @@ class MaterialDetailConnector extends ConnOp<AppState, MaterialDetailState> {
 
   @override
   void set(AppState appState, MaterialDetailState subState) {
-
     appState.materialDetailState = subState.clone();
   }
 }
-
 
 class InfoConnector extends ConnOp<MaterialDetailState, InfoState> {
   @override
@@ -83,7 +82,9 @@ class StockConnector extends ConnOp<MaterialDetailState, StockState> {
   }
 
   @override
-  void set(MaterialDetailState state, StockState subState) {}
+  void set(MaterialDetailState state, StockState subState) {
+    state.model = subState.model;
+  }
 }
 
 class AdvancedConnector extends ConnOp<MaterialDetailState, AdvancedState> {
@@ -97,4 +98,3 @@ class AdvancedConnector extends ConnOp<MaterialDetailState, AdvancedState> {
   @override
   void set(MaterialDetailState state, AdvancedState subState) {}
 }
-

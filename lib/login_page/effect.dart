@@ -27,7 +27,7 @@ void _onInit(Action action, Context<LoginState> ctx) async {
 }
 
 void _onLogin(Action action, Context<LoginState> ctx) async {
-  if(ctx.state.loading){
+  if (ctx.state.loading) {
     return;
   }
   httpUtil.changeHostUrl('http://' + ctx.state.hostUrl.text);
@@ -46,9 +46,8 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
   if (result.isError()) {
     if (result.errDtaitl == ApiErrorDetail.logicError) {
       Utils.showSnackBarWithKey(ctx.state.scaffoldkey, text: result.errMsg);
-        ctx.dispatch(LoginActionCreator.loading(false));
-
     }
+    ctx.dispatch(LoginActionCreator.loading(false));
     return;
   }
   Map<String, dynamic> userMap = result.data['user'];

@@ -6,6 +6,7 @@ class LoginState implements Cloneable<LoginState> {
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();
   var scaffoldkey = new GlobalKey<ScaffoldState>();
   bool canDoLogin = true;
+  bool loading = false;
   TextEditingController account = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController hostUrl = TextEditingController();
@@ -20,6 +21,7 @@ class LoginState implements Cloneable<LoginState> {
       ..password = password
       ..hostUrl = hostUrl
       ..linkWord = linkWord
+      ..loading = loading
       ..canDoLogin = canDoLogin;
   }
 }

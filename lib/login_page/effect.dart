@@ -27,6 +27,9 @@ void _onInit(Action action, Context<LoginState> ctx) async {
 }
 
 void _onLogin(Action action, Context<LoginState> ctx) async {
+  if(ctx.state.loading){
+    return;
+  }
   httpUtil.changeHostUrl('http://' + ctx.state.hostUrl.text);
 
   cacheModel.account = ctx.state.account.text;
@@ -35,7 +38,7 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
   cacheModel.linkword = ctx.state.linkWord.text;
 
   cacheModel.setLoaclCache();
-
+  ctx.dispatch(LoginActionCreator.loading(true));
   ApiModel result = await api.login(
       username: ctx.state.account.text,
       password: ctx.state.password.text,
@@ -43,6 +46,8 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
   if (result.isError()) {
     if (result.errDtaitl == ApiErrorDetail.logicError) {
       Utils.showSnackBarWithKey(ctx.state.scaffoldkey, text: result.errMsg);
+        ctx.dispatch(LoginActionCreator.loading(false));
+
     }
     return;
   }

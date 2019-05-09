@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:inventory_management/common/colors.dart';
 import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/common/utils.dart';
@@ -8,7 +9,6 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(LoginState state, Dispatch dispatch, ViewService viewService) {
-
   return Scaffold(
     key: state.scaffoldkey,
     body: Theme(
@@ -189,10 +189,18 @@ Widget buildSubmitBottom(
           color: Color(0xFF426478),
           disabledTextColor: Colors.white,
           textColor: Colors.white,
-          child: Text(
-            'Login',
-            style: TextStyle(fontSize: 20),
-          ),
+          child: state.loading
+              ? Container(
+                  color: mainColor,
+                  child: SpinKitWave(
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                )
+              : Text(
+                  'Login',
+                  style: TextStyle(fontSize: 20),
+                ),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(40))),
           onPressed: state.canDoLogin

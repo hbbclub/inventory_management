@@ -84,5 +84,4 @@ Widget buildView(
       ),
     ),
   );
-  ;
 }

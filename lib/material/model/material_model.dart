@@ -14,7 +14,7 @@ class MaterialModel {
   String id;
   @JsonKey(name: 'part_no', nullable: false)
   String partNo;
-  Stock stocks;
+  Stocks stocks;
   String loc;
   String desc;
   String uom;
@@ -86,12 +86,31 @@ class InfoItem {
 }
 
 @JsonSerializable()
-class Stock {
+class Stocks {
   int total;
-  List<String> loc;
+  List<Stock> loc;
+
+  Stocks({
+    this.total,
+    this.loc,
+  });
+
+  factory Stocks.fromJson(Map<String, dynamic> json) => _$StocksFromJson(json);
+  Map<String, dynamic> toJson() => _$StocksToJson(this);
+
+  @override
+  String toString() {
+    return this.toJson().toString();
+  }
+}
+
+@JsonSerializable()
+class Stock {
+  int qty;
+  String loc;
 
   Stock({
-    this.total,
+    this.qty,
     this.loc,
   });
 
@@ -103,3 +122,4 @@ class Stock {
     return this.toJson().toString();
   }
 }
+

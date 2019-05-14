@@ -14,7 +14,8 @@ void _oninit(Action action, Context<StockState> ctx) {
       ctx.state.model.stocks.loc.length > 0) {
     List<StockTileModel> list =
         List.generate(ctx.state.model.stocks.loc.length, (index) {
-      return StockTileModel('loc', ctx.state.model.stocks.loc[index]);
+      return StockTileModel(ctx.state.model.stocks.loc[index]?.loc ?? '',
+          ctx.state.model.stocks.loc[index]?.qty.toString() ?? '');
     }).toList();
     list.add(StockTileModel('total', ctx.state.model.stocks.total.toString()));
     ctx.dispatch(StockActionCreator.init(list));

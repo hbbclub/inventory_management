@@ -174,7 +174,7 @@
    
     [command addTextwithX:5 withY:24 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"STOCK NO."];
     
-    [command addTextwithX:25 withY:48 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"part_no"]];
+    [command addTextwithX:25 withY:48 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"part_no_to_show"]];
 
     [command add1DBarcode:25 :86 :@"39"  :40 :0 :0 :3 :5 :info[@"part_no"]];
     
@@ -187,10 +187,10 @@
  
     [command addTextwithX:5 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"LOT NO."];
 
-    [command addTextwithX:25 withY:298 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"lot"]];
+    [command addTextwithX:25 withY:298 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"lot_to_show"]];
 
     
-    [command add1DBarcode:25 :330 :@"39"  :50 :0 :0 :2 :4 :@"050718"];
+    [command add1DBarcode:25 :330 :@"39"  :50 :0 :0 :2 :4 :info[@"lot"]];
     
     //BOTTOM Middle
 
@@ -201,7 +201,7 @@
     //BOTTOM RIGHT
   
     [command addTextwithX:405 withY:274 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:@"LOCATION"];
-    [command addTextwithX:435 withY:320 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"loc"]];
+    [command addTextwithX:435 withY:320 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"loc_to_show"]];
   
     return command;
 }

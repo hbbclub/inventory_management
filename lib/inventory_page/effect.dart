@@ -22,7 +22,7 @@ void _onInit(Action action, Context<InventoryState> ctx) async {
   try {
     state.cameras = await availableCameras();
     state.controller =
-        QRReaderController(state.cameras[0], ResolutionPreset.medium, [
+        QRReaderController(state.cameras[0], ResolutionPreset.high, [
       CodeFormat.qr,
       CodeFormat.code128,
       CodeFormat.code39,

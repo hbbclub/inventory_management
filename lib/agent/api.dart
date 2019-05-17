@@ -112,7 +112,23 @@ class Api {
       params: formData,
     );
   }
-}
 
+  //上传物料图片
+  Future<ApiModel> materialPhoto(List<Asset> files, String partNo) async {
+    List<UploadFileInfo> infos = List.generate(files.length, (index) {
+      List<String> subStrs = files[index].name.split('.');
+      return UploadFileInfo.fromBytes(
+          files[index].thumbData?.buffer?.asUint8List(),
+          partNo + '.' + subStrs.last);
+    });
+    FormData formData = FormData.from({
+      "file": infos,
+    });
+    return httpUtil.post(
+      '/mm/material/photo',
+      params: formData,
+    );
+  }
+}
 
 final Api api = Api();

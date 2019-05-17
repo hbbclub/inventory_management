@@ -10,6 +10,7 @@ Reducer<MaterialListState> buildReducer() {
       MaterialListAction.init: _init,
       RouteAction.route: _route,
       MaterialListAction.clearSearch: _clearSearch,
+      MaterialListAction.scaned: _scaned,
     },
   );
 }
@@ -17,6 +18,12 @@ Reducer<MaterialListState> buildReducer() {
 MaterialListState _clearSearch(MaterialListState state, Action action) {
   final MaterialListState newState = state.clone();
   newState.keywordController.text = '';
+  return newState;
+}
+
+MaterialListState _scaned(MaterialListState state, Action action) {
+  final MaterialListState newState = state.clone();
+  newState.keywordController.text = action.payload;
   return newState;
 }
 
@@ -28,6 +35,5 @@ MaterialListState _init(MaterialListState state, Action action) {
 }
 
 MaterialListState _route(MaterialListState state, Action action) {
-
   return initState(action.payload).clone();
 }

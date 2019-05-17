@@ -56,6 +56,10 @@ void _onBack(Action action, Context<MaterialListState> ctx) async {
 void _onScan(Action action, Context<MaterialListState> ctx) async {
   try {
     String barcode = await BarcodeScanner.scan();
+    if (barcode.length > 1) {
+      String text = barcode.substring(1, barcode.length);
+      ctx.dispatch(MaterialListActionCreator.scaned(text));
+    }
   } catch (e) {}
 }
 

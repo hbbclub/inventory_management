@@ -57,7 +57,7 @@ void _onSelectImage(Action action, Context<MaterialDetailState> ctx) async {
   String error;
   try {
     resultList = await MultiImagePicker.pickImages(
-      maxImages: 300,
+      maxImages: 1,
       enableCamera: true,
     );
   } on PlatformException catch (e) {

@@ -3,6 +3,7 @@ import 'package:inventory_management/material/model/material_model.dart';
 
 enum MaterialListAction {
   init,
+  onUpdateAll,
   onSearch,
   clearSearch,
   onClearSearch,
@@ -16,6 +17,10 @@ enum MaterialListAction {
 class MaterialListActionCreator {
   static Action init(List<MaterialModel> list) {
     return Action(MaterialListAction.init, payload: list);
+  }
+
+  static Action onUpdateAll() {
+    return Action(MaterialListAction.onUpdateAll);
   }
 
   static Action onSearch(String keyword) {

@@ -60,8 +60,11 @@ void _onSelectImage(Action action, Context<MaterialDetailState> ctx) async {
       maxImages: 1,
       enableCamera: true,
     );
+    if (resultList.length == 0) {
+      return;
+    }
     ApiModel resule =
-        await api.materialPhoto(resultList, ctx.state.model.partNo);
+        await api.materialPhoto(resultList.first, ctx.state.model.partNo);
     if (resule.isError()) {
       return;
     }

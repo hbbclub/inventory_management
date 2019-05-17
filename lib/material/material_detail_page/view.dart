@@ -4,6 +4,7 @@ import 'package:inventory_management/common/colors.dart';
 import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -50,7 +51,9 @@ Widget buildView(
                       child: (state.model.imgs.length > 0
                           ? FadeInImage(
                               placeholder: AssetImage(ImageAssets.materalIcon),
-                              image: NetworkImage(state.model.imgs.first.url),
+                              image: NetworkImage('http://' +
+                                  cacheModel.hostUrl +
+                                  state.model.imgs.first.url),
                             )
                           : Image.asset(ImageAssets.materalIcon)),
                     ),

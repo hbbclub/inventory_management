@@ -11,6 +11,7 @@ import 'state.dart';
 Effect<MaterialListState> buildEffect() {
   return combineEffects(<Object, Effect<MaterialListState>>{
     Lifecycle.initState: _onInit,
+    MaterialListAction.onUpdateAll: _onUpdateAll,
     MaterialListAction.onSearch: _onSearch,
     MaterialListAction.onLoadmore: _onLoadmore,
     MaterialListAction.onEnterDetail: _onEnterDetail,
@@ -30,14 +31,29 @@ void _onInit(Action action, Context<MaterialListState> ctx) async {
   for (Map item in labels) {
     res.add(MaterialModel.fromJson(item));
   }
-  ctx.dispatch(MaterialListActionCreator.init(res.reversed.toList()));
+  ctx.dispatch(MaterialListActionCreator.init(res.toList()));
+}
+
+void _onUpdateAll(Action action, Context<MaterialListState> ctx) async {
+  ApiModel result =
+      await api.materialList(current: 0, pageSize: ctx.state.list.length);
+  if (result.isError()) {
+    return;
+  }
+  List labels = result.data['data'] ?? [];
+  List<MaterialModel> res = [];
+  for (Map item in labels) {
+    res.add(MaterialModel.fromJson(item));
+  }
+  ctx.dispatch(MaterialListActionCreator.init(res.toList()));
 }
 
 void _onEnterDetail(Action action, Context<MaterialListState> ctx) async {
   MaterialModel model = action.payload;
   if (ctx.state.type == MaterialListType.page) {
-    appRouter.pushScreen(ctx.context, routerNameForMaterialDetailPage,
+    await appRouter.pushScreen(ctx.context, routerNameForMaterialDetailPage,
         arguments: model);
+    ctx.dispatch(MaterialListActionCreator.onUpdateAll());
   } else {
     appRouter.pushScreen(ctx.context, routerNameForStkLabelPage,
         arguments: model);
@@ -76,7 +92,7 @@ Future<Null> _onLoadmore(Action action, Context<MaterialListState> ctx) async {
     res.add(MaterialModel.fromJson(item));
   }
   List<MaterialModel> datas = List.from(ctx.state.list);
-  datas.addAll(res.reversed.toList());
+  datas.addAll(res.toList());
   ctx.dispatch(MaterialListActionCreator.init(datas));
   return;
 }
@@ -92,7 +108,7 @@ void _onSearch(Action action, Context<MaterialListState> ctx) async {
   for (Map item in labels) {
     res.add(MaterialModel.fromJson(item));
   }
-  ctx.dispatch(MaterialListActionCreator.init(res.reversed.toList()));
+  ctx.dispatch(MaterialListActionCreator.init(res.toList()));
 }
 
 // void _onInit(Action action, Context<MaterialListState> ctx) async {

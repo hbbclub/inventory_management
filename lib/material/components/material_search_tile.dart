@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:inventory_management/material/model/material_model.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 class MaterialSearchTile extends StatelessWidget {
   final MaterialModel model;
@@ -22,7 +23,9 @@ class MaterialSearchTile extends StatelessWidget {
               child: ((model.imgs != null && model.imgs.length > 0)
                   ? FadeInImage(
                       placeholder: AssetImage(ImageAssets.materalIcon),
-                      image: NetworkImage(model.imgs.first.url),
+                      image: NetworkImage('http://' +
+                          cacheModel.hostUrl +
+                          model.imgs.first.url),
                       fit: BoxFit.fitHeight,
                     )
                   : Image.asset(ImageAssets.materalIcon)),
@@ -37,7 +40,8 @@ class MaterialSearchTile extends StatelessWidget {
                   Text(
                     model.partNo ?? '',
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: sp(40),fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        fontSize: sp(40), fontWeight: FontWeight.w600),
                   ),
                   Text(
                     model.desc ?? '',

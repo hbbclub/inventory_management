@@ -22,12 +22,14 @@ class Api {
   Future<ApiModel> materialList({
     keyword,
     current = 0,
+    pageSize = 20,
   }) async {
     return httpUtil.get(
       '/mm/materials/list',
       params: {
         'keyword': keyword ?? '',
         'current': current,
+        'pageSize': pageSize,
       },
     );
   }
@@ -114,15 +116,15 @@ class Api {
   }
 
   //上传物料图片
-  Future<ApiModel> materialPhoto(List<Asset> files, String partNo) async {
-    List<UploadFileInfo> infos = List.generate(files.length, (index) {
-      List<String> subStrs = files[index].name.split('.');
-      return UploadFileInfo.fromBytes(
-          files[index].thumbData?.buffer?.asUint8List(),
-          partNo + '.' + subStrs.last);
-    });
+  Future<ApiModel> materialPhoto(Asset file, String partNo) async {
+    await file.requestThumbnail(300, 300, quality: 50);
+    List<String> subStrs = file.name.split('.');
+    // print(file.thumbData?.buffer?.asUint8List());
+    UploadFileInfo formItem = UploadFileInfo.fromBytes(
+        file.thumbData?.buffer?.asUint8List(), partNo + '.' + subStrs.last);
+
     FormData formData = FormData.from({
-      "file": infos,
+      "file": [formItem],
     });
     return httpUtil.post(
       '/mm/material/photo',

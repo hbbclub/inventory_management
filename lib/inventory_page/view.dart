@@ -46,9 +46,29 @@ Widget buildView(
                   !state.controller.value.isInitialized) {
                 return new Container();
               }
-              return AspectRatio(
-                  aspectRatio: state.controller.value.aspectRatio,
-                  child: new QRReaderPreview(state.controller));
+              return Stack(
+                children: <Widget>[
+                  new Container(
+                    width: Utils.getScreenWidth(viewService.context),
+                    height: Utils.getScreenWidth(viewService.context),
+                    child: AspectRatio(
+                      aspectRatio: state.controller.value.aspectRatio,
+                      child: new QRReaderPreview(state.controller),
+                    ),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      height: h(200),
+                      width:w(600) ,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green, width: 1.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
             }(),
           ),
           Row(

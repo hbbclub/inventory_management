@@ -176,7 +176,7 @@
     
     [command addTextwithX:25 withY:48 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"part_no_to_show"]];
 
-    [command add1DBarcode:25 :86 :@"39"  :40 :0 :0 :3 :5 :info[@"part_no"]];
+    [command add1DBarcode:25 :86 :@"128"  :40 :0 :0 :3 :5 :info[@"part_no"]];
     
     // Middle
 
@@ -190,7 +190,7 @@
     [command addTextwithX:25 withY:298 withFont:@"TSS24.BF2" withRotation:0 withXscal:1 withYscal:1 withText:info[@"lot_to_show"]];
 
     
-    [command add1DBarcode:25 :330 :@"39"  :50 :0 :0 :2 :4 :info[@"lot"]];
+    [command add1DBarcode:25 :330 :@"128"  :50 :0 :0 :2 :4 :info[@"lot"]];
     
     //BOTTOM Middle
 

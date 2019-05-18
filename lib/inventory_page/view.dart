@@ -58,7 +58,7 @@ Widget buildView(
                   ),
                   Center(
                     child: SizedBox(
-                      height: h(200),
+                      height: h(100),
                       width:w(600) ,
                       child: Container(
                         decoration: BoxDecoration(

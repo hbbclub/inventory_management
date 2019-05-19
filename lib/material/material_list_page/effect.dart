@@ -35,8 +35,10 @@ void _onInit(Action action, Context<MaterialListState> ctx) async {
 }
 
 void _onUpdateAll(Action action, Context<MaterialListState> ctx) async {
-  ApiModel result =
-      await api.materialList(current: 0, pageSize: ctx.state.list.length);
+  ApiModel result = await api.materialList(
+      current: 0,
+      keyword: ctx.state.keywordController.text,
+      pageSize: ctx.state.list.length);
   if (result.isError()) {
     return;
   }
@@ -75,6 +77,7 @@ void _onScan(Action action, Context<MaterialListState> ctx) async {
     if (barcode.length > 1) {
       String text = barcode.substring(1, barcode.length);
       ctx.dispatch(MaterialListActionCreator.scaned(text));
+      ctx.dispatch(MaterialListActionCreator.onSearch(text));
     }
   } catch (e) {}
 }
@@ -98,8 +101,9 @@ Future<Null> _onLoadmore(Action action, Context<MaterialListState> ctx) async {
 }
 
 void _onSearch(Action action, Context<MaterialListState> ctx) async {
-  String keyword = action.payload;
-  ApiModel result = await api.materialList(keyword: keyword);
+  // String keyword = action.payload;
+  ApiModel result =
+      await api.materialList(keyword: ctx.state.keywordController.text);
   if (result.isError()) {
     return;
   }

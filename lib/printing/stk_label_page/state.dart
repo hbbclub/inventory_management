@@ -39,8 +39,10 @@ StkLabelState initState(Map<String, dynamic> args) {
 class PrintingStkLabel {
   String title;
   String initValue;
+  bool changeable = false;
   TextEditingController controller;
-  PrintingStkLabel(this.title, this.initValue, this.controller);
+  PrintingStkLabel(
+      this.title, this.initValue, this.controller, this.changeable);
 }
 
 class StkLabelConnector extends ConnOp<AppState, StkLabelState> {

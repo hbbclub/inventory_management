@@ -18,25 +18,6 @@ Widget buildView(
         children: <Widget>[
           Expanded(
             child: TextField(
-              controller: state.lotNumberController,
-              decoration: InputDecoration(
-                labelText: 'Lot Number',
-                hintText: 'Please enter lot number',
-                labelStyle: TextStyle(fontSize: 20, color: Colors.black),
-                hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
-                border: InputBorder.none,
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-    Container(
-      height: 60.0,
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: TextField(
               controller: state.countController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
@@ -110,7 +91,7 @@ class PrintingStkTile extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: TextField(
-              enabled: false,
+              enabled: label.changeable,
               controller: label.controller,
               decoration: InputDecoration(
                 labelText: this.label.title,

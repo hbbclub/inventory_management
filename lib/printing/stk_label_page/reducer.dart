@@ -28,11 +28,12 @@ StkLabelState _route(StkLabelState state, Action action) {
     ..lotNumberController = TextEditingController()
     ..locationController = TextEditingController(text: model.loc);
   newState.items = [
-    PrintingStkLabel('Stock Code', '', newState.stockController),
-    PrintingStkLabel('Description', '', newState.descController),
-    PrintingStkLabel('UOM', '', newState.uomController),
-    PrintingStkLabel('QTY', '', newState.qtyController),
-    PrintingStkLabel('Location', '', newState.locationController),
+    PrintingStkLabel('Stock Code', '', newState.stockController, false),
+    PrintingStkLabel('Description', '', newState.descController, false),
+    PrintingStkLabel('UOM', '', newState.uomController, false),
+    PrintingStkLabel('QTY', '', newState.qtyController, true),
+    PrintingStkLabel('Location', '', newState.locationController, true),
+    PrintingStkLabel('Lot Number', '', newState.lotNumberController, true),
   ];
   return newState;
 }

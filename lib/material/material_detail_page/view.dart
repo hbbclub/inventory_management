@@ -64,7 +64,9 @@ Widget buildView(
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
-                            color: mainColor,
+                            color: state.model.imgs.length > 0
+                                ? Colors.grey
+                                : mainColor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(25))),
                         child: IconButton(
@@ -72,8 +74,12 @@ Widget buildView(
                             Icons.add,
                             color: Colors.white,
                           ),
-                          onPressed: () => dispatch(
-                              MaterialDetailActionCreator.onSelectImage()),
+                          color: mainColor,
+                          disabledColor: Colors.grey,
+                          onPressed: state.model.imgs.length > 0
+                              ? null
+                              : () => dispatch(
+                                  MaterialDetailActionCreator.onSelectImage()),
                         ),
                       ),
                     ),

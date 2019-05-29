@@ -63,9 +63,11 @@ StdState initState(Map<String, dynamic> args) {
 @JsonSerializable()
 class Img {
   String url;
+  String src;
 
   Img({
     this.url,
+    this.src,
   });
   Map<String, dynamic> toJson() => _$ImgToJson(this);
 

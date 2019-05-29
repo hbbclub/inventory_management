@@ -26,7 +26,7 @@ Widget buildView(StdState state, Dispatch dispatch, ViewService viewService) {
         Expanded(
           child: Image(
             image: AdvancedNetworkImage(
-              state.imgs.first.url,
+              state.imgs.first.src,
               useDiskCache: true,
               cacheRule: CacheRule(maxAge: const Duration(days: 1)),
             ),

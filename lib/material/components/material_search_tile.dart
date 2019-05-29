@@ -25,7 +25,7 @@ class MaterialSearchTile extends StatelessWidget {
                       placeholder: AssetImage(ImageAssets.materalIcon),
                       image: NetworkImage('http://' +
                           cacheModel.hostUrl +
-                          model.imgs.first.url),
+                          model.imgs.first.src),
                       fit: BoxFit.fitHeight,
                     )
                   : Image.asset(ImageAssets.materalIcon)),

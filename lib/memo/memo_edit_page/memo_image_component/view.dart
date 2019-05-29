@@ -17,8 +17,8 @@ Widget buildView(
           width: 40,
         ),
         Expanded(
-          child: state.url != null
-              ? Image.network('http://' + cacheModel.hostUrl + '/' + state.url)
+          child: state.src != null
+              ? Image.network('http://' + cacheModel.hostUrl + '/' + state.src)
               : state.asset != null
                   ? AssetView(Key(state.asset.identifier), 0, state.asset)
                   : Container(),

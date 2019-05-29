@@ -53,7 +53,7 @@ Widget buildView(
                               placeholder: AssetImage(ImageAssets.materalIcon),
                               image: NetworkImage('http://' +
                                   cacheModel.hostUrl +
-                                  state.model.imgs.first.url),
+                                  state.model.imgs.first.src),
                             )
                           : Image.asset(ImageAssets.materalIcon)),
                     ),

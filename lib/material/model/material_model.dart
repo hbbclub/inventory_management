@@ -61,9 +61,11 @@ class MaterialModel {
 @JsonSerializable()
 class Img {
   String url;
+  String src;
 
   Img({
     this.url,
+    this.src,
   });
 
   factory Img.fromJson(Map<String, dynamic> json) => _$ImgFromJson(json);

@@ -38,7 +38,7 @@ void _onPrinterStd(Action action, Context<StdLabelState> ctx) async {
       .map((item) {
     Map<String, dynamic> itemMap = item.toJson();
     itemMap['count'] = int.parse(item.textController.text);
-    itemMap['url'] = item.imgs.first.url;
+    itemMap['url'] = item.imgs.first.src;
     return itemMap;
   }).toList();
 

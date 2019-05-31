@@ -11,7 +11,7 @@ class Choice {
 class PrintingState implements Cloneable<PrintingState> {
   List<Choice> choices = const <Choice>[
     const Choice(
-      title: 'STD Label',
+      title: 'Common Label',
       icon: Icons.label,
     ),
     const Choice(title: 'Stk Code Label', icon: Icons.scanner),

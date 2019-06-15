@@ -10,7 +10,7 @@ import 'state.dart';
 Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
       body: Container(
-    color: Color(0xFF113042),
+    color: Color(0xFFE1E7E9),
     child: Stack(
       children: <Widget>[
         Image.asset(

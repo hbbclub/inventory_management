@@ -10,6 +10,10 @@ import 'state.dart';
 
 Widget buildView(
     SettingState state, Dispatch dispatch, ViewService viewService) {
+  print(state.activity);
+  state.blueToothList.forEach((item) {
+    print(item.name);
+  });
   return Scaffold(
     appBar: AppBar(
       title: Text('Setting'),

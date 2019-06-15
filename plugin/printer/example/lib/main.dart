@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text(connState),
+          title: Text(connState ?? ''),
           actions: <Widget>[
             FlatButton(
               onPressed: () {
@@ -76,17 +76,18 @@ class _MyAppState extends State<MyApp> {
             )
           ],
         ),
-        body: Center(
-            child: ListView(
-          children: datas.map((item) {
-            return ListTile(
-              title: Text(item['name']),
-              onTap: () {
-                Printer.connect(item['uuid']);
-              },
-            );
-          }).toList(),
-        )),
+        body: Container(
+          child: ListView(
+            children: datas.map((item) {
+              return ListTile(
+                title: Text(item['name']),
+                onTap: () {
+                  Printer.connect(item['uuid']);
+                },
+              );
+            }).toList(),
+          ),
+        ),
       ),
     );
   }

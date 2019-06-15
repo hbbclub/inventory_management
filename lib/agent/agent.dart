@@ -9,7 +9,7 @@ enum HttpVerb { POST, GET, DELETE, PUT, PATCH }
 
 final BaseOptions options = BaseOptions(
   baseUrl: 'http://' + cacheModel.hostUrl ?? '',
-  connectTimeout: 5000,
+  connectTimeout: 10000,
   receiveTimeout: 8000,
   headers: <String, String>{
     'Cache-Control': 'no-cache',
@@ -87,8 +87,8 @@ class Agent {
     }
     // final result = json.decode(res.data.toString());
     print('result:' + dio.options.baseUrl + url);
-    debugPrint(res.data.toString(),wrapWidth:1000);
-    
+    debugPrint(res.data.toString(), wrapWidth: 1000);
+
     var model =
         ApiModel.fromJson({'error': 0, 'data': res.data, 'message': ''});
     return model;

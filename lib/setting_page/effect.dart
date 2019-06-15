@@ -33,6 +33,7 @@ void _onInit(Action action, Context<SettingState> ctx) async {
       List<BlueToothModel> blueTooths = list.map((item) {
         return BlueToothModel.fromJson(Map<String, dynamic>.from(item));
       }).toList();
+      print(blueTooths);
       ctx.dispatch(SettingActionCreator.updateBlueTooth(blueTooths));
       if ((cacheModel.bluetourhName != '') && (ctx.state.flag != 'connected')) {
         ctx.dispatch(

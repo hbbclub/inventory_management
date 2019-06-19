@@ -5,6 +5,7 @@ import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:inventory_management/agent/api.dart';
 import 'package:inventory_management/printing/std_label_page/std_component/state.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 import 'package:printer/printer.dart';
 import 'action.dart';
 import 'state.dart';
@@ -38,7 +39,7 @@ void _onPrinterStd(Action action, Context<StdLabelState> ctx) async {
       .map((item) {
     Map<String, dynamic> itemMap = item.toJson();
     itemMap['count'] = int.parse(item.textController.text);
-    itemMap['url'] = item.imgs.first.src;
+    itemMap['url'] = 'http://' + cacheModel.hostUrl + item.imgs.first.src;
     return itemMap;
   }).toList();
 

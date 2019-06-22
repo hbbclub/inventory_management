@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,9 @@ import com.gprinter.command.LabelCommand;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -253,8 +257,24 @@ public class MainActivity extends FlutterActivity {
                 int count = (int) item.get("count");
                 byte[] imageData = (byte[]) item.get("imageData");
                 final LabelCommand tsc = new LabelCommand();
+                tsc.addSize(100, 300);
+                tsc.addGap(2);
+                tsc.addQueryPrinterStatus(LabelCommand.RESPONSE_MODE.BATCH);
+                tsc.addReference(0, 0);
+                tsc.addTear(EscCommand.ENABLE.ON);
+                tsc.addCls();
+                Bitmap bitmap = null;
+
+                byte[] imgByte = imageData;
+                InputStream input = null;
+                BitmapFactory.Options options=new BitmapFactory.Options();
+                options.inSampleSize = 8;
+                input = new ByteArrayInputStream(imgByte);
+                 SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
+                bitmap = (Bitmap)softRef.get();
+                tsc.addBitmap(100, 30, 300, bitmap);
+
                 tsc.addPrint(count);
-                tsc.addBitmap(0, 0, 10, BitmapFactory.decodeByteArray(imageData, 0, imageData.length));
                 DeviceConnFactoryManager
                         .getDeviceConnFactoryManagers()[1]
                         .sendDataImmediately(tsc.getCommand());

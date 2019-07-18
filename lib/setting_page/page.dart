@@ -1,5 +1,6 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter/material.dart';
+import 'package:inventory_management/common/keep_alive_widget.dart';
 
 import 'effect.dart';
 import 'reducer.dart';
@@ -8,9 +9,8 @@ import 'view.dart';
 
 const routerNameForSettingPage = 'router://SettingPage';
 
-@ARoute(url: routerNameForSettingPage)
 class SettingPage extends Page<SettingState, Map<String, dynamic>> {
-  SettingPage(param)
+  SettingPage()
       : super(
           initState: initState,
           effect: buildEffect(),
@@ -19,5 +19,10 @@ class SettingPage extends Page<SettingState, Map<String, dynamic>> {
           dependencies: Dependencies<SettingState>(
               adapter: null, slots: <String, Dependent<SettingState>>{}),
           middleware: <Middleware<SettingState>>[],
+          wrapper: wrapperFunc,
         );
+
+  static Widget wrapperFunc(Widget widget) {
+    return KeepAliveWidget(widget);
+  }
 }

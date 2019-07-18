@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_management/common/colors.dart';
 import 'package:inventory_management/common/images.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:inventory_management/common/utils.dart' show h, sp;
@@ -9,10 +8,9 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(MainState state, Dispatch dispatch, ViewService viewService) {
-  print(state.modules);
   return Scaffold(
       body: Container(
-    color: Color(0xFF113042),
+    color: Color(0xFFE1E7E9),
     child: Stack(
       children: <Widget>[
         Image.asset(

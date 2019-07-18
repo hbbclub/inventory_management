@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'effect.dart';
@@ -8,9 +7,8 @@ import 'view.dart';
 
 const routerNameForMemoSavePage = 'router://MemoSavePage';
 
-@ARoute(url: routerNameForMemoSavePage)
 class MemoSavePage extends Page<MemoSaveState, Map<String, dynamic>> {
-  MemoSavePage(param)
+  MemoSavePage()
       : super(
           initState: initState,
           effect: buildEffect(),

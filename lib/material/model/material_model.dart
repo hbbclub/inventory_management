@@ -2,22 +2,49 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'material_model.g.dart';
 
+class StockTileModel {
+  String title;
+  String label;
+  StockTileModel(this.title, this.label);
+}
+
 @JsonSerializable()
 class MaterialModel {
   @JsonKey(name: '_id', nullable: false)
   String id;
   @JsonKey(name: 'part_no', nullable: false)
   String partNo;
+  Stocks stocks;
   String loc;
   String desc;
   String uom;
   double unitCost;
   @JsonKey(name: 'sap_qty', nullable: false)
   String sapQty;
+  @JsonKey(name: 'tech_spec', nullable: false)
+  String techSpec;
+  @JsonKey(toJson: _imgToJson, defaultValue: [])
   List<Img> imgs;
+
+  @JsonKey(name: 'adv_info', toJson: _advInfoToJson, defaultValue: [])
+  List<InfoItem> advInfo;
+  @JsonKey(ignore: true)
+  List<StockTileModel> list = [];
 
   factory MaterialModel.fromJson(Map<String, dynamic> json) =>
       _$MaterialModelFromJson(json);
+
+  static List<Map<String, dynamic>> _imgToJson(List<Img> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
+
+  static List<Map<String, dynamic>> _advInfoToJson(List<InfoItem> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
+
+  Map<String, dynamic> toJson() => _$MaterialModelToJson(this);
 
   MaterialModel({
     this.id,
@@ -34,10 +61,67 @@ class MaterialModel {
 @JsonSerializable()
 class Img {
   String url;
+  String src;
 
   Img({
     this.url,
+    this.src,
   });
 
   factory Img.fromJson(Map<String, dynamic> json) => _$ImgFromJson(json);
+  Map<String, dynamic> toJson() => _$ImgToJson(this);
 }
+
+@JsonSerializable()
+class InfoItem {
+  String label;
+  String value;
+
+  InfoItem({
+    this.label,
+    this.value,
+  });
+
+  factory InfoItem.fromJson(Map<String, dynamic> json) =>
+      _$InfoItemFromJson(json);
+  Map<String, dynamic> toJson() => _$InfoItemToJson(this);
+}
+
+@JsonSerializable()
+class Stocks {
+  int total;
+  List<Stock> loc;
+
+  Stocks({
+    this.total,
+    this.loc,
+  });
+
+  factory Stocks.fromJson(Map<String, dynamic> json) => _$StocksFromJson(json);
+  Map<String, dynamic> toJson() => _$StocksToJson(this);
+
+  @override
+  String toString() {
+    return this.toJson().toString();
+  }
+}
+
+@JsonSerializable()
+class Stock {
+  int qty;
+  String loc;
+
+  Stock({
+    this.qty,
+    this.loc,
+  });
+
+  factory Stock.fromJson(Map<String, dynamic> json) => _$StockFromJson(json);
+  Map<String, dynamic> toJson() => _$StockToJson(this);
+
+  @override
+  String toString() {
+    return this.toJson().toString();
+  }
+}
+

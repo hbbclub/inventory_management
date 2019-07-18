@@ -6,12 +6,13 @@ import 'state.dart';
 Reducer<StockState> buildReducer() {
   return asReducer(
     <Object, Reducer<StockState>>{
-      StockAction.action: _onAction,
+      StockAction.init: _init,
     },
   );
 }
 
-StockState _onAction(StockState state, Action action) {
+StockState _init(StockState state, Action action) {
   final StockState newState = state.clone();
+  newState.model.list = action.payload;
   return newState;
 }

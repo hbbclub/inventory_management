@@ -1,13 +1,15 @@
 import 'dart:async';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:inventory_management/agent/api_model.dart';
 import 'package:dio/dio.dart';
 import 'package:inventory_management/welcome_page/model/cache_model.dart';
+import 'package:flutter/foundation.dart';
 
 enum HttpVerb { POST, GET, DELETE, PUT, PATCH }
 
 final BaseOptions options = BaseOptions(
-  baseUrl: 'http://' + cacheModel.hostUrl,
-  connectTimeout: 5000,
+  baseUrl: 'http://' + cacheModel.hostUrl ?? '',
+  connectTimeout: 10000,
   receiveTimeout: 8000,
   headers: <String, String>{
     'Cache-Control': 'no-cache',
@@ -28,8 +30,10 @@ class Agent {
     Map<String, dynamic> header,
   }) async {
     try {
+      print('-------------------------------------------');
       print('url:' + dio.options.baseUrl + url);
       print(params);
+      print('--------------------------------------------');
       Response res;
 
       if (verb == HttpVerb.POST) {
@@ -83,14 +87,20 @@ class Agent {
     }
     // final result = json.decode(res.data.toString());
     print('result:' + dio.options.baseUrl + url);
-    print(res.data);
+    debugPrint(res.data.toString(), wrapWidth: 1000);
+
     var model =
         ApiModel.fromJson({'error': 0, 'data': res.data, 'message': ''});
     return model;
   }
 
   Future<ApiModel> _handError(String errorMsg, int code) {
-    print("errorMsg :" + errorMsg);
+    Fluttertoast.showToast(
+      msg: errorMsg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIos: 1,
+    );
     var model =
         ApiModel.fromJson({'error': code, 'data': null, 'message': errorMsg});
     return Future.value(model);
@@ -110,6 +120,7 @@ class HttpUtil {
   Map<String, dynamic> commonHeader = {};
 
   Agent agent = Agent();
+
   Future<ApiModel> post(
     String url, {
     Map<String, dynamic> params,

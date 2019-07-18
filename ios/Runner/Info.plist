@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>MobileInfoCollection</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -22,10 +24,16 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>是否允许此App使用您的蓝牙？</string>
 	<key>NSCameraUsageDescription</key>
-	<string>萌贝树会在更换头像和直播课发送图片消息服务中使用您的相机权限</string>
+	<string>相机权限</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>萌贝树会在更换头像和直播课发送图片消息服务中使用您的相册权限</string>
+	<string>相册权限</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

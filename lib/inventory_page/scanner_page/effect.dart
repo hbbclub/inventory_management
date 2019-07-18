@@ -13,29 +13,33 @@ Effect<ScannerState> buildEffect() {
 
 void _onInit(Action action, Context<ScannerState> ctx) async {
   ScannerState state = ctx.state.clone();
-  state.cameras = await availableCameras();
-  state.controller =
-      QRReaderController(state.cameras[0], ResolutionPreset.medium, [
-    CodeFormat.qr,
-    CodeFormat.code128,
-    CodeFormat.code39,
-    CodeFormat.code93,
-  ], (dynamic value) {
-    print(value);
-    if (value == null) {
-      return;
-    }
-    ctx.dispatch(ScannerActionCreator.scaned(value));
-    if (state.isfull()) {
-      Navigator.of(ctx.context).pop<ScannerState>(ctx.state);
-    } else {
-      Future.delayed(
-          const Duration(seconds: 2), ctx.state.controller.startScanning);
-    }
-  });
-  await state.controller.initialize();
-  ctx.dispatch(ScannerActionCreator.init(state));
-  await state.controller.startScanning();
+
+  try {
+    state.cameras = await availableCameras();
+    state.controller =
+        QRReaderController(state.cameras[0], ResolutionPreset.medium, [
+      CodeFormat.qr,
+      CodeFormat.code128,
+      CodeFormat.code39,
+      CodeFormat.code93,
+    ], (dynamic value) {
+      if (value == null) {
+        return;
+      }
+      ctx.dispatch(ScannerActionCreator.scaned(value));
+      if (state.isfull()) {
+        Navigator.of(ctx.context).pop<ScannerState>(ctx.state);
+      } else {
+        Future.delayed(
+            const Duration(seconds: 2), ctx.state.controller.startScanning);
+      }
+    });
+    await state.controller.initialize();
+    ctx.dispatch(ScannerActionCreator.init(state));
+    await state.controller.startScanning();
+  } catch (e) {
+    state.cameras = [];
+  }
 }
 
 void _dispose(Action action, Context<ScannerState> ctx) async {

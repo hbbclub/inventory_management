@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'effect.dart';
@@ -8,9 +7,8 @@ export  'state.dart';
 import 'view.dart';
 
 const routerNameForInventoryPage = 'router://InventoryPage';
-@ARoute(url: routerNameForInventoryPage)
 class InventoryPage extends Page<InventoryState, Map<String, dynamic>> {
-  InventoryPage(params)
+  InventoryPage()
       : super(
             initState: initState,
             effect: buildEffect(),

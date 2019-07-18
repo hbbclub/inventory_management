@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 
 import 'effect.dart';
@@ -8,9 +7,8 @@ import 'view.dart';
 
 const routerNameForResetPasswordPage = 'router://ResetPasswordPage';
 
-@ARoute(url: routerNameForResetPasswordPage)
 class ResetPasswordPage extends Page<ResetPasswordState, Map<String, dynamic>> {
-  ResetPasswordPage(param)
+  ResetPasswordPage()
       : super(
           initState: initState,
           effect: buildEffect(),

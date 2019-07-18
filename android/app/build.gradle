@@ -73,19 +73,18 @@ flutter {
 }
 
 dependencies {
-//    implementation 'com.google.android.gms:play-services-analytics:15.0.1'
-//    implementation 'com.google.firebase:firebase-core:16.0.7'
+    //    implementation 'com.google.android.gms:play-services-analytics:15.0.1'
+    //    implementation 'com.google.firebase:firebase-core:16.0.7'
     testImplementation 'junit:junit:4.12'
-
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
-
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     annotationProcessor 'androidx.annotation:annotation:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-    implementation "com.android.support:exifinterface:28.0.3"
+    implementation 'androidx.exifinterface:exifinterface:1.0.0-beta01'
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
-    implementation 'com.android.support:multidex:1.0.1'
+    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation files('libs/gprintersdkv1.jar')
 }
 
 

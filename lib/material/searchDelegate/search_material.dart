@@ -1,12 +1,13 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_refresh/flutter_refresh.dart';
 import 'package:inventory_management/bloc/bloc_provider.dart';
 import 'package:inventory_management/material/components/material_search_tile.dart';
 import 'package:inventory_management/material/material_detail_page/page.dart';
 import 'package:inventory_management/material/material_list_page/state.dart';
 import 'package:inventory_management/material/model/material_model.dart';
-import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 
 class SearchMaterial<T> extends SearchDelegate<String> {
   Context<MaterialListState> ctx;
@@ -48,18 +49,27 @@ class SearchMaterial<T> extends SearchDelegate<String> {
       builder:
           (BuildContext context, AsyncSnapshot<List<MaterialModel>> snapshot) {
         if (snapshot.hasData) {
-          return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  router.pushScreen(
-                      ctx.context,
-                      RouterPageOption(
-                          url: routerNameForMaterialDetailPage,
-                          params: snapshot.data[index]));
-                },
-                child: MaterialSearchTile(snapshot.data[index]),
+          return Refresh(
+            onFooterRefresh: () async {
+              await Future.delayed(Duration(seconds: 1));
+            },
+            // onHeaderRefresh: onHeaderRefresh,
+            childBuilder: (BuildContext context,
+                {ScrollController controller, ScrollPhysics physics}) {
+              return new Container(
+                child: ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        appRouter.pushScreen(
+                            ctx.context, routerNameForMaterialDetailPage,
+                            arguments: snapshot.data[index]);
+                      },
+                      child: MaterialSearchTile(snapshot.data[index]),
+                    );
+                  },
+                ),
               );
             },
           );
@@ -72,28 +82,40 @@ class SearchMaterial<T> extends SearchDelegate<String> {
     );
   }
 
+  Future<Null> onFooterRefresh() {
+    return new Future.delayed(new Duration(seconds: 2), () {});
+  }
+
   @override
   Widget buildSuggestions(BuildContext context) {
     MaterialBloc bloc = BlocProvider.of<MaterialBloc>(ctx.context);
-
     bloc.handelSearchTextChanged(query);
     return StreamBuilder(
       stream: bloc.source,
       builder:
           (BuildContext context, AsyncSnapshot<List<MaterialModel>> snapshot) {
         if (snapshot.hasData) {
-          return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  router.pushScreen(
-                      ctx.context,
-                      RouterPageOption(
-                          url: routerNameForMaterialDetailPage,
-                          params: snapshot.data[index]));
-                },
-                child: MaterialSearchTile(snapshot.data[index]),
+          return Refresh(
+            onFooterRefresh: ()=>bloc.handelLoadMore(query),
+            // onHeaderRefresh: onHeaderRefresh,
+            childBuilder: (BuildContext context,
+                {ScrollController controller, ScrollPhysics physics}) {
+              return new Container(
+                child: ListView.builder(
+                  itemCount: snapshot.data.length,
+                  physics: physics,
+                  controller: controller,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        appRouter.pushScreen(
+                            ctx.context, routerNameForMaterialDetailPage,
+                            arguments: snapshot.data[index]);
+                      },
+                      child: MaterialSearchTile(snapshot.data[index]),
+                    );
+                  },
+                ),
               );
             },
           );

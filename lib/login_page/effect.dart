@@ -1,10 +1,10 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:inventory_management/route/router.dart';
 import 'package:inventory_management/tab_page/page.dart';
 import 'package:inventory_management/agent/agent.dart';
 import 'package:inventory_management/agent/api.dart';
 import 'package:inventory_management/common/utils.dart';
 import 'package:inventory_management/login_page/model/user_model.dart';
-import 'package:inventory_management/route/route.route.dart';
 import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';
@@ -27,6 +27,9 @@ void _onInit(Action action, Context<LoginState> ctx) async {
 }
 
 void _onLogin(Action action, Context<LoginState> ctx) async {
+  if (ctx.state.loading) {
+    return;
+  }
   httpUtil.changeHostUrl('http://' + ctx.state.hostUrl.text);
 
   cacheModel.account = ctx.state.account.text;
@@ -35,22 +38,26 @@ void _onLogin(Action action, Context<LoginState> ctx) async {
   cacheModel.linkword = ctx.state.linkWord.text;
 
   cacheModel.setLoaclCache();
-
+  ctx.dispatch(LoginActionCreator.loading(true));
   ApiModel result = await api.login(
       username: ctx.state.account.text,
       password: ctx.state.password.text,
       linkWord: ctx.state.linkWord.text);
   if (result.isError()) {
-    Utils.showSnackBarWithKey(ctx.state.scaffoldkey,
-        text: result.data['message']);
+    if (result.errDtaitl == ApiErrorDetail.logicError) {
+      Utils.showSnackBarWithKey(ctx.state.scaffoldkey, text: result.errMsg);
+    }
+    ctx.dispatch(LoginActionCreator.loading(false));
     return;
   }
-  cacheModel.user = UserModel.fromJson(result.data['user']);
+  Map<String, dynamic> userMap = result.data['user'];
+  cacheModel.user = UserModel.fromJson(userMap);
   cacheModel.setLoaclCache();
   httpUtil.commonHeader.addAll({
     'Authorization': result.data['token'],
   });
-  router.replaceScreen(
-      ctx.context, RouterPageOption(url: routerNameForTabPage));
-  // Utils.pushScreen(ctx.context, Tab());
+  appRouter.replaceScreen(
+    ctx.context,
+    routerNameForTabPage,
+  );
 }

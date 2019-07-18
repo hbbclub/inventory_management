@@ -3,6 +3,7 @@ import 'package:inventory_management/material/model/material_model.dart';
 
 class StockState implements Cloneable<StockState> {
   MaterialModel model = MaterialModel();
+
   @override
   StockState clone() {
     return StockState()..model = model;

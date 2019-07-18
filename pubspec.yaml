@@ -7,47 +7,55 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.0.3+3
+version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
+  flutter_spinkit: ^3.1.0
+  fluttertoast: ^3.0.4
+  flutter_image_compress: ^0.4.0
+  flutter_advanced_networkimage: ^0.4.15
+  audioplayer: ^0.5.2
+  flutter_refresh: ^0.0.1
   firebase_ml_vision: ^0.6.0
   image_picker: ^0.4.12
   barcode_scan: ^1.0.0
   font_awesome_flutter: ^8.2.0
   cupertino_icons: ^0.1.2
-  path_provider: ^0.4.1
+  path_provider: ^0.5.0
   multi_image_picker: ^3.0.13
   #  flutter packages pub run build_runner clean
   # flutter packages pub run build_runner build --delete-conflicting-outputs
   # flutter packages pub run build_runner watch
-  json_annotation: ^2.0.0
-  annotation_route: any
+  json_annotation: ^2.2.0
   rxdart: ^0.20.0
   shared_preferences: ^0.4.0
   device_info: ^0.2.1
   http: ^0.12.0
-  dio: ^2.0.5
+  dio: ^2.1.3
   flutter_user_agent: ^1.0.1
   fast_qr_reader_view:
     git:
       url: git://github.com/facundomedica/fast_qr_reader_view.git
   package_info: ^0.4.0+2
   fish_redux:
-    git:
-      url: git://github.com/alibaba/fish-redux.git
+    ^0.1.7
+    # git:
+    #   url: git://github.com/alibaba/fish-redux.git
+  printer:
+    path: ./plugin/printer
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   build_runner: ^1.1.2
-  json_serializable: ^2.0.0
+  json_serializable: ^2.2.0
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
@@ -60,6 +68,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/audio/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

@@ -1,6 +1,4 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:inventory_management/inventory_page/scanner_page/state.dart';
-
 import 'action.dart';
 import 'state.dart';
 
@@ -10,8 +8,14 @@ Reducer<InventoryState> buildReducer() {
       InventoryAction.add: _add,
       InventoryAction.subtract: _subtract,
       InventoryAction.scaned: _scaned,
+      InventoryAction.init: _init,
+      RouteAction.route: _route,
     },
   );
+}
+
+InventoryState _route(InventoryState state, Action action) {
+  return initState(action.payload);
 }
 
 InventoryState _add(InventoryState state, Action action) {
@@ -29,14 +33,25 @@ InventoryState _subtract(InventoryState state, Action action) {
   return newState;
 }
 
+InventoryState _init(InventoryState state, Action action) {
+  InventoryState payload = action.payload;
+  final InventoryState newState = state.clone();
+  newState.controller = payload.controller;
+  newState.cameras = payload.cameras;
+  return newState;
+}
+
 InventoryState _scaned(InventoryState state, Action action) {
   final InventoryState newState = state.clone();
-  ScannerState sannerResult = action.payload;
-  newState
-    ..tagNumber = sannerResult.tagNumber
-    ..stockNumber = sannerResult.stockNumber
-    ..location = sannerResult.location
-    ..lotNumber = sannerResult.lotNumber
-    ..qty = sannerResult.qty;
+  Map<String, String> data = action.payload;
+  if (data['flag'] == 'TAG') {
+    newState.tagNumber.text = data['value'];
+  } else if (data['flag'] == 'PART') {
+    newState.stockNumber.text = data['value'];
+  } else if (data['flag'] == 'LOT') {
+    newState.lotNumber.text = data['value'];
+  } else if (data['flag'] == 'LOC') {
+    newState.location.text = data['value'];
+  }
   return newState;
 }

@@ -6,15 +6,29 @@ part 'user_model.g.dart';
 @JsonSerializable()
 class UserModel {
   String username;
+  String name;
   @JsonKey(toJson: _companyToJson)
   Company company;
+  @JsonKey(toJson: _categoriesToJson, defaultValue: [])
+  List<Categorie> categories;
+  @JsonKey(toJson: _initialsToJson, defaultValue: {})
+  Initial initials;
 
   UserModel({
     this.username,
+    this.name,
     this.company,
+    this.categories,
+    this.initials,
   });
 
   static Map<String, dynamic> _companyToJson(Company cmp) => cmp.toJson();
+  static Map<String, dynamic> _initialsToJson(Initial initials) =>
+      initials.toJson();
+  static List<Map<String, dynamic>> _categoriesToJson(List<Categorie> list) =>
+      list.map<Map<String, dynamic>>((item) {
+        return item.toJson();
+      }).toList();
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
@@ -35,4 +49,44 @@ class Company {
       _$CompanyFromJson(json);
 
   Map<String, dynamic> toJson() => _$CompanyToJson(this);
+}
+
+@JsonSerializable()
+class Categorie {
+  String acronym;
+  String category;
+
+  Categorie({
+    this.acronym,
+    this.category,
+  });
+  factory Categorie.fromJson(Map<String, dynamic> json) =>
+      _$CategorieFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CategorieToJson(this);
+}
+
+@JsonSerializable()
+class Initial {
+  @JsonKey(name: 'TAG', defaultValue: 'T')
+  String tag;
+  @JsonKey(name: 'PART', defaultValue: 'P')
+  String part;
+  @JsonKey(name: 'LOC', defaultValue: 'C')
+  String loc;
+  @JsonKey(name: 'LOT', defaultValue: 'L')
+  String lot;
+  @JsonKey(name: 'QTY', defaultValue: 'Q')
+  String qty;
+
+  Initial({
+    this.tag,
+    this.part,
+    this.loc,
+    this.lot,
+  });
+  factory Initial.fromJson(Map<String, dynamic> json) =>
+      _$InitialFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InitialToJson(this);
 }

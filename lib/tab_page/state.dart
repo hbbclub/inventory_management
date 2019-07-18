@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management/route/app_state.dart';
 
 class TabState implements Cloneable<TabState> {
   PageController controller;
@@ -90,5 +91,19 @@ class NavigationIconView {
         ),
       ),
     );
+  }
+}
+
+class TabConnector extends ConnOp<AppState, TabState> {
+  @override
+  TabState get(AppState appState) {
+    final TabState state = appState.tabState.clone();
+    return state;
+  }
+
+  @override
+  void set(AppState appState, TabState subState) {
+
+    appState.tabState = subState.clone();
   }
 }

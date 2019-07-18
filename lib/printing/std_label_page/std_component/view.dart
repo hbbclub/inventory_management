@@ -1,6 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_management/common/images.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
+import 'package:inventory_management/welcome_page/model/cache_model.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -24,11 +25,13 @@ Widget buildView(StdState state, Dispatch dispatch, ViewService viewService) {
           height: 16,
         ),
         Expanded(
-          child: FadeInImage(
-            placeholder: AssetImage(
-              ImageAssets.materalIcon,
+          child: Image(
+            image: AdvancedNetworkImage(
+              'http://' + cacheModel.hostUrl + state.imgs.first.src,
+              useDiskCache: true,
+              cacheRule: CacheRule(maxAge: const Duration(days: 1)),
             ),
-            image: NetworkImage(state.imgs.first.url),
+            fit: BoxFit.cover,
           ),
         ),
         SizedBox(

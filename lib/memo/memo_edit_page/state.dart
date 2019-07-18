@@ -1,8 +1,7 @@
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/material.dart';
-import 'package:inventory_management/memo/memo_edit_page/memo_image_component/state.dart';
+import 'package:inventory_management/memo/memo_edit_page/memo_notes_component/state.dart';
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
+import 'package:inventory_management/route/app_state.dart';
 
 enum NotePageType {
   Edit,
@@ -10,29 +9,40 @@ enum NotePageType {
 }
 
 class MemoEditState implements Cloneable<MemoEditState> {
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  TextRecognizer textDetector = FirebaseVision.instance.textRecognizer();
-  List<MemoImageState> images = [];
+  List<dynamic> images = [];
   MemoListTileState listTileState = MemoListTileState();
-  TextEditingController textEditingController = TextEditingController();
-  NotePageType type;
-  String id = '';
+
   @override
   MemoEditState clone() {
     return MemoEditState()
-      ..scaffoldKey = scaffoldKey
-      ..textDetector = textDetector
-      ..images = images
-      ..id = id
-      ..textEditingController = textEditingController;
+      ..listTileState = listTileState.clone()
+      ..images = images;
+    // ..textEditingController = textEditingController;
   }
 }
 
 MemoEditState initState(MemoListTileState args) {
+  List images = [MemoNotesState()..textEditingController.text = args.notes];
+  images.addAll(args.files ?? []);
+ 
   return MemoEditState()
-    ..textEditingController = TextEditingController(text: args.notes)
-    ..type = args.id == null ? NotePageType.Add : NotePageType.Edit
-    ..id = args.id
-    ..listTileState = args.clone() 
-    ..images = args.files ?? [];
+    // ..textEditingController = TextEditingController(text: args.notes)
+    ..listTileState = args.clone()
+    ..images = images;
+}
+
+
+
+class MemoEditConnector extends ConnOp<AppState, MemoEditState> {
+  @override
+  MemoEditState get(AppState appState) {
+    final MemoEditState state = appState.memoEditState.clone();
+    return state;
+  }
+
+  @override
+  void set(AppState appState, MemoEditState subState) {
+
+    appState.memoEditState = subState.clone();
+  }
 }

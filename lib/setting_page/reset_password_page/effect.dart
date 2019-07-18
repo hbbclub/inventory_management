@@ -1,5 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -10,5 +10,5 @@ Effect<ResetPasswordState> buildEffect() {
 }
 
 void _onSave(Action action, Context<ResetPasswordState> ctx) {
-  router.popScreen(ctx.context);
+  appRouter.popScreen(ctx.context);
 }

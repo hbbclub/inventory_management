@@ -3,8 +3,7 @@ import 'package:inventory_management/agent/api.dart';
 import 'package:inventory_management/agent/api_model.dart';
 import 'package:inventory_management/memo/memo_edit_page/memo_image_component/state.dart';
 import 'package:inventory_management/memo/memo_list_page/memo_list_tile_component/state.dart';
-import 'package:inventory_management/memo/memo_save_page/model/memo_add_categories_model.dart';
-import 'package:inventory_management/route/route.route.dart';
+import 'package:inventory_management/route/router.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -17,23 +16,20 @@ Effect<MemoSaveState> buildEffect() {
 }
 
 void _init(Action action, Context<MemoSaveState> ctx) async {
-  ApiModel result = await api.noteCategories();
+  // ApiModel result = await api.noteCategories();
 
-  if (result.isError()) {
-    return;
-  }
-  List<CategoriesModel> activities = [];
-  for (var item in result.data['data']) {
-    activities.add(CategoriesModel.fromJson(item));
-  }
+  // if (result.isError()) {
+  //   return;
+  // }
+  // List<CategoriesModel> activities = [];
+  // for (var item in result.data['data']) {
+  //   activities.add(CategoriesModel.fromJson(item));
+  // }
   for (MemoImageState image in ctx.state.images) {
     if (image.asset != null) {
       await image.asset.requestThumbnail(300, 300, quality: 50);
     }
   }
-  ctx.dispatch(MemoSaveActionCreator.init({
-    'activities': activities,
-  }));
 }
 
 void _dispose(Action action, Context<MemoSaveState> ctx) async {
@@ -94,6 +90,6 @@ void _onSave(Action action, Context<MemoSaveState> ctx) async {
     addedResult = await api.updateNote(jsonMap);
   }
   if (!addedResult.isError()) {
-    router.popNum(ctx.context, 2);
+    appRouter.popNum(ctx.context, 2);
   }
 }

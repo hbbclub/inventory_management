@@ -16,6 +16,7 @@ class KeepAliveState extends State<KeepAliveWidget>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return widget.child;
   }
 }

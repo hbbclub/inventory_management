@@ -1,8 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/colors.dart';
-import 'package:inventory_management/memo/memo_save_page/model/memo_add_categories_model.dart';
-
+import 'package:inventory_management/login_page/model/user_model.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -23,13 +22,14 @@ Widget buildView(
           value: state.activity,
           onChanged: (String newValue) =>
               dispatch(MemoSaveActionCreator.selectCategory(newValue)),
-          items: state.allActivities
-              .map<DropdownMenuItem<String>>((CategoriesModel value) {
-            return DropdownMenuItem<String>(
-              value: value.category,
-              child: Text(value.category),
-            );
-          }).toList(),
+          items:
+              state.allActivities.map<DropdownMenuItem<String>>((Categorie value) {
+              
+                    return DropdownMenuItem<String>(
+                      value: value.category,
+                      child: Text(value.acronym),
+                    );
+                  })?.toList(),
         ),
       ),
     ),
@@ -40,8 +40,8 @@ Widget buildView(
               child: TextField(
             decoration: InputDecoration(
               border: InputBorder.none,
-              labelText: 'Key Word',
-              hintText: 'Pleast enter key word',
+              labelText: 'Keyword',
+              hintText: 'Please enter keyword',
               labelStyle: TextStyle(fontSize: 16, color: Colors.black),
               hintStyle: TextStyle(fontSize: 16, color: Color(0XFF999999)),
             ),

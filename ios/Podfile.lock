@@ -1,4 +1,6 @@
 PODS:
+  - audioplayer (0.0.1):
+    - Flutter
   - barcode_scan (0.0.1):
     - Flutter
     - MTBBarcodeScanner
@@ -68,7 +70,11 @@ PODS:
   - FirebaseMLVisionTextModel (0.12.0):
     - GoogleMobileVision/TextDetector (~> 1.4)
   - Flutter (1.0.0)
+  - flutter_image_compress (0.0.1):
+    - Flutter
   - flutter_user_agent (1.0.1):
+    - Flutter
+  - fluttertoast (0.0.2):
     - Flutter
   - GoogleAPIClientForREST/Core (1.3.8):
     - GTMSessionFetcher (>= 1.1.7)
@@ -125,7 +131,7 @@ PODS:
   - image_picker (0.0.1):
     - Flutter
   - MTBBarcodeScanner (5.0.8)
-  - multi_image_picker (3.0.14):
+  - multi_image_picker (3.0.23):
     - BSImagePicker (~> 2.9.0)
     - Flutter
   - nanopb (0.3.901):
@@ -137,11 +143,14 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
+  - printer (0.0.1):
+    - Flutter
   - Protobuf (3.6.1)
   - shared_preferences (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - audioplayer (from `.symlinks/plugins/audioplayer/ios`)
   - barcode_scan (from `.symlinks/plugins/barcode_scan/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - fast_qr_reader_view (from `.symlinks/plugins/fast_qr_reader_view/ios`)
@@ -151,11 +160,14 @@ DEPENDENCIES:
   - Firebase/MLVisionTextModel
   - firebase_ml_vision (from `.symlinks/plugins/firebase_ml_vision/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_image_compress (from `.symlinks/plugins/flutter_image_compress/ios`)
   - flutter_user_agent (from `.symlinks/plugins/flutter_user_agent/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - multi_image_picker (from `.symlinks/plugins/multi_image_picker/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - printer (from `.symlinks/plugins/printer/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
 SPEC REPOS:
@@ -184,6 +196,8 @@ SPEC REPOS:
     - Protobuf
 
 EXTERNAL SOURCES:
+  audioplayer:
+    :path: ".symlinks/plugins/audioplayer/ios"
   barcode_scan:
     :path: ".symlinks/plugins/barcode_scan/ios"
   device_info:
@@ -194,8 +208,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_ml_vision/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
+  flutter_image_compress:
+    :path: ".symlinks/plugins/flutter_image_compress/ios"
   flutter_user_agent:
     :path: ".symlinks/plugins/flutter_user_agent/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
   multi_image_picker:
@@ -204,10 +222,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  printer:
+    :path: ".symlinks/plugins/printer/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
+  audioplayer: 3cc64e4f5f3e231c715c8923a9bc26a19dc5da3b
   barcode_scan: 8288e70cb430072003bce2c794a1431e7adbcb4d
   BSGridCollectionViewLayout: 3e6f23b3a2b4f0ca9afae09ca01389d1057f7b32
   BSImagePicker: 553707de1adaad42eac252e0b84d20dbdba83fe9
@@ -226,7 +247,9 @@ SPEC CHECKSUMS:
   FirebaseMLVisionLabelModel: 926c57dfa63254ea22e005d39b795b560ab1eb30
   FirebaseMLVisionTextModel: 97af06fa88b45cabbe39f04d2c825b9d7001cd66
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_image_compress: 386567f3a592e5f52bdf81be7feba627250147f1
   flutter_user_agent: 2a487a0bfef8b08e34a3ee74f99fdac5a67aeab1
+  fluttertoast: 0a20dcbbb8ecfd1a61b6285651ff2d5989d033fb
   GoogleAPIClientForREST: 5447a194eae517986cafe6421a5330b80b820591
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleMobileVision: a1f93108b3527d67339e2de80e1db76645f9e8b9
@@ -235,13 +258,14 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   image_picker: ee00aab0487cedc80a304085219503cc6d0f2e22
   MTBBarcodeScanner: 5b97f10a037e2560ff104da413343c5ce9413911
-  multi_image_picker: 80947139b787fcf1947757465aea4957c9e691ea
+  multi_image_picker: d11bcb47b586660877b3ae399fa50255c12285eb
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   package_info: d7c98b64f60add4c2908b9d94d82a45d3c8827ad
   path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
+  printer: 4e5c5c5aca0162e41f7ad52ea618aab4ea01db01
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
 
-PODFILE CHECKSUM: fa1c1046b1506722e6f6da3d3743578b2e561fc6
+PODFILE CHECKSUM: 2caae21ce5c6837038d33b916256e794372101b0
 
 COCOAPODS: 1.5.3

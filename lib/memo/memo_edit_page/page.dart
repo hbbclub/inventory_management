@@ -1,4 +1,3 @@
-import 'package:annotation_route/route.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/common/keep_alive_widget.dart';
@@ -13,10 +12,9 @@ import 'view.dart';
 
 const routerNameForMemoEditPage = 'router://MemoEditPage';
 
-@ARoute(url: routerNameForMemoEditPage)
 class MemoEditPage
     extends Page<MemoEditState, memoListTileState.MemoListTileState> {
-  MemoEditPage(param)
+  MemoEditPage()
       : super(
           initState: initState,
           effect: buildEffect(),
